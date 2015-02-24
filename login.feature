@@ -1,27 +1,30 @@
-Feature: fill a registeration form to make a new account
+Feature: login to view application
  
-  As a new user
-  So that I can make a new account
-  I want to be able to fill a registeration form.
+  As a returning or new user
+  So that I can view my application
+  I want to be able to login or make a new account.
 
 Background: movies have been added to database
   
-  Given I am on the "registeration" page
-
-Scenario: fill out the form
-  When I fill the "username" box with "John"
-  And I fill the "company" box with "Chipolte"
-  When I click "continue"
-  Then I should see the "questionnair" page
-
-Scenario: applying for a username that is already in the database
   Given the following users exist: 
-  | username          | company          | status         |
-  | John              | Whole Foods      | Sponsor        |
+  | username          | password         | company          | status         |
+  | John              | bear             | Whole Foods      | Sponsor        |
 
+Scenario: returning user logging in
+  Given I am on the "login" page
   When I fill the "username" box with "John"
-  And I fill the "company" box with "Taco Bell"
-  When I click "continue"
-  Then I should see "username taken"
-  And the "username" box should have "John"
-  And the "company" box should have "Taco Bell"
+  And I fill the "password" box with "bear"
+  When I click "login"
+  Then I should see the "profile" page
+
+Scenario: logging in with invalid username or password
+  Given I am on the "login" page
+  When I fill the "username" box with "John"
+  And I fill the "password" box with "bare"
+  When I click "login"
+  Then I should see the "login unsuccessful"
+
+Scenario: create a new account
+  Given I am on the "login" page
+  When I click "create a new account"
+  Then I should see the "registeration" page

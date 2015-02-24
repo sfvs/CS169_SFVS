@@ -8,8 +8,8 @@ Feature: view application status and steps to complete application
 Background: movies have been added to database
   
   Given the following users exist: 
-  | username          | company          | status         |
-  | John              | Whole Foods      | Sponsor        |
+  | username          | password         | company          | status         |
+  | John              | bear             | Whole Foods      | Sponsor        |
 
 Scenario: view current application status
   Given I am on the "profile" page

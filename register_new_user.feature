@@ -10,18 +10,27 @@ Background: movies have been added to database
 
 Scenario: fill out the form
   When I fill the "username" box with "John"
+  And I fill the "password" box with "bear"
   And I fill the "company" box with "Chipolte"
   When I click "continue"
   Then I should see the "questionnair" page
 
-Scenario: applying for a username that is already in the database
+Scenario: applying for a username that is already taken
   Given the following users exist: 
-  | username          | company          | status         |
-  | John              | Whole Foods      | Sponsor        |
+  | username          | password         | company          | status         |
+  | John              | bear             | Whole Foods      | Sponsor        |
 
   When I fill the "username" box with "John"
+  And I fill the "password" box with "bare"
   And I fill the "company" box with "Taco Bell"
   When I click "continue"
   Then I should see "username taken"
   And the "username" box should have "John"
   And the "company" box should have "Taco Bell"
+
+Scenario: any empty boxes returns an error
+  When I fill the "username" box with "John"
+  And I fill the "password" box with "bare"
+  And I fill the "company" box with ""
+  When I click "continue"
+  Then I should see "company box is empty"
