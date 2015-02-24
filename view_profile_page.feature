@@ -5,7 +5,7 @@ Feature: view application status and steps to complete application
   I want to be view my current application status
   and find steps to complete my application.
 
-Background: movies have been added to database
+Background: users have been added to database
   
   Given the following users exist: 
   | username          | password         | company          | status         |

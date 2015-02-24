@@ -4,7 +4,7 @@ Feature: login to view application
   So that I can view my application
   I want to be able to login or make a new account.
 
-Background: movies have been added to database
+Background: users have been added to database
   
   Given the following users exist: 
   | username          | password         | company          | status         |

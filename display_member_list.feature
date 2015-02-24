@@ -1,27 +1,17 @@
-Feature: fill a registeration form to make a new account
+Feature: display a list of users and view their profiles
  
-  As a new user
-  So that I can make a new account
-  I want to be able to fill a registeration form.
+  As an admin
+  So that I can view my attendees
+  I want to be able to see a list of users
+  and find out more about specific users.
 
-Background: movies have been added to database
+Background: users have been added to database
   
-  Given I am on the "registeration" page
-
-Scenario: fill out the form
-  When I fill the "username" box with "John"
-  And I fill the "company" box with "Chipolte"
-  When I click "continue"
-  Then I should see the "questionnair" page
-
-Scenario: applying for a username that is already in the database
   Given the following users exist: 
   | username          | password         | company          | status         |
   | John              | bear             | Whole Foods      | Sponsor        |
+  | Paul              | oski             | Safeway          | Vendor         |
 
-  When I fill the "username" box with "John"
-  And I fill the "company" box with "Taco Bell"
-  When I click "continue"
-  Then I should see "username taken"
-  And the "username" box should have "John"
-  And the "company" box should have "Taco Bell"
+Scenario: see a list of users
+
+Scenario: clicking on a user will show more information about that user
