@@ -1,27 +1,24 @@
-Feature: fill a registeration form to make a new account
+Feature: view application status and steps to complete application
  
-  As a new user
-  So that I can make a new account
-  I want to be able to fill a registeration form.
+  As an avid user
+  So that I can complete the application
+  I want to be view my current application status
+  and find steps to complete my application.
 
 Background: movies have been added to database
   
-  Given I am on the "registeration" page
-
-Scenario: fill out the form
-  When I fill the "username" box with "John"
-  And I fill the "company" box with "Chipolte"
-  When I click "continue"
-  Then I should see the "questionnair" page
-
-Scenario: applying for a username that is already in the database
   Given the following users exist: 
-  | username          | company       |
-  | John              | Chipolte      |
-  # your steps here
-  When I fill the "username" box with "John"
-  And I fill the "company" box with "Taco Bell"
-  When I click "continue"
-  Then I should see "username taken"
-  And the "username" box should have "John"
-  And the "company" box should have "Taco Bell"
+  | username          | company          | status         |
+  | John              | Whole Foods      | Sponsor        |
+
+Scenario: view current application status
+  Given I am on the "profile" page
+  Then I should see my "username" as "John"
+  And I should see my "company" as "Whole Foods"
+  And I should see my "status" as "Donor"
+
+Scenario: start another form
+  Given I am on the "profile" page
+  And I should see "Sponsor Contract" as "incompleted"
+  When I follow "Sponsor Contract"
+  Then I should see the "Sponsor_contract" page

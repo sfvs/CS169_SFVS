@@ -16,9 +16,9 @@ Scenario: fill out the form
 
 Scenario: applying for a username that is already in the database
   Given the following users exist: 
-  | username          | company       |
-  | John              | Chipolte      |
-  # your steps here
+  | username          | company          | status         |
+  | John              | Whole Foods      | Sponsor        |
+
   When I fill the "username" box with "John"
   And I fill the "company" box with "Taco Bell"
   When I click "continue"
