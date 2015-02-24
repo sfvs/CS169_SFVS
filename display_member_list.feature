@@ -15,3 +15,10 @@ Background: users have been added to database
 Scenario: see a list of users
 
 Scenario: clicking on a user will show more information about that user
+  Given I am on the admin "profile" page
+  When I follow "John"
+  Then I should see the "username" as "John"
+  And I should see the "password" as "bear"
+  And I should see the "company" as "Whole Foods"
+  And I should see the "status" as "Sponsor"
+
