@@ -5,7 +5,8 @@ SFVSRegistrationSystem::Application.routes.draw do
       resources :health_form
     end
   end
-  get "/", to: "User#login"
+  
+  get :root, to: "UserController#login"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
