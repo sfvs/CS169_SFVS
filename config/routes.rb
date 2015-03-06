@@ -1,5 +1,8 @@
 SFVSRegistrationSystem::Application.routes.draw do
 
+  get "admin/index"
+  get "admin", :to => 'admin#index', as: 'admin'
+
   root :to => 'home#index'
   
   devise_for :users
