@@ -1,12 +1,15 @@
 SFVSRegistrationSystem::Application.routes.draw do
 
+  root :to => 'home#index'
+  post 'users/login', as: 'login'
+
+
   resources :users do 
     resources :application do 
       resources :health_form
     end
   end
-  get "/", to: "User#login"
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
