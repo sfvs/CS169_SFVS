@@ -1,9 +1,10 @@
 SFVSRegistrationSystem::Application.routes.draw do
 
   root :to => 'home#index'
-  post 'users/login', as: 'login'
-
-
+  
+  devise_for :users
+  
+  #we should flatten routes
   resources :users do 
     resources :application do 
       resources :health_form
