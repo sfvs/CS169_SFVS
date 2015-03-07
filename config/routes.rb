@@ -2,13 +2,12 @@ SFVSRegistrationSystem::Application.routes.draw do
 
   root :to => 'home#index'
   
-  devise_for :users
+  # name to prevent resource: user and devise routes from overlapping
+  devise_for :users, :path => 'member'
   
-  #we should flatten routes
   resources :users do 
-    resources :application do 
-      resources :health_form
-    end
+    resources :application
+    resources :health_form
   end
   
   # The priority is based upon order of creation:
