@@ -2,7 +2,7 @@ SFVSRegistrationSystem::Application.routes.draw do
 
   get "admin/index"
   get "admin", :to => 'admin#index', as: 'admin'
-  get "admin/:id", :to => 'admin#show', as: 'admin'
+  get "admin/:id", :to => 'admin#show', as: 'admin_show_user'
 
   root :to => 'home#index'
   
