@@ -11,4 +11,4 @@
     - @users.each do |user|
       %tr
         %td= user.email
-        %td= link_to "More Info"
+        %td= link_to "More Info", admin_path(user)
