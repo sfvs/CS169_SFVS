@@ -1,8 +1,10 @@
 SFVSRegistrationSystem::Application.routes.draw do
 
-  get "admin/index"
-  get "admin", :to => 'admin#index', as: 'admin'
-  get "admin/:id", :to => 'admin#show', as: 'admin_show_user'
+  # namespace for the group of controllers for admin
+  namespace :admin do
+    root to: "admin#index"
+    resources :users
+  end
 
   root :to => 'home#index'
   

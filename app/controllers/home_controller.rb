@@ -4,7 +4,7 @@ class HomeController < ApplicationController
 		#just render index page
 		if user_signed_in?
       if current_user.admin?
-        redirect_to admin_path
+        redirect_to admin_users_path
         return
       end
 			redirect_to user_path(current_user)
