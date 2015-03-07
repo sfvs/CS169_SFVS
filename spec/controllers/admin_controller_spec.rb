@@ -7,6 +7,15 @@ describe AdminController do
       get 'index'
       response.should be_success
     end
+
+    it "renders the index template" do
+      get :index
+      expect(response).to render_template("index")
+    end
+
+    pending "should return a list of users' email addresses" #do
+      #users = [stub_model(User), stub_model(User)]
+    #end
   end
 
 end
