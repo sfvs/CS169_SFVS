@@ -4,11 +4,18 @@ class Admin::AdminController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]) # Could probably use current_user
+  end
+
+  def edit
+    @user = User.find(params[:id]) # Could probably use current_user
   end
 
   def create
 
   end
 
+  def destroy
+
+  end
 end
