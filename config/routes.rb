@@ -11,9 +11,9 @@ SFVSRegistrationSystem::Application.routes.draw do
   # name to prevent resource: user and devise routes from overlapping
   devise_for :users, :path => 'member'
   
-  resources :users do
-  resources :application
-  resources :health_form
+  resources :users do 
+    resources :application
+    resources :health_form
   end
   
   # The priority is based upon order of creation:
