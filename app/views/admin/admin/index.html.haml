@@ -14,3 +14,5 @@
         %td= link_to "More Info", admin_user_path(user)
 
 = link_to "Create new user", new_admin_user_path
+
+= button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}

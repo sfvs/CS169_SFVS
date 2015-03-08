@@ -10,4 +10,5 @@ class Admin::AdminController < ApplicationController
   def create
 
   end
+
 end
