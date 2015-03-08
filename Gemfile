@@ -8,6 +8,7 @@ gem 'rails', '3.2.16'
 
 gem 'haml'
 gem 'devise'
+gem 'rake'
 
 group :development, :test do
   gem 'sqlite3'
@@ -16,7 +17,8 @@ group :development, :test do
   gem 'cucumber-rails', :require => false
   gem 'rspec-rails', '~> 2.14.0'
   gem 'simplecov'
-  gem 'factory_girl'
+  #gem 'factory_girl'
+  gem 'factory_girl_rails'
 end
 
 group :production do

@@ -1,5 +1,11 @@
 SFVSRegistrationSystem::Application.routes.draw do
 
+  # namespace for the group of controllers for admin
+  namespace :admin do
+    root to: "admin#index"
+    resources :users
+  end
+
   root :to => 'home#index'
   
   # name to prevent resource: user and devise routes from overlapping
