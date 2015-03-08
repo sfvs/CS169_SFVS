@@ -7,8 +7,7 @@ describe HomeController do
     end
 
     it "should route a signed in user to the user page" do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      user = sign_in FactoryGirl.create(:user) 
+      user = make_a_member(:user, :email => "i_am_a_coconut@mail.com") 
       get :index
       expect(response).to redirect_to user_path(user)
     end
@@ -20,8 +19,7 @@ describe HomeController do
     end
 
     it "should route admin to the admin page" do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      admin = sign_in FactoryGirl.create(:admin)
+      admin = make_a_member(:admin)
       get :index 
       expect(response).to redirect_to admin_users_path
     end
