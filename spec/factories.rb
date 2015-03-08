@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :user do
     email "amanismortal@plato.com"
     password "password"
-    password_confirmation { "password" }
+    password_confirmation "password"
     admin false
   end
 

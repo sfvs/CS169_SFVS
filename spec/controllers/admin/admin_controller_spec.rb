@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Admin::AdminController do
+  # Use factory girl after describe to get users for the RSpec tests
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
