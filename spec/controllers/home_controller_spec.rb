@@ -18,5 +18,12 @@ describe HomeController do
       get :index
       expect(response).to redirect_to new_user_session_path
     end
+
+    it "should route admin to the admin page" do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      admin = sign_in FactoryGirl.create(:admin)
+      get :index 
+      expect(response).to redirect_to admin_users_path
+    end
   end
 end
