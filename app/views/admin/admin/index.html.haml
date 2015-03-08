@@ -2,17 +2,18 @@
 
 %h3 Users List
 
-%table#users
-  %thead
-    %tr
-      %th Email
-      %th More Info
-  %tbody
-    - @users.each do |user|
+%div
+  %table#users
+    %thead
       %tr
-        %td= user.email
-        %td= link_to "More Info", admin_user_path(user)
+        %th Email
+        %th More Info
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.email
+          %td= link_to "More Info", admin_user_path(user)
 
-= link_to "Create new user", new_admin_user_path
+= button_to "Create User", new_admin_user_path, {:id => "create_but", method: :get}
 
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}
