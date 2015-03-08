@@ -3,7 +3,11 @@ class HomeController < ApplicationController
 	def index
 		#just render index page
 		if user_signed_in?
-			redirect_to user_path(current_user)
+      if current_user.admin?
+        redirect_to admin_users_path
+      else
+			  redirect_to user_path(current_user)
+      end
 		else
 			redirect_to new_user_session_path
 		end

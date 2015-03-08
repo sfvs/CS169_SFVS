@@ -1,0 +1,14 @@
+%h1 Admin Page
+
+%h3 Users List
+
+%table#users
+  %thead
+    %tr
+      %th Email
+      %th More Info
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= link_to "More Info", admin_show_user_path(user)
