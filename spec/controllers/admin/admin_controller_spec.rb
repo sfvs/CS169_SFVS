@@ -5,7 +5,7 @@ describe Admin::AdminController do
   render_views
   describe "successful admin login" do
     
-    #login :admin
+    login :admin
 
     describe "admin index page" do
       it "returns http success" do

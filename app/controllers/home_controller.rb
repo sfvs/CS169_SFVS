@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
 
-  skip_before_filter :user_signed_in?, only: [:index]
+  skip_before_filter :require_login, only: [:index]
 
   def index
     if user_signed_in?
