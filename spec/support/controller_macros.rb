@@ -19,9 +19,14 @@ module ControllerMacros
     sign_in FactoryGirl.create(type,member_attributes)
   end
 
-  def login_before_each_test(type = :user)
+  def login(type = :user)
     before(:each) do
-      @user = make_a_member(type)
+      obj = make_a_member(type)
+      if type == :user
+        @user = obj
+      elsif type == :admin
+        @admin = obj
+      end
     end
   end
 
