@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :user do
-    email "amanismortal@plato.com"
+    email "amanismortal@user.com"
     password "password"
     password_confirmation "password"
     admin false
@@ -8,9 +8,9 @@ FactoryGirl.define do
 
   # an admin is from the user class
   factory :admin, class: User do
-    email "platoisaman@plato.com"
+    email "platoisaman@admin.com"
     password "password"
-    password_confirmation { "password" }
+    password_confirmation "password"
     admin true
   end
 end
