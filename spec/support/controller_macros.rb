@@ -16,12 +16,12 @@ module ControllerMacros
   # member_attributes is a hash of specific attrs. ex. {:email => "hello@world.com"}
   def make_a_member(type = :user, member_attributes = nil)
     @request.env["devise.mapping"] = Devise.mappings[type]
-    sign_in FactoryGirl.create(type,member_attributes)
+    FactoryGirl.create(type,member_attributes)
   end
 
   def login(type = :user)
     before(:each) do
-      obj = make_a_member(type)
+      obj = sign_in make_a_member(type)
       if type == :user
         @user = obj
       elsif type == :admin
