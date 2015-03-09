@@ -1,16 +1,17 @@
 class HomeController < ApplicationController
 
-	def index
-		#just render index page
-		if user_signed_in?
+  skip_before_filter :user_signed_in?, only: [:index]
+
+  def index
+    if user_signed_in?
       if current_user.admin?
         redirect_to admin_users_path
       else
-			  redirect_to user_path(current_user)
+        redirect_to user_path(current_user)
       end
-		else
-			redirect_to new_user_session_path
-		end
-	end
+    else
+      redirect_to new_user_session_path
+    end
+  end
 
 end
