@@ -7,24 +7,30 @@ Feature: login to view application
 Background: users have been added to database
   
   Given the following users exist: 
-  | username          | password         | company          | status         |
-  | John              | bear             | Whole Foods      | Sponsor        |
+  | email          | password 	   |
+  | john@gmail.com | 123456789     |
 
 Scenario: returning user logging in
   Given I am on the "login" page
-  When I fill the "username" box with "John"
-  And I fill the "password" box with "bear"
-  When I click "login"
-  Then I should see the "profile" page
+  When I fill in "user_email" with "john@gmail.com"
+  And I fill in "user_password" with "123456789"
+  When I press "Log in"
+  Then I should be on the "profile" page for "john@gmail.com"
 
 Scenario: logging in with invalid username or password
   Given I am on the "login" page
-  When I fill the "username" box with "John"
-  And I fill the "password" box with "bare"
-  When I click "login"
-  Then I should see the "login unsuccessful"
+  When I fill in "user_email" with "invalid username"
+  And I fill in "user_password" with "12344569112"
+  When I press "Log in"
+  Then I should be on the "login" page
+  And I should see "Invalid email or password"
 
 Scenario: create a new account
   Given I am on the "login" page
-  When I click "create a new account"
-  Then I should see the "registeration" page
+  When I follow "Sign up"
+  Then I should be on the "registration" page
+  Then I fill in "user_email" with "johndoe2@gmail.com"
+  And I fill in "user_password" with "123456789"
+  And I fill in "user_password_confirmation" with "123456789"
+  When I press "Sign up"
+  Then I should be on the "profile" page for "johndoe2@gmail.com"
