@@ -6,5 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-admin = User.create({email: 'admin@hostname.com', password: 'admin123', admin: true}, :without_protection => true)
-User.create({email: 'user2@hostname.com', password: 'user1234', admin: false}, :without_protection => true)
+def create_a_user(email, password, admin_status = false)
+	user1 = User.new({:email => email, :password => password})
+	user1.admin = admin_status
+	user1.save
+end
+
+create_a_user('admin@hostname.com', 'admin123', true)
+create_a_user('user2@hostname.com', 'user1234')
+create_a_user('user3@hostname.com', 'user1234')
+create_a_user('user4@hostname.com', 'user1234')

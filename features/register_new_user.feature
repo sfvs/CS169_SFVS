@@ -9,6 +9,7 @@ Background: On the registeration page
   Given I am on the "registration" page
 
 Scenario: fill out the form
+  Given PENDING
   When I fill in "user_email" with "JohnTest@gmail.com"
   And I fill in "user_password" with "bear12345"
   And I fill in "user_password_confirmation" with "bear12345"
@@ -16,6 +17,7 @@ Scenario: fill out the form
   Then I should be on the "profile" page for "JohnTest@gmail.com"
 
 Scenario: applying for a username that is already taken
+  Given PENDING
   Given the following users exist: 
   | email          | password         |
   | johndoe@gmail.com | bear12345     |
@@ -28,6 +30,7 @@ Scenario: applying for a username that is already taken
   And I should see "Email has already been taken"
 
 Scenario: any empty boxes returns an error
+  Given PENDING
   When I fill in "user_email" with "johndoe@gmail.com"
   #And I fill in "user_password" with ""
   #And I fill in "user_password_confirmation" with "bear12345" 

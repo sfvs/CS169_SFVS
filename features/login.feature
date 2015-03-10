@@ -11,6 +11,7 @@ Background: users have been added to database
   | john@gmail.com | 123456789     |
 
 Scenario: returning user logging in
+  Given PENDING
   Given I am on the "login" page
   When I fill in "user_email" with "john@gmail.com"
   And I fill in "user_password" with "123456789"
@@ -18,6 +19,7 @@ Scenario: returning user logging in
   Then I should be on the "profile" page for "john@gmail.com"
 
 Scenario: logging in with invalid username or password
+  Given PENDING
   Given I am on the "login" page
   When I fill in "user_email" with "invalid username"
   And I fill in "user_password" with "12344569112"
@@ -26,6 +28,7 @@ Scenario: logging in with invalid username or password
   And I should see "Invalid email or password"
 
 Scenario: create a new account
+  Given PENDING
   Given I am on the "login" page
   When I follow "Sign up"
   Then I should be on the "registration" page
