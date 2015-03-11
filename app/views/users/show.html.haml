@@ -1,3 +1,5 @@
-%h1 user page
+%h1 User Page
+
+%p Welcome #{@user.email}
 
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}
