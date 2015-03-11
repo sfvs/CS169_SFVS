@@ -6,16 +6,32 @@ class UserPolicy
     @record = record
   end
 
-  def is_admin?
-    @user.admin?
+  def index?
+    user.admin?
+  end
+
+  def show?
+    user.admin?
+  end
+
+  def edit?
+    user.admin?
+  end
+
+  def create?
+    user.admin?
+  end
+
+  def destroy?
+    user.admin?
   end
 
   def is_regular_user?
-    !@user.admin?
+    !user.admin?
   end
 
   def is_profile_owner?
-    @user.id == @record.id
+    user.id == record.id
   end
 end
 
