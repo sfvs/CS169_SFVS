@@ -17,5 +17,6 @@ class UserPolicy
   def is_profile_owner?
     @user.id == @record.id
   end
+  
 end
 
