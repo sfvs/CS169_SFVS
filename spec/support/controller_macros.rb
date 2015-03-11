@@ -1,5 +1,6 @@
 module ControllerMacros
   
+  # takes in a member_objects, authenticates it using a stub, and returns it
   def sign_in(user = double('user'))
     if user.nil?
       allow(request.env['warden']).to receive(:authenticate!).and_throw(:warden, {:scope => :user})
@@ -11,19 +12,22 @@ module ControllerMacros
     user
   end
 
-  def login_admin
+  # current types are :user, and :admin
+  # member_attributes is a hash of specific attrs. ex. {:email => "hello@world.com"}
+  def make_a_member(type = :user, member_attributes = nil)
+    @request.env["devise.mapping"] = Devise.mappings[type]
+    FactoryGirl.create(type,member_attributes)
+  end
+
+  def login(type = :user)
     before(:each) do
-      @request.env["devise.mapping"] = Devise.mappings[:admin]
-      sign_in FactoryGirl.create(:admin) # Using factory girl as an example
+      obj = sign_in make_a_member(type)
+      if type == :user
+        @user = obj
+      elsif type == :admin
+        @admin = obj
+      end
     end
   end
 
-  def login_user
-    before(:each) do
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      user = FactoryGirl.create(:user)
-      #user.confirm! # or set a confirmed_at inside the factory. Only necessary if you are using the "confirmable" module
-      sign_in user
-    end
-  end
 end
