@@ -3,7 +3,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize current_user, :is_regular_user?
     authorize @user, :is_profile_owner?
-    @id = params[:id]
     @response = ""
     if params[:form] != nil
       aid = params[:form]
