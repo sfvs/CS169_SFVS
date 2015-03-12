@@ -19,6 +19,9 @@ class Admin::AdminController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "User #{@user.email} has been removed."
     authorize current_user
   end
 end
