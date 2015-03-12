@@ -1,12 +1,4 @@
-FactoryGirl.define do  factory :answer, :class => 'Answers' do
-    ans "MyText"
-q_id 1
-  end
-  factory :questionnaire do
-    question "MyText"
-parent_id 1
-  end
-
+FactoryGirl.define do  
   factory :user do
     email "amanismortal@user.com"
     password "password"
