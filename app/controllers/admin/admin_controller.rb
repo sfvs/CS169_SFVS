@@ -1,4 +1,5 @@
 class Admin::AdminController < ApplicationController
+  # include UsersHelper # Perhaps need to create the same method in AdminHelper and include it?
 
   def index
     @users = User.find(:all, :conditions => ["admin = ?", false])
@@ -6,11 +7,13 @@ class Admin::AdminController < ApplicationController
   end
 
   def show
-    show_and_edit
+    @user = User.find_by_id(params[:id])
+    authorize current_user
   end
 
   def edit
-    show_and_edit
+    @user = User.find_by_id(params[:id])
+    authorize current_user
   end
 
   def create
@@ -19,15 +22,5 @@ class Admin::AdminController < ApplicationController
 
   def destroy
     authorize current_user
-  end
-
-  private
-  def show_and_edit
-    if User.exists?(params[:id])
-      @user = User.find(params[:id])
-      authorize current_user
-    else
-      redirect_to admin_root_path
-    end
   end
 end
