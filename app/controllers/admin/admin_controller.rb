@@ -7,20 +7,12 @@ class Admin::AdminController < ApplicationController
   end
 
   def show
-    @user = User.find_by_id(params[:id])
-    if @user.nil?
-      redirect_to admin_root_path
-      return
-    end
+    @user = User.find(params[:id])
     authorize current_user
   end
 
   def edit
-    @user = User.find_by_id(params[:id])
-    if @user.nil?
-      redirect_to admin_root_path
-      return
-    end
+    @user = User.find(params[:id])
     authorize current_user
   end
 
