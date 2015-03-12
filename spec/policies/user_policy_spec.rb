@@ -10,13 +10,17 @@ describe UserPolicy do
     end
 
     it "allows access if user is an admin" do
-      expect(subject).to permit(User.new({:admin => true}, :without_protection => true), nil)
+      current_user = User.create({:admin => true}, :without_protection => true)
+      current_user.update_attribute :admin, true
+      expect(subject).to permit(current_user, nil)
     end
   end
 
   permissions :is_regular_user? do
     it "denies access if user is an admin" do
-      expect(subject).not_to permit(User.new({:admin => true}, :without_protection => true), nil)
+      current_user = User.create({:admin => true}, :without_protection => true)
+      current_user.update_attribute :admin, true
+      expect(subject).not_to permit(current_user, nil)
     end
 
     it "allows access if user is regular user" do

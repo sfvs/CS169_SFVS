@@ -8,11 +8,19 @@ class Admin::AdminController < ApplicationController
 
   def show
     @user = User.find_by_id(params[:id])
+    if @user.nil?
+      redirect_to admin_root_path
+      return
+    end
     authorize current_user
   end
 
   def edit
     @user = User.find_by_id(params[:id])
+    if @user.nil?
+      redirect_to admin_root_path
+      return
+    end
     authorize current_user
   end
 
