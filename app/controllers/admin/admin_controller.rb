@@ -6,21 +6,11 @@ class Admin::AdminController < ApplicationController
   end
 
   def show
-    if User.exists?(params[:id])
-      @user = User.find(params[:id])
-      authorize current_user
-    else
-      redirect_to admin_root_path
-    end
+    show_and_edit
   end
 
   def edit
-    if User.exists?(params[:id])
-      @user = User.find(params[:id])
-      authorize current_user
-    else
-      redirect_to admin_root_path
-    end
+    show_and_edit
   end
 
   def create
@@ -29,5 +19,15 @@ class Admin::AdminController < ApplicationController
 
   def destroy
     authorize current_user
+  end
+
+  private
+  def show_and_edit
+    if User.exists?(params[:id])
+      @user = User.find(params[:id])
+      authorize current_user
+    else
+      redirect_to admin_root_path
+    end
   end
 end
