@@ -12,14 +12,12 @@ Background: users have been added to database
   | johndoe@gmail.com | bear12345        |
 
 Scenario: view current application status
-  Given PENDING
   Given I am on the "profile" page
-  Then I should see my "username" as "John"
+  Then I should see my "email" as "John"
   And I should see my "company" as "Whole Foods"
   And I should see my "status" as "Donor"
 
 Scenario: start another form
-  Given PENDING
   Given I am on the "profile" page
   And I should see "Sponsor Contract" as "incompleted"
   When I follow "Sponsor Contract"

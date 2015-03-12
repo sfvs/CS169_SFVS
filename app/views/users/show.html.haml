@@ -1,3 +1,14 @@
-%h1 user page
+%h1=@user.email
 
+%p name
+%p company
+%p status
+
+=link_to "Health Form"
+-#, edit_user_health_form_path(@user.application.health_form)
+
+%p payment
+-#Name, Company, Status, Forms, Payment
+
+= button_to "Edit Profile", edit_user_path
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}
