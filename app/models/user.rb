@@ -11,4 +11,14 @@ class User < ActiveRecord::Base
 
   has_many :applications
 
+  # Need to set admin attr of users to false manually since migration's
+  # setting of the default value of admin to false is not being applied
+  # correctly.
+  after_initialize do
+    if self.new_record?
+      if !self.admin || self.admin.nil?
+        self.admin = false
+      end
+    end
+  end
 end
