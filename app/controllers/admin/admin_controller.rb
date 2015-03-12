@@ -20,8 +20,9 @@ class Admin::AdminController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    authorize current_user
     @user.destroy
     flash[:notice] = "User #{@user.email} has been removed."
-    authorize current_user
+    redirect_to admin_root_path
   end
 end
