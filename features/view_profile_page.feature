@@ -13,12 +13,12 @@ Background: users have been added to database
 
 Scenario: view current application status
   Given I am on the "profile" page
-  Then I should see my "email" as "John"
-  And I should see my "company" as "Whole Foods"
-  And I should see my "status" as "Donor"
+  Then I should see my "email" as "johndoe@gmail.com"
+  And I should see my "company" as "company"
+  And I should see my "status" as "status"
 
 Scenario: start another form
   Given I am on the "profile" page
-  And I should see "Sponsor Contract" as "incompleted"
-  When I follow "Sponsor Contract"
-  Then I should see the "Sponsor_contract" page
+  Then I should see "Health Form"
+  When I follow "Health Form"
+  Then I should see the "Health Form" page
