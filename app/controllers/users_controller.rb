@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @response = parse_questionnaire_response(params[:questionnaire_response])
-  end
+ end
 
   def questionnaire
     # @display is an array of hashes, containing question and its answers 
