@@ -11,6 +11,6 @@
 %p payment
 -#Name, Company, Status, Forms, Payment
 = button_to "Take Survey", questionnaire_user_path(@user), {:id => "questionnaire_but", method: :get}
-= button_to "Edit Profile", edit_user_path
+= button_to "Edit Profile", edit_user_path(@user)
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}
 
