@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_filter :require_valid_user
 
   def show
-    @user = User.find_by_id(params[:id])
+    @user = User.find(params[:id])
     @response = parse_questionnaire_response(params[:questionnaire_response])
   end
 
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   
   def require_valid_user
     #if used everywhere, we should put in application controller
-    authorize User.find_by_id(params[:id]), :is_profile_owner?
+    authorize User.find(params[:id]), :is_profile_owner?
     authorize current_user, :is_regular_user?
   end
 
