@@ -6,23 +6,7 @@ class UserPolicy
     @record = record
   end
 
-  def index?
-    user.admin?
-  end
-
-  def show?
-    user.admin?
-  end
-
-  def edit?
-    user.admin?
-  end
-
-  def create?
-    user.admin?
-  end
-
-  def destroy?
+  def is_admin?
     user.admin?
   end
 
