@@ -1,28 +1,10 @@
 class UsersController < ApplicationController
 
+  before_filter :require_valid_user
+
   def show
-    @user = User.find(params[:id])
-    authorize current_user, :is_regular_user?
-    authorize @user, :is_profile_owner?
-    @response = ""
-    if params[:form] != nil
-      aid = params[:form]
-      if aid == "3"
-        @response = "Good choice"
-      elsif aid == "4"
-        @response = "Hmmmmm"
-      elsif aid == "5"
-        @response = "Ewwwwww"
-      elsif aid == "6"
-        @response = "I knew it!"
-      elsif aid == "7"
-        @response = "Cool"
-      elsif aid == "8"
-        @response = "MANGO HABANERO"
-      elsif aid == "9"
-        @response = "So you like to be second."
-      end
-    end 
+    @user = User.find_by_id(params[:id])
+    @response = parse_questionnaire_response(params[:questionnaire_response])
   end
 
   def questionnaire
@@ -57,4 +39,35 @@ class UsersController < ApplicationController
       current_qid = q.parent_id
     end
   end
+
+  private
+  
+  def require_valid_user
+    #if used everywhere, we should put in application controller
+    authorize User.find_by_id(params[:id]), :is_profile_owner?
+    authorize current_user, :is_regular_user?
+  end
+
+  def parse_questionnaire_response(answer_id)
+    if answer_id != nil
+      if answer_id == "3"
+        "Good choice"
+      elsif answer_id == "4"
+        "Hmmmmm"
+      elsif answer_id == "5"
+        "Ewwwwww"
+      elsif answer_id == "6"
+        "I knew it!"
+      elsif answer_id == "7"
+        "Cool"
+      elsif answer_id == "8"
+        "MANGO HABANERO"
+      elsif answer_id == "9"
+        "So you like to be second."
+      else
+        "" #default response is empty
+      end
+    end
+  end
+
 end

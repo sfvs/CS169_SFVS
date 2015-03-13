@@ -3,4 +3,4 @@
 
 %h2 #{@response}
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}
-= button_to "Take Survey", questionnaire_user_path(@user), {:id => "questionnaire_but", method: :get}
+= button_to "Take Survey", user_questionnaire_path(@user), {:id => "questionnaire_but", method: :get}
