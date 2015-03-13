@@ -1,6 +1,16 @@
-%h1 User Page
-%p Welcome #{@user.email}
+%h1=@user.email
+
+%p name
+%p company
+%p status
 
 %h2 #{@response}
-= button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}
+=link_to "Health Form"
+-#, edit_user_health_form_path(@user.application.health_form)
+
+%p payment
+-#Name, Company, Status, Forms, Payment
 = button_to "Take Survey", questionnaire_user_path(@user), {:id => "questionnaire_but", method: :get}
+= button_to "Edit Profile", edit_user_path(@user)
+= button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}
+
