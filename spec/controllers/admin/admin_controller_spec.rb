@@ -14,8 +14,15 @@ describe Admin::AdminController do
       end
 
       it "should render the admin index template" do
-        get :index
+        get 'index'
         expect(response).to render_template("index")
+      end
+
+      it "should assign @users to the list of regular users" do
+        users = make_many_members
+        get 'index'
+        response.should be_success
+        assigns(:users).should == users
       end
 
       it "should return a list of users' email addresses" do

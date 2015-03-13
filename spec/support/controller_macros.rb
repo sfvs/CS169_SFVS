@@ -19,6 +19,17 @@ module ControllerMacros
     FactoryGirl.create(type,member_attributes)
   end
 
+  def make_many_members(type = :user, count = 5)
+    @request.env["devise.mapping"] = Devise.mappings[type]
+    user_list = []
+    member_attributes = Hash.new
+    (0..count-1).each do |i|
+      member_attributes[:email] = "user" + i.to_s + "@hostname.com"
+      user_list << FactoryGirl.create(type, member_attributes)
+    end
+    user_list
+  end
+
   def login(type = :user, attributes = nil)
     before(:each) do
       obj = sign_in make_a_member(type, attributes)
