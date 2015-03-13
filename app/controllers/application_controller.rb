@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery
   before_filter :authenticate_user!
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   
   private
@@ -14,4 +15,9 @@ class ApplicationController < ActionController::Base
   def after_sign_out_path_for(resource_or_scope)
     new_user_session_path
   end
+
+  def not_found
+    redirect_to root_path
+  end
+
 end

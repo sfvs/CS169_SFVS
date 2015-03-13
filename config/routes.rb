@@ -12,7 +12,7 @@ SFVSRegistrationSystem::Application.routes.draw do
   devise_for :users, :path => 'member'
   resources :users do 
     resources :application
-    resources :health_form
+    resources :health_form, only: [:edit, :show, :update]
     get "questionnaire", on: :member
   end
 
