@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+
   skip_before_filter :authenticate_user!, :only => :index
 
   def index
@@ -12,5 +13,5 @@ class HomeController < ApplicationController
       redirect_to new_user_session_path
     end
   end
-
+  
 end

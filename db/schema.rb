@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(:version => 20150312124306) do
 
+  create_table "answers", :force => true do |t|
+    t.text     "ans"
+    t.integer  "leads_to"
+    t.integer  "questionnaire_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "applications", :force => true do |t|
     t.integer  "user_id"
     t.datetime "created_at", :null => false
@@ -23,6 +31,13 @@ ActiveRecord::Schema.define(:version => 20150312124306) do
     t.integer  "application_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "questionnaires", :force => true do |t|
+    t.text     "question"
+    t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
