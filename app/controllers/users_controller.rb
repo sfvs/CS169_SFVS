@@ -40,10 +40,6 @@ class UsersController < ApplicationController
     authorize current_user, :is_regular_user?
   end
 
-  def setup_for_last(answer)
-
-  end
-
   # make an array of with q/a pairs for display, also edites current_select_answers
   def populate_display(current_qid)
     questions = Array.new {Hash.new}
