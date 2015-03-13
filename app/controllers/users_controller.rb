@@ -65,13 +65,13 @@ class UsersController < ApplicationController
   def parse_questionnaire_response(answer_id)
     if answer_id != nil 
       if answer_id == "2" #way not not hard code in answer?
-        "Good choice"
+        "You are a Vendor."
       elsif answer_id == "3"
-        "Hmmmmm"
+        "You are a Donor."
       elsif answer_id == "4"
-        "Ewwwwww"
+        "You are a Restaurant Concessionaire."
       elsif answer_id == "5"
-        "I knew it!"
+        "You are Other."
       else
         "" #default response is empty, should be throwing an exception
       end
