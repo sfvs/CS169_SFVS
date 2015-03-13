@@ -31,4 +31,18 @@ describe ApplicationController do
       flash[:alert].should == "You are not authorized to perform this action."
     end
   end
+
+  describe "after sign out" do
+    controller do
+    def after_sign_out_path_for(resource)
+          super resource
+      end
+    end
+
+    login :user
+
+    it "should redirect to sign in page" do
+      controller.after_sign_out_path_for(@user).should == new_user_session_path
+    end
+  end
 end
