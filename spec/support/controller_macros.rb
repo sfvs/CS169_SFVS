@@ -19,9 +19,9 @@ module ControllerMacros
     FactoryGirl.create(type,member_attributes)
   end
 
-  def login(type = :user)
+  def login(type = :user, attributes = nil)
     before(:each) do
-      obj = sign_in make_a_member(type)
+      obj = sign_in make_a_member(type, attributes)
       if type == :user
         @user = obj
       elsif type == :admin
