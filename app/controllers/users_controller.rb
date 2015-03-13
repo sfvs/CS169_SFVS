@@ -19,7 +19,9 @@ class UsersController < ApplicationController
     unless params[:ans].nil? # got an answer
       selected_answer = Answers.find(params[:ans])
       if selected_answer.is_last_answer?
-        setup_for_last selected_answer
+        @end_of_questionnaire = true
+        @current_selected_answers.push(selected_answer.id) #corner case: add the last selected answer into array
+        @application_type = selected_answer.id
         current_qid = selected_answer.questionnaire_id
       else	#case2: a is an intermidate answer
         current_qid = selected_answer.leads_to
@@ -39,9 +41,7 @@ class UsersController < ApplicationController
   end
 
   def setup_for_last(answer)
-    @end_of_questionnaire = true
-    @current_selected_answers.push(answer.id) #corner case: add the last selected answer into array
-    @application_type = answer.id
+
   end
 
   # make an array of with q/a pairs for display, also edites current_select_answers
