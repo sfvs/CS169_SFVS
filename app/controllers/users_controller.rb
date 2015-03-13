@@ -45,13 +45,12 @@ class UsersController < ApplicationController
     questions = Array.new {Hash.new}
     while current_qid != nil
       current_question = Questionnaire.find(current_qid)
-      associated_answer = Answers.get_answer_from_question current_question
+      associated_answer = Answers.get_answer_from current_question
 
       # put question to front so it is in order from first to last question
       questions.unshift({:question => current_question.question, :answer => associated_answer})
-      
-      if current_qid != Questionnaire.get_root_question_id #why? better way to detect nil on final
-        @current_selected_answers.push(Answers.get_answer_id(current_question)) 
+      if current_qid != Questionnaire.get_root_question_id # root question has no parent question
+        @current_selected_answers.push(Answers.get_answer_leading_to(current_question).id) 
       end
 
       current_qid = current_question.parent_id
