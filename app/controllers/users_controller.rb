@@ -23,7 +23,7 @@ class UsersController < ApplicationController
         @current_selected_answers.push(selected_answer.id) #corner case: add the last selected answer into array
         @application_type = selected_answer.id
         current_qid = selected_answer.questionnaire_id
-      else	#case2: a is an intermidate answer
+      else	# selected_answer is an intermidate answer
         current_qid = selected_answer.leads_to
       end
     end
