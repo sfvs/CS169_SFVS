@@ -8,6 +8,3 @@ script:
   - bundle exec rake db:test:prepare
   - bundle exec rspec spec/
   - bundle exec cucumber features/
-addons:
-  code_climate:
-    repo_token: 02f781b1561c0fe3dc97d44550ccaecdc7df4ceb6224743bb6e8f89fdce7b0a0
