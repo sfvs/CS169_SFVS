@@ -16,15 +16,13 @@ class UsersController < ApplicationController
     @end_of_questionnaire = false	#set default value
     current_qid = Questionnaire.get_root_question_id
 
-    if params[:ans] != nil	#got an answer
-      a = Answers.find(params[:ans])
-      if a.leads_to == nil	#case1: a is the last answer
-        @end_of_questionnaire = true
-        @current_selected_answers.push(a.id) #corner case: add the last selected answer into array
-        @form = a.id
-        current_qid = a.questionnaire_id
+    unless params[:ans].nil? # got an answer
+      selected_answer = Answers.find(params[:ans])
+      if selected_answer.is_last_answer?
+        setup_for_last selected_answer
+        current_qid = selected_answer.questionnaire_id
       else	#case2: a is an intermidate answer
-        current_qid = a.leads_to
+        current_qid = selected_answer.leads_to
       end
     end
 
@@ -33,11 +31,17 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
   def require_valid_user
     #if used everywhere, we should put in application controller
     authorize User.find(params[:id]), :is_profile_owner?
     authorize current_user, :is_regular_user?
+  end
+
+  def setup_for_last(answer)
+    @end_of_questionnaire = true
+    @current_selected_answers.push(answer.id) #corner case: add the last selected answer into array
+    @application_type = answer.id
   end
 
   # make an array of with q/a pairs for display, also edites current_select_answers

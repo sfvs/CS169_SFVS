@@ -10,4 +10,8 @@ class Answers < ActiveRecord::Base
     self.where(questionnaire_id: question.id)
   end
 
+  def is_last_answer?
+  	self.leads_to == nil
+  end
+
 end
