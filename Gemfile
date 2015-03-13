@@ -10,6 +10,7 @@ gem 'haml'
 gem 'devise'
 gem 'rake'
 gem 'pundit'
+gem "codeclimate-test-reporter", group: :test, require: nil
 
 group :development, :test do
   gem 'sqlite3'
