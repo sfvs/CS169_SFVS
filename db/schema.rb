@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150307003835) do
+ActiveRecord::Schema.define(:version => 20150310023537) do
+
+  create_table "answers", :force => true do |t|
+    t.text     "ans"
+    t.integer  "leads_to"
+    t.integer  "questionnaire_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "applications", :force => true do |t|
     t.integer  "user_id"
@@ -23,6 +31,13 @@ ActiveRecord::Schema.define(:version => 20150307003835) do
     t.integer  "application_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+  end
+
+  create_table "questionnaires", :force => true do |t|
+    t.text     "question"
+    t.integer  "parent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

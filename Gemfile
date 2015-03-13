@@ -9,6 +9,7 @@ gem 'rails', '3.2.16'
 gem 'haml'
 gem 'devise'
 gem 'rake'
+gem 'pundit'
 
 group :development, :test do
   gem 'sqlite3'

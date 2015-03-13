@@ -12,13 +12,13 @@ Background: users have been added to database
   | johndoe@gmail.com | bear12345        |
 
 Scenario: view current application status
-  Given I am on the "profile" page
+  Given I am on the "profile" page for "johndoe@gmail.com"
   Then I should see my "email" as "johndoe@gmail.com"
   And I should see my "company" as "company"
   And I should see my "status" as "status"
 
 Scenario: start another form
-  Given I am on the "profile" page
-  Then I should see "Health Form"
-  When I follow "Health Form"
-  Then I should see the "Health Form" page
+  Given I am on the "profile" page for "johndoe@gmail.com"
+  And I can see "Take Survey"
+  When I do follow "Take Survey"
+  Then I should see the "survey" page for "johndoe@gmail.com"

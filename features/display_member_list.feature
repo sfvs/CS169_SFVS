@@ -8,18 +8,26 @@ Feature: display a list of users and view their profiles
 Background: users have been added to database
   
   Given the following users exist: 
-  | email             | password         |
-  | johndoe@gmail.com | bear12345        |
-  | ronpaul@gmail.com | bear12345        |
+  | email            | password         | admin   |
+  | user1@gmail.com  | bear12345        | false   |
+  | user2@gmail.com  | bear12345        | false   |
+  | admin@gmail.com  | admin123         | true    |
+  | admin1@gmail.com | admin123         | true    |
+  | admin2@gmail.com | admin123         | true    |
 
-Scenario: see a list of users
-  Given PENDING
+  And I am logged into the admin page as "admin"
 
-Scenario: clicking on a user will show more information about that user
-  Given PENDING
-  Given I am on the admin "profile" page
-  When I follow "John"
-  Then I should see the "username" as "John"
-  And I should see the "company" as "Whole Foods"
-  And I should see the "status" as "Sponsor"
+Scenario: See a list of registered users
+  Given I am on the admin profile page
+  Then I should see "user1@gmail.com"
+  And I should see "user2@gmail.com"
 
+Scenario: Not see a list of other admins
+  Given I am on the admin profile page
+  Then I should not see "admin1@gmail.com"
+  And I should not see "admin2@gmail.com"
+
+Scenario: clicking on "More Info" next to the user email should show more information about that user
+  Given I am on the admin profile page
+  When I click on More Info for "user1@gmail.com"
+  Then I should see "user1@gmail.com"

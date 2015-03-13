@@ -19,7 +19,11 @@ module NavigationHelpers
     when /^the "profile" page for "(.*)"$/ then "/users/#{User.find_by_email($1).id}"
     when /^the "registration" page$/ then "/member/sign_up"
     when /^the "registration failed" page$/ then "/member"
-
+    when /^the admin profile page$/ then '/admin'
+    when /^the "survey" page$/ then '/users/:id/questionnaire'
+    when /^the "survey" page for "(.*)"$/ then "/users/#{User.find_by_email($1).id}/questionnaire"
+    #when /^I do follow "(.*)"$/ then "/users/#{User.find_by_email($1).id}/questionnaire"
+    
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
