@@ -42,6 +42,6 @@ RSpec.configure do |config|
 
   # rspec for devise setup
   config.include Devise::TestHelpers, :type => :controller
-  config.include ControllerMacros, :type => :controller # allows helper funcs in examples
-  config.extend ControllerMacros, :type => :controller # allows helper funcs in example groups
+  config.include ControllerMacros # allows helper funcs in examples
+  config.extend ControllerMacros # allows helper funcs in example groups
 end
