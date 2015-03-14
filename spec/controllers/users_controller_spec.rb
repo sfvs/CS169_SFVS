@@ -2,12 +2,19 @@ require 'spec_helper'
 
 describe UsersController do
   login(:user, :email => "i_am_a_coconut@mail.com")
-  describe "user validation" do
-    it "works with valid logged in user" do
-      q = Questionnaire.create(:question => "hello world?")
-      a = Answers.create(:ans => "2", :questionnaire_id => q.id)
-      get :questionnaire, :id => @user.id, :ans => "#{a.id}"
-      
+  describe "valid questionnaire" do
+    make_question_answer_tree
+
+    it "opens a new questionnaire" do
+      get :questionnaire, :id => @user.id
+    end
+
+    it "opens the questionnaire with current question not as last question" do
+      get :questionnaire, :id => @user.id, :ans => "#{@a1a.id}"
+    end
+
+    it "opens the questionnaire with current question being last question" do
+      get :questionnaire, :id => @user.id, :ans => "#{@a2.id}"
     end
 
     it "should not work with bad id" do

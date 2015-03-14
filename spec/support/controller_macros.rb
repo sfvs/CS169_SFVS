@@ -41,4 +41,16 @@ module ControllerMacros
     end
   end
 
+  def make_question_answer_tree
+    before :each do
+      @q1 = Questionnaire.create(:question => "hello world")
+      @q2 = Questionnaire.create(:question => "how are you?")
+      @a1a = Answers.create(:ans => "hi", :questionnaire_id => @q1.id, :leads_to => @q2.id)
+      @a1b = Answers.create(:ans => "hello", :questionnaire_id => @q1.id)
+      @a2 = Answers.create(:ans => "I am world", :questionnaire_id => @q2.id)
+      @q2.parent_id = @a1a.id
+      @q2.save
+    end
+  end
+
 end
