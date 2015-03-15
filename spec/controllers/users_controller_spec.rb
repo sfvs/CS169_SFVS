@@ -7,14 +7,20 @@ describe UsersController do
 
     it "opens a new questionnaire" do
       get :questionnaire, :id => @user.id
+
+      response.should be_success
     end
 
+    # Need to stub populate_display
+    # also need to test populate_display separately
     it "opens the questionnaire with current question not as last question" do
       get :questionnaire, :id => @user.id, :ans => "#{@a1a.id}"
+      response.should be_success
     end
 
     it "opens the questionnaire with current question being last question" do
       get :questionnaire, :id => @user.id, :ans => "#{@a2.id}"
+      response.should be_success
     end
 
     it "should not work with bad id" do
