@@ -29,5 +29,6 @@ Scenario: view current application status
   And I should see my "status" as "status"
 
 Scenario: start another form
+  Given I should see a "button" with id "questionnaire_button"
   When I press "Take Survey"
   Then I should be on the "survey" page for "johndoe@gmail.com"

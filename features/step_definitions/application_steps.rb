@@ -18,7 +18,7 @@ end
 
 Given(/^the following questions exist:$/) do |table|
   table.hashes.each do |item|
-    # take not that id does not get assigned
+    # take note that id does not get assigned
     # it is there to help find the parsed status
     Questionnaire.create(item)
   end
@@ -28,4 +28,8 @@ Given(/^the following answers exist:$/) do |table|
   table.hashes.each do |item|
     Answers.create(item)
   end
+end
+
+Then(/^I should see a "(.*)" with id "(.*)"$/) do |item,id|
+  assert find("#"+id)
 end
