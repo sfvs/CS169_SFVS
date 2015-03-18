@@ -1,6 +1,7 @@
-class MakeQuestionsTable < ActiveRecord::Migration
+class CreateFormQuestions < ActiveRecord::Migration
   def change
-    create_table :questions do |t|
+    create_table :form_questions do |t|
+
       t.string :question 
       t.string :form_type
       t.string :question_type
