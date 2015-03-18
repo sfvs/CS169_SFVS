@@ -4,7 +4,7 @@ class CreateApplications < ActiveRecord::Migration
 	  t.belongs_to :user, index:true
       t.integer :year
       t.string :status
-      t.json :content
+      t.string :content
       t.timestamps
     end
   end
