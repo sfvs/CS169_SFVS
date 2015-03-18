@@ -30,3 +30,6 @@ Scenario: view current application status
   | E-mail            | green@onion.com |
   | Website           | apple.com       |
   | Company name for WVF Program listing (if different from above) | Microsoft |
+  When I press "submit_button"
+  Then I should be on the "profile" page for "johndoe@gmail.com"
+  And I should see completed for "general_form"
