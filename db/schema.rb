@@ -28,8 +28,13 @@ ActiveRecord::Schema.define(:version => 20150318230926) do
   end
 
   create_table "form_questions", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "question"
+    t.string   "form_type"
+    t.string   "question_type"
+    t.integer  "order"
+    t.boolean  "completed",     :default => false, :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   create_table "health_forms", :force => true do |t|
@@ -43,15 +48,6 @@ ActiveRecord::Schema.define(:version => 20150318230926) do
     t.integer  "parent_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "questions", :force => true do |t|
-    t.string   "question"
-    t.string   "form_type"
-    t.string   "question_type"
-    t.integer  "order"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
   end
 
   create_table "users", :force => true do |t|
