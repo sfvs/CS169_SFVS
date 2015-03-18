@@ -42,7 +42,10 @@ Scenario: selecting an answer
 Scenario: completing the questionnaire
   When I press "Take Survey"
   And I follow "chicken"
-  And I follow "zuccini"
-  And I follow "Submit Questionnaire"
+  Then I should see "chicken" selected
+  When I follow "zuccini"
+  Then I should see "chicken" selected
+  And I should see "zuccini" selected
+  When I follow "Submit Questionnaire"
   Then I should be on the "profile" page for "johndoe@gmail.com"
   And I should see "You are Other."
