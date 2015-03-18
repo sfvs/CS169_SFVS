@@ -6,96 +6,46 @@ Feature: fill a questionnaire form to find type of attendee
 
 Background: on the questionnaire form
   
-Scenario: User is a vendor
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "yes" to "Will you be selling products?"
-  And I answer "no" to "Will you also money to SFVS?"
-  Then I should see "You are a vendor"
-  
-Scenario: User is a vendor/sponsor
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "yes" to "Will you be selling products?"
-  And I answer "yes" to "Will you also donate to SFVS?"
-  Then I should see "You are a vendor/sponsor"
- 
-Scenario: User is a non-profit
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "no" to "Will you be selling products?"
-  And I answer "yes" to "Will you be giving away free products AND are a non-profit?"
-  And I answer "no" to "Will you also donate to SFVS?"
-  Then I should see "You are a non-profit"
- 
-Scenario: User is a non-profit/sponsor
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "no" to "Will you be selling products?"
-  And I answer "yes" to "Will you be giving away free products AND are a non-profit?"
-  And I answer "yes" to "Will you also donate to SFVS?"
-  Then I should see "You are a non-profit/sponsor"
- 
-Scenario: User is a regular exhibitor (i.e. cliff bars trying to promote their product)
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "no" to "Am I selling products?"
-  And I answer "no" to "Will you be selling products?"
-  And I answer "no" to "Will you be giving away free products AND are a non-profit?"
-  And I answer "yes" to "Will you be giving away free products AND are NOT a non-profit?"
-  And I answer "no" to "Will you also donate to SFVS?"
-  Then I should see "You are a regular exhibitor"
- 
-Scenario: User is a regular exhibitor/sponsor (i.e. cliff bars trying to promote their product)
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "no" to "Am I selling products?"
-  And I answer "no" to "Will you be selling products?"
-  And I answer "no" to "Will you be giving away free products AND are a non-profit?"
-  And I answer "yes" to "Will you be giving away free products AND are NOT a non-profit?"
-  And I answer "yes" to "Will you also donate to SFVS?"
-  Then I should see "You are a regular exhibitor/sponsor"
- 
-Scenario: User is a sponsor only with a table
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "no" to "Am I selling products?"
-  And I answer "no" to "Will you be selling products?"
-  And I answer "no" to "Will you be giving away free products AND are a non-profit?"
-  And I answer "no" to "Will you be giving away free products AND are NOT a non-profit?"
-  And I answer "yes" to "Will you be requiring a table?"
-  And I answer "yes" to "Will you also donate to SFVS?"
-  Then I should see "You are a sponsor requiring a table"
- 
-Scenario: User is a sponsor only without a table
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "no" to "Am I selling products?"
-  And I answer "no" to "Will you be selling products?"
-  And I answer "no" to "Will you be giving away free products AND are a non-profit?"
-  And I answer "no" to "Will you be giving away free products AND are NOT a non-profit?"
-  And I answer "no" to "Will you be requiring a table?"
-  And I answer "yes" to "Will you also donating to SFVS?"
-  Then I should see "You are a sponsor"
- 
-Scenario: User is a regular exhibitor (because they fall under "all other" categories)
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "no" to "Am I selling products?"
-  And I answer "no" to "Will you be selling products?"
-  And I answer "no" to "Will you be giving away free products AND are a non-profit?"
-  And I answer "no" to "Will you be giving away free products AND are NOT a non-profit?"
-  And I answer "yes" to "Will you be requiring a table?"
-  And I answer "no" to "Will you also donate to SFVS?"
-  Then I should see "You are a regular exhibitor"
- 
-Scenario: User is unknown...
-  Given PENDING
-  Given I am on the "questionnaire" page
-  When I answer "no" to "Am I selling products?"
-  And I answer "no" to "Will you be selling products?"
-  And I answer "no" to "Will you be giving away free products AND are a non-profit?"
-  And I answer "no" to "Will you be giving away free products AND are NOT a non-profit?"
-  And I answer "no" to "Will you be requiring a table?"
-  And I answer "no" to "Will you also donate to SFVS?"
-  Then I should see "Please call or email us to help you determine the type of attendee you should register as."
+  Given the following users exist: 
+  | email             | password         |
+  | johndoe@gmail.com | bear12345        |
+
+  And the following questions exist:
+  | question                       | parent_id |
+  | Which one came first?          |           |
+  | How do you like your veggies?  | 1         |
+  | Which is your favorite veggie? | 1         |
+
+  And the following answers exist:
+  | ans      | questionnaire_id | leads_to | id |
+  | egg      | 1                |  2       | 1  |
+  | chicken  | 1                |  3       | 2  |
+  | sauteed  | 2                |          | 3  |
+  | raw      | 2                |          | 4  |
+  | zuccini  | 3                |          | 5  |
+  | cucumber | 3                |          | 6  |
+
+  Given I login as "johndoe@gmail.com" and password "bear12345"
+  And I am on the "profile" page for "johndoe@gmail.com"
+
+Scenario: selecting an answer
+  When I press "Take Survey"
+  Then I should see "Which one came first?"
+  And I should see "egg"
+  And I should see "chicken"
+  When I follow "egg"
+  Then I should see "How do you like your veggies?"
+  And I should see "egg" selected
+  And I should see "raw"
+  And I should see "sauteed"
+
+Scenario: completing the questionnaire
+  When I press "Take Survey"
+  And I follow "chicken"
+  Then I should see "chicken" selected
+  When I follow "zuccini"
+  Then I should see "chicken" selected
+  And I should see "zuccini" selected
+  When I follow "Submit Questionnaire"
+  Then I should be on the "profile" page for "johndoe@gmail.com"
+  And I should see "You are Other."
