@@ -1,4 +1,7 @@
-FactoryGirl.define do
+FactoryGirl.define do  factory :form_question do
+    
+  end
+
   factory :user do
     email "amanismortal@user.com"
     password "password"
