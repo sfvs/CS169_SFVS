@@ -9,12 +9,6 @@ class UsersController < ApplicationController
 
   private
 
-  def require_valid_user
-    #if used everywhere, we should put in application controller
-    authorize User.find(params[:id]), :is_profile_owner?
-    authorize current_user, :is_regular_user?
-  end
-
   def parse_questionnaire_response(answer_id)
     if answer_id != nil 
       if answer_id == "2" #way not not hard code in answer?
