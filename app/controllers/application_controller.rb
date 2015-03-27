@@ -4,6 +4,12 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
+  # need to refactor this, but home_controller cannot do multiple skips??
+  def require_valid_user
+    authorize User.find(params[:id]), :is_profile_owner?
+    authorize current_user, :is_regular_user?
+  end
   
   private
 

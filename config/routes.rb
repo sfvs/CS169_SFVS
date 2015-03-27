@@ -12,7 +12,7 @@ SFVSRegistrationSystem::Application.routes.draw do
   devise_for :users, :path => 'member'
   resources :users do 
     resources :form_question, only: [:edit, :show, :update]
-    get "questionnaire", on: :member
+    get "survey", to: "survey#questionnaire", on: :member
   end
 
   # The priority is based upon order of creation:
