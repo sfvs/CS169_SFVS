@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :applications
 
-  def get_recent_inprogress_application
-  	self.applications.where(completed: false)
+  def get_most_recent_inprogress_application
+  	self.applications.where(completed: false)[-1]
   end
 end

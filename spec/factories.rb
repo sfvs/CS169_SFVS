@@ -16,4 +16,5 @@ FactoryGirl.define do  factory :form_question do
     password_confirmation "password"
     admin true
   end
+
 end
