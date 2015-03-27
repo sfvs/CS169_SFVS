@@ -4,7 +4,7 @@
 - @display_questions.each do |statement|
   %h2 #{statement[:question]}
   - statement[:answer].each do |a|
-    =link_to "#{a.ans}", questionnaire_user_path(:ans => a.id), :class => ("selected" if (@current_selected_answers.include?(a.id)))
+    =link_to "#{a.ans}", survey_user_path(:ans => a.id), :class => ("selected" if (@current_selected_answers.include?(a.id)))
     &nbsp 
   %hr
 \

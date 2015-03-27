@@ -13,7 +13,7 @@ SFVSRegistrationSystem::Application.routes.draw do
   resources :users do 
     resources :application
     resources :health_form, only: [:edit, :show, :update]
-    get "questionnaire", on: :member
+    get "survey", to: "survey#questionnaire", on: :member
   end
 
   # The priority is based upon order of creation:
