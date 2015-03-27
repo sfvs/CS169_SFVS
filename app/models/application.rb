@@ -1,5 +1,6 @@
 class Application < ActiveRecord::Base
-  attr_accessible :user, :year, :type, :content, :completed
+  attr_accessible :user, :year, :app_type, :content, :completed
+  belongs_to :user
 
   def self.get_application_types
     {

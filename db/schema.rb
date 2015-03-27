@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20150318230926) do
   create_table "applications", :force => true do |t|
     t.integer  "user_id"
     t.integer  "year"
-    t.string   "type"
+    t.string   "app_type"
     t.string   "content"
     t.boolean  "completed",  :default => false, :null => false
     t.datetime "created_at",                    :null => false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20150318230926) do
 
   create_table "form_questions", :force => true do |t|
     t.string   "question"
-    t.string   "type"
+    t.string   "app_type"
     t.string   "question_type"
     t.integer  "order"
     t.datetime "created_at",    :null => false

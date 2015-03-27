@@ -3,7 +3,7 @@ class CreateFormQuestions < ActiveRecord::Migration
     create_table :form_questions do |t|
 
       t.string :question 
-      t.string :type
+      t.string :app_type
       t.string :question_type
       t.integer :order
       t.timestamps

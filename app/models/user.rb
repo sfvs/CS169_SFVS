@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :applications
+
+  def get_recent_inprogress_application
+  	self.applications.where(completed: false)
+  end
 end
