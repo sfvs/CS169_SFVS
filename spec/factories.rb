@@ -1,4 +1,7 @@
-FactoryGirl.define do  factory :form_question do
+FactoryGirl.define do  factory :form do
+    
+  end
+  factory :form_question do
     
   end
 
