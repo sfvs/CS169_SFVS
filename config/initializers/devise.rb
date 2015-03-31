@@ -4,7 +4,14 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = ENV["DEVISE_SEC_KEY"]
+  config.secret_key = if Rails.env.development? or Rails.env.test?
+    ('z' * 30) # meets minimum requirement of 30 chars long
+  else
+    # Set the secret_token by doing:
+    # heroku config:set DEVISE_SECRET_TOKEN=...
+    # or from the web dashboard at https://dashboard.heroku.com/apps/(my-app)/settings
+    ENV['DEVISE_SECRET_TOKEN']
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
