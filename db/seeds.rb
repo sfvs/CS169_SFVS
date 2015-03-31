@@ -30,10 +30,10 @@ create_a_user('user4@hostname.com', 'user1234')
 questions = [{:question => 'What type of Exhibitor are you?'}]
 
 #answer table has answer to referance to its question, as well as which question it leads to
-answers = [{:ans => :Vendor, :questionnaire_id => 1},
-		   {:ans => :Donor, :questionnaire_id => 1},
-		   {:ans => :Restaurant_Concessionaire, :questionnaire_id => 1},
-		   {:ans => :Other, :questionnaire_id => 1}]
+answers = [{:ans => :vendor, :questionnaire_id => 1},
+		   {:ans => :donor, :questionnaire_id => 1},
+		   {:ans => :restaurant_concessionaire, :questionnaire_id => 1},
+		   {:ans => :other, :questionnaire_id => 1}]
 
 questions.each do |q|
 	Questionnaire.create!(q)

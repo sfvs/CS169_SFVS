@@ -18,12 +18,20 @@ describe UsersController do
   end
 
   describe "questionnaire answer parser" do
+    
     it "should correctly parse questionnaire response" do
-      # up to 6 so that it explores the else branch
-      for i in 2..6
+      for i in 1..5
         get :show, :id => @user.id, :questionnaire_response => "#{i}"
         expect(response).to be_success
       end
     end
+
+    it "should correctly make an application based on the questionnaire response" do
+      get :show, :id => @user.id, :questionnaire_response => "1"
+      application = @user.applications[0]
+      expect(application.user_id).to be == @user.id
+      expect(application.app_type).to be == "vendor"
+    end
+
   end
 end

@@ -4,25 +4,37 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @response = parse_questionnaire_response(params[:questionnaire_response])
+    @application = @user.get_most_recent_inprogress_application
+    flash[:notice] = parse_questionnaire_response(params[:questionnaire_response])
   end
 
   private
 
   def parse_questionnaire_response(answer_id)
     application_types = Application.get_application_types
+    type = nil
+
     if answer_id != nil 
       if answer_id == application_types[:vendor]
-        "You are a Vendor."
+        response = "You are a Vendor."
+        type = :vendor
       elsif answer_id == application_types[:donor]
-        "You are a Donor."
+        response = "You are a Donor."
+        type = :donor
       elsif answer_id == application_types[:restaurant_concessionaire]
-        "You are a Restaurant Concessionaire."
+        response = "You are a Restaurant Concessionaire."
+        type = :restaurant_concessionaire
       elsif answer_id == application_types[:other]
-        "You are Other."
+        response = "You are Other."
+        type = :other
       else
-        "Error in response." # default response is empty, should be throwing an exception
+        response = "Error in response." # default response is empty, should be throwing an exception
       end
+
+      unless type.nil?
+        app = @user.applications.create(:app_type => type)
+      end
+      response
     end
   end
 
