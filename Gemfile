@@ -11,6 +11,7 @@ gem 'devise'
 gem 'rake'
 gem 'pundit'
 gem "codeclimate-test-reporter", group: :test, require: nil
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'sqlite3'
