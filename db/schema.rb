@@ -24,20 +24,20 @@ ActiveRecord::Schema.define(:version => 20150318230926) do
   create_table "applications", :force => true do |t|
     t.integer  "user_id"
     t.integer  "year"
-    t.string   "status"
+    t.string   "type"
     t.string   "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.boolean  "completed",  :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   create_table "form_questions", :force => true do |t|
     t.string   "question"
-    t.string   "form_type"
+    t.string   "type"
     t.string   "question_type"
     t.integer  "order"
-    t.boolean  "completed",     :default => false, :null => false
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "questionnaires", :force => true do |t|

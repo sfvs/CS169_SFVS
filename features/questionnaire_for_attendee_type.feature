@@ -21,8 +21,8 @@ Background: on the questionnaire form
   | egg      | 1                |  2       | 1  |
   | chicken  | 1                |  3       | 2  |
   | sauteed  | 2                |          | 3  |
-  | raw      | 2                |          | 4  |
-  | zuccini  | 3                |          | 5  |
+  | zuccini  | 3                |          | 4  |
+  | raw      | 2                |          | 5  |
   | cucumber | 3                |          | 6  |
 
   Given I login as "johndoe@gmail.com" and password "bear12345"
