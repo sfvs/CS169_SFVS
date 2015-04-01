@@ -16,6 +16,8 @@ create_a_user('user2@hostname.com', 'user1234')
 create_a_user('user3@hostname.com', 'user1234')
 create_a_user('user4@hostname.com', 'user1234')
 
+objects_to_create = {}
+
 #adding seeds questions, each question has an attribute referances its parent(like a tree), the tree is as follow:
 #
 #                   'Which one came first?'
@@ -26,19 +28,18 @@ create_a_user('user4@hostname.com', 'user1234')
 #      /        |        \              /         |          |        \
 #(scramble)   (ssu)     (raw)      (breast)    (legs)     (wings)    (eggs)
 
-
-questions = [{:question => 'What type of Exhibitor are you?'}]
+objects_to_create[:Questionnaire] = [{:question => 'What type of Exhibitor are you?'}]
 
 #answer table has answer to referance to its question, as well as which question it leads to
-answers = [{:ans => :vendor, :questionnaire_id => 1},
+objects_to_create[:Answers] = [{:ans => :vendor, :questionnaire_id => 1},
 		   {:ans => :donor, :questionnaire_id => 1},
 		   {:ans => :restaurant_concessionaire, :questionnaire_id => 1},
 		   {:ans => :other, :questionnaire_id => 1}]
 
-questions.each do |q|
-	Questionnaire.create!(q)
-end
-
-answers.each do |a|
-	Answers.create!(a)
+# seed database
+objects_to_create.each do|obj,params|
+	obj_class = obj.to_s.constantize
+	params.each do |a|
+		obj_class.create!(a)
+	end
 end

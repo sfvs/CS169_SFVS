@@ -4,8 +4,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @application = @user.get_most_recent_inprogress_application
     flash[:notice] = parse_questionnaire_response(params[:questionnaire_response])
+    @application = @user.get_most_recent_inprogress_application
   end
 
   private
