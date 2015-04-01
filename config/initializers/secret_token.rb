@@ -4,4 +4,11 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-SFVSRegistrationSystem::Application.config.secret_token = 'fb56f780017c0fc303c3743e7b9d220704a0495706fd095638ad9d51d2c9a66f8b47e812500f139a5a740f0f524bf2a49fb00a41686ad84d207b871bd8f1617c'
+SFVSRegistrationSystem::Application.config.secret_token = if Rails.env.development? or Rails.env.test?
+  ('x' * 30) # meets minimum requirement of 30 chars long
+else
+# Set the secret_token by doing:
+# heroku config:set SECRET_TOKEN=...
+# or from the web dashboard at https://dashboard.heroku.com/apps/(my-app)/settings
+  ENV['SECRET_TOKEN']
+end

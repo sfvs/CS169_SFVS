@@ -16,3 +16,6 @@
 
 # Ignore simplecov.
 /coverage
+
+# Ignore file containing secret_tokens and keys
+/application.env
