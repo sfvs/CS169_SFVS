@@ -15,6 +15,20 @@
           %td= user.email
           %td= link_to "More Info", admin_user_path(user)
 
+%h3 Forms List
+
+%div
+  %table#forms
+    %thead
+      %tr
+        %th Form
+        %th Edit
+    %tbody
+      - @forms.each do |form|
+        %tr
+          %td= form.form_name
+          %td= link_to "Edit", edit_admin_form_path(form)
+
 = button_to "Create User", new_admin_user_path, {:id => "create_but", method: :get}
 
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}

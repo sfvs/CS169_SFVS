@@ -4,6 +4,7 @@ class Admin::AdminController < ApplicationController
 
   def index
     @users = User.find(:all, :conditions => ["admin = ?", false])
+    @forms = Form.find(:all)
   end
 
   def show
