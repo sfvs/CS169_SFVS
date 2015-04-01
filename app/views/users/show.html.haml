@@ -1,15 +1,21 @@
-%h1=@user.email
+%h2= "Welcome #{@user.email}"
 
-%p name
-%p company
-%p status
+%p
+	%strong name
+%p
+	%strong company
+%p
+	%strong Application type:
+	-if @application
+		="#{@application.app_type}"
+	-else
+		status
 
-%h2 #{@response}
 =link_to "Health Form"
 -#, edit_user_health_form_path(@user.application.health_form)
 
 %p payment
--#Name, Company, Status, Forms, Payment
-= button_to "Take Survey", questionnaire_user_path(@user), {:id => "questionnaire_button", method: :get}
+
+= button_to "Take Survey", survey_user_path, {:id => "questionnaire_button", method: :get}
 = button_to "Edit Profile", edit_user_path(@user)
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}

@@ -2,46 +2,36 @@ require 'spec_helper'
 
 describe UsersController do
   login(:user, :email => "i_am_a_coconut@mail.com")
-  describe "valid questionnaire" do
-    make_question_answer_tree
-
-    it "opens a new questionnaire" do
-      get :questionnaire, :id => @user.id
-
-      response.should be_success
-    end
-
-    # Need to stub populate_display
-    # also need to test populate_display separately
-    it "opens the questionnaire with current question not as last question" do
-      get :questionnaire, :id => @user.id, :ans => "#{@a1a.id}"
-      response.should be_success
-    end
-
-    it "opens the questionnaire with current question being last question" do
-      get :questionnaire, :id => @user.id, :ans => "#{@a2.id}"
-      response.should be_success
-    end
-
-    it "should not work with bad id" do
-      get :questionnaire, :id => 15, :ans => "3"
-      response.should_not be_success
-    end
-  end
 
   describe "show action" do
-    it "should show the questionnaire page" do
-      get :show, :id => @user.id, :questionnaire_response => "1"
+    render_views
+    it "should show the user profile" do
+      get :show, :id => @user.id
+      response.should be_success
     end
+
+    it "should show the user profile with the questionnaire response" do
+      get :show, :id => @user.id, :questionnaire_response => "1"
+      response.should be_success
+    end
+
   end
 
   describe "questionnaire answer parser" do
+    
     it "should correctly parse questionnaire response" do
-      # up to 6 so that it explores the else branch
-      for i in 2..6
+      for i in 1..5
         get :show, :id => @user.id, :questionnaire_response => "#{i}"
         expect(response).to be_success
       end
     end
+
+    it "should correctly make an application based on the questionnaire response" do
+      get :show, :id => @user.id, :questionnaire_response => "1"
+      application = @user.applications[0]
+      expect(application.user_id).to be == @user.id
+      expect(application.app_type).to be == "vendor"
+    end
+
   end
 end

@@ -27,21 +27,13 @@ create_a_user('user4@hostname.com', 'user1234')
 #(scramble)   (ssu)     (raw)      (breast)    (legs)     (wings)    (eggs)
 
 
-questions = [{:question => 'Which one came first?'},
-			 {:question => 'How do you like your veggies?', :parent_id => 1},
-			 {:question => 'Which is your favorite veggie?', :parent_id => 1}]
+questions = [{:question => 'What type of Exhibitor are you?'}]
 
 #answer table has answer to referance to its question, as well as which question it leads to
-answers = [{:ans => 'egg', :questionnaire_id => 1, :leads_to => 2},
-		   {:ans => 'chicken', :questionnaire_id => 1, :leads_to => 3},
-		   {:ans => 'sauteed', :questionnaire_id => 2},
-		   {:ans => 'raw', :questionnaire_id => 2},
-		   {:ans => 'stirfried', :questionnaire_id => 2},
-		   {:ans => 'zuccini', :questionnaire_id => 3},
-		   {:ans => 'cucumber', :questionnaire_id => 3},
-		   {:ans => 'snowpeas', :questionnaire_id => 3},
-		   {:ans => 'lettuce', :questionnaire_id => 3}]
-
+answers = [{:ans => :vendor, :questionnaire_id => 1},
+		   {:ans => :donor, :questionnaire_id => 1},
+		   {:ans => :restaurant_concessionaire, :questionnaire_id => 1},
+		   {:ans => :other, :questionnaire_id => 1}]
 
 questions.each do |q|
 	Questionnaire.create!(q)
