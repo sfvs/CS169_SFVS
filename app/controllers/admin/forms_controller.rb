@@ -12,6 +12,7 @@ class Admin::FormsController < Admin::AdminController
 
   def edit
     @form = Form.find(params[:id])
+    @form_questions = @form.form_questions
   end
 
   def create
