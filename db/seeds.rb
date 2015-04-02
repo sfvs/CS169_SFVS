@@ -45,3 +45,9 @@ objects_to_create.each do|obj,params|
 end
 
 gen_form = Form.create({:form_name => "General Form"}, :without_protection => true)
+
+# form_question attr :question, :app_type, :question_type, :order
+q1 = FormQuestion.create({:question => "Name", :app_type => "general", :question_type => :textbox, :order => 1})
+q2 = FormQuestion.create({:question => "Company", :app_type => "general", :question_type => :textbox, :order => 2})
+gen_form.form_questions << q1
+gen_form.form_questions << q2
