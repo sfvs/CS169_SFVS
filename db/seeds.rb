@@ -40,7 +40,7 @@ objects_to_create[:FormQuestion] = [
 												{:question => 'Please provide a description of all items being displayed, promoted and/or 
 												sold. Attach a seperate sheet if neccesary', 
 												:form_type => :restaurant_concessionaire,
-												:question_type => :textbox, 
+												:question_type => :message, 
 												:order => 1},
 
 												{:question => 'Food Guidelines...', 
@@ -56,6 +56,7 @@ objects_to_create[:FormQuestion] = [
 													:order => 3},
 
 												{:question => 'Will you require a health permit?', 
+													:answers => "[Yes, No]",
 													:form_type => :restaurant_concessionaire,
 													:question_type => :radio_button, 
 													:order => 4},

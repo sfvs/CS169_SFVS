@@ -1,3 +1,27 @@
-%h1 HELLO TO FORM QUESTION SHOW
+%h1 #{@form_type}
+%p
+  %font{:color => "Crimson"} #{@error}
 
-%h1 #{@response}
+
+-@list_of_questions.each do |question|
+  %a 
+    %font{:color => "008B8B"} #{question.question} 
+  %br
+  -if (question.question_type == "radio_button")
+    -String(String(question.answers)[1..-2]).split(', ').each do |choice|
+      =radio_button_tag(:ans, "#{choice}")
+      =label_tag(:tag, "#{choice}")
+      &nbsp
+  -elsif (question.question_type == "statement")
+  -elsif (question.question_type == "message")
+    %textarea{:cols => "35", :name => "#{@form_type}[#{question.order}]", :rows => "6"} 
+  -elsif (question.question_type == "textbox")
+    %input{:name => "#{@form_type}[#{question.order}]", :type => "text"}
+
+  / = radio_button_tag(:age, "child")
+  / = label_tag(:age_child, "I am younger than 21")
+  / = radio_button_tag(:age, "adult")
+  / = label_tag(:age_adult, "I'm over 21")
+  %hr
+=link_to 'Save and Return', form_user_path(:save => true)
+=link_to 'Submit Form', form_user_path(:submit => true)
