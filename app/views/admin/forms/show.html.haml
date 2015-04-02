@@ -1,0 +1,5 @@
+%h1 Form Content
+
+%p= "Contents of Form: #{@form.form_name}"
+
+= button_to "Edit", edit_admin_form_path(@form), {:id => "edit_but", method: :get}

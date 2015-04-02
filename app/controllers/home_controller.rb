@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   def index
     if user_signed_in?
       if current_user.admin?
-        redirect_to admin_users_path
+        redirect_to admin_root_path
       else
         redirect_to user_path(current_user)
       end

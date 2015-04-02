@@ -19,15 +19,18 @@ Background: users have been added to database
 
 Scenario: See a list of registered users
   Given I am on the admin profile page
+  When I follow "Users List"
   Then I should see "user1@gmail.com"
   And I should see "user2@gmail.com"
 
 Scenario: Not see a list of other admins
   Given I am on the admin profile page
+  When I follow "Users List"
   Then I should not see "admin1@gmail.com"
   And I should not see "admin2@gmail.com"
 
 Scenario: clicking on "More Info" next to the user email should show more information about that user
   Given I am on the admin profile page
-  When I click on More Info for "user1@gmail.com"
+  When I follow "Users List"
+  And I click on More Info for "user1@gmail.com"
   Then I should see "user1@gmail.com"

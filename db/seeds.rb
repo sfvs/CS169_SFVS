@@ -45,5 +45,3 @@ objects_to_create.each do|obj,params|
 end
 
 gen_form = Form.create({:form_name => "General Form"}, :without_protection => true)
-
-

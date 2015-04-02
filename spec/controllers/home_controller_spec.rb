@@ -21,7 +21,7 @@ describe HomeController do
     it "should route admin to the admin page" do
       admin = sign_in make_a_member(:admin)
       get :index 
-      expect(response).to redirect_to admin_users_path
+      expect(response).to redirect_to admin_root_path
     end
   end
 end

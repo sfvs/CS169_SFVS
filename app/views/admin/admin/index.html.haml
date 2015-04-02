@@ -1,34 +1,7 @@
 %h1 Admin Page
 
+%p= link_to "Users List", admin_users_path
 
-%h3 Users List
-
-%div
-  %table#users
-    %thead
-      %tr
-        %th Email
-        %th More Info
-    %tbody
-      - @users.each do |user|
-        %tr
-          %td= user.email
-          %td= link_to "More Info", admin_user_path(user)
-
-%h3 Forms List
-
-%div
-  %table#forms
-    %thead
-      %tr
-        %th Form
-        %th Edit
-    %tbody
-      - @forms.each do |form|
-        %tr
-          %td= form.form_name
-          %td= link_to "Edit", edit_admin_form_path(form)
-
-= button_to "Create User", new_admin_user_path, {:id => "create_but", method: :get}
+%p= link_to "Forms List", admin_forms_path
 
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}

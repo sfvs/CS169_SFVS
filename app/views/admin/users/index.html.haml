@@ -1,0 +1,18 @@
+%h1 Admin Page
+
+%h3 Users List
+
+%div
+  %table#users
+    %thead
+      %tr
+        %th Email
+        %th More Info
+    %tbody
+      - if !@users.nil?
+        - @users.each do |user|
+          %tr
+            %td= user.email
+            %td= link_to "More Info", admin_user_path(user)
+
+= button_to "Create User", new_admin_user_path, {:id => "create_but", method: :get}
