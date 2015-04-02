@@ -4,7 +4,7 @@ class CreateFormQuestions < ActiveRecord::Migration
 
       t.string :question 
       t.string :answers, default: nil 
-      t.string :app_type
+      t.string :form_type
       t.string :question_type
       t.integer :order
       t.timestamps
