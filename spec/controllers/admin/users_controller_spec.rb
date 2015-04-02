@@ -10,7 +10,7 @@ describe Admin::UsersController do
         get 'index'
         response.should be_success
         assigns(:users).should == users
-      end
+    end
 
     it "should return a list of users' email addresses" do
         user = make_a_member(:user, :email => "shrek_is_love@shrek_is_life.com") 

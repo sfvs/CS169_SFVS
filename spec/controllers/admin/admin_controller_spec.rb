@@ -22,6 +22,16 @@ describe Admin::AdminController do
         get 'index'
         expect(response.body).to include("Logout")
       end
+
+      it "should have a link to users list" do
+        get 'index'
+        expect(response.body).to include("Users List")
+      end
+
+      it "should have a link to forms list" do
+        get 'index'
+        expect(response.body).to include("Forms List")
+      end
     end
   end
 end
