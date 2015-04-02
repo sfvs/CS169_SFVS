@@ -33,7 +33,8 @@ ActiveRecord::Schema.define(:version => 20150318230926) do
 
   create_table "form_questions", :force => true do |t|
     t.string   "question"
-    t.string   "app_type"
+    t.string   "answers"
+    t.string   "form_type"
     t.string   "question_type"
     t.integer  "order"
     t.datetime "created_at",    :null => false
