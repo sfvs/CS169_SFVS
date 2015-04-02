@@ -11,7 +11,7 @@ SFVSRegistrationSystem::Application.routes.draw do
   # name to prevent resource: user and devise routes from overlapping
   devise_for :users, :path => 'member'
   resources :users do 
-    resources :form_question, only: [:edit, :show, :update]
+    get "form", to: "formQuestion#show", on: :member
     get "survey", to: "survey#questionnaire", on: :member
   end
 
