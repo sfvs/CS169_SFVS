@@ -1,19 +1,55 @@
 window.onload = function() {
-	$('#form_question_checkbox').hide();
-	$('#checkbox_label').hide();
-	$('#form_question_radio_button').hide();
-	$('#radiobutton_label').hide();
 	$('#count_label').hide();
 	$('#answer_count').hide();
+	$('#ok_but').hide();
+}
+
+function show_button() {
+	$('#count_label').show();
+	$('#answer_count').show();
+	$('#ok_but').show();
+}
+
+function hide_button() {
+	$('#count_label').hide();
+	$('#answer_count').hide();
+	$('#ok_but').hide();
 }
 
 function selectedOption() {
-	if ($("#form_question_question_type_checkbox").is(":checked") || $("#form_question_question_type_radio_button").is(":checked")) {
-		$('#count_label').show();
-		$('#answer_count').show();
+	if ($("#form_question_question_type_checkbox").is(":checked")) {
+		show_button();
+		var s = $('#answer_count').val();
+		for (i = 0; i < s; i++) {
+			$('#radiobutton_label').remove();
+			$('#form_question_radio_button').remove();
+		}
+	}
+	else if ( $("#form_question_question_type_radio_button").is(":checked")) {
+		show_button();
+		var s = $('#answer_count').val();
+		for (i = 0; i < s; i++) {
+			$('#checkbox_label').remove();
+			$('#form_question_checkbox').remove();
+		}
 	}
 	else {
-		$('#count_label').hide();
-		$('#answer_count').hide();
+		hide_button();
+	}
+}
+
+function createFields() {
+	hide_button();
+	var option = $("input[type='radio'][name='form_question[question_type]']:checked").val();
+	var count = $('#answer_count').val();
+	for (i = 0; i < count; i++) {
+		if (option == "checkbox") {
+			$('.input_fields').append("<label for=\"form_question_answer\" id=\"checkbox_label\">Checkbox Answer</label>")
+			$('.input_fields').append("<input id=\"form_question_checkbox\" name=\"form_question[checkbox]\" size=\"20\" type=\"text\"/>");
+		}
+		else if (option == "radio_button") {
+			$('.input_fields').append("<label for=\"form_question_answer\" id=\"radiobutton_label\">Radio Button Answer</label>")
+			$('.input_fields').append("<input id=\"form_question_radio_button\" name=\"form_question[radio_button]\" size=\"20\" type=\"text\"/>");
+		}
 	}
 }
