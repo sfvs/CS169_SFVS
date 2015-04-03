@@ -128,72 +128,147 @@ questions_for_form[restaurant_contract] = [
 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
 		Attach a seperate sheet if neccesary', 
 		:question_type => :textbox},
-
 	{:question => 'Food Guidelines...',
 		:question_type => :statement},
-
 	{:question => 'Will you be distributing food/beverage?', 
 		:answers => "[Yes, No]",
 	 	:question_type => :radio_button},
-
 	{:question => 'Will you require a health permit?',
 		:answers => "[Yes, No]", 
 		:question_type => :radio_button},
-
 	{:question => 'Will you use a stereo?', 
 		:answers => "[Yes, No]", 
 		:question_type => :radio_button},
-
 	{:question => 'Exhibit Registration...', 
 		:question_type => :statement},
-
 	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
 		:answers => "[150, 250]", 
 		:question_type => :radio_button},
-
 	# {:question => 'Food Booth Fee',  
 	# 	:question_type => :textbox},
-
 	# {:question => 'City Health Permit Fee', 
 	# 	:answers => "207", 
 	# 	:question_type => :textbox},
-
 	# {:question => 'Advertising:', 
 	# 	:question_type => :textbox},
-
 	# {:question => 'Total enclosed', 
 	# 	:question_type => :textbox},
-
 	# {:question => 'Please make payable to...', 
 	# 	:question_type => :statement},
-
 	{:question => 'Will you need electricity?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-
 	{:question => 'Please state electrical requirements...', 
 		:question_type => :textbox},
-
 	{:question => 'Name',
 		:question_type => :textbox},
-
 	{:question => 'Signature', 
 		:question_type => :textbox},
-
 	{:question => 'Title', 
 		:question_type => :textbox},
-
 	{:question => 'Date', 
 		:question_type => :textbox}
 ] 
 
+questions_for_form[advertising_contract] = 	[
+	{:question => 'Full Page',
+		:answers => "[Free, $500, N/A]",
+		:question_type => :radio_button},
+	{:question => 'Half Page',
+		:answers => "[Free, $300, N/A]",
+		:question_type => :radio_button},
+	{:question => 'Quarter Page',
+		:answers => "[Free, $200, N/A]",
+		:question_type => :radio_button},
+	{:question => 'One Eigth Page',
+		:answers => "[$100, N/A]",
+		:question_type => :radio_button},
+	{:question => 'Business Card Size',
+		:answers => "[$75, $50]",
+		:question_type => :radio_button},
+	{:question => 'Total Enclosed', 
+		:question_type => :textbox},
+	{:question => 'Encosed camera-ready ad/ logo...',
+		:question_type => :checkbox},
+	{:question => 'Email electronic copy...',
+		:question_type => :checkbox},
+	{:question => 'Mail Information',
+		:question_type => :statement},
+	{:question => 'Authorized Signature',
+		:question_type => :textbox}
+]
+
 questions_for_form[conditions_of_agreement] = [
 	{:question => 'Company/Organization', 
 		:question_type => :textbox},
-
 	{:question => 'Conditions of Agreement ......', 
 		:answers => "[Agree]",
 		:question_type => :radio_button}
+]
+
+questions_for_form[health_permit_form] = [
+	{:question => "1. Name of Event:",
+		:question_type => :textbox},
+	{:question => "Location:",
+		:question_type => :textbox},
+	{:question => "Date(s):",
+		:question_type => :textbox},
+	{:question => "Number of booths:",
+		:question_type => :textbox},
+	{:question => "Number of Carts:",
+		:question_type => :textbox},
+	{:question => "Start Time:",
+		:question_type => :textbox},
+	{:question => "2. Company Name:",
+		:question_type => :textbox},
+	{:question => "Address:",
+		:question_type => :textbox},
+	{:question => "Phone:",
+		:question_type => :textbox},
+	{:question => "Fax:",
+		:question_type => :textbox0},
+	{:question => "Email:",
+		:question_type => :textbox},
+	{:question => "On-Site Representative:",
+		:question_type => :textbox},
+	{:question => "3. Name of Facility:",
+		:question_type => :textbox},
+	{:question => "Name & Address:",
+		:question_type => :textbox},
+	{:question => "Phone:",
+		:question_type => :textbox},
+	{:question => "Fax:",
+		:question_type => :textbox},
+	{:question => "E-mail:",
+		:question_type => :textbox},
+	{:question => "Travel Time:",
+		:question_type => :textbox},
+	{:question => "Plumbed Sink:",
+		:question_type => :textbox},
+	{:question => "Warm H20:",
+		:question_type => :textbox},
+	{:question => "3 compartment sink:",
+		:question_type => :textbox},
+	{:question => "Other method approved:",
+		:question_type => :textbox},
+	{:question => "Hot:",
+		:question_type => :textbox},
+	{:question => "Cold:",
+		:question_type => :textbox},
+	{:question => "Food Item:",
+		:question_type => :textbox},
+	{:question => "Off-Site Prep:",
+		:question_type => :textbox},
+	{:question => "Cooking Procedures:",
+		:question_type => :textbox},
+	{:question => "Holding Methods:",
+		:question_type => :textbox},
+	{:question => "Applicant Signaure:",
+		:question_type => :textbox},
+	{:question => "Date:",
+		:question_type => :textbox},
+	{:question => "Printed Name:",
+		:question_type => :textbox}
 ]
 
 # sponsor_contract = Form.create({:form_name => "Sponsor Contract"})
@@ -202,9 +277,6 @@ questions_for_form[conditions_of_agreement] = [
 
 # vendor_solicitation = Form.create({:form_name => "Vendor Solicitation"})
 # sponsor_solicitation = Form.create({:form_name => "Sponsor Solicitation"})
-
-# advertising_contract = Form.create({:form_name => "Advertising Contract"})
-# health_permit_form = Form.create({:form_name => "Health Permit Form"})
 
 questions_for_form.each do |form_object, form_question_attributes|
 	link_form_questions_to_form form_object, form_question_attributes
