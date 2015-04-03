@@ -11,12 +11,22 @@ def create_a_user(email, password, admin_status = :user)
 	User.create({:email => email, :password => password, :admin => admin}, :without_protection => true)
 end
 
+def link_form_questions_to_form(form,questions)
+	question_objects = []
+	questions.each_with_index do |question_attributes,index|
+		question_attributes[:form_type] = form.form_name
+		question_attributes[:order] = index
+		question_objects << FormQuestion.create(question_attributes)
+	end
+	form.form_questions << question_objects
+end
+
+objects_to_create = {}
+
 create_a_user('admin@hostname.com', 'admin123', :admin)
 create_a_user('user2@hostname.com', 'user1234')
 create_a_user('user3@hostname.com', 'user1234')
 create_a_user('user4@hostname.com', 'user1234')
-
-objects_to_create = {}
 
 # Application Types
 vendor = ApplicationType.create({:app_type => 'Vendor Exhibitor'})
@@ -96,120 +106,183 @@ other_vendor.forms << [
 	health_permit_form
 ]
 
-# form_question attr :question, :app_type, :question_type, :order
-general_form_questions = [
-	{:question => "Name", :question_type => :textbox}
+# create form questions for each form
+questions_for_form = {}
+
+questions_for_form[general_form]  = [
+	{:question => "Company Name", :question_type => :textbox},
+	{:question => "Contact Person", :question_type => :textbox},
+	{:question => "Mailing Address", :question_type => :textbox},
+	{:question => "City", :question_type => :textbox},
+	{:question => "State", :question_type => :textbox},
+	{:question => "Zip", :question_type => :textbox},
+	{:question => "Phone Number", :question_type => :textbox},
+	{:question => "Alternate Number", :question_type => :textbox},
+	{:question => "Fax", :question_type => :textbox},
+	{:question => "Website", :question_type => :textbox},
+	{:question => "Company name for WVF Program listing (if different from above)", :question_type => :textbox}
 ]
 
-
-q1 = FormQuestion.create({:question => "Name", :form_type => "general", :question_type => :textbox, :order => 1})
-q2 = FormQuestion.create({:question => "Company", :form_type => "general", :question_type => :textbox, :order => 2})
-
-
 # Restuarant Concessionaire Contract
-objects_to_create[:FormQuestion] = [
-	{:question => 'Please provide a description of all items being displayed, promoted and/or 
-	sold. Attach a seperate sheet if neccesary', 
-	:form_type => :restaurant_concessionaire,
-	:question_type => :textbox, 
-	:order => 1},
-
-	{:question => 'Food Guidelines...', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :statement, 
-		:order => 2},
-
-	{:question => 'Will you be distributing food/
-	 beverage?', 
+questions_for_form[restaurant_contract] = [
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
+		Attach a seperate sheet if neccesary', 
+		:question_type => :textbox},
+	{:question => 'Food Guidelines...',
+		:question_type => :statement},
+	{:question => 'Will you be distributing food/beverage?', 
+		:answers => "[Yes, No]",
+	 	:question_type => :radio_button},
+	{:question => 'Will you require a health permit?',
 		:answers => "[Yes, No]", 
-		:form_type => :restaurant_concessionaire,
-	 	:question_type => :radio_button, 
-		:order => 3},
-
-	{:question => 'Will you require a health permit?', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :radio_button, 
-		:order => 4},
-
+		:question_type => :radio_button},
 	{:question => 'Will you use a stereo?', 
 		:answers => "[Yes, No]", 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :radio_button, 
-		:order => 5},
-
+		:question_type => :radio_button},
 	{:question => 'Exhibit Registration...', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :statement, 
-		:order => 6},
-
-	{:question => 'Food/Catering Booth Fee', 
+		:question_type => :statement},
+	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
 		:answers => "[150, 250]", 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :radio_button, 
-		:order => 7},
-
-	{:question => 'Food Booth Fee',  
-		:form_type => :restaurant_concessionaire,
-		:question_type => :textbox, 
-		:order => 8},
-
-	#{:question => 'City Health Permit Fee', 
-	#	"207", 
-	#	:form_type => :restaurant_concessionaire,:textbox, 9},
-
-	{:question => 'Advertising:', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :textbox, 
-		:order => 10},
-
-	{:question => 'Total enclosed', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :textbox, 
-		:order => 11},
-
-	{:question => 'Please make payable to...', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :statement, 
-		:order => 21},
-
-	{:question => 'Will you need electricity?', 
-		:answers => "[Yes, No]", 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :radio_button, 
-		:order => 13},
-
+		:question_type => :radio_button},
+	# {:question => 'Food Booth Fee',  
+	# 	:question_type => :textbox},
+	# {:question => 'City Health Permit Fee', 
+	# 	:answers => "207", 
+	# 	:question_type => :textbox},
+	# {:question => 'Advertising:', 
+	# 	:question_type => :textbox},
+	# {:question => 'Total enclosed', 
+	# 	:question_type => :textbox},
+	# {:question => 'Please make payable to...', 
+	# 	:question_type => :statement},
+	{:question => 'Will you need electricity?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
 	{:question => 'Please state electrical requirements...', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :textbox, 
-		:order => 14},
-
-	{:question => 'Name', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :textbox, 
-		:order => 15},
-
+		:question_type => :textbox},
+	{:question => 'Name',
+		:question_type => :textbox},
 	{:question => 'Signature', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :textbox, 
-		:order => 16},
-
+		:question_type => :textbox},
 	{:question => 'Title', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :textbox, 
-		:order => 17},
-
+		:question_type => :textbox},
 	{:question => 'Date', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :textbox, 
-		:order => 18},
-
-	{:question => 'Company/Organization', 
-		:form_type => :restaurant_concessionaire,
-		:question_type => :textbox, 
-		:order => 19}
+		:question_type => :textbox}
 ] 
 
-# seed database
+questions_for_form[advertising_contract] = 	[
+	{:question => 'Full Page',
+		:answers => "[Free, $500, N/A]",
+		:question_type => :radio_button},
+	{:question => 'Half Page',
+		:answers => "[Free, $300, N/A]",
+		:question_type => :radio_button},
+	{:question => 'Quarter Page',
+		:answers => "[Free, $200, N/A]",
+		:question_type => :radio_button},
+	{:question => 'One Eigth Page',
+		:answers => "[$100, N/A]",
+		:question_type => :radio_button},
+	{:question => 'Business Card Size',
+		:answers => "[$75, $50]",
+		:question_type => :radio_button},
+	{:question => 'Total Enclosed', 
+		:question_type => :textbox},
+	{:question => 'Encosed camera-ready ad/ logo...',
+		:question_type => :checkbox},
+	{:question => 'Email electronic copy...',
+		:question_type => :checkbox},
+	{:question => 'Mail Information',
+		:question_type => :statement},
+	{:question => 'Authorized Signature',
+		:question_type => :textbox}
+]
+
+questions_for_form[conditions_of_agreement] = [
+	{:question => 'Company/Organization', 
+		:question_type => :textbox},
+	{:question => 'Conditions of Agreement ......', 
+		:answers => "[Agree]",
+		:question_type => :radio_button}
+]
+
+questions_for_form[health_permit_form] = [
+	{:question => "1. Name of Event:",
+		:question_type => :textbox},
+	{:question => "Location:",
+		:question_type => :textbox},
+	{:question => "Date(s):",
+		:question_type => :textbox},
+	{:question => "Number of booths:",
+		:question_type => :textbox},
+	{:question => "Number of Carts:",
+		:question_type => :textbox},
+	{:question => "Start Time:",
+		:question_type => :textbox},
+	{:question => "2. Company Name:",
+		:question_type => :textbox},
+	{:question => "Address:",
+		:question_type => :textbox},
+	{:question => "Phone:",
+		:question_type => :textbox},
+	{:question => "Fax:",
+		:question_type => :textbox0},
+	{:question => "Email:",
+		:question_type => :textbox},
+	{:question => "On-Site Representative:",
+		:question_type => :textbox},
+	{:question => "3. Name of Facility:",
+		:question_type => :textbox},
+	{:question => "Name & Address:",
+		:question_type => :textbox},
+	{:question => "Phone:",
+		:question_type => :textbox},
+	{:question => "Fax:",
+		:question_type => :textbox},
+	{:question => "E-mail:",
+		:question_type => :textbox},
+	{:question => "Travel Time:",
+		:question_type => :textbox},
+	{:question => "Plumbed Sink:",
+		:question_type => :textbox},
+	{:question => "Warm H20:",
+		:question_type => :textbox},
+	{:question => "3 compartment sink:",
+		:question_type => :textbox},
+	{:question => "Other method approved:",
+		:question_type => :textbox},
+	{:question => "Hot:",
+		:question_type => :textbox},
+	{:question => "Cold:",
+		:question_type => :textbox},
+	{:question => "Food Item:",
+		:question_type => :textbox},
+	{:question => "Off-Site Prep:",
+		:question_type => :textbox},
+	{:question => "Cooking Procedures:",
+		:question_type => :textbox},
+	{:question => "Holding Methods:",
+		:question_type => :textbox},
+	{:question => "Applicant Signaure:",
+		:question_type => :textbox},
+	{:question => "Date:",
+		:question_type => :textbox},
+	{:question => "Printed Name:",
+		:question_type => :textbox}
+]
+
+# sponsor_contract = Form.create({:form_name => "Sponsor Contract"})
+# non_profit_contract = Form.create({:form_name => "Exhibitor Contract - Non Profit"})
+# other_contract = Form.create({:form_name => "Exhibitor Contract - All other Exhibitors"})
+
+# vendor_solicitation = Form.create({:form_name => "Vendor Solicitation"})
+# sponsor_solicitation = Form.create({:form_name => "Sponsor Solicitation"})
+
+questions_for_form.each do |form_object, form_question_attributes|
+	link_form_questions_to_form form_object, form_question_attributes
+end
+
+# seed database for every object in objects_to_create
 objects_to_create.each do|obj,params|
 	obj_class = obj.to_s.constantize
 	params.each do |a|
