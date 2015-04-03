@@ -36,6 +36,15 @@ Given(/^the following application types exist:$/) do |table|
   end
 end
 
+Given(/^the following applications exist:$/) do |table|
+  table.hashes.each do |item|
+    app = Application.create()
+    app.user_id = item[:user]
+    app.application_type_id = item[:type]
+    app.save
+  end
+end
+
 Then(/^I should see a "(.*)" with id "(.*)"$/) do |item,id|
   assert find("#"+id)
 end

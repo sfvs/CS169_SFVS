@@ -1,5 +1,5 @@
 class Application < ActiveRecord::Base
-  attr_accessible :user, :year, :content, :completed
+  attr_accessible :year, :content, :completed
   belongs_to :user
   belongs_to :application_type
 
