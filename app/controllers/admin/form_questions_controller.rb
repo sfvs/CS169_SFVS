@@ -7,6 +7,25 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form_questions = @form.form_questions.sort_by {|question| question.order}
   end
 
+  def new
+    #default: render 'new' template
+  end
+
+  def create
+
+  end
+
+  def destroy
+    @form_question = FormQuestion.find(params[:id])
+    @form_question.destroy
+    flash[:notice] = "Question deleted."
+    redirect_to admin_form_form_questions_path(Form.find(params[:form_id]))
+  end
+
+  def edit
+
+  end
+
   def sort
     params[:order].each do |key, value|
       FormQuestion.find(value[:id]).update_attributes({:order => value[:position].to_i})
