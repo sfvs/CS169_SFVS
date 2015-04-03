@@ -21,15 +21,15 @@ ActiveRecord::Schema.define(:version => 20150403031612) do
     t.datetime "updated_at",       :null => false
   end
 
-  create_table "app_types_forms", :id => false, :force => true do |t|
-    t.integer "application_type_id"
-    t.integer "form_id"
-  end
-
   create_table "application_types", :force => true do |t|
     t.string   "app_type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "application_types_forms", :id => false, :force => true do |t|
+    t.integer "application_type_id"
+    t.integer "form_id"
   end
 
   create_table "applications", :force => true do |t|

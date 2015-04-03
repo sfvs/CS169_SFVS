@@ -3,13 +3,4 @@ class Application < ActiveRecord::Base
   belongs_to :user
   has_one :application_type
 
-  def self.get_application_types
-    {
-      :vendor => "1",
-      :donor => "2",
-      :restaurant_concessionaire => "3",
-      :other => "4"
-    }
-  end
-
 end
