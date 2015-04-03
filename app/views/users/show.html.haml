@@ -1,23 +1,19 @@
-%h2= "Welcome #{@user.email}"
+%h2= "Welcome"
 
 %p
-	%strong name
+	%strong= "Email: #{@user.email}"
 %p
-	%strong company
-%p
-	%strong Application type:
 	-if @application
-		="#{@application.application_type}"
+		%strong="Application type: #{@type}"
 	-else
-		status
+		Please take survey below to determine your application status.
 
+-if @application
+	-@forms_to_build.each do |form|
+		%br= link_to "#{form.form_name}", form_user_path(:type => form.id), :class => "form_link"
+	%br= link_to "Payment"
 
-
-
-= link_to "Health Form", form_user_path(:type => "health_form")
-
-%p payment
-
+%br
 = button_to "Take Survey", survey_user_path, {:id => "questionnaire_button", method: :get}
 = button_to "Edit Profile", edit_user_path(@user)
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}

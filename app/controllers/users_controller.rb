@@ -6,6 +6,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     flash[:notice] = parse_questionnaire_response(params[:questionnaire_response])
     @application = @user.get_most_recent_inprogress_application
+    if @application
+      @type = @application.application_type.app_type
+      @forms_to_build = @application.application_type.forms
+    end
   end
 
   private

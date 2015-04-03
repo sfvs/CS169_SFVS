@@ -42,7 +42,7 @@ objects_to_create[:Answers] = [
 	{:ans => vendor.app_type, :questionnaire_id => 1, :results_to => vendor.id},
 	{:ans => sponsor.app_type, :questionnaire_id => 1, :results_to => sponsor.id},
 	{:ans => non_profit.app_type, :questionnaire_id => 1, :results_to => non_profit.id},
-	{:ans => other_vendor, :questionnaire_id => 1, :results_to => other_vendor.id}
+	{:ans => other_vendor.app_type, :questionnaire_id => 1, :results_to => other_vendor.id}
 ]
 
 # Forms
