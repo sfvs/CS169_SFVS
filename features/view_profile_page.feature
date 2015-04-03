@@ -7,20 +7,12 @@ Feature: view application status and steps to complete application
 
 Background: users have been added to database
   
-  Given the following users exist: 
-  | email             | password         |
-  | johndoe@gmail.com | bear12345        |
+  Given the application is setup
+  And user john doe exist in the database
+  And john doe has an incomplete vendor application
+  And john doe has logged in
 
-  Given the following application types exist: 
-  | app_type  | id |
-  | vendor    | 1  |
-  
-  Given the following applications exist: 
-  | user | type |
-  | 1    | 1    |
-
-  Given I login as "johndoe@gmail.com" and password "bear12345"
-  And I am on the "profile" page for "johndoe@gmail.com"
+  Given I am on the "profile" page for "johndoe@gmail.com"
 
 Scenario: view current application status
   Then I should see my "email" as "johndoe@gmail.com"

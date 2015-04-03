@@ -6,17 +6,14 @@ Feature: fill a questionnaire form to find type of attendee
 
 Background: on the questionnaire form
   
-  Given the following users exist: 
-  | email             | password         |
-  | johndoe@gmail.com | bear12345        |
+  Given user john doe exist in the database
 
-  Given the following application types exist: 
+  And the following application types exist: 
   | app_type  | id |
   | vendor    | 1  |
   | sponsor   | 2  |
 
-
-  And the following questions exist:
+  And the following survey questions exist:
   | question                       | parent_id |
   | Which one came first?          |           |
   | How do you like your veggies?  | 1         |
@@ -31,11 +28,11 @@ Background: on the questionnaire form
   | raw      | 2                |          | 1          |
   | cucumber | 3                |          | 2          |
 
-  Given I login as "johndoe@gmail.com" and password "bear12345"
+  And john doe has logged in
   And I am on the "profile" page for "johndoe@gmail.com"
+  Given I press "Take Survey"
 
 Scenario: selecting an answer
-  When I press "Take Survey"
   Then I should see "Which one came first?"
   And I should see "egg"
   And I should see "chicken"
@@ -46,7 +43,6 @@ Scenario: selecting an answer
   And I should see "sauteed"
 
 Scenario: completing the questionnaire
-  When I press "Take Survey"
   And I follow "chicken"
   Then I should see "chicken" selected
   When I follow "zuccini"
