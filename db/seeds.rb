@@ -36,47 +36,106 @@ objects_to_create[:Answers] = [{:ans => :vendor, :questionnaire_id => 1},
 		   {:ans => :restaurant_concessionaire, :questionnaire_id => 1},
 		   {:ans => :other, :questionnaire_id => 1}]
 
-objects_to_create[:Concessionaire_Questions] = [{:form_question => 'Please provide a description 
-												of all items being displayed, promoted and/or 
-												sold. Attach a seperate sheet if neccesary', :restaurant_concessionaire,
-												:textbox, 1},
-												{:form_question => 'Food Guidelines...', :restaurant_concessionaire,
-													:statement, 2},
-												{:form_question => 'Will you be distributing food/
-												 beverage?', "[Yes, No]", :restaurant_concessionaire,
-												 :radio_button, 3},
-												{:form_question => 'Will you require a health permit?', 
-												"[Yes, No]", :restaurant_concessionaire,:radio_button, 4},
-												{:form_question => 'Will you use a stereo?', "[Yes, No]", 
-													:restaurant_concessionaire,:radio_button, 5},
-												{:form_question => 'Exhibit Registration...', :restaurant_concessionaire,
-													:statement, 6},
-												{:form_question => 'Food/Catering Booth Fee', "[150, 250]", 
-													:restaurant_concessionaire,:radio_button, 7},
-												{:form_question => 'Food Booth Fee',  
-													:restaurant_concessionaire,:textbox, 8},
-												{:form_question => 'City Health Permit Fee', "207", 
-													:restaurant_concessionaire,:textbox, 9},
-												{:form_question => 'Advertising:', 
-													:restaurant_concessionaire,:textbox, 10},
-												{:form_question => 'Total enclosed', 
-													:restaurant_concessionaire,:textbox, 11},
-												{:form_question => 'Please make payable to...', :restaurant_concessionaire,
-													:statement, 21},
-												{:form_question => 'Will you need electricity?', "[Yes, No]", 
-													:restaurant_concessionaire,:radio_button, 13},
-												{:form_question => 'Please state electrical requirements...', 
-													:restaurant_concessionaire,:textbox, 14},
-												{:form_question => 'Name', 
-													:restaurant_concessionaire,:textbox, 15},
-												{:form_question => 'Signature', 
-													:restaurant_concessionaire,:textbox, 16},
-												{:form_question => 'Title', 
-													:restaurant_concessionaire,:textbox, 17},
-												{:form_question => 'Date', 
-													:restaurant_concessionaire,:textbox, 18}
-												{:form_question => 'Company/Organization', 
-													:restaurant_concessionaire,:textbox, 19}] 
+objects_to_create[:FormQuestion] = [
+												{:question => 'Please provide a description of all items being displayed, promoted and/or 
+												sold. Attach a seperate sheet if neccesary', 
+												:form_type => :restaurant_concessionaire,
+												:question_type => :textbox, 
+												:order => 1},
+
+												{:question => 'Food Guidelines...', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :statement, 
+													:order => 2},
+
+												{:question => 'Will you be distributing food/
+												 beverage?', 
+													:answers => "[Yes, No]", 
+													:form_type => :restaurant_concessionaire,
+												 	:question_type => :radio_button, 
+													:order => 3},
+
+												{:question => 'Will you require a health permit?', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :radio_button, 
+													:order => 4},
+
+												{:question => 'Will you use a stereo?', 
+													:answers => "[Yes, No]", 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :radio_button, 
+													:order => 5},
+
+												{:question => 'Exhibit Registration...', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :statement, 
+													:order => 6},
+
+												{:question => 'Food/Catering Booth Fee', 
+													:answers => "[150, 250]", 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :radio_button, 
+													:order => 7},
+
+												{:question => 'Food Booth Fee',  
+													:form_type => :restaurant_concessionaire,
+													:question_type => :textbox, 
+													:order => 8},
+
+												#{:question => 'City Health Permit Fee', 
+												#	"207", 
+												#	:form_type => :restaurant_concessionaire,:textbox, 9},
+
+												{:question => 'Advertising:', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :textbox, 
+													:order => 10},
+
+												{:question => 'Total enclosed', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :textbox, 
+													:order => 11},
+
+												{:question => 'Please make payable to...', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :statement, 
+													:order => 21},
+
+												{:question => 'Will you need electricity?', 
+													:answers => "[Yes, No]", 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :radio_button, 
+													:order => 13},
+
+												{:question => 'Please state electrical requirements...', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :textbox, 
+													:order => 14},
+
+												{:question => 'Name', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :textbox, 
+													:order => 15},
+
+												{:question => 'Signature', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :textbox, 
+													:order => 16},
+
+												{:question => 'Title', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :textbox, 
+													:order => 17},
+
+												{:question => 'Date', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :textbox, 
+													:order => 18},
+
+												{:question => 'Company/Organization', 
+													:form_type => :restaurant_concessionaire,
+													:question_type => :textbox, 
+													:order => 19}] 
 
 objects_to_create[:FormQuestionnaire] = 	[{:form_question => 'Full Page', "[Free, $500, N/A]"
 													:advertising_form,:radio_button, 1},
@@ -168,3 +227,11 @@ objects_to_create.each do|obj,params|
 		obj_class.create!(a)
 	end
 end
+
+gen_form = Form.create({:form_name => "General Form"}, :without_protection => true)
+
+# form_question attr :question, :app_type, :question_type, :order
+q1 = FormQuestion.create({:question => "Name", :form_type => "general", :question_type => :textbox, :order => 1})
+q2 = FormQuestion.create({:question => "Company", :form_type => "general", :question_type => :textbox, :order => 2})
+gen_form.form_questions << q1
+gen_form.form_questions << q2

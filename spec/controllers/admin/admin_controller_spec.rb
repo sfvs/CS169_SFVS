@@ -18,47 +18,19 @@ describe Admin::AdminController do
         expect(response).to render_template("index")
       end
 
-      it "should assign @users to the list of regular users" do
-        users = make_many_members
-        get 'index'
-        response.should be_success
-        assigns(:users).should == users
-      end
-
-      it "should return a list of users' email addresses" do
-        user = make_a_member(:user, :email => "shrek_is_love@shrek_is_life.com") 
-        get 'index'
-        expect(response.body).to include(user.email)
-      end
-
       it "should have a logout button" do
         get 'index'
         expect(response.body).to include("Logout")
       end
 
-      it "should have a 'Create User' button" do
+      it "should have a link to users list" do
         get 'index'
-        expect(response.body).to include("Create User")
+        expect(response.body).to include("Users List")
       end
-    end
 
-    describe "admin show user content page" do 
-      it "should route to show user content page" do
-        user = make_a_member :user
-        expect(:get => "/admin/users/#{user.id}").to route_to(:controller => "admin/users", :action => "show", :id => "#{user.id}")
-      end
-    end
-
-    describe "admin user edit page" do
-      it "should route to user edit page" do
-        user = make_a_member :user
-        expect(:get => "/admin/users/#{user.id}/edit").to route_to(:controller => "admin/users", :action => "edit", :id => "#{user.id}")
-      end
-    end
-
-    describe "admin create user page" do
-      it "should route to create new user page" do
-        expect(:get => "/admin/users/new").to route_to(:controller => "admin/users", :action => "new")
+      it "should have a link to forms list" do
+        get 'index'
+        expect(response.body).to include("Forms List")
       end
     end
   end

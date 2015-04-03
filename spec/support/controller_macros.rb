@@ -30,6 +30,18 @@ module ControllerMacros
     user_list
   end
 
+  def make_a_form(form_name = "Form")
+    form = Form.create(:form_name => form_name)
+  end
+
+  def make_many_forms(count = 3)
+    form_list = []
+    (0..count-1).each do |i|
+      form_list << make_a_form
+    end
+    form_list
+  end
+
   def login(type = :user, attributes = nil)
     before(:each) do
       obj = sign_in make_a_member(type, attributes)

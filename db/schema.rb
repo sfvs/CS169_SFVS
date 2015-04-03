@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150318230926) do
+ActiveRecord::Schema.define(:version => 20150402011320) do
 
   create_table "answers", :force => true do |t|
     t.text     "ans"
@@ -33,13 +33,25 @@ ActiveRecord::Schema.define(:version => 20150318230926) do
 
   create_table "form_questions", :force => true do |t|
     t.string   "question"
-    t.string   "app_type"
     t.string   "answers"
+    t.string   "form_type"
     t.string   "question_type"
     t.integer  "order"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+    t.integer  "form_id"
   end
+
+  add_index "form_questions", ["form_id"], :name => "index_form_questions_on_form_id"
+
+  create_table "forms", :force => true do |t|
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.string   "form_name"
+    t.integer  "application_id"
+  end
+
+  add_index "forms", ["application_id"], :name => "index_forms_on_application_id"
 
   create_table "questionnaires", :force => true do |t|
     t.text     "question"
