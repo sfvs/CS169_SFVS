@@ -14,8 +14,9 @@
 ActiveRecord::Schema.define(:version => 20150403031612) do
 
   create_table "answers", :force => true do |t|
-    t.text     "ans"
+    t.string   "ans"
     t.integer  "leads_to"
+    t.integer  "results_to"
     t.integer  "questionnaire_id"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
@@ -34,12 +35,13 @@ ActiveRecord::Schema.define(:version => 20150403031612) do
 
   create_table "applications", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "application_type_id"
     t.integer  "year"
     t.string   "app_type"
     t.string   "content"
-    t.boolean  "completed",  :default => false, :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.boolean  "completed",           :default => false, :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "form_questions", :force => true do |t|

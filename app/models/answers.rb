@@ -1,5 +1,5 @@
 class Answers < ActiveRecord::Base
-  attr_accessible :ans, :questionnaire_id, :leads_to
+  attr_accessible :ans, :questionnaire_id, :leads_to, :results_to
   belongs_to :questionnaire
 
   def self.get_answer_leading_to(question)

@@ -1,11 +1,20 @@
-FactoryGirl.define do  factory :application_type do
-    
+FactoryGirl.define do  
+  factory :application_type do
+    app_type "vendor"
   end
+  
   factory :form do
-    
+    form_name "General"
   end
+  
   factory :form_question do
     
+  end
+
+  factory :application do
+    year 2000
+    content ""
+    completed false
   end
 
   factory :user do

@@ -19,11 +19,31 @@ create_a_user('user4@hostname.com', 'user1234')
 objects_to_create = {}
 
 # Application Types
-
 vendor = ApplicationType.create({:app_type => 'Vendor Exhibitor'})
 sponsor = ApplicationType.create({:app_type => 'Sponsor'})
 non_profit = ApplicationType.create({:app_type => 'Non-Profit Exhibitor'})
 other_vendor = ApplicationType.create({:app_type => 'All Other Vendors'})
+
+# Questionnaire
+#adding seeds questions, each question has an attribute referances its parent(like a tree), the tree is as follow:
+#
+#                   'Which one came first?'
+#                     /                 \
+#                  (egg)             (chicken)
+#                   /                     \
+#     'How do you like it?'          'Which part of chicken do you like?'
+#      /        |        \              /         |          |        \
+#(scramble)   (ssu)     (raw)      (breast)    (legs)     (wings)    (eggs)
+
+objects_to_create[:Questionnaire] = [{:question => 'What type of Exhibitor are you?'}]
+
+#answer table has answer to referance to its question, as well as which question it leads to
+objects_to_create[:Answers] = [
+	{:ans => vendor.app_type, :questionnaire_id => 1, :results_to => vendor.id},
+	{:ans => sponsor.app_type, :questionnaire_id => 1, :results_to => sponsor.id},
+	{:ans => non_profit.app_type, :questionnaire_id => 1, :results_to => non_profit.id},
+	{:ans => other_vendor, :questionnaire_id => 1, :results_to => other_vendor.id}
+]
 
 # Forms
 general_form = Form.create({:form_name => "General Form"})
@@ -40,7 +60,7 @@ health_permit_form = Form.create({:form_name => "Health Permit Form"})
 conditions_of_agreement = Form.create({:form_name => "Conditions of Agreement"})
 
 
-# Associate Application Types to Forms Required
+# Associate Application Types to forms
 vendor.forms << [
 	vendor_solicitation,
 	general_form,
@@ -76,26 +96,15 @@ other_vendor.forms << [
 	health_permit_form
 ]
 
-# Questionnaire
-#adding seeds questions, each question has an attribute referances its parent(like a tree), the tree is as follow:
-#
-#                   'Which one came first?'
-#                     /                 \
-#                  (egg)             (chicken)
-#                   /                     \
-#     'How do you like it?'          'Which part of chicken do you like?'
-#      /        |        \              /         |          |        \
-#(scramble)   (ssu)     (raw)      (breast)    (legs)     (wings)    (eggs)
-
-objects_to_create[:Questionnaire] = [{:question => 'What type of Exhibitor are you?'}]
-
-#answer table has answer to referance to its question, as well as which question it leads to
-objects_to_create[:Answers] = [
-	{:ans => :vendor, :questionnaire_id => 1},
-	{:ans => :donor, :questionnaire_id => 1},
-	{:ans => :restaurant_concessionaire, :questionnaire_id => 1},
-	{:ans => :other, :questionnaire_id => 1}
+# form_question attr :question, :app_type, :question_type, :order
+general_form_questions = [
+	{:question => "Name", :question_type => :textbox}
 ]
+
+
+q1 = FormQuestion.create({:question => "Name", :form_type => "general", :question_type => :textbox, :order => 1})
+q2 = FormQuestion.create({:question => "Company", :form_type => "general", :question_type => :textbox, :order => 2})
+
 
 # Restuarant Concessionaire Contract
 objects_to_create[:FormQuestion] = [
@@ -207,10 +216,3 @@ objects_to_create.each do|obj,params|
 		obj_class.create!(a)
 	end
 end
-
-
-# # form_question attr :question, :app_type, :question_type, :order
-# q1 = FormQuestion.create({:question => "Name", :form_type => "general", :question_type => :textbox, :order => 1})
-# q2 = FormQuestion.create({:question => "Company", :form_type => "general", :question_type => :textbox, :order => 2})
-# gen_form.form_questions << q1
-# gen_form.form_questions << q2

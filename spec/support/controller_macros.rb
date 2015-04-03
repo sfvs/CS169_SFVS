@@ -31,7 +31,7 @@ module ControllerMacros
   end
 
   def make_a_form(form_name = "Form")
-    form = Form.create(:form_name => form_name)
+    form = FactoryGirl.create(:form, {:form_name => form_name})
   end
 
   def make_many_forms(count = 3)
@@ -40,6 +40,12 @@ module ControllerMacros
       form_list << make_a_form
     end
     form_list
+  end
+
+  def make_forms_for_app_type(type)
+    type = FactoryGirl.create(:application_type,{:app_type => type})
+    type.forms << make_many_forms
+    type
   end
 
   def login(type = :user, attributes = nil)
