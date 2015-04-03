@@ -45,11 +45,11 @@ function createFields() {
 	for (i = 0; i < count; i++) {
 		if (option == "checkbox") {
 			$('.input_fields').append("<label for=\"form_question_answer\" id=\"checkbox_label\">Checkbox Answer</label>")
-			$('.input_fields').append("<input id=\"form_question_checkbox\" name=\"form_question[checkbox]\" size=\"20\" type=\"text\"/>");
+			$('.input_fields').append("<input id=\"form_question_checkbox\" name=\"q_answer[answers[" + i.toString() + "]]\" size=\"20\" type=\"text\"/>");
 		}
 		else if (option == "radio_button") {
 			$('.input_fields').append("<label for=\"form_question_answer\" id=\"radiobutton_label\">Radio Button Answer</label>")
-			$('.input_fields').append("<input id=\"form_question_radio_button\" name=\"form_question[radio_button]\" size=\"20\" type=\"text\"/>");
+			$('.input_fields').append("<input id=\"form_question_radio_button\" name=\"q_answer[answers[" + i.toString() + "]]\" size=\"20\" type=\"text\"/>");
 		}
 	}
 }

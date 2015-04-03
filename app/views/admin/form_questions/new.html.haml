@@ -1,4 +1,4 @@
-= form_tag do
+= form_tag admin_form_form_questions_path do
   = label :form_question, :question, 'Enter the question'
   = text_field :form_question, 'question', size: 50
 
@@ -23,10 +23,3 @@
   %div.input_fields
 
   = submit_tag 'Save Changes'
-
-
-  / = label :form_question, :answer, "Checkbox Answer 1", id: 'checkbox_label'
-  / = text_field :form_question, 'checkbox', size: 20
-
-  / = label :form_question, :answer, "Radio Button Answer 1", id: 'radiobutton_label'
-  / = text_field :form_question, 'radio_button', size: 20

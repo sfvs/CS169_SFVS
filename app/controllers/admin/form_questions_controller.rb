@@ -13,6 +13,10 @@ class Admin::FormQuestionsController < Admin::AdminController
 
   def create
     # might need to create the correct format of arguments to be passed
+    # Need to format the answers correctly
+    params[:form_question][:answers] = get_answers_from_param
+    logger.debug "The parameters passed are #{params[:form_question]}"
+    redirect_to admin_form_form_questions_path
   end
 
   def destroy
@@ -31,5 +35,13 @@ class Admin::FormQuestionsController < Admin::AdminController
       FormQuestion.find(value[:id]).update_attributes({:order => value[:position].to_i})
     end
     render :nothing => true
+  end
+
+  def get_answers_from_param
+    answers = []
+    params[:q_answer][:answers].each do |key, value|
+      answers << value
+    end
+    answers
   end
 end
