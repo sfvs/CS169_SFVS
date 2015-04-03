@@ -6,6 +6,4 @@ class FormQuestion < ActiveRecord::Base
   	[:checkbox, :textbox, :radio_button, :statement]
   end
 
-
-
 end
