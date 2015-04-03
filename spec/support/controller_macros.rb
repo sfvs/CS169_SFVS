@@ -42,6 +42,14 @@ module ControllerMacros
     form_list
   end
 
+  def make_a_form_question()
+
+  end
+
+  def make_many_form_questions(count = 5)
+
+  end
+
   def login(type = :user, attributes = nil)
     before(:each) do
       obj = sign_in make_a_member(type, attributes)

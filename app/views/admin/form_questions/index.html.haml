@@ -1,0 +1,7 @@
+%h1 Form Content
+
+%p= "Contents of #{@form.form_name}"
+
+%div.sortable
+  - if !@form_questions.nil?
+    = render @form_questions

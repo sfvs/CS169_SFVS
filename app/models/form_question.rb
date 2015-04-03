@@ -6,6 +6,7 @@ class FormQuestion < ActiveRecord::Base
   	[:checkbox, :textbox, :radio_button, :statement]
   end
 
-
-
+  def self.get_questions_for_form(form_id)
+    self.where(:form_id => form_id).order(order: :desc)
+  end
 end

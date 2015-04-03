@@ -152,3 +152,7 @@ q1 = FormQuestion.create({:question => "Name", :form_type => "general", :questio
 q2 = FormQuestion.create({:question => "Company", :form_type => "general", :question_type => :textbox, :order => 2})
 gen_form.form_questions << q1
 gen_form.form_questions << q2
+
+cons_form = Form.create({:form_name => "Restaurant Concessionaire"}, :without_protection => true)
+cons_questions = FormQuestion.where(:form_type => "restaurant_concessionaire").order(:order => :asc)
+cons_form.form_questions << cons_questions
