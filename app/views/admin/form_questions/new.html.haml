@@ -19,3 +19,8 @@
 
   = label :form_question, :answer, "Radio Button Answer 1", id: 'radiobutton_label'
   = text_field :form_question, 'radio_button', size: 20
+
+  = label_tag "answer_count", "Number of Answers for Checkbox/Radio Button", id: 'count_label'
+  = text_field_tag 'answer_count', nil, maxlength: 1, size: 1
+
+  = submit_tag 'Save Changes'

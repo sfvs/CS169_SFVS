@@ -12,7 +12,7 @@ class Admin::FormQuestionsController < Admin::AdminController
   end
 
   def create
-
+    # might need to create the correct format of arguments to be passed
   end
 
   def destroy
