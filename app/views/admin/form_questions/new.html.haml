@@ -1,0 +1,21 @@
+= form_tag do
+  = label :form_question, :question, 'Enter the question'
+  = text_field :form_question, 'question', size: 50
+
+  = label :form_question, :question_type, "Textfield"
+  =radio_button :form_question, 'question_type', "textfield", options = {onclick: "javascript:selectedOption()"}
+
+  = label :form_question, :question_type, "Checkbox"
+  =radio_button :form_question, 'question_type', "checkbox", options = {onclick: "javascript:selectedOption()"}
+
+  = label :form_question, :question_type, "Radio Button"
+  =radio_button :form_question, 'question_type', "radio_button", options = {onclick: "javascript:selectedOption()"}
+
+  = label :form_question, :question_type, "Statement"
+  =radio_button :form_question, 'question_type', "statement", options = {onclick: "javascript:selectedOption()"}
+
+  = label :form_question, :answer, "Checkbox Answer 1", id: 'checkbox_label'
+  = text_field :form_question, 'checkbox', size: 20
+
+  = label :form_question, :answer, "Radio Button Answer 1", id: 'radiobutton_label'
+  = text_field :form_question, 'radio_button', size: 20
