@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(:version => 20150403031612) do
     t.integer  "user_id"
     t.integer  "application_type_id"
     t.integer  "year"
-    t.string   "app_type"
     t.string   "content"
     t.boolean  "completed",           :default => false, :null => false
     t.datetime "created_at",                             :null => false
