@@ -47,7 +47,7 @@ describe UsersController do
       User.stub(:get_most_recent_inprogress_application).with(@user).and_return(mock_app)
       get :show, :id => @user.id, :questionnaire_response => reply
 
-      mock_app.should_receive(:destroy)
+      Application.find_by_id(mock_app).should == nil
     end
 
   end

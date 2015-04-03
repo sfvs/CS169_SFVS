@@ -12,14 +12,14 @@ class UsersController < ApplicationController
 
   def parse_questionnaire_response(answer_id)
 
-    if answer_id != nil 
+    if answer_id != nil
+      print answer_id
       type = ApplicationType.find_by_id(answer_id.to_i)
       response = "Your type is #{type.app_type}."
 
       unless type.nil?
         recent_application = @user.get_most_recent_inprogress_application
         if not recent_application.nil?
-          print recent_application.inspect
           recent_application.destroy
         end
         app = @user.applications.create()

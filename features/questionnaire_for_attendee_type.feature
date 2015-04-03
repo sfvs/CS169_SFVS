@@ -10,6 +10,12 @@ Background: on the questionnaire form
   | email             | password         |
   | johndoe@gmail.com | bear12345        |
 
+  Given the following application types exist: 
+  | app_type  | id |
+  | vendor    | 1  |
+  | sponsor   | 2  |
+
+
   And the following questions exist:
   | question                       | parent_id |
   | Which one came first?          |           |
@@ -17,13 +23,13 @@ Background: on the questionnaire form
   | Which is your favorite veggie? | 1         |
 
   And the following answers exist:
-  | ans      | questionnaire_id | leads_to | id |
-  | egg      | 1                |  2       | 1  |
-  | chicken  | 1                |  3       | 2  |
-  | sauteed  | 2                |          | 3  |
-  | zuccini  | 3                |          | 4  |
-  | raw      | 2                |          | 5  |
-  | cucumber | 3                |          | 6  |
+  | ans      | questionnaire_id | leads_to | results_to |
+  | egg      | 1                |  2       |            |
+  | chicken  | 1                |  3       |            |
+  | sauteed  | 2                |          | 1          |
+  | zuccini  | 3                |          | 2          |
+  | raw      | 2                |          | 1          |
+  | cucumber | 3                |          | 2          |
 
   Given I login as "johndoe@gmail.com" and password "bear12345"
   And I am on the "profile" page for "johndoe@gmail.com"
@@ -48,4 +54,4 @@ Scenario: completing the questionnaire
   And I should see "zuccini" selected
   When I follow "Submit Questionnaire"
   Then I should be on the "profile" page for "johndoe@gmail.com"
-  And I should see "You are Other."
+  And I should see "sponsor."

@@ -30,6 +30,12 @@ Given(/^the following answers exist:$/) do |table|
   end
 end
 
+Given(/^the following application types exist:$/) do |table|
+  table.hashes.each do |item|
+    ApplicationType.create(item)
+  end
+end
+
 Then(/^I should see a "(.*)" with id "(.*)"$/) do |item,id|
   assert find("#"+id)
 end
