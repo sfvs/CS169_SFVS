@@ -10,6 +10,7 @@ set_positions = function() {
 
 ready = function(){
 	// call set_positions function
+
 	set_positions();
 
 	$('.sortable').sortable();
@@ -30,7 +31,7 @@ ready = function(){
 		// send the updated order via ajax
 		$.ajax({
 			type: "PUT",
-			url: '/admin/forms/1/form_questions/sort', // Need to fix the routing
+			url: '/admin/forms/' + gon.form_id + '/form_questions/sort', // Need to fix the routing
 			data: {order: updated_order} 
 		});
 	});

@@ -3,6 +3,7 @@ class Admin::FormQuestionsController < Admin::AdminController
 
   def index
     @form = Form.find(params[:form_id])
+    gon.form_id = params[:form_id]
     @form_questions = @form.form_questions.sort_by {|question| question.order}
   end
 
