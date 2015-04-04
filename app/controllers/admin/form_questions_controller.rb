@@ -5,6 +5,7 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form = Form.find(params[:form_id])
     gon.form_id = params[:form_id]
     @form_questions = @form.form_questions.sort_by {|question| question.order}
+    logger.debug "Form Qs #{@form_questions}"
   end
 
   def new
@@ -20,7 +21,6 @@ class Admin::FormQuestionsController < Admin::AdminController
     end
 
     params[:form_question][:order] = @form.number_of_questions + 1
-
     @form.form_questions.create(params[:form_question])
     redirect_to admin_form_form_questions_path
   end
