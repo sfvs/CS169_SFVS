@@ -7,6 +7,7 @@ class CreateFormQuestions < ActiveRecord::Migration
       t.string :form_type
       t.string :question_type
       t.integer :order
+
       t.timestamps
     end
   end
