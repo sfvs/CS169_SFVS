@@ -37,7 +37,7 @@ module ControllerMacros
   def make_many_forms(count = 3)
     form_list = []
     (0..count-1).each do |i|
-      form_list << make_a_form
+      form_list[i] = make_a_form
     end
     form_list
   end
