@@ -12,7 +12,7 @@ class Application < ActiveRecord::Base
 			if (val == "")
 				@hashed_val = {}
 			else
-				@hashed_val = JSON.parse(read_attribute(:content))
+				@hashed_val = JSON.parse(read_attribute(:content).gsub('\"', '"'))
 			end
 		end
 
