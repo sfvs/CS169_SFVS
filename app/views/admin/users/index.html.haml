@@ -9,9 +9,10 @@
         %th Email
         %th More Info
     %tbody
-      - @users.each do |user|
-        %tr
-          %td= user.email
-          %td= link_to "More Info", admin_user_path(user)
+      - if !@users.nil?
+        - @users.each do |user|
+          %tr
+            %td= user.email
+            %td= link_to "More Info", admin_user_path(user)
 
 = button_to "Create User", new_admin_user_path, {:id => "create_but", method: :get}

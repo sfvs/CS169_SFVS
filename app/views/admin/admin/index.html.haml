@@ -2,4 +2,6 @@
 
 %p= link_to "Users List", admin_users_path
 
+%p= link_to "Forms List", admin_forms_path
+
 = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}
