@@ -68,6 +68,7 @@ sponsor_solicitation = Form.create({:form_name => "Sponsor Solicitation"})
 advertising_contract = Form.create({:form_name => "Advertising Contract"})
 health_permit_form = Form.create({:form_name => "Health Permit Form"})
 conditions_of_agreement = Form.create({:form_name => "Conditions of Agreement"})
+make_agreement = Form.create({:form_name => "Agreement"})
 
 
 # Associate Application Types to forms
@@ -77,7 +78,8 @@ vendor.forms << [
 	restaurant_contract,
 	conditions_of_agreement,
 	advertising_contract,
-	health_permit_form
+	health_permit_form,
+	make_agreement
 ]
 
 sponsor.forms << [
@@ -86,7 +88,8 @@ sponsor.forms << [
 	restaurant_contract,
 	conditions_of_agreement,
 	advertising_contract,
-	health_permit_form
+	health_permit_form,
+	make_agreement
 ]
 
 non_profit.forms << [
@@ -94,7 +97,8 @@ non_profit.forms << [
 	general_form,
 	non_profit_contract,
 	conditions_of_agreement,
-	advertising_contract
+	advertising_contract,
+	make_agreement
 ]
 
 other_vendor.forms << [
@@ -103,7 +107,8 @@ other_vendor.forms << [
 	other_contract,
 	conditions_of_agreement,
 	advertising_contract,
-	health_permit_form
+	health_permit_form,
+	make_agreement
 ]
 
 # create form questions for each form
@@ -159,14 +164,6 @@ questions_for_form[restaurant_contract] = [
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => 'Please state electrical requirements...', 
-		:question_type => :textbox},
-	{:question => 'Name',
-		:question_type => :textbox},
-	{:question => 'Signature', 
-		:question_type => :textbox},
-	{:question => 'Title', 
-		:question_type => :textbox},
-	{:question => 'Date', 
 		:question_type => :textbox}
 ] 
 
@@ -374,12 +371,61 @@ questions_for_form[other_contract] = [
 		:question_type => :textbox}
 	]
 
+questions_for_form[non_profit_contract] = 	[
+	{:question => 'Product/Service Description',
+		:question_type => :textbox},
+	{:question => 'Non-Profit Registration',
+		:question_type => :statement},
+	{:question => 'Non-Profit Booth',
+		:answers => "[$165, $215]",
+		:question_type => :radio_button},
+	{:question => 'Non-Profit Booth Fee',
+		:question_type => :textbox},
+	{:question => 'Electricity Fee, $75',
+		:question_type => :textbox},
+	{:question => 'Additional Chair $5 Each', 
+		:question_type => :textbox},
+	{:question => 'Advertising',
+		:question_type => :textbox},
+	{:question => 'TOTAL ENCLOSED',
+		:question_type => :textbox},
+	{:question => 'Please make check payable to...',
+		:question_type => :statement},
+	{:question => 'Will you need electricity?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Please state electrical requirements...',
+		:question_type => :textbox}
+]
+
+questions_for_form[make_agreement] = [
+	{:question => 'Agreement...',
+		:question_type => :statement},
+	{:question => "Name:",
+		:question_type => :textbox},
+	{:question => "Signature:",
+		:question_type => :textbox},
+	{:question => "Title:",
+		:question_type => :textbox},
+	{:question => "Date:",
+		:question_type => :textbox}
+]
+
+questions_for_form[vendor_solicitation] = [
+	{:question => 'BIG STATEMENT',
+		:question_type => :statement}
+]
+
+questions_for_form[sponsor_solicitation] = [
+	{:question => 'BIG STATEMENT',
+		:question_type => :statement}
+]
+
+
+
 # sponsor_contract = Form.create({:form_name => "Sponsor Contract"})
-# non_profit_contract = Form.create({:form_name => "Exhibitor Contract - Non Profit"})
 # other_contract = Form.create({:form_name => "Exhibitor Contract - All other Exhibitors"})
 
-# vendor_solicitation = Form.create({:form_name => "Vendor Solicitation"})
-# sponsor_solicitation = Form.create({:form_name => "Sponsor Solicitation"})
 
 questions_for_form.each do |form_object, form_question_attributes|
 	link_form_questions_to_form form_object, form_question_attributes
