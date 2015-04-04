@@ -17,4 +17,13 @@ describe Application do
 		myApp.content["yourName"].should == "John"
 		myApp.content["yourAge"].should == 23
 	end
+
+	describe "complicated content should still work" do
+		myApp = Application.new
+		myApp.content = {:depth1 => {:depth2 => {:depth3 => "hello world"} } }
+		myApp.save!
+
+		myApp.reload()
+		myApp.content["depth1"]["depth2"]["depth3"].should == "hello world"
+	end
 end
