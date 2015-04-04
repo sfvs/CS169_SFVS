@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe FormQuestion do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "form question functions" do
+    it "tells me list of form question types" do
+      FormQuestion.get_form_question_types.should be_true
+    end
+  end
 end

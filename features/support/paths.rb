@@ -19,6 +19,8 @@ module NavigationHelpers
     when /^the "registration failed" page$/ then "/member"
     when /^the admin profile page$/ then '/admin'
     when /^the "survey" page for "(.*)"$/ then "/users/#{User.find_by_email($1).id}/survey"
+    when /^the creation page for "(.*)"$/ then "/admin/forms/#{Form.find_by_form_name($1).id}/form_questions/new"
+    when /^the content page for "(.*)"$/ then "/admin/forms/#{Form.find_by_form_name($1).id}/form_questions"
     
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
