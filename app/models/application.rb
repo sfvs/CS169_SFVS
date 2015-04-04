@@ -20,9 +20,11 @@ class Application < ActiveRecord::Base
 	end
 
 	def content=(val)
-		@hashed_val = JSON.parse(val.to_json)
-		#print(val.to_json)
-		write_attribute(:content, val.to_json)
-		#self.update_attributes(:content => val.to_json)
+		if val == nil
+			@hashed_val = {}
+		else
+			@hashed_val = JSON.parse(val.to_json)
+			write_attribute(:content, val.to_json)
+		end
 	end
 end
