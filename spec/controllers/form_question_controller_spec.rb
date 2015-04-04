@@ -6,18 +6,18 @@ describe FormQuestionController do
   	make_test_form_questions
 
   	it "opens a new form" do 
-  	  get :show, id: => @user.id, :type => @test_form
+  	  get :show, :id => @user.id, :type => @test_form
   	  expect(response).to render_template(:show)
   	end
 
     it "should redirect to profile when the form is correctly completed" do
-      get :show, id: => @user.id, :submit => true
+      get :show, :id => @user.id, :submit => true
       response.should redirect_to user_path(@user)
     end
 
     it "should not redirect if the form is not correctly completed" do
       FormQuestionController.stub(:fomr_completed?) {false}
-      get :show, id: => @user.id, :submit => true
+      get :show, :id => @user.id, :submit => true
       expect(response).to render_template(:show)
     end
 
@@ -30,8 +30,8 @@ describe FormQuestionController do
     end
 
     it "should redirect if click save" do
-      get :show, id: => @user.id, :save => true
+      get :show, :id => @user.id, :save => true
       response.should redirect_to user_path(@user)
     end
-    
+  end
 end

@@ -29,8 +29,8 @@ Background: application is setup with user john doe
   And I am on the "profile" page for "johndoe@gmail.com"
 
 Scenario: view current application status
-  When I follow General Form
-  Then I should be on the "form" page
+  When I follow "General Form"
+  Then I should be on the "form" page for "johndoe@gmail.com"
   And I fill in the following:
   | Company name                                                           | Apple           |
   | Contact person                                                         | Tomato Carrot   |
@@ -46,4 +46,3 @@ Scenario: view current application status
   | Company name for WVF Program listing (if different from above)         | Microsoft       |   
   When I follow "Submit Form"
   Then I should be on the "profile" page for "johndoe@gmail.com"
-  And I should see completed for "general form"
