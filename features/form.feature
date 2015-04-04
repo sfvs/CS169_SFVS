@@ -29,7 +29,7 @@ Background: application is setup with user john doe
   And I am on the "profile" page for "johndoe@gmail.com"
 
 Scenario: view current application status
-  When I follow general form
+  When I follow General Form
   Then I should be on the "form" page
   And I fill in the following:
   | Company name                                                           | Apple           |
