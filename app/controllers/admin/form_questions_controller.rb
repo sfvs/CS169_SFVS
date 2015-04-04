@@ -5,6 +5,7 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form = Form.find(params[:form_id])
     gon.form_id = params[:form_id]
     @form_questions = @form.form_questions.sort_by {|question| question.order}
+    logger.debug "The form questions are #{@form_questions}"
   end
 
   def new
@@ -23,7 +24,7 @@ class Admin::FormQuestionsController < Admin::AdminController
       params[:form_question][:answers] = get_answers_from_param(:radio_answer)
     end
     params[:form_question][:order] = Form.number_of_questions(params[:form_id]) + 1
-    
+
     @form.form_questions.create(params[:form_question])
     redirect_to admin_form_form_questions_path
   end
@@ -36,7 +37,7 @@ class Admin::FormQuestionsController < Admin::AdminController
   end
 
   def edit
-
+    # edit the form question
   end
 
   def sort
@@ -53,6 +54,7 @@ class Admin::FormQuestionsController < Admin::AdminController
         answers << value
       end
     end
-    answers
+    logger.debug "The answers are #{answers}"
+    return answers.to_s.gsub('"','')
   end
 end
