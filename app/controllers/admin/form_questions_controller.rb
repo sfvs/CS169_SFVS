@@ -13,13 +13,7 @@ class Admin::FormQuestionsController < Admin::AdminController
 
   def create
     @form = Form.find(params[:form_id])
-    q_type = params[:form_question][:question_type]
-
-    if q_type == "checkbox" || q_type == "radio_button"
-      params[:form_question][:answers] = get_answers_from_param(q_type)
-    end
-
-    params[:form_question][:order] = @form.number_of_questions + 1
+    set_attr
     @form.form_questions.create(params[:form_question])
     redirect_to admin_form_form_questions_path
   end
@@ -51,5 +45,13 @@ class Admin::FormQuestionsController < Admin::AdminController
       end
     end
     answers.to_s.gsub('"','')
+  end
+
+  def set_attr
+    q_type = params[:form_question][:question_type]
+    if q_type == "checkbox" || q_type == "radio_button"
+      params[:form_question][:answers] = get_answers_from_param(q_type)
+    end
+    params[:form_question][:order] = @form.number_of_questions + 1
   end
 end
