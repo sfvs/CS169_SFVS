@@ -10,7 +10,7 @@
 
 -if @application
 	-@forms_to_build.each do |form|
-		%br= link_to "#{form.form_name}", form_user_path(:type => form.id), :class => "form_link", :id => "link_#{form.id}"
+		%br= link_to "#{form.form_name}", form_user_path(:type => form.form_name), :class => "form_link", :id => "link_#{form.id}"
 	%br= link_to "Payment"
 
 %br

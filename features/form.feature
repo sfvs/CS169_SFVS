@@ -2,12 +2,27 @@ Feature: view, fill, and submit a form
  
   As an avid user
   So that I can complete the application
-  I want to be view a required form and
+  I want to view a required form and
   be able to fill it out for submission.
 
 Background: application is setup with user john doe
   
   Given application type and forms are setup for vendor and sponsor
+  Given the following form questions exist:
+  | question                                                         | form_type       | question_type | 
+  | Company name                                                     | General Form    | textbox       |
+  | Contact person                                                   | General Form    | textbox       |
+  | Mailing address                                                  | General Form    | textbox       |
+  | City                                                             | General Form    | textbox       |
+  | State                                                            | General Form    | textbox       |
+  | ZIP                                                              | General Form    | textbox       |
+  | Phone                                                            | General Form    | textbox       |
+  | Alternate                                                        | General Form    | textbox       |
+  | Fax                                                              | General Form    | textbox       |
+  | E-mail                                                           | General Form    | textbox       |
+  | Website                                                          | General Form    | textbox       |
+  | Company name for WVF Program listing (if different from above)   | General Form    | textbox       |
+
   And user john doe exist in the database
   And john doe has an incomplete vendor application
   And john doe has logged in
@@ -29,6 +44,6 @@ Scenario: view current application status
   | E-mail                                                                 | green@onion.com |
   | Website                                                                | apple.com       |
   | Company name for WVF Program listing (if different from above)         | Microsoft       |   
-  When I press "submit_button"
+  When I follow "Submit Form"
   Then I should be on the "profile" page for "johndoe@gmail.com"
   And I should see completed for "general form"

@@ -24,4 +24,4 @@
   / = label_tag(:age_adult, "I'm over 21")
   %hr
 =link_to 'Save and Return', form_user_path(:save => true)
-=link_to 'Submit Form', form_user_path(:submit => true)
+=link_to 'Submit Form', form_user_path(:submit => true, :type => @form_type)

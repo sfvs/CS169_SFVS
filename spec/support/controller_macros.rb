@@ -30,24 +30,6 @@ module ControllerMacros
     user_list
   end
 
-  def make_a_form(form_name = "Form")
-    form = FactoryGirl.create(:form, {:form_name => form_name})
-  end
-
-  def make_many_forms(count = 3)
-    form_list = []
-    (0..count-1).each do |i|
-      form_list << make_a_form
-    end
-    form_list
-  end
-
-  def make_forms_for_app_type(type)
-    type = FactoryGirl.create(:application_type,{:app_type => type})
-    type.forms << make_many_forms
-    type
-  end
-
   def login(type = :user, attributes = nil)
     before(:each) do
       obj = sign_in make_a_member(type, attributes)
@@ -68,6 +50,28 @@ module ControllerMacros
       @a2 = Answers.create(:ans => "I am world", :questionnaire_id => @q2.id)
       @q2.parent_id = @a1a.id
       @q2.save
+    end
+  end
+
+  def make_test_form_questions
+    before :eash do
+      @test_form = "test"
+      @message = FormQuestion.create({:question => 'Describe potato.', 
+                                      :form_type => "test",
+                                      :question_type => :message, 
+                                      :order => 1})
+      @statement = FormQuestion.create({:question => 'Green Onion!', 
+                                      :form_type => "test",
+                                      :question_type => :statement, 
+                                      :order => 2})
+      @radio_button = FormQuestion.create({:question => 'Which fruit you like the most?', 
+                                      :form_type => "test",
+                                      :question_type => :radio_button, 
+                                      :order => 3})
+      @testbox = FormQuestion.create({:question => 'How much is the papaya?', 
+                                      :form_type => "test",
+                                      :question_type => :textbox, 
+                                      :order => 4})
     end
   end
 
