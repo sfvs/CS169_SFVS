@@ -14,14 +14,9 @@
       &nbsp
   -elsif (question.question_type == "statement")
   -elsif (question.question_type == "message")
-    %textarea{:cols => "35", :name => "#{@form_type}[#{question.order}]", :rows => "6"} 
+    %textarea{:cols => "35", :name => "#{question.question}]", :rows => "6"} 
   -elsif (question.question_type == "textbox")
-    %input{:name => "#{@form_type}[#{question.order}]", :type => "text"}
-
-  / = radio_button_tag(:age, "child")
-  / = label_tag(:age_child, "I am younger than 21")
-  / = radio_button_tag(:age, "adult")
-  / = label_tag(:age_adult, "I'm over 21")
+    %input{:name => "#{question.question}", :type => "text"}
   %hr
 =link_to 'Save and Return', form_user_path(:save => true)
 =link_to 'Submit Form', form_user_path(:submit => true, :type => @form_type)
