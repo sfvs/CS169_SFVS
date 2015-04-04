@@ -1,4 +1,4 @@
-var ready, set_position;
+var ready, set_positions;
 
 set_positions = function() {
 	// loop through and give each form question a question_pos
@@ -6,7 +6,7 @@ set_positions = function() {
 	$('.form_q').each(function(i){
 		$(this).attr("data-pos", i+1);
 	});
-}
+};
 
 ready = function(){
 	// call set_positions function
@@ -18,7 +18,7 @@ ready = function(){
 	// after order changes
 	$('.sortable').sortable().bind('sortupdate', function(e, ui){
 		// array to store new order
-		updated_order = []
+		updated_order = [];
 
 		// set the updated positions
 		set_positions();
@@ -35,6 +35,6 @@ ready = function(){
 			data: {order: updated_order} 
 		});
 	});
-}
+};
 
 $(document).ready(ready);
