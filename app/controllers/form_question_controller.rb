@@ -5,13 +5,15 @@ class FormQuestionController < ApplicationController
     @list_of_questions = FormQuestion.get_questions_for_form(@form_type)
   	if (params[:submit]) 
       if form_completed?
-      	redirect_to user_path(:form_response => @form_type)
+        flash[:notice] = "#{@form_type} successfully submitted."
+      	redirect_to user_path()
       else
       	@error = "Please complete the form before submitting."
       end
     elsif (params[:save])
       save_progress
-      redirect_to user_path(:form_response => "successfully saved.")
+      flash[:notice] = "#{@form_type} successfully saved."
+      redirect_to user_path()
     end
   end
 
