@@ -24,5 +24,5 @@ Scenario: See a list of forms
 Scenario: clicking on "More Information" next to the form should display its contents
   Given I am on the admin profile page
   When I follow "Forms List"
-  And I click on More Info for "General Form"
+  And I click on More Information for "General Form"
   Then I should see "General Question"

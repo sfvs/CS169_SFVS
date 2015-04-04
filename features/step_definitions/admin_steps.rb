@@ -20,5 +20,15 @@ end
 
 And /^a form with questions exists$/ do
   gen = Form.create({:form_name => "General Form"})
-  gen.form_questions.create({:question => "General Question", :question_type => "textbox"})
+  gen.form_questions.create({:question => "General Question", :question_type => "textbox", :order => 1})
+end
+
+And /^I click on More Information for "(.*)"$/ do |form_name|
+  form = Form.find(:first, :conditions => ["form_name = ?", form_name])
+  xpath_search = "///a[@href='/admin/forms/" + form.id.to_s + "/form_questions']"
+  find(:xpath, xpath_search).click
+end
+
+And /^I select "(.*)"$/ do |radio_id|
+  choose radio_id
 end
