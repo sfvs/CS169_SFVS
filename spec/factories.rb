@@ -13,7 +13,7 @@ FactoryGirl.define do
 
   factory :application do
     year 2000
-    content ""
+    content {}
     completed false
   end
 

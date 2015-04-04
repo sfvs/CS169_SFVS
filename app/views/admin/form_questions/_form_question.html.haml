@@ -1,0 +1,5 @@
+%div.form_q{"data-id" => form_question.id, "q-order" => form_question.order}
+  %div.buttons
+    = link_to "Remove", admin_form_form_question_path(:form_id => @form.id, :id=> form_question.id), {:id => "delete_but", method: :delete, data: { confirm: "Are you sure?"}}
+    = link_to "Edit", edit_admin_form_form_question_path(:form_id => @form.id, :id=> form_question.id)
+  %p= form_question.question
