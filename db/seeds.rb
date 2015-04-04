@@ -168,14 +168,6 @@ questions_for_form[restaurant_contract] = [
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => 'Please state electrical requirements...', 
-		:question_type => :textbox},
-	{:question => 'Name',
-		:question_type => :textbox},
-	{:question => 'Signature', 
-		:question_type => :textbox},
-	{:question => 'Title', 
-		:question_type => :textbox},
-	{:question => 'Date', 
 		:question_type => :textbox}
 ] 
 
