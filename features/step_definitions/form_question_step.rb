@@ -5,10 +5,3 @@ Given(/^the following form questions exist:$/) do |table|
   end
 end
 
-Given(/^user john doe exist in the database$/) do
-  steps %Q{
-    Given the following users exist: 
-    | email             | password         |
-    | johndoe@gmail.com | bear12345        |
-  }
-end
