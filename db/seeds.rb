@@ -48,6 +48,7 @@ other_vendor = ApplicationType.create({:app_type => 'All Other Vendors'})
 objects_to_create[:Questionnaire] = [{:question => 'What type of Exhibitor are you?'}]
 
 #answer table has answer to referance to its question, as well as which question it leads to
+
 objects_to_create[:Answers] = [
 	{:ans => vendor.app_type, :questionnaire_id => 1, :results_to => vendor.id},
 	{:ans => sponsor.app_type, :questionnaire_id => 1, :results_to => sponsor.id},

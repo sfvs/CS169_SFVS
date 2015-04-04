@@ -79,4 +79,26 @@ module ControllerMacros
     end
   end
 
+  def make_test_form_questions
+    before :each do
+      @test_form = "test"
+      @message = FormQuestion.create({:question => 'Describe potato.', 
+                                      :form_type => "test",
+                                      :question_type => :message, 
+                                      :order => 1})
+      @statement = FormQuestion.create({:question => 'Green Onion!', 
+                                      :form_type => "test",
+                                      :question_type => :statement, 
+                                      :order => 2})
+      @radio_button = FormQuestion.create({:question => 'Which fruit you like the most?', 
+                                      :form_type => "test",
+                                      :question_type => :radio_button, 
+                                      :order => 3})
+      @testbox = FormQuestion.create({:question => 'How much is the papaya?', 
+                                      :form_type => "test",
+                                      :question_type => :textbox, 
+                                      :order => 4})
+    end
+  end
+
 end

@@ -4,3 +4,4 @@ Given(/^the following form questions exist:$/) do |table|
     app = FormQuestion.create(item,:without_protection => true)
   end
 end
+
