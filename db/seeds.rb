@@ -327,7 +327,7 @@ questions_for_form[sponsor_contract] = [
 		:question_type => :textbox}
 	]
 
-questions_for_form[restaurant_contract] = [
+questions_for_form[other_contract] = [
 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
 		Attach a seperate sheet if neccesary', 
 		:question_type => :textbox},
