@@ -16,7 +16,7 @@ describe FormQuestionController do
     end
 
     it "should not redirect if the form is not correctly completed" do
-      FormQuestionController.stub(:fomr_completed?) {false}
+      FormQuestionController.stub(:form_completed?) {false}
       get :show, :id => @user.id, :submit => true
       expect(response).to render_template(:show)
     end
