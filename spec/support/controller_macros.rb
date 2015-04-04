@@ -81,7 +81,7 @@ module ControllerMacros
 
   def make_test_form_questions
     before :each do
-      @test_form = "test"
+      @test_form = make_a_form
       @message = FormQuestion.create({:question => 'Describe potato.', 
                                       :form_type => "test",
                                       :question_type => :message, 
@@ -98,6 +98,10 @@ module ControllerMacros
                                       :form_type => "test",
                                       :question_type => :textbox, 
                                       :order => 4})
+      @test_form.form_questions << @message
+      @test_form.form_questions << @statement
+      @test_form.form_questions << @radio_button
+      @test_form.form_questions << @testbox
     end
   end
 
