@@ -80,7 +80,7 @@ module ControllerMacros
   end
 
   def make_test_form_questions
-    before :eash do
+    before :each do
       @test_form = "test"
       @message = FormQuestion.create({:question => 'Describe potato.', 
                                       :form_type => "test",

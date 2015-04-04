@@ -3,7 +3,7 @@ window.onload = function() {
 	$('.radio_button_fields').hide();
 	// $('#answer_count').hide();
 	// $('#ok_but').hide();
-}
+};
 
 // function show_button() {
 // 	$('#count_label').show();
