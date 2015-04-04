@@ -30,7 +30,7 @@ Background: application is setup with user john doe
 
 Scenario: view current application status
   When I follow "General Form"
-  Then I should be on the "form" page
+  Then I should be on the "form" page for "johndoe@gmail.com"
   And I fill in the following:
   | Company name                                                           | Apple           |
   | Contact person                                                         | Tomato Carrot   |
