@@ -5,7 +5,6 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form = Form.find(params[:form_id])
     gon.form_id = params[:form_id]
     @form_questions = @form.form_questions.sort_by {|question| question.order}
-    logger.debug "The form questions are #{@form_questions}"
   end
 
   def new
@@ -54,7 +53,6 @@ class Admin::FormQuestionsController < Admin::AdminController
         answers << value
       end
     end
-    logger.debug "The answers are #{answers}"
     return answers.to_s.gsub('"','')
   end
 end
