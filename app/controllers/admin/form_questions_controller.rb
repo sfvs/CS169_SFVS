@@ -14,8 +14,17 @@ class Admin::FormQuestionsController < Admin::AdminController
   def create
     # might need to create the correct format of arguments to be passed
     # Need to format the answers correctly
-    params[:form_question][:answers] = get_answers_from_param
-    logger.debug "The parameters passed are #{params[:form_question]}"
+    @form = Form.find(params[:form_id])
+    q_type = params[:form_question][:question_type]
+
+    if q_type == "checkbox"
+      params[:form_question][:answers] = get_answers_from_param(:check_answer)
+    elsif q_type == "radio_button" 
+      params[:form_question][:answers] = get_answers_from_param(:radio_answer)
+    end
+    params[:form_question][:order] = Form.number_of_questions(params[:form_id]) + 1
+    
+    @form.form_questions.create(params[:form_question])
     redirect_to admin_form_form_questions_path
   end
 
@@ -37,10 +46,12 @@ class Admin::FormQuestionsController < Admin::AdminController
     render :nothing => true
   end
 
-  def get_answers_from_param
+  def get_answers_from_param(option)
     answers = []
-    params[:q_answer][:answers].each do |key, value|
-      answers << value
+    params[option].each do |key, value|
+      if value != ""
+        answers << value
+      end
     end
     answers
   end
