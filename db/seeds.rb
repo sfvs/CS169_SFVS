@@ -286,6 +286,8 @@ questions_for_form[sponsor_contract] = [
 	{:question => 'Will you use a sterno?', 
 		:answers => "[Yes, No]", 
 		:question_type => :radio_button},
+	{:question => 'Exhibit Registration...', 
+		:question_type => :statement},
 	{:question => "Principal Sponsor ($3000)
 		-Promiment exhibitor location
 		-Name on all publicity
@@ -322,7 +324,54 @@ questions_for_form[sponsor_contract] = [
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => 'Please state electrical requirements...', 
+		:question_type => :textbox}
+	]
+
+questions_for_form[restaurant_contract] = [
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
+		Attach a seperate sheet if neccesary', 
 		:question_type => :textbox},
+	{:question => 'Food Guidelines...',
+		:question_type => :statement},
+	{:question => 'Non-Food Guidelines...',
+		:question_type => :statement},
+	{:question => 'Will you be distributing food/beverage?', 
+		:answers => "[Yes, No]",
+	 	:question_type => :radio_button},
+	{:question => 'Will you require a health permit?',
+		:answers => "[Yes, No]", 
+		:question_type => :radio_button},
+	{:question => 'Will you use a sterno?', 
+		:answers => "[Yes, No]", 
+		:question_type => :radio_button},
+	{:question => 'Do you guarantee your products on display at the Festival to be vegan?', 
+		:answers => "[Yes, No]", 
+		:question_type => :radio_button},
+	{:question => 'Exhibit Registration...', 
+		:question_type => :statement},
+	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
+		:answers => "[150, 250]", 
+		:question_type => :radio_button},
+	{:question => "Regular Booth 'B' - Open Courtyard", 
+		:answers => "[150 (Before July 15), 250 (After July 15)]",
+	 	:question_type => :radio_button},
+	{:question => "Regular Booth 'C' - Gallery Building", 
+		:answers => "[200 (Before July 15), 300 (After July 15)]",
+	 	:question_type => :radio_button},
+	{:question => "Health Permit Fee", 
+		:answers => "[High risk city health permit ($207), 
+			Low risk city health permit free ($105)]",
+	 	:question_type => :radio_button},
+	 {:question => "Electricity Fee", 
+		:answers => "[75, N/A]",
+	 	:question_type => :radio_button},
+	{:question => "Number of additional chairs ($5 each)",
+		:question_type => :textbox},
+	{:question => 'Will you need electricity?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Please state electrical requirements...', 
+		:question_type => :textbox}
 	]
 
 # sponsor_contract = Form.create({:form_name => "Sponsor Contract"})
