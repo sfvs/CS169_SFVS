@@ -42,19 +42,10 @@ module ControllerMacros
     form_list
   end
 
-<<<<<<< HEAD
-  def make_a_form_question()
-
-  end
-
-  def make_many_form_questions(count = 5)
-
-=======
   def make_forms_for_app_type(type)
     type = FactoryGirl.create(:application_type,{:app_type => type})
     type.forms << make_many_forms
     type
->>>>>>> 183e5fc1982307813770ad692719d99e801727da
   end
 
   def login(type = :user, attributes = nil)
