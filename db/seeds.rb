@@ -422,11 +422,6 @@ questions_for_form[sponsor_solicitation] = [
 ]
 
 
-
-# sponsor_contract = Form.create({:form_name => "Sponsor Contract"})
-# other_contract = Form.create({:form_name => "Exhibitor Contract - All other Exhibitors"})
-
-
 questions_for_form.each do |form_object, form_question_attributes|
 	link_form_questions_to_form form_object, form_question_attributes
 end
