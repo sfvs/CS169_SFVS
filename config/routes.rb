@@ -4,7 +4,11 @@ SFVSRegistrationSystem::Application.routes.draw do
   namespace :admin do
     root to: "admin#index"
     resources :users
-    resources :forms
+    resources :forms do
+      resources :form_questions do
+        put :sort, on: :collection
+      end
+    end
   end
 
   root :to => 'home#index'

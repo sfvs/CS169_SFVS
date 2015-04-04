@@ -11,6 +11,4 @@
         - @forms.each do |form|
           %tr
             %td= form.form_name
-            %td= link_to "More Information", admin_form_path(form)
-
-= button_to "Create Form", new_admin_form_path, {:id => "create_but", method: :get}
+            %td= link_to "More Information", admin_form_form_questions_path(form)

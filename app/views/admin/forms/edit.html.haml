@@ -1,8 +1,0 @@
-%h1 Edit Form
-
-%div.sortable
-  - if !@form_questions.nil?
-    - @form_questions.each do |form_question|
-      %p= form_question.question
-
-= button_to "Delete Form", admin_form_path(@form), {:id => "delete_but", method: :delete, data: { confirm: "Are you sure?"}}
