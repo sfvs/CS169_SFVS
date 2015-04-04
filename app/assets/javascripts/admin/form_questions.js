@@ -18,7 +18,7 @@ ready = function(){
 	// after order changes
 	$('.sortable').sortable().bind('sortupdate', function(e, ui){
 		// array to store new order
-		updated_order = [];
+		var updated_order = [];
 
 		// set the updated positions
 		set_positions();
