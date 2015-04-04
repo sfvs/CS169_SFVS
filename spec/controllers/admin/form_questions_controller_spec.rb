@@ -5,6 +5,8 @@ describe Admin::FormQuestionsController do
   login :admin
 
   describe "form questions index page" do
+    it "should assign @form_questions" do
 
+    end
   end
 end
