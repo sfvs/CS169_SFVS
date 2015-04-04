@@ -79,7 +79,6 @@ vendor.forms << [
 	conditions_of_agreement,
 	advertising_contract,
 	health_permit_form,
-	vendor_solicitation,
 	make_agreement
 ]
 
@@ -90,7 +89,6 @@ sponsor.forms << [
 	conditions_of_agreement,
 	advertising_contract,
 	health_permit_form,
-	sponsor_solicitation
 	make_agreement
 ]
 
@@ -100,7 +98,6 @@ non_profit.forms << [
 	non_profit_contract,
 	conditions_of_agreement,
 	advertising_contract,
-	sponsor_solicitation,
 	make_agreement
 ]
 
@@ -111,7 +108,6 @@ other_vendor.forms << [
 	conditions_of_agreement,
 	advertising_contract,
 	health_permit_form,
-	sponsor_solicitation,
 	make_agreement
 ]
 
