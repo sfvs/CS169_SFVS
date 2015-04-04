@@ -289,3 +289,11 @@ objects_to_create.each do|obj,params|
 		obj_class.create!(a)
 	end
 end
+
+# create dummy application
+
+dummyApp = Application.new
+dummyApp.year = 2015
+dummyApp.completed = false
+dummyApp.content = {:testField => "test Value"}
+dummyApp.save!
