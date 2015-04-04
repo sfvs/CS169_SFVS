@@ -68,6 +68,7 @@ sponsor_solicitation = Form.create({:form_name => "Sponsor Solicitation"})
 advertising_contract = Form.create({:form_name => "Advertising Contract"})
 health_permit_form = Form.create({:form_name => "Health Permit Form"})
 conditions_of_agreement = Form.create({:form_name => "Conditions of Agreement"})
+make_agreement = Form.create({:form_name => "Agreement"})
 
 
 # Associate Application Types to forms
@@ -77,7 +78,8 @@ vendor.forms << [
 	restaurant_contract,
 	conditions_of_agreement,
 	advertising_contract,
-	health_permit_form
+	health_permit_form,
+	make_agreement
 ]
 
 sponsor.forms << [
@@ -86,7 +88,8 @@ sponsor.forms << [
 	restaurant_contract,
 	conditions_of_agreement,
 	advertising_contract,
-	health_permit_form
+	health_permit_form,
+	make_agreement
 ]
 
 non_profit.forms << [
@@ -94,7 +97,8 @@ non_profit.forms << [
 	general_form,
 	non_profit_contract,
 	conditions_of_agreement,
-	advertising_contract
+	advertising_contract,
+	make_agreement
 ]
 
 other_vendor.forms << [
@@ -103,7 +107,8 @@ other_vendor.forms << [
 	other_contract,
 	conditions_of_agreement,
 	advertising_contract,
-	health_permit_form
+	health_permit_form,
+	make_agreement
 ]
 
 # create form questions for each form
@@ -136,7 +141,7 @@ questions_for_form[restaurant_contract] = [
 	{:question => 'Will you require a health permit?',
 		:answers => "[Yes, No]", 
 		:question_type => :radio_button},
-	{:question => 'Will you use a stereo?', 
+	{:question => 'Will you use a sterno?', 
 		:answers => "[Yes, No]", 
 		:question_type => :radio_button},
 	{:question => 'Exhibit Registration...', 
@@ -159,14 +164,6 @@ questions_for_form[restaurant_contract] = [
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => 'Please state electrical requirements...', 
-		:question_type => :textbox},
-	{:question => 'Name',
-		:question_type => :textbox},
-	{:question => 'Signature', 
-		:question_type => :textbox},
-	{:question => 'Title', 
-		:question_type => :textbox},
-	{:question => 'Date', 
 		:question_type => :textbox}
 ] 
 
@@ -271,12 +268,159 @@ questions_for_form[health_permit_form] = [
 		:question_type => :textbox}
 ]
 
-# sponsor_contract = Form.create({:form_name => "Sponsor Contract"})
-# non_profit_contract = Form.create({:form_name => "Exhibitor Contract - Non Profit"})
-# other_contract = Form.create({:form_name => "Exhibitor Contract - All other Exhibitors"})
+questions_for_form[sponsor_contract] = [
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
+		Attach a seperate sheet if neccesary', 
+		:question_type => :textbox},
+	{:question => 'Food Guidelines...',
+		:question_type => :statement},
+	{:question => 'Will you be distributing food/beverage?', 
+		:answers => "[Yes, No]",
+	 	:question_type => :radio_button},
+	{:question => 'Will you require a health permit?',
+		:answers => "[Yes, No]", 
+		:question_type => :radio_button},
+	{:question => 'Will you use a sterno?', 
+		:answers => "[Yes, No]", 
+		:question_type => :radio_button},
+	{:question => 'Exhibit Registration...', 
+		:question_type => :statement},
+	{:question => "Principal Sponsor ($3000)
+		-Promiment exhibitor location
+		-Name on all publicity
+		-Full page ad in event program
+		-Product exclusivity
+		-Logo link on SFVS website
+		-Booth (12'x8')
+		-Two tables with two chairs",
+		:question_type => :statement},
+	{:question => "Major Sponsor ($2000)
+		-Name on special publicity
+		-Half page ad in event program
+		-Logo link on SFVS website
+		-Booth (12'x8')
+		-Two tables with two chairs",
+		:question_type => :statement},
+	{:question => "Associate Sponsor ($1000)
+		-Newsletter recognition
+		-Quarter page ad in event program
+		-Booth (8'x8')
+		-One table with two chairs",
+		:question_type => :statement},
+	{:question => "Supporting Sponsor [non-exhibiting] ($500)
+		-Newsletter recognition
+		-Quarter page ad in event program",
+		:question_type => :statement},
+	{:question => "Included above are 6' x 2.5' table(s), chairs, health permits, and electricity (except non-exhibitor)",
+		:question_type => :statement},
+	{:question => 'Sponsorship type',
+		:answers => "[Principal Sponsor ($3000), Major Sponsor ($2000), 
+			Associate Sponsor ($1000), Supporting Sponsor [non-exhibiting] ($500)]", 
+		:question_type => :radio_button},	
+	{:question => 'Will you need electricity?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Please state electrical requirements...', 
+		:question_type => :textbox}
+	]
 
-# vendor_solicitation = Form.create({:form_name => "Vendor Solicitation"})
-# sponsor_solicitation = Form.create({:form_name => "Sponsor Solicitation"})
+questions_for_form[other_contract] = [
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
+		Attach a seperate sheet if neccesary', 
+		:question_type => :textbox},
+	{:question => 'Food Guidelines...',
+		:question_type => :statement},
+	{:question => 'Non-Food Guidelines...',
+		:question_type => :statement},
+	{:question => 'Will you be distributing food/beverage?', 
+		:answers => "[Yes, No]",
+	 	:question_type => :radio_button},
+	{:question => 'Will you require a health permit?',
+		:answers => "[Yes, No]", 
+		:question_type => :radio_button},
+	{:question => 'Will you use a sterno?', 
+		:answers => "[Yes, No]", 
+		:question_type => :radio_button},
+	{:question => 'Do you guarantee your products on display at the Festival to be vegan?', 
+		:answers => "[Yes, No]", 
+		:question_type => :radio_button},
+	{:question => 'Exhibit Registration...', 
+		:question_type => :statement},
+	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
+		:answers => "[150, 250]", 
+		:question_type => :radio_button},
+	{:question => "Regular Booth 'B' - Open Courtyard", 
+		:answers => "[150 (Before July 15), 250 (After July 15)]",
+	 	:question_type => :radio_button},
+	{:question => "Regular Booth 'C' - Gallery Building", 
+		:answers => "[200 (Before July 15), 300 (After July 15)]",
+	 	:question_type => :radio_button},
+	{:question => "Health Permit Fee", 
+		:answers => "[High risk city health permit ($207), 
+			Low risk city health permit free ($105)]",
+	 	:question_type => :radio_button},
+	 {:question => "Electricity Fee", 
+		:answers => "[75, N/A]",
+	 	:question_type => :radio_button},
+	{:question => "Number of additional chairs ($5 each)",
+		:question_type => :textbox},
+	{:question => 'Will you need electricity?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Please state electrical requirements...', 
+		:question_type => :textbox}
+	]
+
+questions_for_form[non_profit_contract] = 	[
+	{:question => 'Product/Service Description',
+		:question_type => :textbox},
+	{:question => 'Non-Profit Registration',
+		:question_type => :statement},
+	{:question => 'Non-Profit Booth',
+		:answers => "[$165, $215]",
+		:question_type => :radio_button},
+	{:question => 'Non-Profit Booth Fee',
+		:question_type => :textbox},
+	{:question => 'Electricity Fee, $75',
+		:question_type => :textbox},
+	{:question => 'Additional Chair $5 Each', 
+		:question_type => :textbox},
+	{:question => 'Advertising',
+		:question_type => :textbox},
+	{:question => 'TOTAL ENCLOSED',
+		:question_type => :textbox},
+	{:question => 'Please make check payable to...',
+		:question_type => :statement},
+	{:question => 'Will you need electricity?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Please state electrical requirements...',
+		:question_type => :textbox}
+]
+
+questions_for_form[make_agreement] = [
+	{:question => 'Agreement...',
+		:question_type => :statement},
+	{:question => "Name:",
+		:question_type => :textbox},
+	{:question => "Signature:",
+		:question_type => :textbox},
+	{:question => "Title:",
+		:question_type => :textbox},
+	{:question => "Date:",
+		:question_type => :textbox}
+]
+
+questions_for_form[vendor_solicitation] = [
+	{:question => 'BIG STATEMENT',
+		:question_type => :statement}
+]
+
+questions_for_form[sponsor_solicitation] = [
+	{:question => 'BIG STATEMENT',
+		:question_type => :statement}
+]
+
 
 questions_for_form.each do |form_object, form_question_attributes|
 	link_form_questions_to_form form_object, form_question_attributes
