@@ -8,7 +8,12 @@ class Application < ActiveRecord::Base
 	def content
 		# has content been parsed yet? If not, let's do that..
 		if not @hashed_val
-			@hashed_val = JSON.parse(read_attribute(:content))
+			val = read_attribute(:content)
+			if (val == "")
+				@hashed_val = {}
+			else
+				@hashed_val = JSON.parse(read_attribute(:content))
+			end
 		end
 
 		return @hashed_val
