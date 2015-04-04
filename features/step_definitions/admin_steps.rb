@@ -17,3 +17,8 @@ When /^I click on More Info for "(.*)"$/ do |user_email|
   xpath_search = "///a[@href='/admin/users/" + user.id.to_s + "']"
   find(:xpath, xpath_search).click
 end
+
+And /^a form with questions exists$/ do
+  gen = Form.create({:form_name => "General Form"})
+  gen.form_questions.create({:question => "General Question", :question_type => "textbox"})
+end
