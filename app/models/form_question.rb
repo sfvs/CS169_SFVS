@@ -7,6 +7,6 @@ class FormQuestion < ActiveRecord::Base
   end
 
   def self.get_questions_for_form(form_type)
-  	self.where(form_type: form_type).order(order: :asc)
+  	self.where(form_type: form_type)
   end
 end
