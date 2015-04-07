@@ -18,8 +18,8 @@ When /^I click on More Info for "(.*)"$/ do |user_email|
   find(:xpath, xpath_search).click
 end
 
-And /^a form with questions exists$/ do
-  gen = Form.create({:form_name => "General Form"})
+And /^the "(.*?)" with questions exists$/ do |form_name|
+  gen = Form.create({:form_name => form_name})
   gen.form_questions.create({:question => "General Question", :question_type => "textbox", :order => 1})
 end
 
