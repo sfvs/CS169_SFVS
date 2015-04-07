@@ -15,7 +15,7 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form = Form.find(params[:form_id])
     set_attr
     @form.form_questions.create(params[:form_question])
-    redirect_to admin_form_form_questions_path
+    redirect_to admin_form_form_questions_path(@form)
   end
 
   def destroy
@@ -26,7 +26,18 @@ class Admin::FormQuestionsController < Admin::AdminController
   end
 
   def edit
-    # edit the form question
+    @form = Form.find(params[:form_id])
+    @form_question = FormQuestion.find(params[:id])
+  end
+
+  def update
+    # update the form_question with given attributes values
+    @form = Form.find(params[:form_id])
+    @form_question = FormQuestion.find(params[:id])
+    set_attr
+    @form_question.update_attributes!(params[:form_question])
+    flash[:notice] = "Form Question was succesfully updated"
+    redirect_to admin_form_form_questions_path(@form)
   end
 
   def sort
@@ -52,6 +63,6 @@ class Admin::FormQuestionsController < Admin::AdminController
     if q_type == "checkbox" || q_type == "radio_button"
       params[:form_question][:answers] = get_answers_from_param(q_type)
     end
-    params[:form_question][:order] = @form.number_of_questions + 1
+    params[:form_question][:order] = @form_question.nil? ? @form.number_of_questions + 1 : @form_question.order
   end
 end
