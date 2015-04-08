@@ -46,3 +46,23 @@ Scenario: view current application status
   | Company name for WVF Program listing (if different from above)         | Microsoft       |   
   When I follow "Submit Form"
   Then I should be on the "profile" page for "johndoe@gmail.com"
+
+Scenario: see completed form status after submission
+  When I follow "General Form"
+  And I fill in the following:
+  | Company name                                                           | Apple           |
+  | Contact person                                                         | Tomato Carrot   |
+  | Mailing address                                                        | 4444 Fruit Ave. |
+  | City                                                                   | New Pealand     |
+  | State                                                                  | AA              |
+  | ZIP                                                                    | 12345           |
+  | Phone                                                                  | 111-222-3333    |
+  | Alternate                                                              | 333-222-1111    |
+  | Fax                                                                    | 222-111-5555    |
+  | E-mail                                                                 | green@onion.com |
+  | Website                                                                | apple.com       |
+  | Company name for WVF Program listing (if different from above)         | Microsoft       |
+  When I follow "Submit Form"
+  And I should see completed next to "General Form"
+  When I follow "General Form"
+  I should see "Company name" with "Apple"
