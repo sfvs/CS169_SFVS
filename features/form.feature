@@ -65,4 +65,4 @@ Scenario: see completed form status after submission
   When I follow "Submit Form"
   And I should see completed next to "General Form"
   When I follow "General Form"
-  I should see "Company name" with "Apple"
+  Then I should see "Company name" with "Apple"
