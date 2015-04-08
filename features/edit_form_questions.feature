@@ -19,5 +19,6 @@ Background: users have been added to database
   And I click on More Information for "General Form"
 
 Scenario: editing a form question
+  When I follow "Edit"
 
 Scenario: cancelling and returning to previous page
