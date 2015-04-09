@@ -10,8 +10,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :applications
-
-  def get_most_recent_inprogress_application
-  	self.applications.where(completed: false)[-1]
+  def get_most_recent_application
+    self.applications.where(year: Application.latest_year)[0]
   end
 end

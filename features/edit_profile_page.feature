@@ -14,6 +14,7 @@ Background: users have been added to database
   Given I am on the "profile" page for "johndoe@gmail.com"
 
 Scenario: view current application status
+  Given PENDING
   When I press "Edit Profile"
   Then I should see "email textbox" as "johndoe@gmail.com"
   When I fill in "email textbox" with "doejohn@gmail.com"
