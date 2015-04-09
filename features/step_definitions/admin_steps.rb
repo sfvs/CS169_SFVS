@@ -32,3 +32,8 @@ end
 And /^I select "(.*)"$/ do |radio_id|
   choose radio_id
 end
+
+When(/^I erase and fill in "(.*?)" with "(.*?)"$/) do |question, new_question|
+  fill_in(question, :with => "")
+  fill_in(question, :with => new_question)
+end

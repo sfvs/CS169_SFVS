@@ -54,3 +54,8 @@ Scenario: creating a radio button form question
   And I press "Save Changes"
   Then I should be on the content page for "General Form"
   And I should see "This is a test question"
+
+Scenario: cancelling and returning to previous page
+  Given I press "Add Form Question"
+  And I press "Cancel"
+  Then I should be on the content page for "General Form"
