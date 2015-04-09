@@ -19,6 +19,18 @@ describe Admin::FormQuestionsController do
       get 'edit', :form_id => form.id, :id => form.form_questions[0].id
       response.should be_success
     end
+
+    it "should redirect to form content page when pressed Cancel" do
+      form = make_form_with_questions
+      put 'update', :form_id => form.id, :id => form.form_questions[0].id, :commit => 'Cancel'
+      response.should redirect_to '/admin/forms/' + form.id.to_s + '/form_questions'
+    end
+
+    it "should redirect to form content page when pressed Update Form Question" do
+      form = make_form_with_questions
+      put 'update', :form_id => form.id, :id => form.form_questions[0].id, :form_question => {}
+      response.should redirect_to '/admin/forms/' + form.id.to_s + '/form_questions'
+    end
   end
 
   describe "admin delete form question" do
@@ -46,7 +58,11 @@ describe Admin::FormQuestionsController do
 
     it "should redirect to form content page after creating form question" do
       form = make_a_form
-      post 'create', :form_id => form.id, :form_question => {}
+      attribute = {
+        :form_question => {:question => "Rspec test question", :question_type => "checkbox"}
+      }
+      checkbox_answers = {"0"=>"True", "1"=>"False", "2"=>"", "3"=>""}
+      post 'create', :form_id => form.id, :form_question => attribute[:form_question], :check_answer => checkbox_answers
       response.should redirect_to '/admin/forms/' + form.id.to_s + '/form_questions' 
     end
   end

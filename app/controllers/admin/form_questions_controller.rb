@@ -43,7 +43,7 @@ class Admin::FormQuestionsController < Admin::AdminController
 
   def sort
     params[:order].each do |key, value|
-      FormQuestion.find(value[:id]).update_attributes({:order => value[:position].to_i})
+      FormQuestion.find(value[:id]).update_attribute(:order,value[:position])
     end
     render :nothing => true
   end
@@ -51,6 +51,7 @@ class Admin::FormQuestionsController < Admin::AdminController
   def get_answers_from_param(q_type)
     option = q_type == "checkbox"? :check_answer : :radio_answer
     answers = []
+    logger.debug "params[option] is #{params[option]}"
     params[option].each do |key, value|
       if value != ""
         answers << value
