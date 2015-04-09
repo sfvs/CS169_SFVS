@@ -5,11 +5,28 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     flash[:notice] = parse_questionnaire_response(params[:questionnaire_response])
-    @application = @user.get_most_recent_inprogress_application
+    @application = @user.get_most_recent_application
     if @application
+      if @application.completed
+        @status = "Completed"
+      else
+        @status = "Incompleted"
+      end
+      @year = @application.year
       @type = @application.application_type.app_type
       @forms_to_build = @application.application_type.forms
     end
+  end
+
+  def submit_application
+    user = User.find(params[:id])
+    # Anthony insert here! check if forms are completed
+    application = user.get_most_recent_application
+    if not application.completed
+      application.completed = true
+      application.save
+    end
+    redirect_to user_path(user)
   end
 
   private
@@ -20,12 +37,13 @@ class UsersController < ApplicationController
       type = ApplicationType.find_by_id(answer_id.to_i)
       unless type.nil?
         response = "Your type is #{type.app_type}."
-        recent_application = @user.get_most_recent_inprogress_application
+        recent_application = @user.get_most_recent_application
         if not recent_application.nil?
           recent_application.destroy
         end
         app = @user.applications.create()
         app.application_type = type
+        app.year = Application.latest_year
         app.save
       end
       response
