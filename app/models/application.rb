@@ -10,6 +10,10 @@ class Application < ActiveRecord::Base
     @@year
   end
 
+  def self.latest_year=(year)
+    @@year=year
+  end
+
   def content
   	# has content been parsed yet? If not, let's do that..
   	if not @hashed_val

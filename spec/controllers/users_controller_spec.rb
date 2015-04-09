@@ -35,16 +35,18 @@ describe UsersController do
     end
 
     it "should correctly delete the most recent application and create a new application" do
+      Application.latest_year = 2015
       reply = 1
       type = make_forms_for_app_type "vendor"
       mock_app = FactoryGirl.create(:application)
       mock_app.user = @user
+      mock_app.year = Application.latest_year
       mock_app.application_type = type
       mock_app.completed = false
       mock_app.save
 
       ApplicationType.stub(:find_by_id).with(reply).and_return(type)
-      User.stub(:get_most_recent_inprogress_application).with(@user).and_return(mock_app)
+      User.stub(:get_most_recent_application).with(@user).and_return(mock_app)
       get :show, :id => @user.id, :questionnaire_response => reply
 
       Application.find_by_id(mock_app).should == nil
