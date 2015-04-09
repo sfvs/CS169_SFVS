@@ -1,5 +1,6 @@
 class Admin::FormQuestionsController < Admin::AdminController
   before_filter :require_admin
+  before_filter :pressed_cancel?, :only => [:create, :update]
 
   def index
     @form = Form.find(params[:form_id])
@@ -64,5 +65,11 @@ class Admin::FormQuestionsController < Admin::AdminController
       params[:form_question][:answers] = get_answers_from_param(q_type)
     end
     params[:form_question][:order] = @form_question.nil? ? @form.number_of_questions + 1 : @form_question.order
+  end
+
+  def pressed_cancel?
+    if params[:commit] == 'Cancel'
+      redirect_to admin_form_form_questions_path(:form_id => params[:form_id])
+    end
   end
 end
