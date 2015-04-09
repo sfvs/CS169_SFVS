@@ -51,7 +51,6 @@ class Admin::FormQuestionsController < Admin::AdminController
   def get_answers_from_param(q_type)
     option = q_type == "checkbox"? :check_answer : :radio_answer
     answers = []
-    logger.debug "params[option] is #{params[option]}"
     params[option].each do |key, value|
       if value != ""
         answers << value
