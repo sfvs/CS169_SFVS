@@ -56,6 +56,24 @@ module ControllerMacros
     form
   end
 
+  def make_an_application(type,year)
+    app = FactoryGirl.create(:application)
+    app.application_type = type
+    app.year = year
+    app.save
+    app
+  end
+
+  def make_a_vendor_application_for_user
+    before(:each) do
+      Application.latest_year = 2015
+      @type = make_forms_for_app_type "vendor"
+      @mock_app = make_an_application @type, Application.latest_year
+      @user.applications << @mock_app
+      @user.save
+    end
+  end
+
   def login(type = :user, attributes = nil)
     before(:each) do
       obj = sign_in make_a_member(type, attributes)
