@@ -6,9 +6,10 @@ describe User do
     it "tells me what is my most recent application" do
       #create user
       user = FactoryGirl.create(:user)
-      app1 = user.applications.create :completed => true
-      app2 = user.applications.create
-      expect(user.get_most_recent_inprogress_application).to be == app2
+      Application.latest_year = 2015
+      app1 = user.applications.create :completed => true, :year => 2014
+      app2 = user.applications.create :year => 2015
+      expect(user.get_most_recent_application).to be == app2
     end
 
   end

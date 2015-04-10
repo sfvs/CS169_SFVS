@@ -4,6 +4,9 @@ describe FormQuestionController do
   login(:user, :email => "i_am_a_coconut@mail.com")
   describe "valid form question" do
   	make_test_form_questions
+    before :each do 
+      Form.stub(:where).and_return([@test_form])
+    end
 
   	it "opens a new form" do 
   	  get :show, :id => @user.id, :type => @test_form

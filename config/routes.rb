@@ -4,6 +4,8 @@ SFVSRegistrationSystem::Application.routes.draw do
   namespace :admin do
     root to: "admin#index"
     resources :users
+      # Need to add route to the forms (?) or might need to think about how to access and look at 
+      # each individual forms the user has.
     resources :forms do
       resources :form_questions do
         put :sort, on: :collection
@@ -16,6 +18,7 @@ SFVSRegistrationSystem::Application.routes.draw do
   # name to prevent resource: user and devise routes from overlapping
   devise_for :users, :path => 'member'
   resources :users do 
+    post "submit_application", on: :member
     get "form", to: "form_question#show", on: :member
     get "survey", to: "survey#questionnaire", on: :member
   end

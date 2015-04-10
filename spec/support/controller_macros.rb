@@ -51,9 +51,27 @@ module ControllerMacros
   def make_form_with_questions(q_number = 3)
     form = make_a_form
     (0..q_number-1).each do |i|
-      form.form_questions.create({:question => "General Question", :question_type => "textbox"})
+      form.form_questions.create({:question => "General Question", :question_type => "textbox", :order => (i+1)})
     end
     form
+  end
+
+  def make_an_application(type,year)
+    app = FactoryGirl.create(:application)
+    app.application_type = type
+    app.year = year
+    app.save
+    app
+  end
+
+  def make_a_vendor_application_for_user
+    before(:each) do
+      Application.latest_year = 2015
+      @type = make_forms_for_app_type "vendor"
+      @mock_app = make_an_application @type, Application.latest_year
+      @user.applications << @mock_app
+      @user.save
+    end
   end
 
   def login(type = :user, attributes = nil)
@@ -81,7 +99,7 @@ module ControllerMacros
 
   def make_test_form_questions
     before :each do
-      @test_form = "test"
+      @test_form = make_a_form
       @message = FormQuestion.create({:question => 'Describe potato.', 
                                       :form_type => "test",
                                       :question_type => :message, 
@@ -98,6 +116,10 @@ module ControllerMacros
                                       :form_type => "test",
                                       :question_type => :textbox, 
                                       :order => 4})
+      @test_form.form_questions << @message
+      @test_form.form_questions << @statement
+      @test_form.form_questions << @radio_button
+      @test_form.form_questions << @testbox
     end
   end
 

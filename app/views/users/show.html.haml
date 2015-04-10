@@ -2,18 +2,27 @@
 
 %p
 	%strong= "Email: #{@user.email}"
-%p
 	-if @application
-		%strong="Application type: #{@type}"
+		%br
+		%strong="Application Type: #{@type}"
+		%br
+		%strong="Application Year: #{@year}"
+		%br
+		%strong="Application Status: #{@status}"
 	-else
-		Please take survey below to determine your application status.
+		%br
+		Please take survey below to determine your application type.
 
 -if @application
 	-@forms_to_build.each do |form|
 		%br= link_to "#{form.form_name}", form_user_path(:type => form.form_name), :class => "form_link", :id => "link_#{form.id}"
-	%br= link_to "Payment"
-
-%br
-= button_to "Take Survey", survey_user_path, {:id => "questionnaire_button", method: :get}
+	%br
+	-unless @application.completed
+		= button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post}
+		%br
+		= button_to "Restart Application", survey_user_path, {:id => "questionnaire_button", method: :get}
+-else
+	%br
+	= button_to "Determine Application Type", survey_user_path, {:id => "questionnaire_button", method: :get}
 = button_to "Edit Profile", edit_user_path(@user)
 = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}

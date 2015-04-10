@@ -1,5 +1,6 @@
 class Admin::FormQuestionsController < Admin::AdminController
   before_filter :require_admin
+  before_filter :pressed_cancel?, :only => [:create, :update]
 
   def index
     @form = Form.find(params[:form_id])
@@ -15,7 +16,7 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form = Form.find(params[:form_id])
     set_attr
     @form.form_questions.create(params[:form_question])
-    redirect_to admin_form_form_questions_path
+    redirect_to admin_form_form_questions_path(@form)
   end
 
   def destroy
@@ -26,12 +27,23 @@ class Admin::FormQuestionsController < Admin::AdminController
   end
 
   def edit
-    # edit the form question
+    @form = Form.find(params[:form_id])
+    @form_question = FormQuestion.find(params[:id])
+  end
+
+  def update
+    # update the form_question with given attributes values
+    @form = Form.find(params[:form_id])
+    @form_question = FormQuestion.find(params[:id])
+    set_attr
+    @form_question.update_attributes!(params[:form_question])
+    flash[:notice] = "Form Question was succesfully updated"
+    redirect_to admin_form_form_questions_path(@form)
   end
 
   def sort
     params[:order].each do |key, value|
-      FormQuestion.find(value[:id]).update_attributes({:order => value[:position].to_i})
+      FormQuestion.find(value[:id]).update_attribute(:order,value[:position])
     end
     render :nothing => true
   end
@@ -52,6 +64,12 @@ class Admin::FormQuestionsController < Admin::AdminController
     if q_type == "checkbox" || q_type == "radio_button"
       params[:form_question][:answers] = get_answers_from_param(q_type)
     end
-    params[:form_question][:order] = @form.number_of_questions + 1
+    params[:form_question][:order] = @form_question.nil? ? @form.number_of_questions + 1 : @form_question.order
+  end
+
+  def pressed_cancel?
+    if params[:commit] == 'Cancel'
+      redirect_to admin_form_form_questions_path(:form_id => params[:form_id])
+    end
   end
 end

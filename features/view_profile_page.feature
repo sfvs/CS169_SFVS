@@ -17,5 +17,14 @@ Background: users have been added to database
 Scenario: view current application status
   Then I should see my "email" as "johndoe@gmail.com"
   And I should see "vendor"
+  And I should see "2015"
+  And I should see a "button" with id "submit_app_button"
   And I should see a "button" with id "logout_button"
   And I should see a "button" with id "questionnaire_button"
+  And I should see "Incomplete"
+
+Scenario: submitting the final application
+  When I press "Submit Application"
+  Then I should see "Complete"
+  And I should not see "Determine Application Type"
+  And I should not see "Submit Application"
