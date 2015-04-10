@@ -7,4 +7,17 @@
  
 .sortable {
   display: list-item;
+  list-style-type: none;
+}
+
+li {
+  display: inline;
+}
+
+.form_q {
+  padding: 10px;
+}
+
+.form_q_button a {
+  text-decoration: none;
 }

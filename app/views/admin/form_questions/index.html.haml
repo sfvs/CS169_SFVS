@@ -1,9 +1,10 @@
-%h1 Form Content
+%div.container-fluid
+  %h1 Form Content
 
-%p= "Contents of #{@form.form_name}"
+  %p= "Contents of #{@form.form_name}"
 
-%div.sortable
-  - if !@form_questions.nil?
-    = render @form_questions
+  %ul.sortable
+    - if !@form_questions.nil?
+      = render @form_questions
 
-= button_to "Add Form Question", new_admin_form_form_question_path, {:id => "create_but", method: :get}
+  = button_to "Add Form Question", new_admin_form_form_question_path, {:id => "create_but", method: :get}
