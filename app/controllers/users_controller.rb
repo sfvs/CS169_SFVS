@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    flash[:notice] = parse_questionnaire_response(params[:questionnaire_response])
+    flash[:notice] = parse_questionnaire_response(flash[:questionnaire_response])
     @application = @user.get_most_recent_application
     if @application
       if @application.completed
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     # Anthony insert here! check if forms are completed
     application = user.get_most_recent_application
-    if not application.completed
+    if application and not application.completed
       application.completed = true
       application.save
     end
