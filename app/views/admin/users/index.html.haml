@@ -17,6 +17,6 @@
               %td= user.id
               %td= user.email
               %td= user.created_at
-              %td= link_to "Show", admin_user_path(user)
+              %td= link_to "Show", admin_user_path(user), :class => "btn btn-default admin_button"
 
-= button_to "Create User", new_admin_user_path, {:id => "create_but", method: :get}
+= button_to "Create User", new_admin_user_path, {:class => "btn btn-default", method: :get}

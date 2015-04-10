@@ -18,4 +18,4 @@
         %p The Society hosts events throughout the year such as vegetarian potlucks, picnics, dining out and lectures. Monthly meetings held most months. Please check our hotline, 415-273-5481 for details.
     %div.row
       %div.span9
-        = button_to "Logout", destroy_user_session_path, {:id => "logout_but", method: :delete}
+        = button_to "Logout", destroy_user_session_path, { :class => "btn btn-default", method: :delete}
