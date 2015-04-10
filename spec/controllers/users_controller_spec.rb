@@ -15,7 +15,7 @@ describe UsersController do
       application_type = make_forms_for_app_type "vendor"
       ApplicationType.stub(:find_by_id).with(reply).and_return(application_type)
       User.stub(:get_most_recent_inprogress_application).with(@user).and_return(nil)
-      get :show, :id => @user.id, :questionnaire_response => reply
+      get :show, {:id => @user.id}, nil, {:questionnaire_response => @reply}
       response.should be_success
     end
 
@@ -29,7 +29,7 @@ describe UsersController do
 
     it "should correctly make an application based on the questionnaire response" do
       ApplicationType.stub(:find_by_id).with(@reply).and_return(@type)
-      get :show, :id => @user.id, :questionnaire_response => @reply
+      get :show, {:id => @user.id}, nil, {:questionnaire_response => @reply}
 
       application = @user.applications[0]
       expect(application.user_id).to be == @user.id
@@ -47,7 +47,7 @@ describe UsersController do
 
       ApplicationType.stub(:find_by_id).with(@reply).and_return(@type)
       User.stub(:get_most_recent_application).with(@user).and_return(mock_app)
-      get :show, :id => @user.id, :questionnaire_response => @reply
+      get :show, {:id => @user.id}, nil, {:questionnaire_response => @reply}
 
       Application.find_by_id(mock_app).should == nil
     end
@@ -69,7 +69,7 @@ describe UsersController do
       @mock_app.save
       User.stub(:get_most_recent_application).and_return(@mock_app)
       get :show, :id => @user.id
-      assigns(:status).should_not match /incompleted/i
+      assigns(:status).should_not match /incomplete/i
       response.should be_success
     end
 
