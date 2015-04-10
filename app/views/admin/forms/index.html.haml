@@ -10,6 +10,7 @@
           %th Actions
       %tbody
         - if !@forms.nil?
+          = paginate @forms
           - @forms.each do |form|
             %tr
               %td= form.form_name

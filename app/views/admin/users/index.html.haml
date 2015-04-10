@@ -19,6 +19,7 @@
           %th Actions
       %tbody
         - if @users.any?
+          = paginate @users
           - @users.each do |user|
             %tr
               %td= user.id
