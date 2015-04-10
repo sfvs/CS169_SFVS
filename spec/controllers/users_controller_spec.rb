@@ -65,9 +65,11 @@ describe UsersController do
     end
 
     it "should show the completed user profile" do
-      @mock_app.completed = be_true
+      @mock_app.completed = true
       @mock_app.save
+      User.stub(:get_most_recent_application).and_return(@mock_app)
       get :show, :id => @user.id
+      assigns(:status).should_not match /incompleted/i
       response.should be_success
     end
 
