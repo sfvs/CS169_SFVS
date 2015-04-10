@@ -5,6 +5,9 @@
     - if alert
       %p.alert.alert-danger= alert
 
+  - if @users.any?
+    = paginate @users
+
   %div.container-fluid
     %div.row
       %div.span12

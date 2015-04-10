@@ -1,6 +1,8 @@
 %body
   %h3 Forms List
 
+  - if @forms.any?
+    = paginate @forms
   %div
     %table.table.table-hover
       %thead
@@ -10,7 +12,6 @@
           %th Actions
       %tbody
         - if !@forms.nil?
-          = paginate @forms
           - @forms.each do |form|
             %tr
               %td= form.form_name
