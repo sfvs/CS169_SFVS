@@ -1,14 +1,16 @@
 %h3 Forms List
 
 %div
-  %table#forms
+  %table.table.table-hover
     %thead
       %tr
         %th Form
-        %th Edit
+        %th Created At
+        %th Actions
     %tbody
       - if !@forms.nil?
         - @forms.each do |form|
           %tr
             %td= form.form_name
-            %td= link_to "More Information", admin_form_form_questions_path(form)
+            %td= form.created_at
+            %td= link_to "Show", admin_form_form_questions_path(form)
