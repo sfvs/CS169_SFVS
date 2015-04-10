@@ -1,18 +1,19 @@
-%h3 Forms List
+%body
+  %h3 Forms List
 
-%div
-  %table.table.table-hover
-    %thead
-      %tr
-        %th Form
-        %th Created At
-        %th Actions
-    %tbody
-      - if !@forms.nil?
-        - @forms.each do |form|
-          %tr
-            %td= form.form_name
-            %td= form.created_at
-            %td= link_to "Show", admin_form_form_questions_path(form),  class: "btn btn-default admin_button"
+  %div
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Form
+          %th Created At
+          %th Actions
+      %tbody
+        - if !@forms.nil?
+          - @forms.each do |form|
+            %tr
+              %td= form.form_name
+              %td= form.created_at
+              %td= link_to "Show", admin_form_form_questions_path(form),  class: "btn btn-default admin_button"
 
-= button_to "Back", admin_root_path, {:class => "btn btn-default", method: :get}
+  = button_to "Back", admin_root_path, {:class => "btn btn-default", method: :get}
