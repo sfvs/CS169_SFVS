@@ -1,22 +1,23 @@
-%h1 #{@form_type}
-%p
-  %font{:color => "Crimson"} #{@error}
+%body
+  %h1 #{@form_type}
+  %p
+    %font{:color => "Crimson"} #{@error}
 
 
--@list_of_questions.each do |question|
-  %a 
-    %font{:color => "008B8B"} #{question.question} 
-  %br
-  -if (question.question_type == "radio_button")
-    -String(String(question.answers)[1..-2]).split(', ').each do |choice|
-      =radio_button_tag(:ans, "#{choice}")
-      =label_tag(:tag, "#{choice}")
-      &nbsp
-  -elsif (question.question_type == "statement")
-  -elsif (question.question_type == "message")
-    %textarea{:cols => "35", :name => "#{question.question}]", :rows => "6"} 
-  -elsif (question.question_type == "textbox")
-    %input{:name => "#{question.question}", :type => "text"}
-  %hr
-=link_to 'Save and Return', form_user_path(:type=> @form_type,:save => true)
-=link_to 'Submit Form', form_user_path(:submit => true, :type => @form_type)
+  -@list_of_questions.each do |question|
+    %a 
+      %font{:color => "008B8B"} #{question.question} 
+    %br
+    -if (question.question_type == "radio_button")
+      -String(String(question.answers)[1..-2]).split(', ').each do |choice|
+        =radio_button_tag(:ans, "#{choice}")
+        =label_tag(:tag, "#{choice}")
+        &nbsp
+    -elsif (question.question_type == "statement")
+    -elsif (question.question_type == "message")
+      %textarea{:cols => "35", :name => "#{question.question}]", :rows => "6"} 
+    -elsif (question.question_type == "textbox")
+      %input{:name => "#{question.question}", :type => "text"}
+    %hr
+  =link_to 'Save and Return', form_user_path(:type=> @form_type,:save => true)
+  =link_to 'Submit Form', form_user_path(:submit => true, :type => @form_type)
