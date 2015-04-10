@@ -64,5 +64,12 @@ describe UsersController do
       expect(@mock_app.completed).to be_true
     end
 
+    it "should show the completed user profile" do
+      @mock_app.completed = be_true
+      @mock_app.save
+      get :show, :id => @user.id
+      response.should be_success
+    end
+
   end
 end
