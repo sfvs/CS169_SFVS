@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::AdminController
   before_filter :require_admin
 
   def index
-    @users = User.where(admin: false).page(params[:page]).per(10)
+    @users = User.where(admin: false).paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

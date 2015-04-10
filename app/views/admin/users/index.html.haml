@@ -5,9 +5,6 @@
     - if alert
       %p.alert.alert-danger= alert
 
-  - if @users.any?
-    = paginate @users
-
   %div.container-fluid
     %div.row
       %div.span12
@@ -22,13 +19,14 @@
           %th Actions
       %tbody
         - if @users.any?
-          = paginate @users
           - @users.each do |user|
             %tr
               %td= user.id
               %td= user.email
               %td= user.created_at
               %td= link_to "Show", admin_user_path(user), :class => "btn btn-default admin_button"
+    - if @users.any?
+      = will_paginate @users
 
     = button_to "Create User", new_admin_user_path, {:class => "btn btn-default", method: :get}
     = button_to "Back", admin_root_path, {:class => "btn btn-default", method: :get}
