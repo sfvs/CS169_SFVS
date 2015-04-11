@@ -5,10 +5,10 @@ class FormQuestionController < ApplicationController
     @list_of_questions = FormQuestion.get_questions_for_form(@form_type)
     # Idea: In order to pre populate the form fields...
     # Check that the most recent application content has the key params[:type]
-    # If it has call a method that returns an array of answers
-    #   set the @prefill_form to returned array of answers
+    # If it has call a method that returns a hash of answers
+    #   set the @form_answers to returned hash of answers
     # else do nothing
-    # Then set the value of the fields with the values from @prefill_form
+    # Then the values of the form fields will be set
   end
 
   def save_progress
@@ -60,9 +60,9 @@ class FormQuestionController < ApplicationController
         redirect_to user_path(@user)
       else
         # Need to find a way to keep the values in the fields
-        # Idea: call a method that returns an array of answers
-        # set the @prefill_form to returned array of answers
-        # Then set the value of the fields with the values from @prefill_form
+        # Idea: call a method that returns a hash of answers
+        # set the @form_answers hash to returned hash of answers
+        # Then the values of the form fields will be set
         flash[:alert] = "There are missing fields in the form"
         @list_of_questions = FormQuestion.get_questions_for_form(params[:type])
         @form_type = params[:type]
