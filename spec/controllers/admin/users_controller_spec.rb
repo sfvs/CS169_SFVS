@@ -88,4 +88,28 @@ describe Admin::UsersController do
       expect(:get => "admin/users/new").to route_to(:controller => "admin/users", :action => "new")
     end
   end 
+
+  describe "search user by e-mail" do
+    it "should assign the alert with warning when invalid e-mail" do
+      post 'search', :user_email => {:email => "invalid@email.com"}
+      flash[:alert].should == "No user with e-mail: invalid@email.com"
+    end
+
+    it "should route to users list page with invalid e-mail" do
+      post 'search', :user_email => {:email => "invalid@email.com"}
+      response.should redirect_to '/admin/users'
+    end
+
+    it "should route to users list page with admin e-mail" do
+      admin = make_a_member :admin, :email => "admin@gmail.com"
+      post 'search', :user_email => {:email => "admin@gmail.com"}
+      response.should redirect_to '/admin/users'
+    end
+
+    it "should route to the user content page with valid e-mail" do
+      user = make_a_member :user, :email => "user1@hostname.com"
+      post 'search', :user_email => {:email => "user1@hostname.com"}
+      response.should redirect_to '/admin/users/' + user.id.to_s
+    end
+  end
 end
