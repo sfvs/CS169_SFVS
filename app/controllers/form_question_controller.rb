@@ -26,15 +26,16 @@ class FormQuestionController < ApplicationController
     @form_content = {
       params[:type] => Hash[@questions_list.zip get_answers]
     }
-    logger.debug "form_content #{@form_content}"
+    # logger.debug "form_content #{@form_content}"
     # logger.debug "user #{params[:id]}"
     @user = User.find(params[:id])
     @application = @user.get_most_recent_application
-    @application.content = @application.content.merge(@form_content)
-    @application.save!
-    logger.debug "application #{@application.content}"
+    @application.add_content(@form_content)
+    # @application.content = @application.content.merge(@form_content)
+    # @application.save!
+    # logger.debug "application #{@application.content}"
     flash[:notice] = "#{params[:type]} successfully saved."
-    redirect_to user_path
+    redirect_to user_path(@user)
   end
 
   private
