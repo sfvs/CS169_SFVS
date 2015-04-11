@@ -24,4 +24,15 @@ class Admin::UsersController < Admin::AdminController
     flash[:notice] = "User #{@user.email} has been removed."
     redirect_to admin_users_path
   end
+
+  def search
+    @user = User.where(email: params[:user_email][:email], admin: false).first
+    if @user.nil?
+      flash[:alert] = "No user with e-mail: #{params[:user_email][:email]}"
+      redirect_to admin_users_path
+      return
+    end
+    redirect_to admin_user_path(@user)
+    return
+  end
 end
