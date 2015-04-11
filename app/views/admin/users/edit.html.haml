@@ -1,5 +1,11 @@
-%h1 Edit User
+%body.users_view
 
-= button_to "Delete User", admin_user_path(@user), {:class => "btn btn-danger", method: :delete, data: { confirm: "Are you sure?"}}
+  = render 'admin/navi_bar'
 
-= button_to "Back", admin_user_path(@user), {:class => "btn btn-default", method: :get}
+  %div.container-fluid
+
+    %h1 Edit User
+
+    = button_to "Delete User", admin_user_path(@user), {:class => "btn btn-danger", method: :delete, data: { confirm: "Are you sure?"}}
+
+    = button_to "Back", admin_user_path(@user), {:class => "btn btn-default", method: :get}

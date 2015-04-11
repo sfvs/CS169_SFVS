@@ -13,6 +13,8 @@ gem 'pundit'
 gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'dotenv-rails'
 gem 'gon'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'sqlite3'

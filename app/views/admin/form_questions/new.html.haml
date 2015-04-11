@@ -1,50 +1,55 @@
-= form_tag admin_form_form_questions_path do
-  = label :form_question, :question, 'Enter the question'
-  = text_field :form_question, 'question', size: 50
+%body.users_view
+  = render 'admin/navi_bar'
 
-  %div
-    = label :form_question, :question_type, "Textfield"
-    =radio_button :form_question, 'question_type', "textbox", options = {onclick: "javascript:selectedOption()"}
+  %div.container-fluid
+    %h1 Create a New Form Question
+    = form_tag admin_form_form_questions_path do
+      = label :form_question, :question, 'Enter the question'
+      = text_field :form_question, 'question', size: 50
 
-    = label :form_question, :question_type, "Checkbox"
-    =radio_button :form_question, 'question_type', "checkbox", options = {onclick: "javascript:selectedOption()"}
+      %div
+        = label :form_question, :question_type, "Textfield"
+        =radio_button :form_question, 'question_type', "textbox", options = {onclick: "javascript:selectedOption()"}
 
-    = label :form_question, :question_type, "Radio Button"
-    =radio_button :form_question, 'question_type', "radio_button", options = {onclick: "javascript:selectedOption()"}
+        = label :form_question, :question_type, "Checkbox"
+        =radio_button :form_question, 'question_type', "checkbox", options = {onclick: "javascript:selectedOption()"}
 
-    = label :form_question, :question_type, "Statement"
-    =radio_button :form_question, 'question_type', "statement", options = {onclick: "javascript:selectedOption()"}
+        = label :form_question, :question_type, "Radio Button"
+        =radio_button :form_question, 'question_type', "radio_button", options = {onclick: "javascript:selectedOption()"}
 
-  / %div
-  /   = label_tag "answer_count", "Number of Answers for Checkbox/Radio Button", id: 'count_label'
-  /   = text_field_tag 'answer_count', nil, maxlength: 1, size: 1
-  /   = button_to_function "OK", "createFields()", id: "ok_but"
+        = label :form_question, :question_type, "Statement"
+        =radio_button :form_question, 'question_type', "statement", options = {onclick: "javascript:selectedOption()"}
 
-  %div.checkbox_fields
-    = label :check_answer, :answer, "Checkbox Answer 1"
-    = text_field :check_answer, 0, size: 20
+      / %div
+      /   = label_tag "answer_count", "Number of Answers for Checkbox/Radio Button", id: 'count_label'
+      /   = text_field_tag 'answer_count', nil, maxlength: 1, size: 1
+      /   = button_to_function "OK", "createFields()", id: "ok_but"
 
-    = label :check_answer, :answer, "Checkbox Answer 2"
-    = text_field :check_answer, 1, size: 20
+      %div.checkbox_fields
+        = label :check_answer, :answer, "Checkbox Answer 1"
+        = text_field :check_answer, 0, size: 20
 
-    = label :check_answer, :answer, "Checkbox Answer 3"
-    = text_field :check_answer, 2, size: 20
+        = label :check_answer, :answer, "Checkbox Answer 2"
+        = text_field :check_answer, 1, size: 20
 
-    = label :check_answer, :answer, "Checkbox Answer 4"
-    = text_field :check_answer, 3, size: 20
+        = label :check_answer, :answer, "Checkbox Answer 3"
+        = text_field :check_answer, 2, size: 20
 
-  %div.radio_button_fields
-    = label :radio_answer, :answer, "Radio Button Answer 1"
-    = text_field :radio_answer, 4, size: 20
+        = label :check_answer, :answer, "Checkbox Answer 4"
+        = text_field :check_answer, 3, size: 20
 
-    = label :radio_answer, :answer, "Radio Button Answer 2"
-    = text_field :radio_answer, 5, size: 20
+      %div.radio_button_fields
+        = label :radio_answer, :answer, "Radio Button Answer 1"
+        = text_field :radio_answer, 4, size: 20
 
-    = label :radio_answer, :answer, "Radio Button Answer 3"
-    = text_field :radio_answer, 6, size: 20
+        = label :radio_answer, :answer, "Radio Button Answer 2"
+        = text_field :radio_answer, 5, size: 20
 
-    = label :radio_answer, :answer, "Radio Button Answer 4"
-    = text_field :radio_answer, 7, size: 20
+        = label :radio_answer, :answer, "Radio Button Answer 3"
+        = text_field :radio_answer, 6, size: 20
 
-  = submit_tag 'Save Changes', :class => "btn btn-default"
-  = submit_tag 'Cancel', :class => "btn btn-default"
+        = label :radio_answer, :answer, "Radio Button Answer 4"
+        = text_field :radio_answer, 7, size: 20
+
+      = submit_tag 'Save Changes', :class => "btn btn-default"
+      = submit_tag 'Cancel', :class => "btn btn-default"
