@@ -1,7 +1,8 @@
 class Admin::FormQuestionsController < Admin::AdminController
+  
   before_filter :require_admin
   before_filter :pressed_cancel?, :only => [:create, :update]
-
+  
   def index
     @form = Form.find(params[:form_id])
     gon.form_id = params[:form_id]

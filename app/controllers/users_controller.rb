@@ -11,9 +11,9 @@ class UsersController < ApplicationController
     if @application
       @completed_forms = get_completed_forms(@application.content)
       if @application.completed
-        @status = "Completed"
+        @status = "Complete"
       else
-        @status = "Incompleted"
+        @status = "Incomplete"
       end
       @year = @application.year
       @type = @application.application_type.app_type

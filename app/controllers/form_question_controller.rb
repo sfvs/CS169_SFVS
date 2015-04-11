@@ -1,5 +1,5 @@
 class FormQuestionController < ApplicationController
-
+  
   def show
     @form_type = params[:type]
     @list_of_questions = FormQuestion.get_questions_for_form(@form_type)

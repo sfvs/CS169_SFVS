@@ -1,12 +1,11 @@
-%body.users_view
+- body_class "users_view"
+= render 'admin/navi_bar'
 
-  = render 'admin/navi_bar'
+%div.container-fluid
 
-  %div.container-fluid
-    
-    %h1 User Content
+%h1 User Content
 
-    %p= "Contents of user: #{@user.email}"
+%p= "Contents of user: #{@user.email}"
 
-    = button_to "Edit", edit_admin_user_path(@user), {:class => "btn btn-default", method: :get}
-    = button_to "Back", admin_users_path, {:class => "btn btn-default", method: :get}
+= button_to "Edit", edit_admin_user_path(@user), {:class => "btn btn-default", method: :get}
+= button_to "Back", admin_users_path, {:class => "btn btn-default", method: :get}
