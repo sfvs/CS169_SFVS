@@ -27,18 +27,14 @@ class FormQuestionController < ApplicationController
     @application = @user.get_most_recent_application
 
     if params[:commit] == "Save and Return"
-      @application.add_content(@form_content)
+      update_application(false)
+      logger.debug "see2 @application.content"
       flash[:notice] = "#{params[:type]} successfully saved."
-      logger.debug "see1 #{@application.content}"
       redirect_to user_path(@user)
     elsif params[:commit] == 'Submit'
-      # Submit the form
-      # check if the form is complete by calling form_completed?
-      # if the form is complete 
-      # save the form_content into the application.content (assume that hash with same keys get their values overwritten)
       if form_completed?
-        @application.add_content(@form_content)
-        logger.debug "see2 #{@application.content}"
+        update_application(true)
+        logger.debug "see1 @application.content"
         flash[:notice] = "Submitted #{params[:type]}"
         redirect_to user_path(@user)
       else
@@ -65,5 +61,10 @@ class FormQuestionController < ApplicationController
       answers_list << value
     end
     answers_list
+  end
+
+  def update_application(completed)
+    @form_content[params[:type]][:completed] = completed
+    @application.add_content(@form_content)
   end
 end
