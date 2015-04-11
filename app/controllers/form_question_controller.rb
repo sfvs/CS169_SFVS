@@ -3,12 +3,13 @@ class FormQuestionController < ApplicationController
   def show
     @form_type = params[:type]
     @list_of_questions = FormQuestion.get_questions_for_form(@form_type)
-    # Idea: In order to pre populate the form fields...
-    # Check that the most recent application content has the key params[:type]
-    # If it has call a method that returns a hash of answers
-    #   set the @form_answers to returned hash of answers
-    # else do nothing
-    # Then the values of the form fields will be set
+    application = User.find(params[:id]).get_most_recent_application
+    if application
+      @saved_form = application.content
+      if @saved_form.has_key?(@form_type)
+        @form_answer = get_answers_to_prefill_from(@saved_form[@form_type])
+      end
+    end
   end
 
   def save_progress
@@ -26,6 +27,20 @@ class FormQuestionController < ApplicationController
   end
 
   private
+  
+  def get_answers_to_prefill_from(content)
+    number_of_questions = Form.where(form_name: @form_type)[0].number_of_questions
+    form_answer = Hash.new
+    cur_num_questions = 0
+    content.each do |key, value|
+      if cur_num_questions != number_of_questions && key != "completed"
+        form_answer[cur_num_questions.to_s] = value
+        cur_num_questions += 1
+      end
+    end
+    form_answer
+  end
+
   #filter that check if the form is filled correctly
   def form_completed?
   	!(@form_content[params[:type]].has_value?("") || @form_content[params[:type]].has_value?(nil))
@@ -59,13 +74,10 @@ class FormQuestionController < ApplicationController
         flash[:notice] = "Submitted #{params[:type]}"
         redirect_to user_path(@user)
       else
-        # Need to find a way to keep the values in the fields
-        # Idea: call a method that returns a hash of answers
-        # set the @form_answers hash to returned hash of answers
-        # Then the values of the form fields will be set
         flash[:alert] = "There are missing fields in the form"
         @list_of_questions = FormQuestion.get_questions_for_form(params[:type])
         @form_type = params[:type]
+        @form_answer = params[:form_answer]
         render :show
       end
   end
