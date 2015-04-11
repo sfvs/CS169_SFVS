@@ -3,13 +3,15 @@ module DeviseHelper
     return "" if resource.errors.empty?
 
     messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
-    sentence = I18n.t("errors.messages.not_saved",
-                      :count => resource.errors.count,
-                      :resource => resource.class.model_name.human.downcase)
+    # sentence = I18n.t("errors.messages.not_saved",
+    #                   :count => resource.errors.count,
+    #                   :resource => resource.class.model_name.human.downcase)
+
+    fragment = resource.errors.count == 1 ? "error is" : "errors are"
 
     html = <<-HTML
     <div class="alert alert-danger alert_msg">
-      <p>#{sentence}</p>
+      <p> The following #{fragment} preventing to proceed:</p>
       <ul class="regis_alert">#{messages}</ul>
     </div>
     HTML
