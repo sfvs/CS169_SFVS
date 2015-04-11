@@ -1,30 +1,27 @@
-%body.users_view
-  %div.alert_msg
-    - if notice
-      %p.alert.alert-success= notice
-    - if alert
-      %p.alert.alert-danger= alert
+- body_class "users_view"
+= render 'admin/navi_bar'
 
-  = render 'admin/navi_bar'
+%div.admin_index_page
+  %div.container-fluid
+    %div.row
+      %div.span12
+        %h1#index_title Admin Page
+        %div.row
+          %div.span12.admin_link
+            = link_to admin_users_path, class: "btn btn-success admin_button" do
+              %span.glyphicon.icon-user Users List
+        %div.row
+          %div.span12.admin_link  
+            = link_to admin_forms_path, class: "btn btn-success admin_button" do
+              %span.glyphicon.icon-pencil Forms List
+      %div.span6
+        %h3 About Us
 
-  %div.admin_index_page
-    %div.container-fluid
-      %div.row
-        %div.span12
-          %h1#index_title Admin Page
-          %div.row
-            %div.span6.admin_link
-              = link_to "Users List", admin_users_path, class: "admin_list_link"
-            %div.span6.admin_link  
-              = link_to "Forms List", admin_forms_path, class: "admin_list_link"
-        %div.span6
-          %h3 About Us
+        %p The San Francisco Vegetarian Society (SFVS) is a non-profit organization that has been working in the Bay Area for over 40 years promoting a vegetarian diet as a healthful and humane way of life.
 
-          %p The San Francisco Vegetarian Society (SFVS) is a non-profit organization that has been working in the Bay Area for over 40 years promoting a vegetarian diet as a healthful and humane way of life.
+        %p The Society is run entirely by volunteers. We always appreciate help, whether it is available once in a while or on an ongoing basis. You can volunteer to help with a variety of activities, from coordinating our programs to helping at our events. If you are interested in getting involved, please contact us.
 
-          %p The Society is run entirely by volunteers. We always appreciate help, whether it is available once in a while or on an ongoing basis. You can volunteer to help with a variety of activities, from coordinating our programs to helping at our events. If you are interested in getting involved, please contact us.
-
-          %p The Society hosts events throughout the year such as vegetarian potlucks, picnics, dining out and lectures. Monthly meetings held most months. Please check our hotline, 415-273-5481 for details.
-      %div.row
-        %div.span9
-          = button_to "Logout", destroy_user_session_path, { :class => "btn btn-default", method: :delete}
+        %p The Society hosts events throughout the year such as vegetarian potlucks, picnics, dining out and lectures. Monthly meetings held most months. Please check our hotline, 415-273-5481 for details.
+    %div.row
+      %div.span9
+        = button_to "Logout", destroy_user_session_path, { :class => "btn btn-default", method: :delete}

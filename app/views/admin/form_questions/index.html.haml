@@ -1,30 +1,26 @@
-%body.users_view
-  %div.alert_msg
-    - if notice
-      %p.alert.alert-success= notice
-    - if alert
-      %p.alert.alert-danger= alert
+- body_class "users_view"
+= render 'admin/navi_bar'
 
-  = render 'admin/navi_bar'
+%div.container-fluid
+  %h1 Form Content
 
-  %div.container-fluid
-    %h1 Form Content
+  %p= "Contents of #{@form.form_name}"
 
-    %p= "Contents of #{@form.form_name}"
+  %div.row.header
+    %div.span5
+      %p Form Question
+    %div.span2
+      %p Type
+    %div.span4
+      %p Created At
+    %div.span4
+      %p Update At
+    %div.span3
+      %p Actions
+            
+  %ul.sortable
+    - if !@form_questions.nil?
+      = render @form_questions
 
-    %div.row.header
-      %div.span3
-        %p Form Question
-      %div.span3
-        %p Type
-      %div.span3
-        %p Created At
-      %div.span3
-        %p Actions
-              
-    %ul.sortable
-      - if !@form_questions.nil?
-        = render @form_questions
-
-    = button_to "Add Form Question", new_admin_form_form_question_path, {:class => "btn btn-default", method: :get}
-    = button_to "Back", admin_forms_path, {:class => "btn btn-default", method: :get}
+  = button_to "Add Form Question", new_admin_form_form_question_path, {:class => "btn btn-default", method: :get}
+  = button_to "Back", admin_forms_path, {:class => "btn btn-default", method: :get}

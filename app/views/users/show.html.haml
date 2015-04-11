@@ -1,48 +1,42 @@
-%body.users_view
-  %div.alert_msg
-    - if notice
-      %p.alert.alert-success= notice
-    - if alert
-      %p.alert.alert-danger= alert
+- body_class "users_view"
+= render 'shared/navi_bar'
 
-  = render 'shared/navi_bar'
-
-  %div.container-fluid
-    %div.row
-      %div.span4
-        %h2= "Welcome"
-        %p
-          %strong= "Email: #{@user.email}"
-          -if @application
-            %br
-            %strong="Application Type: #{@type}"
-            %br
-            %strong="Application Year: #{@year}"
-            %br
-            %strong="Application Status: #{@status}"
-          -else
-            %br
-            Please take survey below to determine your application type.
-      %div.span4
+%div.container-fluid
+  %div.row
+    %div.span4
+      %h2= "Welcome"
+      %p
+        %strong= "Email: #{@user.email}"
         -if @application
-          -@forms_to_build.each do |form|
-            %br= link_to "#{form.form_name}", form_user_path(:type => form.form_name), :class => "form_link", :id => "link_#{form.id}"
           %br
-          -unless @application.completed
-            = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post}
-            %br
-            = button_to "Restart Application", survey_user_path, {:id => "questionnaire_button", method: :get}
+          %strong="Application Type: #{@type}"
+          %br
+          %strong="Application Year: #{@year}"
+          %br
+          %strong="Application Status: #{@status}"
         -else
           %br
-          = button_to "Determine Application Type", survey_user_path, {:id => "questionnaire_button", method: :get}
+          Please take survey below to determine your application type.
         = button_to "Edit Profile", edit_user_path(@user)
         = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
+    %div.span4
+      -if @application
+        %h3= "Application Forms"
+        -@forms_to_build.each do |form|
+          %br= link_to "#{form.form_name}", form_user_path(:type => form.form_name), :class => "form_link", :id => "link_#{form.id}"
+        %br
+        -unless @application.completed
+          = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post}
+          = button_to "Restart Application", survey_user_path, {:id => "questionnaire_button", method: :get}
+      -else
+        %br
+        = button_to "Determine Application Type", survey_user_path, {:id => "questionnaire_button", method: :get}
 
-      %div.span3
-        %h3 About Us
+    %div.span3
+      %h3 About Us
 
-        %p The San Francisco Vegetarian Society (SFVS) is a non-profit organization that has been working in the Bay Area for over 40 years promoting a vegetarian diet as a healthful and humane way of life.
+      %p The San Francisco Vegetarian Society (SFVS) is a non-profit organization that has been working in the Bay Area for over 40 years promoting a vegetarian diet as a healthful and humane way of life.
 
-        %p The Society is run entirely by volunteers. We always appreciate help, whether it is available once in a while or on an ongoing basis. You can volunteer to help with a variety of activities, from coordinating our programs to helping at our events. If you are interested in getting involved, please contact us.
+      %p The Society is run entirely by volunteers. We always appreciate help, whether it is available once in a while or on an ongoing basis. You can volunteer to help with a variety of activities, from coordinating our programs to helping at our events. If you are interested in getting involved, please contact us.
 
-        %p The Society hosts events throughout the year such as vegetarian potlucks, picnics, dining out and lectures. Monthly meetings held most months. Please check our hotline, 415-273-5481 for details.
+      %p The Society hosts events throughout the year such as vegetarian potlucks, picnics, dining out and lectures. Monthly meetings held most months. Please check our hotline, 415-273-5481 for details.

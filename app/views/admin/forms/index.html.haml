@@ -1,26 +1,25 @@
-%body.users_view
+- body_class "users_view"
+= render 'admin/navi_bar'
 
-  = render 'admin/navi_bar'
+%div.container-fluid
+  %h3 Forms List
 
-  %div.container-fluid
-    %h3 Forms List
+  %div
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Form
+          %th Created At
+          %th Actions
+      %tbody
+        - if !@forms.nil?
+          - @forms.each do |form|
+            %tr
+              %td= form.form_name
+              %td= form.created_at
+              %td= link_to "Show", admin_form_form_questions_path(form),  class: "btn btn-default admin_button"
+  - if @forms.any?
+    %div.pagination
+      = will_paginate @forms, renderer: BootstrapPagination::Rails
 
-    %div
-      %table.table.table-hover
-        %thead
-          %tr
-            %th Form
-            %th Created At
-            %th Actions
-        %tbody
-          - if !@forms.nil?
-            - @forms.each do |form|
-              %tr
-                %td= form.form_name
-                %td= form.created_at
-                %td= link_to "Show", admin_form_form_questions_path(form),  class: "btn btn-default admin_button"
-    - if @forms.any?
-      %div.pagination
-        = will_paginate @forms, renderer: BootstrapPagination::Rails
-
-    = button_to "Back", admin_root_path, {:class => "btn btn-default", method: :get}
+  = button_to "Back", admin_root_path, {:class => "btn btn-default", method: :get}
