@@ -13,6 +13,11 @@
       %div.span12
         %h1 Admin Page
         %h3 Users List
+    %div.user_search
+      = form_tag admin_search_user_path do
+        = label :user_email, :email, 'Search by e-mail'
+        = text_field :user_email, 'email', size: 30
+        = submit_tag 'Search', :class => "btn btn-default"
     %table.table.table-hover
       %thead
         %tr

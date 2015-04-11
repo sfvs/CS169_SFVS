@@ -3,6 +3,7 @@ SFVSRegistrationSystem::Application.routes.draw do
   # namespace for the group of controllers for admin
   namespace :admin do
     root to: "admin#index"
+    post "/users", to: "users#search", as: 'search_user'
     resources :users
       # Need to add route to the forms (?) or might need to think about how to access and look at 
       # each individual forms the user has.
