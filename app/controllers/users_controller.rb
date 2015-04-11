@@ -9,7 +9,6 @@ class UsersController < ApplicationController
     end
     @application = @user.get_most_recent_application
     @completed_forms = get_completed_forms(@application.content)
-    logger.debug "22 #{@completed_forms}"
     if @application
       if @application.completed
         @status = "Completed"

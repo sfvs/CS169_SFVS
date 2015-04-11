@@ -2,7 +2,6 @@ class FormQuestionController < ApplicationController
 
   def show
     @form_type = params[:type]
-    logger.debug "params #{params[:form_answer]}"
     @list_of_questions = FormQuestion.get_questions_for_form(@form_type)
   	# if (params[:submit]) 
     #    if form_completed?
@@ -28,13 +27,11 @@ class FormQuestionController < ApplicationController
 
     if params[:commit] == "Save and Return"
       update_application(false)
-      logger.debug "see2 @application.content"
       flash[:notice] = "#{params[:type]} successfully saved."
       redirect_to user_path(@user)
     elsif params[:commit] == 'Submit'
       if form_completed?
         update_application(true)
-        logger.debug "see1 @application.content"
         flash[:notice] = "Submitted #{params[:type]}"
         redirect_to user_path(@user)
       else
@@ -50,7 +47,6 @@ class FormQuestionController < ApplicationController
   private
   #filter that check if the form is filled correctly
   def form_completed?
-    logger.debug "form_content #{@form_content[params[:type]]}"
   	!(@form_content[params[:type]].has_value?("") || @form_content[params[:type]].has_value?(nil))
   end
   
