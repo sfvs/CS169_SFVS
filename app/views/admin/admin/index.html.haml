@@ -13,10 +13,13 @@
         %div.span12
           %h1#index_title Admin Page
           %div.row
-            %div.span6.admin_link
-              = link_to "Users List", admin_users_path, class: "admin_list_link"
-            %div.span6.admin_link  
-              = link_to "Forms List", admin_forms_path, class: "admin_list_link"
+            %div.span12.admin_link
+              = link_to admin_users_path, class: "btn btn-success admin_button" do
+                %span.glyphicon.icon-user Users List
+          %div.row
+            %div.span12.admin_link  
+              = link_to admin_forms_path, class: "btn btn-success admin_button" do
+                %span.glyphicon.icon-pencil Forms List
         %div.span6
           %h3 About Us
 
