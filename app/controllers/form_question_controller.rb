@@ -7,10 +7,7 @@ class FormQuestionController < ApplicationController
 
   def save_progress
     @user = User.find(params[:id])
-    @questions_list = FormQuestion.get_list_of_questions(params[:type])
-    @form_content = {
-      params[:type] => Hash[@questions_list.zip get_answers]
-    }
+    @form_content = get_form_content
     @application = @user.get_most_recent_application
 
     if params[:commit] == "Save and Return"
@@ -35,6 +32,14 @@ class FormQuestionController < ApplicationController
       answers_list << value
     end
     answers_list
+  end
+
+  def get_form_content
+    @questions_list = FormQuestion.get_list_of_questions(params[:type])
+    form_content = {
+      params[:type] => Hash[@questions_list.zip get_answers]
+    }
+    form_content
   end
 
   def update_application(completed)
