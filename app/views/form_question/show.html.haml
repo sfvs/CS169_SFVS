@@ -22,18 +22,16 @@
             = text_field :form_answer, answer, size: 20
             - answer += 1 
           - elsif (question.question_type == "radio_button")
-            - logger.debug "bbbb #{question.answers}"
             -String(String(question.answers)[1..-2]).split(', ').each do |choice|
-              - logger.debug "dddd #{choice.to_s}"
               = label :form_answer, answer, choice
               = radio_button :form_answer, answer, choice
             - answer += 1
           - elsif (question.question_type == "checkbox")
-            - logger.debug "aaaa #{question.answers}"
+            - check_ans = 0
             - String(String(question.answers)[1..-2]).split(', ').each do |choice|
-              - logger.debug "cccc #{choice.to_sym.to_s}"
               = label :form_answer, answer, choice
-              = check_box_tag "form_answer[#{answer.to_s}]", choice
+              = check_box_tag "form_answer[#{answer.to_s}][check_box_ans][#{check_ans.to_s}]", choice
+              = check_ans += 1
             - answer += 1
         / -if (question.question_type == "radio_button")
         /   -String(String(question.answers)[1..-2]).split(', ').each do |choice|
