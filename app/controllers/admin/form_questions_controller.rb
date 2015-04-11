@@ -1,7 +1,8 @@
 class Admin::FormQuestionsController < Admin::AdminController
+  
   before_filter :require_admin
   before_filter :pressed_cancel?, :only => [:create, :update]
-
+  
   def index
     @form = Form.find(params[:form_id])
     gon.form_id = params[:form_id]
@@ -16,6 +17,7 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form = Form.find(params[:form_id])
     set_attr
     @form.form_questions.create(params[:form_question])
+    flash[:notice] = "Form Question was succesfully created"
     redirect_to admin_form_form_questions_path(@form)
   end
 

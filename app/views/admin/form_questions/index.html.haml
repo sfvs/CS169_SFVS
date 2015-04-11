@@ -1,9 +1,26 @@
-%h1 Form Content
+- body_class "users_view"
+= render 'admin/navi_bar'
 
-%p= "Contents of #{@form.form_name}"
+%div.container-fluid
+  %h1 Form Content
 
-%div.sortable
-  - if !@form_questions.nil?
-    = render @form_questions
+  %p= "Contents of #{@form.form_name}"
 
-= button_to "Add Form Question", new_admin_form_form_question_path, {:id => "create_but", method: :get}
+  %div.row.header
+    %div.span5
+      %p Form Question
+    %div.span2
+      %p Type
+    %div.span4
+      %p Created At
+    %div.span4
+      %p Update At
+    %div.span3
+      %p Actions
+            
+  %ul.sortable
+    - if !@form_questions.nil?
+      = render @form_questions
+
+  = button_to "Add Form Question", new_admin_form_form_question_path, {:class => "btn btn-default", method: :get}
+  = button_to "Back", admin_forms_path, {:class => "btn btn-default", method: :get}
