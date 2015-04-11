@@ -1,4 +1,4 @@
-%body
+%body.users_view
   %div.alert_msg
     - if notice
       %p.alert.alert-success= notice
@@ -10,14 +10,14 @@
   %div.admin_index_page
     %div.container-fluid
       %div.row
-        %div.span9
+        %div.span12
           %h1#index_title Admin Page
           %div.row
-            %div.span4.admin_link
+            %div.span6.admin_link
               = link_to "Users List", admin_users_path, class: "admin_list_link"
-            %div.span4.admin_link  
+            %div.span6.admin_link  
               = link_to "Forms List", admin_forms_path, class: "admin_list_link"
-        %div.span3
+        %div.span6
           %h3 About Us
 
           %p The San Francisco Vegetarian Society (SFVS) is a non-profit organization that has been working in the Bay Area for over 40 years promoting a vegetarian diet as a healthful and humane way of life.
