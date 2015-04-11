@@ -29,6 +29,7 @@ Background: application is setup with user john doe
   And I am on the "profile" page for "johndoe@gmail.com"
 
 Scenario: view current application status
+  Given PENDING
   When I follow "General Form"
   Then I should be on the "form" page for "johndoe@gmail.com"
   And I fill in the following:
@@ -48,6 +49,7 @@ Scenario: view current application status
   Then I should be on the "profile" page for "johndoe@gmail.com"
 
 Scenario: see completed form status after submission
+  Given PENDING
   When I follow "General Form"
   And I fill in the following:
   | Company name                                                           | Apple           |
