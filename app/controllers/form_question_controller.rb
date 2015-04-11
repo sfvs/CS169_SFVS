@@ -3,18 +3,6 @@ class FormQuestionController < ApplicationController
   def show
     @form_type = params[:type]
     @list_of_questions = FormQuestion.get_questions_for_form(@form_type)
-  	# if (params[:submit]) 
-    #    if form_completed?
-    #      flash[:notice] = "#{@form_type} successfully submitted."
-    #    	 redirect_to user_path()
-    #    else
-    #    	 @error = "Please complete the form before submitting."
-    #    end
-    # elsif (params[:save])
-    #   save_progress
-    #   flash[:notice] = "#{@form_type} successfully saved."
-    #   redirect_to user_path()
-    # end
   end
 
   def save_progress
@@ -30,17 +18,7 @@ class FormQuestionController < ApplicationController
       flash[:notice] = "#{params[:type]} successfully saved."
       redirect_to user_path(@user)
     elsif params[:commit] == 'Submit'
-      if form_completed?
-        update_application(true)
-        flash[:notice] = "Submitted #{params[:type]}"
-        redirect_to user_path(@user)
-      else
-        # Need to find a way to keep the values in the fields
-        flash[:alert] = "There are missing fields in the form"
-        @list_of_questions = FormQuestion.get_questions_for_form(params[:type])
-        @form_type = params[:type]
-        render :show
-      end
+      submit
     end
   end
 
@@ -62,5 +40,19 @@ class FormQuestionController < ApplicationController
   def update_application(completed)
     @form_content[params[:type]][:completed] = completed
     @application.add_content(@form_content)
+  end
+
+  def submit
+    if form_completed?
+        update_application(true)
+        flash[:notice] = "Submitted #{params[:type]}"
+        redirect_to user_path(@user)
+      else
+        # Need to find a way to keep the values in the fields
+        flash[:alert] = "There are missing fields in the form"
+        @list_of_questions = FormQuestion.get_questions_for_form(params[:type])
+        @form_type = params[:type]
+        render :show
+      end
   end
 end
