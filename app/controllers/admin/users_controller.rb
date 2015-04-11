@@ -24,4 +24,8 @@ class Admin::UsersController < Admin::AdminController
     flash[:notice] = "User #{@user.email} has been removed."
     redirect_to admin_users_path
   end
+
+  def filter_year
+    redirect_to admin_users_path
+  end
 end

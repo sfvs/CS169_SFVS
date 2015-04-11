@@ -7,6 +7,9 @@
       %h1 Admin Page
       %h3 Users List
   %table.table.table-hover
+    =form_tag filter_year_admin_users_path do
+      -hidden_field_tag :from, "index"
+      =collection_select :post, :year, @users,:id,:email, {prompt: true}, {:onchange => 'this.form.submit()'}
     %thead
       %tr
         %th ID
