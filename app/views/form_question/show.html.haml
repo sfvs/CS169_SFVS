@@ -1,5 +1,10 @@
 %body.users_view
 
+  %div.alert_msg
+    - if notice
+      %p.alert.alert-success= notice
+    - if alert
+      %p.alert.alert-danger= alert
   / Anthony's code
   / -if (question.question_type == "radio_button")
   /   -String(String(question.answers)[1..-2]).split(', ').each do |choice|
@@ -20,7 +25,7 @@
       %font{:color => "Crimson"} #{@error}
 
     = form_tag form_user_path(:type=> @form_type) do
-      - answer = 1
+      - answer = 0
       - @list_of_questions.each do |question|
         %p 
           %font{:color => "black"} #{question.question}
@@ -41,7 +46,10 @@
             - answer += 1
           - elsif (question.question_type == "statement")
             = text_area :form_answer, answer, size: "35x6"
+            - answer += 1
 
       = submit_tag 'Save and Return'
+      = submit_tag 'Submit'
+
     =link_to 'Save and Return', form_user_path(:type=> @form_type,:save => true), :method => :post
     =link_to 'Submit Form', form_user_path(:submit => true, :type => @form_type)

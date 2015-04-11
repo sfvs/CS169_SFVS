@@ -4,44 +4,58 @@ class FormQuestionController < ApplicationController
     @form_type = params[:type]
     logger.debug "params #{params[:form_answer]}"
     @list_of_questions = FormQuestion.get_questions_for_form(@form_type)
-  	if (params[:submit]) 
-      if form_completed?
-        flash[:notice] = "#{@form_type} successfully submitted."
-      	redirect_to user_path()
-      else
-      	@error = "Please complete the form before submitting."
-      end
+  	# if (params[:submit]) 
+    #    if form_completed?
+    #      flash[:notice] = "#{@form_type} successfully submitted."
+    #    	 redirect_to user_path()
+    #    else
+    #    	 @error = "Please complete the form before submitting."
+    #    end
     # elsif (params[:save])
     #   save_progress
     #   flash[:notice] = "#{@form_type} successfully saved."
     #   redirect_to user_path()
-    end
+    # end
   end
 
   def save_progress
-    # logger.debug "params #{params[:form_answer]}"
-    # Converting the answers into hash key = form questions, value = answers
-    # logger.debug "form_type #{params[:type]}"
+    @user = User.find(params[:id])
     @questions_list = FormQuestion.get_list_of_questions(params[:type])
     @form_content = {
       params[:type] => Hash[@questions_list.zip get_answers]
     }
-    # logger.debug "form_content #{@form_content}"
-    # logger.debug "user #{params[:id]}"
-    @user = User.find(params[:id])
     @application = @user.get_most_recent_application
-    @application.add_content(@form_content)
-    # @application.content = @application.content.merge(@form_content)
-    # @application.save!
-    # logger.debug "application #{@application.content}"
-    flash[:notice] = "#{params[:type]} successfully saved."
-    redirect_to user_path(@user)
+
+    if params[:commit] == "Save and Return"
+      @application.add_content(@form_content)
+      flash[:notice] = "#{params[:type]} successfully saved."
+      logger.debug "see1 #{@application.content}"
+      redirect_to user_path(@user)
+    elsif params[:commit] == 'Submit'
+      # Submit the form
+      # check if the form is complete by calling form_completed?
+      # if the form is complete 
+      # save the form_content into the application.content (assume that hash with same keys get their values overwritten)
+      if form_completed?
+        @application.add_content(@form_content)
+        logger.debug "see2 #{@application.content}"
+        flash[:notice] = "Submitted #{params[:type]}"
+        redirect_to user_path(@user)
+      else
+        # Need to find a way to keep the values in the fields
+        flash[:alert] = "There are missing fields in the form"
+        @list_of_questions = FormQuestion.get_questions_for_form(params[:type])
+        @form_type = params[:type]
+        render :show
+      end
+    end
   end
 
   private
   #filter that check if the form is filled correctly
   def form_completed?
-  	true
+    logger.debug "form_content #{@form_content[params[:type]]}"
+  	!(@form_content[params[:type]].has_value?("") || @form_content[params[:type]].has_value?(nil))
   end
   
   # Form an array of answers using the params
