@@ -1,18 +1,29 @@
-%h1 Admin Page
+- body_class "users_view"
+= render 'admin/navi_bar'
 
-%h3 Users List
-
-%div
-  %table#users
+%div.container-fluid
+  %div.row
+    %div.span12
+      %h1 Admin Page
+      %h3 Users List
+  %table.table.table-hover
     %thead
       %tr
-        %th Email
-        %th More Info
+        %th ID
+        %th E-mail
+        %th Created At
+        %th Actions
     %tbody
-      - if !@users.nil?
+      - if @users.any?
         - @users.each do |user|
           %tr
+            %td= user.id
             %td= user.email
-            %td= link_to "More Info", admin_user_path(user)
+            %td= user.created_at
+            %td= link_to "Show", admin_user_path(user), :class => "btn btn-default admin_button"
+  - if @users.any?
+    %div.pagination
+      = will_paginate @users, renderer: BootstrapPagination::Rails
 
-= button_to "Create User", new_admin_user_path, {:id => "create_but", method: :get}
+  = button_to "Create User", new_admin_user_path, {:class => "btn btn-default", method: :get}
+  = button_to "Back", admin_root_path, {:class => "btn btn-default", method: :get}

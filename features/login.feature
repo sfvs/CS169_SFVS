@@ -27,7 +27,7 @@ Scenario: logging in with invalid username or password
 
 Scenario: create a new account
   Given I am on the "login" page
-  When I follow "Sign up"
+  When I follow "New User"
   Then I should be on the "registration" page
   Then I fill in "user_email" with "johndoe2@gmail.com"
   And I fill in "user_password" with "123456789"
