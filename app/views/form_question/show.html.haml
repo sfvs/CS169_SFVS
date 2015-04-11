@@ -14,7 +14,7 @@
       / = radio_button :form_question, 'question_type', "textbox", options = {onclick: "javascript:selectedOption()"}
 
     = form_tag form_user_path(:type=> @form_type,:save => true) do
-      - answer = 0
+      - answer = 1
       - @list_of_questions.each do |question|
         %p 
           %font{:color => "black"} #{question.question}
@@ -33,6 +33,9 @@
               = check_box_tag "form_answer[#{answer.to_s}][check_box_ans][#{check_ans.to_s}]", choice
               = check_ans += 1
             - answer += 1
+          - elsif (question.question_type == "statement")
+            = text_area :form_answer, answer, size: "35x6"
+
         / -if (question.question_type == "radio_button")
         /   -String(String(question.answers)[1..-2]).split(', ').each do |choice|
         /     =radio_button_tag(:ans, "#{choice}")
@@ -43,6 +46,7 @@
         /   %textarea{:cols => "35", :name => "#{question.question}]", :rows => "6"} 
         / -elsif (question.question_type == "textbox")
         /   %input{:name => "#{question.question}", :type => "text"}
+        
       = submit_tag 'Save and Return'
     =link_to 'Save and Return', form_user_path(:type=> @form_type,:save => true), :method => :post
     =link_to 'Submit Form', form_user_path(:submit => true, :type => @form_type)

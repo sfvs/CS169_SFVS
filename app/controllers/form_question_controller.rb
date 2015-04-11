@@ -20,6 +20,11 @@ class FormQuestionController < ApplicationController
 
   def save_progress
     logger.debug "params #{params[:form_answer]}"
+    # Converting the answers into hash key = form questions, value = answers
+    logger.debug "form_type #{params[:type]}"
+    @questions_list = FormQuestion.get_list_of_questions(params[:type])
+    @form_content = Hash[@questions_list.zip get_answers]
+    logger.debug "form_content #{@form_content}"
     redirect_to user_path()
   end
 
@@ -29,6 +34,11 @@ class FormQuestionController < ApplicationController
   	true
   end
   #update db with progress
-  
-
+  def get_answers
+    answers_list = []
+    params[:form_answer].each do |key, value|
+      answers_list << value
+    end
+    answers_list
+  end
 end

@@ -9,4 +9,12 @@ class FormQuestion < ActiveRecord::Base
   def self.get_questions_for_form(form_type)
   	Form.where(form_name: form_type)[0].form_questions.sort_by {|e| e.order}
   end
+
+  def self.get_list_of_questions(form_type)
+    questions_list = []
+    form_questions = self.get_questions_for_form(form_type).each do |question|
+      questions_list << question.question
+    end    
+    questions_list
+  end
 end
