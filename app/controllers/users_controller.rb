@@ -8,8 +8,8 @@ class UsersController < ApplicationController
       flash[:notice] = parse_questionnaire_response(flash[:questionnaire_response]) # This line overwrites the notice from formq controller
     end
     @application = @user.get_most_recent_application
-    @completed_forms = get_completed_forms(@application.content)
     if @application
+      @completed_forms = get_completed_forms(@application.content)
       if @application.completed
         @status = "Completed"
       else
