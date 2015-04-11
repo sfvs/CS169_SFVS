@@ -1,17 +1,23 @@
 %body.users_view
 
+  / Anthony's code
+  / -if (question.question_type == "radio_button")
+  /   -String(String(question.answers)[1..-2]).split(', ').each do |choice|
+  /     =radio_button_tag(:ans, "#{choice}")
+  /     =label_tag(:tag, "#{choice}")
+  /     &nbsp
+  / -elsif (question.question_type == "statement")
+  / -elsif (question.question_type == "message")
+  /   %textarea{:cols => "35", :name => "#{question.question}]", :rows => "6"} 
+  / -elsif (question.question_type == "textbox")
+  /   %input{:name => "#{question.question}", :type => "text"}
+
   = render 'shared/navi_bar'
 
   %div.container-fluid
     %h1 #{@form_type}
     %p
       %font{:color => "Crimson"} #{@error}
-
-      / = label :form_question, :question, 'Enter the question'
-      / = text_field :form_question, 'question', size: 50
-
-      / = label :form_question, :question_type, "Textfield"
-      / = radio_button :form_question, 'question_type', "textbox", options = {onclick: "javascript:selectedOption()"}
 
     = form_tag form_user_path(:type=> @form_type) do
       - answer = 1
@@ -36,17 +42,6 @@
           - elsif (question.question_type == "statement")
             = text_area :form_answer, answer, size: "35x6"
 
-        / -if (question.question_type == "radio_button")
-        /   -String(String(question.answers)[1..-2]).split(', ').each do |choice|
-        /     =radio_button_tag(:ans, "#{choice}")
-        /     =label_tag(:tag, "#{choice}")
-        /     &nbsp
-        / -elsif (question.question_type == "statement")
-        / -elsif (question.question_type == "message")
-        /   %textarea{:cols => "35", :name => "#{question.question}]", :rows => "6"} 
-        / -elsif (question.question_type == "textbox")
-        /   %input{:name => "#{question.question}", :type => "text"}
-        
       = submit_tag 'Save and Return'
     =link_to 'Save and Return', form_user_path(:type=> @form_type,:save => true), :method => :post
     =link_to 'Submit Form', form_user_path(:submit => true, :type => @form_type)

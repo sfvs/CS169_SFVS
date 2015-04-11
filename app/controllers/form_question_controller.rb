@@ -30,7 +30,7 @@ class FormQuestionController < ApplicationController
     # logger.debug "user #{params[:id]}"
     @user = User.find(params[:id])
     @application = @user.get_most_recent_application
-    @application.content = @form_content
+    @application.content = @application.content.merge(@form_content)
     @application.save!
     logger.debug "application #{@application.content}"
     flash[:notice] = "#{params[:type]} successfully saved."
