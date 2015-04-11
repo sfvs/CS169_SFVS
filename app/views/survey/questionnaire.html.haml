@@ -1,16 +1,15 @@
-%body.users_view
+- body_class "users_view"
+= render 'shared/navi_bar'
 
-  = render 'shared/navi_bar'
-
-  %div.container-fluid
-    %h1 Questionnaire
-    %h2 #{@response}
+%div.container-fluid
+  %h1 Questionnaire
+  %h2 #{@response}
+  %hr
+  - @display_questions.each do |statement|
+    %h2 #{statement[:question]}
+    - statement[:answer].each do |a|
+      =link_to "#{a.ans}", survey_user_path(:ans => a.id), :class => ("selected" if (@current_selected_answers.include?(a.id)))
+      &nbsp 
     %hr
-    - @display_questions.each do |statement|
-      %h2 #{statement[:question]}
-      - statement[:answer].each do |a|
-        =link_to "#{a.ans}", survey_user_path(:ans => a.id), :class => ("selected" if (@current_selected_answers.include?(a.id)))
-        &nbsp 
-      %hr
-    -if @end_of_questionnaire
-      =link_to 'Submit Questionnaire', user_path()
+  -if @end_of_questionnaire
+    =link_to 'Submit Questionnaire', user_path()
