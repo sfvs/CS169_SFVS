@@ -19,6 +19,7 @@ SFVSRegistrationSystem::Application.routes.draw do
   devise_for :users, :path => 'member'
   resources :users do 
     post "submit_application", on: :member
+    post "form", to: "form_question#save_progress", on: :member
     get "form", to: "form_question#show", on: :member
     get "survey", to: "survey#questionnaire", on: :member
   end
