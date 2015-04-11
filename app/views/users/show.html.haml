@@ -1,9 +1,11 @@
-%body
+%body.users_view
   %div.alert_msg
     - if notice
       %p.alert.alert-success= notice
     - if alert
       %p.alert.alert-danger= alert
+
+  = render 'shared/navi_bar'
 
   %div.container-fluid
     %div.row
