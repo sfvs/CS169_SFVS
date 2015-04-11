@@ -32,9 +32,9 @@ describe FormQuestionController do
       #test not written yet
     end
 
-    it "should redirect if click save" do
-      get :show, :id => @user.id, :type => @test_form, :save => true
-      response.should redirect_to user_path(@user)
-    end
+    # it "should redirect if click save" do
+    #   get :show, :id => @user.id, :type => @test_form, :save => true
+    #   response.should redirect_to user_path(@user)
+    # end
   end
 end

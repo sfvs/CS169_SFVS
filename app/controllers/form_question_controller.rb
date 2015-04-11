@@ -26,7 +26,7 @@ class FormQuestionController < ApplicationController
     @form_content = {
       params[:type] => Hash[@questions_list.zip get_answers]
     }
-    # logger.debug "form_content #{@form_content}"
+    logger.debug "form_content #{@form_content}"
     # logger.debug "user #{params[:id]}"
     @user = User.find(params[:id])
     @application = @user.get_most_recent_application
