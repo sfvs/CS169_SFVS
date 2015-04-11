@@ -7,18 +7,17 @@
       %h2= "Welcome"
       %p
         %strong= "Email: #{@user.email}"
-        -if @application
-          %br
+      -if @application
+        %p    
           %strong="Application Type: #{@type}"
-          %br
+        %p
           %strong="Application Year: #{@year}"
-          %br
+        %p
           %strong="Application Status: #{@status}"
-        -else
-          %br
-          Please take survey below to determine your application type.
-        = button_to "Edit Profile", edit_user_path(@user)
-        = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
+      -else
+        %p Please take survey below to determine your application type.
+      = button_to "Edit Profile", edit_user_path(@user)
+      = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
     %div.span4
       -if @application
         %h3= "Application Forms"
