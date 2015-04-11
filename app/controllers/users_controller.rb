@@ -43,7 +43,7 @@ class UsersController < ApplicationController
         end
         app = @user.applications.create()
         app.application_type = type
-        app.year = Application.latest_year
+        app.year = Application.current_application_year
         app.save
       end
       response
