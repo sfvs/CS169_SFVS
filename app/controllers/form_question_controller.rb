@@ -10,7 +10,7 @@ class FormQuestionController < ApplicationController
     if application
       @saved_form = application.content
       if @saved_form.has_key?(@form_name)
-        @form_answer = get_answers_to_prefill_from(@saved_form[@form_name])
+        @form_answer = get_answers_to_prefill_from(@saved_form[@form_name], @form_name)
       end
     end
   end

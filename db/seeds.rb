@@ -15,7 +15,7 @@ def link_form_questions_to_form(form,questions)
 	question_objects = []
 	questions.each_with_index do |question_attributes,index|
 		question_attributes[:form_type] = form.form_name
-		question_attributes[:order] = index
+		question_attributes[:order] = index + 1
 		question_objects << FormQuestion.create(question_attributes)
 	end
 	form.form_questions << question_objects
