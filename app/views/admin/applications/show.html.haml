@@ -17,7 +17,7 @@
         - @app_forms.each do |form|
           %tr
             %td= form.form_name
-            %td Here goes Form status
+            %td= @completed_forms[form.form_name] == true ? "Complete" : "Incomplete"
             %td= form.created_at
             %td 
               %ul
