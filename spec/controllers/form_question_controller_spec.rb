@@ -6,6 +6,17 @@ describe FormQuestionController do
   	make_test_form_questions
     before :each do 
       Form.stub(:where).and_return([@test_form])
+
+      @type = make_forms_for_app_type "vendor"
+      Application.latest_year = 2015
+      mock_app = FactoryGirl.create(:application)
+      mock_app.user = @user
+      mock_app.year = Application.latest_year
+      mock_app.application_type = @type
+      mock_app.completed = false
+      mock_app.save
+      @form = make_form_with_questions
+      @form_answer = {"0" => "", "1" => "Yes", "2" => "No"}
     end
 
   	it "opens a new form" do 
@@ -36,8 +47,11 @@ describe FormQuestionController do
       response.should redirect_to user_path(@user)
     end
 
-    it "should return false if the form is not completed" do 
-      #test not writtien yet
+    it "should not update the db if the form is not complete" do 
+      post :save_progress, :id => @user.id, :type => @form.form_name, :commit => "Submit", :form_answer => @form_answer
+      @user.reload
+      application = @user.get_most_recent_application
+      application.content.should == {}
     end
 
     it "should update db if click save" do

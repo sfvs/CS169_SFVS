@@ -49,7 +49,7 @@ module ControllerMacros
   end
 
   def make_form_with_questions(q_number = 3)
-    form = make_a_form
+    form = make_a_form("General Form")
     (0..q_number-1).each do |i|
       form.form_questions.create({:question => "General Question", :question_type => "textbox", :order => (i+1)})
     end
