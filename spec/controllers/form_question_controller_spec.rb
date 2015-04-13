@@ -68,6 +68,14 @@ describe FormQuestionController do
       application = @user.get_most_recent_application
       application.content.should == {@form.form_name => {"General Question 1" => "Yes", "General Question 2" => "Yes", "General Question 3" => "No", "completed" => true}}
     end
+
+    it "should prefill the form fields if there is a saved form" do
+      application = @user.get_most_recent_application
+      application.content = {@form.form_name => {"General Question 1" => "Yes", "General Question 2" => "Yes", "General Question 3" => "No", "completed" => true}}
+      application.save
+      get :show, :id => @user.id, :type => @form.form_name
+      assigns(:form_answer).should == {"0"=>"Yes", "1"=>"Yes", "2"=>"No"}
+    end
     
   end
 end
