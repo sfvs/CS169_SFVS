@@ -57,14 +57,14 @@ objects_to_create[:Answers] = [
 ]
 
 # Forms
+vendor_solicitation = Form.create({:form_name => "Vendor Solicitation"})
+sponsor_solicitation = Form.create({:form_name => "Sponsor Solicitation"})
+
 general_form = Form.create({:form_name => "General Form"})
 restaurant_contract = Form.create({:form_name => "Restaurant Concessionaire Contract"})
 sponsor_contract = Form.create({:form_name => "Sponsor Contract"})
 non_profit_contract = Form.create({:form_name => "Exhibitor Contract - Non Profit"})
 other_contract = Form.create({:form_name => "Exhibitor Contract - All other Exhibitors"})
-
-vendor_solicitation = Form.create({:form_name => "Vendor Solicitation"})
-sponsor_solicitation = Form.create({:form_name => "Sponsor Solicitation"})
 
 advertising_contract = Form.create({:form_name => "Advertising Contract"})
 health_permit_form = Form.create({:form_name => "Health Permit Form"})

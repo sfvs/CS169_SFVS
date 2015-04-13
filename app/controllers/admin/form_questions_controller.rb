@@ -25,7 +25,8 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form_question = FormQuestion.find(params[:id])
     @form_question.destroy
     # update the ordering of the questions
-    FormQuestion.update_order(params[:form_id])
+    @form = Form.find_by_id(params[:form_id])
+    @form.update_form_questions_order()
     flash[:notice] = "Question deleted."
     redirect_to admin_form_form_questions_path(Form.find(params[:form_id]))
   end
