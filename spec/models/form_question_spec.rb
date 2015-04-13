@@ -22,10 +22,10 @@ describe FormQuestion do
   	end
 
     it "should order the form questions correctly" do
-      num_of_questions = 3
+      num_of_questions = 4
       shift_question_order = 2
       form = make_a_form
-      add_questions_to_form(form, num_of_questions, shift_question_order)
+      add_questions_to_form(form,num_of_questions,shift_question_order)
       FormQuestion.stub(:get_questions_for_form).with(form.form_name).and_return(form.form_questions)
       FormQuestion.update_order(form.id)
       form.reload

@@ -54,11 +54,16 @@ module ControllerMacros
   def make_many_forms(count = 3)
     form_list = []
     (0..count-1).each do |i|
-      cur_form = make_a_form "Form #{i}"
-      add_questions_to_form cur_form
-      form_list[i] = cur_form
+      form_list[i] = make_a_form_with_questions "Form #{i}"
     end
     form_list
+  end
+
+  def make_a_form_with_questions(form_name = "Form", q_number = 3, shift = 0)
+    form = make_a_form form_name
+    add_questions_to_form(form, q_number, shift)
+    form.save
+    form
   end
 
   def make_a_form(form_name = "Form")

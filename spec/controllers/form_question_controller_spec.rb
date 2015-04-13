@@ -3,15 +3,11 @@ require 'spec_helper'
 describe FormQuestionController do
   login(:user, :email => "i_am_a_coconut@mail.com")
   describe "valid form question" do
-  	make_test_form_questions
+  	make_test_form_questions    
+    make_a_vendor_application_for_user
+
     before :each do
-      Application.latest_year = 2015
-      @application = Application.new
-      @application.user = @user
-      @application.application_type = make_useable_application
-      @application.year = Application.latest_year
-      @application.save
-      @form = @application.application_type.forms[0]
+      @form = @mock_app.application_type.forms[0]
       @form_answer = {"0" => "", "1" => "Yes", "2" => "No"}
     end
 
