@@ -20,7 +20,7 @@ class FormQuestion < ActiveRecord::Base
 
   def self.update_order(form_id)
     form_questions = self.get_questions_for_form(Form.find(form_id).form_name)
-    order = 1
+    order = 0
     form_questions.each do |question|
       question.update_attribute(:order,order)
       order += 1
