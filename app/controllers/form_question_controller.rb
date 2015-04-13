@@ -16,10 +16,8 @@ class FormQuestionController < ApplicationController
     @user = User.find(params[:id])
     @form_content = get_form_content
     @application = @user.get_most_recent_application
-    logger.debug "@form_cont: #{@form_content}"
     if params[:commit] == "Save and Return"
       update_application(false)
-      logger.debug "@app.cont: #{@application.content}"
       flash[:notice] = "#{params[:type]} successfully saved."
       redirect_to user_path(@user)
     elsif params[:commit] == 'Submit'
