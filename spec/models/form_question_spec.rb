@@ -20,5 +20,16 @@ describe FormQuestion do
   	it "should give me all the form types" do
   	  FormQuestion.get_form_question_types.should == [:checkbox, :textbox, :radio_button, :statement, :message]
   	end
+
+    it "should order the form questions correctly" do
+      form = make_form_with_unordered_questions
+      FormQuestion.update_order(form.id)
+      form.reload
+      order = 1
+      form.form_questions.each do |question|
+        question.order.should == order
+        order += 1
+      end
+    end
   end
 end

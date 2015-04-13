@@ -3,24 +3,40 @@
 
 %div.container-fluid
   %h1 #{@form_type}
-  %p
-    %font{:color => "Crimson"} #{@error}
 
+  = form_tag form_user_path(:type=> @form_type) do
+    - answer = 0
+    - @list_of_questions.each do |question|
+      %p 
+        %font{:color => "black"} #{question.question}
+        - if (question.question_type == "textbox")
+          - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
+            - f_answer = @form_answer[answer.to_s]
+          = text_field_tag "form_answer[#{answer.to_s}]", f_answer, size: 20
+          - answer += 1 
+        - elsif (question.question_type == "radio_button")
+          -String(String(question.answers)[1..-2]).split(', ').each do |choice|
+            - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
+              - if @form_answer[answer.to_s] == choice
+                - r_checked = true
+            = label :form_answer, answer, choice
+            = radio_button_tag "form_answer[#{answer.to_s}]", choice, r_checked
+          - answer += 1
+        - elsif (question.question_type == "checkbox")
+          - check_ans = 0
+          - String(String(question.answers)[1..-2]).split(', ').each do |choice|
+            - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
+              - if @form_answer[answer.to_s]["check_box_ans"][check_ans.to_s] == choice
+                - c_checked = true
+            = label :form_answer, answer, choice
+            = check_box_tag "form_answer[#{answer.to_s}][check_box_ans][#{check_ans.to_s}]", choice, c_checked
+            = check_ans += 1
+          - answer += 1
+        - elsif (question.question_type == "statement" || question.question_type == "message")
+          - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
+            - f_answer = @form_answer[answer.to_s]
+          = text_area_tag "form_answer[#{answer.to_s}]", f_answer, size: "60x5"
+          - answer += 1
 
-  -@list_of_questions.each do |question|
-    %a 
-      %font{:color => "008B8B"} #{question.question} 
-    %br
-    -if (question.question_type == "radio_button")
-      -String(String(question.answers)[1..-2]).split(', ').each do |choice|
-        =radio_button_tag(:ans, "#{choice}")
-        =label_tag(:tag, "#{choice}")
-        &nbsp
-    -elsif (question.question_type == "statement")
-    -elsif (question.question_type == "message")
-      %textarea{:cols => "35", :name => "#{question.question}]", :rows => "6"} 
-    -elsif (question.question_type == "textbox")
-      %input{:name => "#{question.question}", :type => "text"}
-    %hr
-  =link_to 'Back', form_user_path(:type=> @form_type,:save => true)
-  =link_to 'Submit Form', form_user_path(:submit => true, :type => @form_type)
+    = submit_tag 'Save and Return'
+    = submit_tag 'Submit'
