@@ -118,21 +118,33 @@ Then /^(?:|I )should (not )?see "([^"]*)"$/ do |option, text|
   end
 end
 
+# > a = "my_string"
+# > meth = a.method("size")
+# > meth.call()
+
 Then /^(?:|I )should (not )?see \/([^\/]*)\/$/ do |option, regexp|
   regexp = Regexp.new(regexp)
-  if !option.nil?
-    if page.respond_to? :should
-      page.should have_no_xpath('//*', :text => regexp)
-    else
-      assert page.has_no_xpath?('//*', :text => regexp)
-    end
+  if page.respond_? :should
+    method = !option.nil? ? "have_no_xpath" : "has_xpath"
+    page.should send(method, '//*', :text => regexp)
   else
-    if page.respond_to? :should
-      page.should have_xpath('//*', :text => regexp)
-    else
-      assert page.has_xpath?('//*', :text => regexp)
-    end
+    method = !option.nil? ? "has_no_xpath?" : "has_xpath?"
+    assert page.send(method, '//*', :text => regexp)
   end
+
+  # if !option.nil?
+  #   if page.respond_to? :should
+  #     page.should have_no_xpath('//*', :text => regexp)
+  #   else
+  #     assert page.has_no_xpath?('//*', :text => regexp)
+  #   end
+  # else
+  #   if page.respond_to? :should
+  #     page.should have_xpath('//*', :text => regexp)
+  #   else
+  #     assert page.has_xpath?('//*', :text => regexp)
+  #   end
+  # end
 end
 
 Then /^the "([^"]*)" field(?: within (.*))? should (not )?contain "([^"]*)"$/ do |field, parent, option, value|
