@@ -70,14 +70,14 @@ class FormQuestionController < ApplicationController
 
   def submit
     if form_completed?
-        update_application(true)
-        flash[:notice] = "Submitted #{@form_name}"
-        redirect_to user_path(@user)
-      else
-        flash[:alert] = "There are missing fields in the form"
-        @list_of_questions = @form_type.get_sorted_form_questions
-        @form_answer = params[:form_answer]
-        render :show
-      end
+      update_application(true)
+      flash[:notice] = "Submitted #{@form_name}"
+      redirect_to user_path(@user)
+    else
+      flash[:alert] = "There are missing fields in the form"
+      @list_of_questions = @form_type.get_sorted_form_questions
+      @form_answer = params[:form_answer]
+      render :show
+    end
   end
 end

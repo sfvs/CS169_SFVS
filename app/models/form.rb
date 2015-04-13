@@ -4,7 +4,7 @@ class Form < ActiveRecord::Base
   has_many :form_questions
   has_and_belongs_to_many :application_types
 
-  def number_of_questions()
+  def number_of_questions
     self.form_questions.count
   end
 
@@ -20,7 +20,7 @@ class Form < ActiveRecord::Base
     questions_list
   end
 
-  def update_form_question_order
+  def update_form_questions_order
     form_questions = self.get_sorted_form_questions
     order = 0
     form_questions.each do |question|
