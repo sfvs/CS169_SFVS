@@ -17,4 +17,13 @@ class FormQuestion < ActiveRecord::Base
     end    
     questions_list
   end
+
+  def self.update_order(form_id)
+    form_questions = self.get_questions_for_form(Form.find(form_id).form_name)
+    order = 1
+    form_questions.each do |question|
+      question.update_attribute(:order,order)
+      order += 1
+    end
+  end
 end
