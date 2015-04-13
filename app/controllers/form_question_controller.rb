@@ -25,8 +25,6 @@ class FormQuestionController < ApplicationController
     end
   end
 
-  private
-  
   def get_answers_to_prefill_from(content)
     number_of_questions = Form.where(form_name: @form_type)[0].number_of_questions
     form_answer = Hash.new

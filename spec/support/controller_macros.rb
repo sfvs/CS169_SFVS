@@ -56,6 +56,14 @@ module ControllerMacros
     form
   end
 
+  def make_form_with_unordered_questions(q_number = 3)
+    form = make_a_form("Unordered Form")
+    (0..q_number-1).each do |i|
+      form.form_questions.create({:question => "General Question", :question_type => "textbox", :order => (i+2)})
+    end
+    form
+  end
+
   def make_an_application(type,year)
     app = FactoryGirl.create(:application)
     app.application_type = type
