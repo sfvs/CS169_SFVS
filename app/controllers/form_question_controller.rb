@@ -3,7 +3,7 @@ class FormQuestionController < ApplicationController
   def show
     @form_type = Form.find_by_id(params[:form_id])
     @form_name = @form_type.form_name
-    @list_of_questions = FormQuestion.get_questions_for_form(@form_name)
+    @list_of_questions = @form_type.get_sorted_form_questions
     application = User.find(params[:id]).get_most_recent_application
     if application
       @saved_form = application.content
@@ -56,7 +56,7 @@ class FormQuestionController < ApplicationController
   end
 
   def get_form_content
-    @questions_list = FormQuestion.get_list_of_questions(@form_name)
+    @questions_list = @form_type.get_list_of_questions
     form_content = {
       @form_name => Hash[@questions_list.zip get_answers]
     }
@@ -75,7 +75,7 @@ class FormQuestionController < ApplicationController
         redirect_to user_path(@user)
       else
         flash[:alert] = "There are missing fields in the form"
-        @list_of_questions = FormQuestion.get_questions_for_form(@form_name)
+        @list_of_questions = @form_type.get_sorted_form_questions
         @form_answer = params[:form_answer]
         render :show
       end
