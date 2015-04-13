@@ -16,7 +16,7 @@
         %th Created At
         %th Actions
     %tbody
-      - if @applications.any?
+      - if !@applications.nil?
         - @applications.each do |application|
           %tr
             %td Application

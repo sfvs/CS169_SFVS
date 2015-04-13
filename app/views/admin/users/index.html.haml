@@ -19,14 +19,14 @@
         %th Created At
         %th Actions
     %tbody
-      - if @users.any?
+      - if !@users.nil?
         - @users.each do |user|
           %tr
             %td= user.id
             %td= user.email
             %td= user.created_at
             %td= link_to "Show", admin_user_path(user), :class => "btn btn-default admin_button"
-  - if @users.any?
+  - if !@users.nil?
     %div.pagination
       = will_paginate @users, renderer: BootstrapPagination::Rails
 
