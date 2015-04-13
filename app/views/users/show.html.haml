@@ -16,7 +16,7 @@
           %strong="Application Status: #{@status}"
       -else
         %p Please take survey below to determine your application type.
-      = button_to "Edit Profile", edit_user_path(@user)
+      = button_to "Edit Profile", edit_user_registration_path, {method: :get}
       = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
     %div.span4
       -if @application
