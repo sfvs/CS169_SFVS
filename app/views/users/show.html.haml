@@ -7,26 +7,23 @@
       %h2= "Welcome"
       %p
         %strong= "Email: #{@user.email}"
-      -if @application
-        %p    
+        -if @application
+          %br
           %strong="Application Type: #{@type}"
-        %p
+          %br
           %strong="Application Year: #{@year}"
-        %p
+          %br
           %strong="Application Status: #{@status}"
-      -else
-        %p Please take survey below to determine your application type.
-      = button_to "Edit Profile", edit_user_path(@user)
-      = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
+        -else
+          %br
+          Please take survey below to determine your application type.
+        = button_to "Edit Profile", edit_user_registration_path, {method: :get}
+        = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
     %div.span4
       -if @application
         %h3= "Application Forms"
-        %ul
-          -@forms_to_build.each do |form|
-            %br
-            %li= link_to "#{form.form_name}", form_user_path(:type => form.form_name, :id => @user), :class => "form_link", :id => "link_#{form.id}"
-            - if !@completed_forms.nil? && @completed_forms.include?(form.form_name)
-              %span.glyphicons.icon-check 
+        -@forms_to_build.each do |form|
+          %br= link_to "#{form.form_name}", form_user_path(:type => form.form_name), :class => "form_link", :id => "link_#{form.id}"
         %br
         -unless @application.completed
           = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post}
