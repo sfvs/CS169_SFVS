@@ -2,9 +2,9 @@
 = render 'shared/navi_bar'
 
 %div.container-fluid
-  %h1 #{@form_type}
+  %h1 #{@form_name}
 
-  = form_tag form_user_path(:type=> @form_type) do
+  = form_tag form_user_path(:form_id => @form_type.id) do
     - answer = 0
     - @list_of_questions.each do |question|
       %p 
