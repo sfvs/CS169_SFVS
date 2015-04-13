@@ -22,12 +22,13 @@ Background: application is setup with user john doe
   | Website                                                          | General Form    | textbox       |
   | Company name for WVF Program listing (if different from above)   | General Form    | textbox       |
 
+  And user john doe exist in the database
   And the following users exist: 
   | email            | password         | admin   |
-  | johndoe@gmail.com| bear12345        | false   |
   | admin@gmail.com  | admin123         | true    |
 
   And john doe has an incomplete vendor application
+  And john doe filled the "General Form"
   And I am logged into the admin page as "admin"
   And I am on the admin profile page
   And I follow "Users List"
@@ -39,7 +40,12 @@ Scenario: display the forms of a user
   Then I should see "General Form"
   And I should see "Vendor Form"
 
-Scenario: display the contents of the form of a user
+Scenario: display the questions of the form of a user
   When I follow "Show"
   And I click the "Show" button for "General Form"
   Then I should see "Company name"
+
+Scenario: display the content of the form of a user
+  When I follow "Show"
+  And I click the "Show" button for "General Form"
+  Then I should see disabled "Company name" with "Apple"
