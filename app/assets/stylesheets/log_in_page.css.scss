@@ -1,0 +1,40 @@
+.login_container {
+  background-color: white;
+  border-radius: 25px;
+  border: 2px solid #8AC007;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  padding: 60px 0px 70px 80px;
+  width: 320px;
+  height: 350px;
+}
+
+.login_page {
+	background-image: image-url(image_path("login_bg1.jpg"));
+	background-repeat: no-repeat;
+}
+
+.authentication_button {
+	text-decoration: none;
+	margin: 0px 0px 5px 0px;
+}
+
+.password_container {
+  background-color: white;
+  border-radius: 25px;
+  border: 2px solid #8AC007;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 60px 10px 30px 80px;
+  width: 430px;
+  height: 350px;
+}
+
+.regis_alert li {
+  display: block;
+}

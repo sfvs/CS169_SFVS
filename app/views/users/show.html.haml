@@ -1,28 +1,45 @@
-%h2= "Welcome"
+- body_class "users_view"
+= render 'shared/navi_bar'
 
-%p
-	%strong= "Email: #{@user.email}"
-	-if @application
-		%br
-		%strong="Application Type: #{@type}"
-		%br
-		%strong="Application Year: #{@year}"
-		%br
-		%strong="Application Status: #{@status}"
-	-else
-		%br
-		Please take survey below to determine your application type.
+%div.container-fluid
+  %div.row
+    %div.span4
+      %h2= "Welcome"
+      %p
+        %strong= "Email: #{@user.email}"
+      -if @application
+        %p    
+          %strong="Application Type: #{@type}"
+        %p
+          %strong="Application Year: #{@year}"
+        %p
+          %strong="Application Status: #{@status}"
+      -else
+        %p Please take survey below to determine your application type.
+      = button_to "Edit Profile", edit_user_registration_path, {method: :get}
+      = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
+    %div.span4
+      -if @application
+        %h3= "Application Forms"
+        %ul
+          -@forms_to_build.each do |form|
+            %br
+            %li= link_to "#{form.form_name}", form_user_path(:form_id => form.id, :id => @user), :class => "form_link", :id => "link_#{form.id}"
+            - if !@completed_forms.nil? && @completed_forms.include?(form.form_name)
+              %span.glyphicons.icon-check 
+        %br
+        -unless @application.completed
+          = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post}
+          = button_to "Restart Application", survey_user_path, {:id => "questionnaire_button", method: :get}
+      -else
+        %br
+        = button_to "Determine Application Type", survey_user_path, {:id => "questionnaire_button", method: :get}
 
--if @application
-	-@forms_to_build.each do |form|
-		%br= link_to "#{form.form_name}", form_user_path(:type => form.form_name), :class => "form_link", :id => "link_#{form.id}"
-	%br
-	-unless @application.completed
-		= button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post}
-		%br
-		= button_to "Restart Application", survey_user_path, {:id => "questionnaire_button", method: :get}
--else
-	%br
-	= button_to "Determine Application Type", survey_user_path, {:id => "questionnaire_button", method: :get}
-= button_to "Edit Profile", edit_user_path(@user)
-= button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
+    %div.span3
+      %h3 About Us
+
+      %p The San Francisco Vegetarian Society (SFVS) is a non-profit organization that has been working in the Bay Area for over 40 years promoting a vegetarian diet as a healthful and humane way of life.
+
+      %p The Society is run entirely by volunteers. We always appreciate help, whether it is available once in a while or on an ongoing basis. You can volunteer to help with a variety of activities, from coordinating our programs to helping at our events. If you are interested in getting involved, please contact us.
+
+      %p The Society hosts events throughout the year such as vegetarian potlucks, picnics, dining out and lectures. Monthly meetings held most months. Please check our hotline, 415-273-5481 for details.

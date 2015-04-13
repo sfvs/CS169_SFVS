@@ -26,4 +26,16 @@ describe Application do
 		myApp.reload()
 		myApp.content["depth1"]["depth2"]["depth3"].should == "hello world"
 	end
+
+	describe "should merge new contents with old one" do 
+		myApp = Application.new
+		myApp.year = 2015
+		myApp.content = {"Person1" => {"yourName" => "John", "yourLastName" => "Wick"}}
+		myApp.save!
+
+		myApp.add_content({"Person2" => {"yourName" => "Neo", "yourLastName" => "The Chosen One"}})
+		myApp.reload
+		myApp.content.should == {"Person1" => {"yourName" => "John", "yourLastName" => "Wick"}, "Person2" => {"yourName" => "Neo", "yourLastName" => "The Chosen One"}}
+	end
+
 end

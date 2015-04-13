@@ -1,5 +1,7 @@
 module ControllerMacros
   
+  ### Create users and sign_in helpers
+
   # takes in a member_objects, authenticates it using a stub, and returns it
   def sign_in(user = double('user'))
     if user.nil?
@@ -10,6 +12,17 @@ module ControllerMacros
       allow(controller).to receive(:current_user).and_return(user)
     end
     user
+  end
+
+  def login(type = :user, attributes = nil)
+    before(:each) do
+      obj = sign_in make_a_member(type, attributes)
+      if type == :user
+        @user = obj
+      elsif type == :admin
+        @admin = obj
+      end
+    end
   end
 
   # current types are :user, and :admin
@@ -30,17 +43,7 @@ module ControllerMacros
     user_list
   end
 
-  def make_a_form(form_name = "Form")
-    form = FactoryGirl.create(:form, {:form_name => form_name})
-  end
-
-  def make_many_forms(count = 3)
-    form_list = []
-    (0..count-1).each do |i|
-      form_list[i] = make_a_form
-    end
-    form_list
-  end
+  ### Create Application Types, Forms, and Form Questions helpers
 
   def make_forms_for_app_type(type)
     type = FactoryGirl.create(:application_type,{:app_type => type})
@@ -48,52 +51,32 @@ module ControllerMacros
     type
   end
 
-  def make_form_with_questions(q_number = 3)
-    form = make_a_form
-    (0..q_number-1).each do |i|
-      form.form_questions.create({:question => "General Question", :question_type => "textbox", :order => (i+1)})
+  def make_many_forms(count = 3)
+    form_list = []
+    (0..count-1).each do |i|
+      form_list[i] = make_a_form_with_questions "Form #{i}"
     end
+    form_list
+  end
+
+  def make_a_form_with_questions(form_name = "Form", q_number = 3, shift = 0)
+    form = make_a_form form_name
+    add_questions_to_form(form, q_number, shift)
+    form.save
     form
   end
 
-  def make_an_application(type,year)
-    app = FactoryGirl.create(:application)
-    app.application_type = type
-    app.year = year
-    app.save
-    app
+  def make_a_form(form_name = "Form")
+    FactoryGirl.create(:form, {:form_name => form_name})
   end
 
-  def make_a_vendor_application_for_user
-    before(:each) do
-      Application.latest_year = 2015
-      @type = make_forms_for_app_type "vendor"
-      @mock_app = make_an_application @type, Application.latest_year
-      @user.applications << @mock_app
-      @user.save
-    end
-  end
-
-  def login(type = :user, attributes = nil)
-    before(:each) do
-      obj = sign_in make_a_member(type, attributes)
-      if type == :user
-        @user = obj
-      elsif type == :admin
-        @admin = obj
-      end
-    end
-  end
-
-  def make_question_answer_tree
-    before :each do
-      @q1 = Questionnaire.create(:question => "hello world")
-      @q2 = Questionnaire.create(:question => "how are you?")
-      @a1a = Answers.create(:ans => "hi", :questionnaire_id => @q1.id, :leads_to => @q2.id)
-      @a1b = Answers.create(:ans => "hello", :questionnaire_id => @q1.id)
-      @a2 = Answers.create(:ans => "I am world", :questionnaire_id => @q2.id)
-      @q2.parent_id = @a1a.id
-      @q2.save
+  def add_questions_to_form(form, q_number = 3, shift = 0)
+    (0..q_number-1).each do |i|
+      form.form_questions.create({
+        :question => "General Question #{(i+1).to_s}",
+        :question_type => "textbox",
+        :order => (shift+1)
+      })
     end
   end
 
@@ -120,6 +103,40 @@ module ControllerMacros
       @test_form.form_questions << @statement
       @test_form.form_questions << @radio_button
       @test_form.form_questions << @testbox
+    end
+  end
+
+  ### Create Application helpers
+
+  def make_a_vendor_application_for_user
+    before(:each) do
+      Application.latest_year = 2015
+      @type = make_forms_for_app_type "vendor"
+      @mock_app = make_an_application @type, Application.latest_year
+      @user.applications << @mock_app
+      @user.save
+    end
+  end
+
+  def make_an_application(type,year)
+    app = FactoryGirl.create(:application)
+    app.application_type = type
+    app.year = year
+    app.save
+    app
+  end
+
+  # Create Questionnaire, and Answer Helpers
+
+  def make_question_answer_tree
+    before :each do
+      @q1 = Questionnaire.create(:question => "hello world")
+      @q2 = Questionnaire.create(:question => "how are you?")
+      @a1a = Answers.create(:ans => "hi", :questionnaire_id => @q1.id, :leads_to => @q2.id)
+      @a1b = Answers.create(:ans => "hello", :questionnaire_id => @q1.id)
+      @a2 = Answers.create(:ans => "I am world", :questionnaire_id => @q2.id)
+      @q2.parent_id = @a1a.id
+      @q2.save
     end
   end
 

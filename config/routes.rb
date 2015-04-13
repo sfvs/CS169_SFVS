@@ -3,6 +3,7 @@ SFVSRegistrationSystem::Application.routes.draw do
   # namespace for the group of controllers for admin
   namespace :admin do
     root to: "admin#index"
+    post "/users", to: "users#search", as: 'search_user'
     resources :users
       # Need to add route to the forms (?) or might need to think about how to access and look at 
       # each individual forms the user has.
@@ -19,6 +20,7 @@ SFVSRegistrationSystem::Application.routes.draw do
   devise_for :users, :path => 'member'
   resources :users do 
     post "submit_application", on: :member
+    post "form", to: "form_question#save_progress", on: :member
     get "form", to: "form_question#show", on: :member
     get "survey", to: "survey#questionnaire", on: :member
   end

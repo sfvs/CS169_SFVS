@@ -13,6 +13,8 @@ gem 'pundit'
 gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'dotenv-rails'
 gem 'gon'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'sqlite3'
@@ -38,6 +40,9 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem "therubyracer"
+  gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+  gem 'twitter-bootstrap-rails'
 end
 
 gem 'jquery-rails'

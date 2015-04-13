@@ -1,8 +1,9 @@
 class Admin::UsersController < Admin::AdminController
+
   before_filter :require_admin
 
   def index
-    @users = User.find(:all, :conditions => ["admin = ?", false])
+    @users = User.where(admin: false).paginate(:page => params[:page], :per_page => 10)
   end
 
   def show
@@ -22,5 +23,16 @@ class Admin::UsersController < Admin::AdminController
     @user.destroy
     flash[:notice] = "User #{@user.email} has been removed."
     redirect_to admin_users_path
+  end
+
+  def search
+    @user = User.where(email: params[:user_email][:email], admin: false).first
+    if @user.nil?
+      flash[:alert] = "No user with e-mail: #{params[:user_email][:email]}"
+      redirect_to admin_users_path
+      return
+    end
+    redirect_to admin_user_path(@user)
+    return
   end
 end
