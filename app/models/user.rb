@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
   def get_most_recent_application
     self.applications.where(year: Application.current_application_year).first
   end
+
+  def self.get_users_by_order(order)
+    self.find(:all, :order => order, :conditions => {:admin => false})
+  end
 end

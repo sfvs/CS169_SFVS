@@ -15,7 +15,10 @@
     %thead
       %tr
         %th ID
-        %th E-mail
+        %th= link_to "E-mail", admin_users_path(:order => :email)
+        %th= link_to "Company Name", admin_users_path(:order => :company_name)
+        %th= link_to "Contact Person", admin_users_path(:order => :contact_person)
+        %th Telephone Number
         %th Created At
         %th Actions
     %tbody
@@ -24,6 +27,9 @@
           %tr
             %td= user.id
             %td= user.email
+            %td= user.company_name
+            %td= user.contact_person
+            %td= user.telephone
             %td= user.created_at
             %td= link_to "Show", admin_user_path(user), :class => "btn btn-default admin_button"
   - if !@users.nil?
