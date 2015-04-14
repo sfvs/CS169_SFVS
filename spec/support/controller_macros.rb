@@ -59,16 +59,6 @@ module ControllerMacros
     form_list
   end
 
-  def make_a_vendor_application_for_user
-    before(:each) do
-      @app_year = stub_app_year 2015
-      @type = make_forms_for_app_type "vendor"
-      @mock_app = make_an_application @type, @app_year
-      @user.applications << @mock_app
-      @user.save
-    end
-  end
-
   def make_a_form_with_questions(form_name = "Form", q_number = 3, shift = 0)
     form = make_a_form form_name
     add_questions_to_form(form, q_number, shift)
@@ -125,9 +115,9 @@ module ControllerMacros
 
   def make_a_vendor_application_for_user
     before(:each) do
-      app_year = stub_app_year 2015
+      @app_year = stub_app_year 2015
       @type = make_forms_for_app_type "vendor"
-      @mock_app = make_an_application @type, app_year
+      @mock_app = make_an_application @type, @app_year
       @user.applications << @mock_app
       @user.save
     end
