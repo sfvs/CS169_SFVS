@@ -1,5 +1,7 @@
 class FormQuestionController < ApplicationController
   
+  include ApplicationHelper
+
   def show
     @form_type = Form.find_by_id(params[:form_id])
     @form_name = @form_type.form_name
@@ -8,7 +10,7 @@ class FormQuestionController < ApplicationController
     if application
       @saved_form = application.content
       if @saved_form.has_key?(@form_name)
-        @form_answer = get_answers_to_prefill_from(@saved_form[@form_name])
+        @form_answer = get_answers_to_prefill_from(@saved_form[@form_name], @form_name)
       end
     end
   end
@@ -26,19 +28,6 @@ class FormQuestionController < ApplicationController
     elsif params[:commit] == 'Submit'
       submit
     end
-  end
-
-  def get_answers_to_prefill_from(content)
-    number_of_questions = @form_type.number_of_questions
-    form_answer = Hash.new
-    cur_num_questions = 0
-    content.each do |key, value|
-      if cur_num_questions != number_of_questions && key != "completed"
-        form_answer[cur_num_questions.to_s] = value
-        cur_num_questions += 1
-      end
-    end
-    form_answer
   end
 
   #filter that check if the form is filled correctly

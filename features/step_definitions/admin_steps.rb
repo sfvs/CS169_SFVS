@@ -37,3 +37,7 @@ When(/^I erase and fill in "(.*?)" with "(.*?)"$/) do |question, new_question|
   fill_in(question, :with => "")
   fill_in(question, :with => new_question)
 end
+
+When(/^I click the "(.*?)" button for "(.*?)"$/) do |button, form_name|
+  visit "1/form?form_type=" + form_name.gsub(' ','+')
+end

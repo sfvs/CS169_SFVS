@@ -121,7 +121,7 @@ module ControllerMacros
       @user.applications << @mock_app
       @user.save
     end
-  end
+  end 
 
   def make_an_application(type,year)
     app = FactoryGirl.create(:application)

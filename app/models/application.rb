@@ -36,4 +36,14 @@ class Application < ActiveRecord::Base
     self.content = self.content.merge(form_content_hash)
     self.save!
   end
+
+  def get_form(form_name)
+    form = Form.where(form_name: form_name).first
+    form.get_sorted_form_questions
+    form
+  end
+
+  def get_forms
+    self.application_type.forms
+  end
 end
