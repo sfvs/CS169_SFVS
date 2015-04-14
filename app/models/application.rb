@@ -43,8 +43,8 @@ class Application < ActiveRecord::Base
   end
 
   def get_form(form_name)
-    self.application_type.forms.each do |form|
-      return form if form.form_name == form_name
-    end
+    form = Form.where(form_name: form_name).first
+    form.get_sorted_form_questions
+    form
   end
 end
