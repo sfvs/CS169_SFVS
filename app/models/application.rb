@@ -31,4 +31,9 @@ class Application < ActiveRecord::Base
       write_attribute(:content, val.to_json)
     end
   end
+
+  def add_content(form_content_hash)
+    self.content = self.content.merge(form_content_hash)
+    self.save!
+  end
 end

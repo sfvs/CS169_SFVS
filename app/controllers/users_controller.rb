@@ -4,13 +4,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    flash[:notice] = parse_questionnaire_response(flash[:questionnaire_response])
+    if flash[:questionnaire_response]
+      flash[:notice] = parse_questionnaire_response(flash[:questionnaire_response]) # This line overwrites the notice from formq controller
+    end
     @application = @user.get_most_recent_application
     if @application
+      @completed_forms = get_completed_forms(@application.content)
       if @application.completed
-        @status = "Completed"
+        @status = "Complete"
       else
-        @status = "Incompleted"
+        @status = "Incomplete"
       end
       @year = @application.year
       @type = @application.application_type.app_type
@@ -50,4 +53,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def get_completed_forms(contents)
+    completed_forms = []
+    contents.each do |key, value|
+      completed_forms << key.to_s if value["completed"]
+    end
+    completed_forms
+  end
 end

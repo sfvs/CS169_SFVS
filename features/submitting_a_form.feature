@@ -28,28 +28,17 @@ Background: application is setup with user john doe
   And john doe has logged in
   And I am on the "profile" page for "johndoe@gmail.com"
 
-Scenario: view current application status
+Scenario: save and return to profile page
   When I follow "General Form"
   Then I should be on the "form" page for "johndoe@gmail.com"
-  And I fill in the following:
-  | Company name                                                           | Apple           |
-  | Contact person                                                         | Tomato Carrot   |
-  | Mailing address                                                        | 4444 Fruit Ave. |
-  | City                                                                   | New Pealand     |
-  | State                                                                  | AA              |
-  | ZIP                                                                    | 12345           |
-  | Phone                                                                  | 111-222-3333    |
-  | Alternate                                                              | 333-222-1111    |
-  | Fax                                                                    | 222-111-5555    |
-  | E-mail                                                                 | green@onion.com |
-  | Website                                                                | apple.com       |
-  | Company name for WVF Program listing (if different from above)         | Microsoft       |   
-  When I follow "Submit Form"
+  When I fill out the form completely   
+  And I press "Save and Return"
   Then I should be on the "profile" page for "johndoe@gmail.com"
 
-Scenario: see completed form status after submission
+Scenario: fail submitting the form
   When I follow "General Form"
-  And I fill in the following:
+  Then I should be on the "form" page for "johndoe@gmail.com"
+  And I type in the following:
   | Company name                                                           | Apple           |
   | Contact person                                                         | Tomato Carrot   |
   | Mailing address                                                        | 4444 Fruit Ave. |
@@ -61,8 +50,30 @@ Scenario: see completed form status after submission
   | Fax                                                                    | 222-111-5555    |
   | E-mail                                                                 | green@onion.com |
   | Website                                                                | apple.com       |
-  | Company name for WVF Program listing (if different from above)         | Microsoft       |
-  When I follow "Submit Form"
-  And I should see completed next to "General Form"
+  | Company name for WVF Program listing (if different from above)         |                 |   
+  When I press "Submit"
+  Then I should see "There are missing fields in the form"
+
+Scenario: succeed submitting the form
+  When I follow "General Form"
+  Then I should be on the "form" page for "johndoe@gmail.com"
+  When I fill out the form completely   
+  And I press "Submit"
+  Then I should be on the "profile" page for "johndoe@gmail.com"
+
+Scenario: save and return, and see prefilled fields
+  When I follow "General Form"
+  Then I should be on the "form" page for "johndoe@gmail.com"
+  When I fill out the form completely   
+  And I press "Save and Return"
+  Then I should see "General Form successfully saved."
+  When I follow "General Form"
+  Then I should see "E-mail" with "green@onion.com"
+
+Scenario: see completed form message after submission
+  When I follow "General Form"
+  And I fill out the form completely
+  And I press "Submit"
+  Then I should see "Submitted General Form"
   When I follow "General Form"
   Then I should see "Company name" with "Apple"
