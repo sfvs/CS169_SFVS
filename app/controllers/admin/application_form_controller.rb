@@ -12,6 +12,7 @@ class Admin::ApplicationFormController < Admin::AdminController
     if @application.content.has_key?(params[:form_type])
       @form_answer = get_answers_to_prefill_from(@application.content[params[:form_type]], params[:form_type])
     end
-    @list_of_questions = FormQuestion.get_questions_for_form(params[:form_type])
+    @form = @application.get_form(params[:form_type])
+    @list_of_questions = @form.get_sorted_form_questions
   end
 end

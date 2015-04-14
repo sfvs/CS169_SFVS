@@ -41,4 +41,10 @@ class Application < ActiveRecord::Base
     self.content = self.content.merge(form_content_hash)
     self.save!
   end
+
+  def get_form(form_name)
+    self.application_type.forms.each do |form|
+      return form if form.form_name == form_name
+    end
+  end
 end
