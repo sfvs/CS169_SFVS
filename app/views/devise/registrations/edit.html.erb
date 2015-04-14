@@ -33,6 +33,21 @@
       <%= f.password_field :current_password, autocomplete: "off" %>
     </div>
 
+    <div class="field">
+      <%= f.label :company_name %><br />
+      <%= f.text_field :company_name, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :contact_person %><br />
+      <%= f.text_field :contact_person, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :telephone %><i>9 digits number (including area code)</i><br />
+      <%= f.telephone_field :telephone, autocomplete: "off" %>
+    </div>
+
     <div class="actions">
       <%= f.submit "Update" %>
     </div>
