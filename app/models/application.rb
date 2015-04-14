@@ -5,13 +5,8 @@ class Application < ActiveRecord::Base
   belongs_to :user
   belongs_to :application_type
 
-  @@year = 2015
-  def self.latest_year
-    @@year
-  end
-
-  def self.latest_year=(year)
-    @@year=year
+  def self.current_application_year
+    Time.now.year
   end
 
   def content

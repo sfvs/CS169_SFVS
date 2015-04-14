@@ -11,6 +11,6 @@ class User < ActiveRecord::Base
 
   has_many :applications
   def get_most_recent_application
-    self.applications.where(year: Application.latest_year)[0]
+    self.applications.where(year: Application.current_application_year).first
   end
 end

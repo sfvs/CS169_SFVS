@@ -14,7 +14,7 @@ describe UsersController do
       reply = 1
       application_type = make_forms_for_app_type "vendor"
       ApplicationType.stub(:find_by_id).with(reply).and_return(application_type)
-      User.stub(:get_most_recent_inprogress_application).with(@user).and_return(nil)
+      User.stub(:get_most_recent_application).with(@user).and_return(nil)
       get :show, {:id => @user.id}, nil, {:questionnaire_response => @reply}
       response.should be_success
     end
@@ -25,10 +25,10 @@ describe UsersController do
     before (:each) do
       @reply = 1
       @type = make_forms_for_app_type "vendor"
+      ApplicationType.stub(:find_by_id).with(@reply).and_return(@type)
     end
 
     it "should correctly make an application based on the questionnaire response" do
-      ApplicationType.stub(:find_by_id).with(@reply).and_return(@type)
       get :show, {:id => @user.id}, nil, {:questionnaire_response => @reply}
 
       application = @user.applications[0]
@@ -37,19 +37,19 @@ describe UsersController do
     end
 
     it "should correctly delete the most recent application and create a new application" do
-      Application.latest_year = 2015
+      app_year = stub_app_year 2015
       mock_app = FactoryGirl.create(:application)
       mock_app.user = @user
-      mock_app.year = Application.latest_year
+      mock_app.year = app_year
       mock_app.application_type = @type
       mock_app.completed = false
       mock_app.save
 
-      ApplicationType.stub(:find_by_id).with(@reply).and_return(@type)
       User.stub(:get_most_recent_application).with(@user).and_return(mock_app)
       get :show, {:id => @user.id}, nil, {:questionnaire_response => @reply}
 
       Application.find_by_id(mock_app).should == nil
+      @user.get_most_recent_application.should_not be_nil
     end
   end
 
@@ -72,6 +72,28 @@ describe UsersController do
       assigns(:status).should_not match /incomplete/i
       response.should be_success
     end
-
   end
+
+  describe "sustainable accounts" do
+    it "should be able to make a new application some new year in the future" do
+      reply = 1
+      type = make_forms_for_app_type "vendor"
+      ApplicationType.stub(:find_by_id).with(reply).and_return(type)
+
+      old_year = stub_app_year 2015
+      app1 = @user.applications.create :completed => true, :year => old_year
+      app1.application_type = type
+      app1.save
+
+      get :show, :id => @user.id
+      assigns(:status).should_not match /incomplete/i
+      
+
+      new_year = stub_app_year 2018
+      # after filling out questionnaire
+      get :show, {:id => @user.id}, nil, {:questionnaire_response => reply}
+      @user.applications.length.should be == 2
+    end
+  end
+
 end
