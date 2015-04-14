@@ -108,11 +108,16 @@ module ControllerMacros
 
   ### Create Application helpers
 
+  def stub_app_year(year)
+    Application.stub(:current_application_year).and_return(year)
+    year
+  end
+
   def make_a_vendor_application_for_user
     before(:each) do
-      Application.latest_year = 2015
+      @app_year = stub_app_year 2015
       @type = make_forms_for_app_type "vendor"
-      @mock_app = make_an_application @type, Application.latest_year
+      @mock_app = make_an_application @type, @app_year
       @user.applications << @mock_app
       @user.save
     end
