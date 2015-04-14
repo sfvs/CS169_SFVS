@@ -5,7 +5,6 @@ SFVSRegistrationSystem::Application.routes.draw do
     root to: "admin#index"
     resources :users do
       post "search", on: :collection
-      post "filter_year", on: :collection
     end
     # Need to add route to the forms (?) or might need to think about how to access and look at 
     # each individual forms the user has.

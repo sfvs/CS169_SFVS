@@ -25,10 +25,6 @@ class Admin::UsersController < Admin::AdminController
     redirect_to admin_users_path
   end
 
-  def filter_year
-    redirect_to admin_users_path
-  end
-
   def search
     @user = User.where(email: params[:user_email][:email], admin: false).first
     if @user.nil?
