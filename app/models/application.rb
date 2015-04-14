@@ -47,4 +47,8 @@ class Application < ActiveRecord::Base
     form.get_sorted_form_questions
     form
   end
+
+  def get_forms
+    self.application_type.forms
+  end
 end
