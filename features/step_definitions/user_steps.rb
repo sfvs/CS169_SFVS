@@ -1,7 +1,9 @@
 # user steps
 Given(/^the following users exist:$/) do |table|
   table.hashes.each do |user|
-    User.create(user, :without_protection => true)
+    user = User.create(user, :without_protection => true)
+    user.skip_confirmation!
+    user.save!
   end
 end
 

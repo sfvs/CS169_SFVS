@@ -29,7 +29,10 @@ module ControllerMacros
   # member_attributes is a hash of specific attrs. ex. {:email => "hello@world.com"}
   def make_a_member(type = :user, member_attributes = nil)
     @request.env["devise.mapping"] = Devise.mappings[type]
-    FactoryGirl.create(type,member_attributes)
+    user = FactoryGirl.create(type,member_attributes)
+    user.skip_confirmation!
+    user.save!
+    user
   end
 
   def make_many_members(type = :user, count = 5)
