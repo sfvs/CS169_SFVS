@@ -7,14 +7,15 @@
       %h1 Admin Page
       %h3 Users List
   %div.user_search
-    = form_tag admin_search_user_path do
+    = form_tag search_admin_users_path do
       = label :user_email, :email, 'Search by e-mail'
       = text_field :user_email, 'email', size: 30
       = submit_tag 'Search', :class => "btn btn-default"
-  %table.table.table-hover
+  %div.filter_year
     =form_tag filter_year_admin_users_path do
       -hidden_field_tag :from, "index"
       =collection_select :post, :year, @users,:id,:email, {prompt: true}, {:onchange => 'this.form.submit()'}
+  %table.table.table-hover
     %thead
       %tr
         %th ID
