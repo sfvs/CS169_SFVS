@@ -55,9 +55,8 @@ describe Admin::UsersController do
 
     it "should assign @applications" do
       user = make_a_member :user, :email => "bravo@hostname.com"
-      Application.latest_year = 2015
       @type = make_forms_for_app_type "vendor"
-      @mock_app = make_an_application @type, Application.latest_year
+      @mock_app = make_an_application @type, 2015
       user.applications << @mock_app
       user.save
       get 'show', :id => user.id
