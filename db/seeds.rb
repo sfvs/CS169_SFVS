@@ -6,9 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-def create_a_user(email, password, admin_status = :user)
+def create_a_user(email, password, contact_person = "", company_name  = "", phone_number  = "", admin_status = :user)
 	admin = :admin == admin_status
-	User.create({:email => email, :password => password, :admin => admin}, :without_protection => true)
+	User.create({:email => email, :password => password, :admin => admin, :contact_person => contact_person, :company_name => company_name, :telephone => phone_number}, :without_protection => true)
 end
 
 def link_form_questions_to_form(form,questions)
@@ -23,10 +23,10 @@ end
 
 objects_to_create = {}
 
-create_a_user('admin@hostname.com', 'admin123', :admin)
-create_a_user('user2@hostname.com', 'user1234')
-create_a_user('user3@hostname.com', 'user1234')
-create_a_user('user4@hostname.com', 'user1234')
+create_a_user('admin@hostname.com', 'admin123', "", "", "", :admin)
+create_a_user('user2@hostname.com', 'user1234', "John Wick", "Pineapple", "512-123-1235")
+create_a_user('user3@hostname.com', 'user1234' "", "", "")
+create_a_user('user4@hostname.com', 'user1234' "", "", "")
 
 # Application Types
 vendor = ApplicationType.create({:app_type => 'Vendor Exhibitor'})

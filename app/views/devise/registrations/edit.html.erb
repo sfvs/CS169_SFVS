@@ -1,6 +1,6 @@
 <%= body_class "login_page" %>
 
-<%= render "shared/background_cycler.html.erb" %>
+<%= render "shared/background_cycler" %>
 
 <%= devise_error_messages! %>
 
@@ -31,6 +31,21 @@
     <div class="field">
       <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
       <%= f.password_field :current_password, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :company_name %><br />
+      <%= f.text_field :company_name, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :contact_person %><br />
+      <%= f.text_field :contact_person, autocomplete: "off" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :telephone %><i>9 digits number (including area code)</i><br />
+      <%= f.telephone_field :telephone, autocomplete: "off" %>
     </div>
 
     <div class="actions">

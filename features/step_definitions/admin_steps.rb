@@ -41,3 +41,23 @@ end
 When(/^I click the "(.*?)" button for "(.*?)"$/) do |button, form_name|
   visit "1/form?form_type=" + form_name.gsub(' ','+')
 end
+
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  # ensure that that e1 occurs before e2.
+  # page.body is the entire content of the page as a string.
+  regexp = /#{e1}.*#{e2}/m
+  match = regexp =~ page.body
+  assert_match regexp, page.body
+end
+
+Then(/^users should be sorted by "(.*)":$/) do |order, table|
+  count = 0
+  previous_user = nil
+  table.hashes.each do |item|
+    if count > 0
+      step %Q{I should see "#{previous_user}" before "#{item[order]}"}
+    end
+    previous_user = item[order]
+    count += 1 
+  end
+end

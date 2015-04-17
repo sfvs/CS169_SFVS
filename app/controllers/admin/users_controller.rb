@@ -1,9 +1,13 @@
 class Admin::UsersController < Admin::AdminController
 
+  require 'will_paginate/array'
+
   before_filter :require_admin
 
   def index
-    @users = User.where(admin: false).paginate(:page => params[:page], :per_page => 10)
+    # Check order of users params[:order]
+    # Call a User model method to return a sorted list of users 
+    @users = User.get_users_by_order(params[:order]).paginate(:page => params[:page], :per_page => 10)
   end
 
   def show
