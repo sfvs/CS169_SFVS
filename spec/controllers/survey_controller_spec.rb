@@ -21,9 +21,10 @@ describe SurveyController do
       response.should be_success
     end
 
-    it "should not work with bad id" do
-      get :questionnaire, :id => 15, :ans => "3"
-      response.should_not be_success
+    it "should still work with bad ans" do
+      bad_ans = 200
+      get :questionnaire, :id => @user.id, :ans => bad_ans.to_s
+      response.should be_success
     end
   end
 
