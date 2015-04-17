@@ -12,8 +12,11 @@ describe FormQuestionController do
     end
 
   	it "opens a new form" do 
-      Form.stub(:where).and_return([@test_form])
-  	  get :show, :id => @user.id, :form_id => @test_form
+      form = @type.forms[0]
+      Form.stub(:find_by_id).and_return(form)
+      Application.stub(:get_most_recent_application).and_return(@mock_app)
+
+  	  get :show, :id => @user.id, :form_id => form.id
   	  expect(response).to render_template(:show)
   	end
 
@@ -73,5 +76,13 @@ describe FormQuestionController do
       assigns(:form_answer).should == {"0"=>"Yes", "1"=>"Yes", "2"=>"No"}
     end
     
+    describe "invalid path" do
+      it "should redirect an invalid path back to the profile page" do
+        invalid_form = 2123
+        get :show, :id => @user.id, :form_id => invalid_form
+        response.should redirect_to user_path
+      end
+    end
+
   end
 end
