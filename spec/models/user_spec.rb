@@ -29,10 +29,11 @@ describe User do
       expect(User.get_users_by_order(:email)).to be == [users[1], users[2], users[0]]
     end
 
-    it "should format the telephone number in the correct format" do
-      user = FactoryGirl.create( :user, :email => "malady@hostname.com")
-      user.telephone = "5105121234"
-      expect(user.format_phone_number).to be == "(510) 512-1234"
+  it "should format the telephone number in the correct format" do
+    user = FactoryGirl.create( :user, :email => "malady@hostname.com")
+    user.telephone = "5105121234"
+    expect(user.format_phone_number).to be == "(510) 512-1234"
+  end
 
   describe "deleting a user" do
     it "remove every application that user has" do
@@ -43,7 +44,6 @@ describe User do
       user.destroy
       User.find_by_id(user.id).should be_nil
       Application.find_by_id(app1.id).should be_nil
-
     end
   end
 
