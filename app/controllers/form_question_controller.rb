@@ -1,6 +1,8 @@
-class FormQuestionController < ApplicationController
-  
+class FormQuestionController < ApplicationController  
   include ApplicationHelper
+
+  before_filter :require_valid_user
+  before_filter :validate_accessible_form
 
   def show
     @form_type = Form.find_by_id(params[:form_id])
@@ -69,4 +71,16 @@ class FormQuestionController < ApplicationController
       render :show
     end
   end
+
+  private
+
+  def validate_accessible_form
+    user_app_type = User.find(params[:id]).get_most_recent_application.application_type
+    form_type = Form.find_by_id(params[:form_id])
+    unless user_app_type.forms.include? form_type
+      flash[:alert] = "Form cannot be found."
+      redirect_to user_path
+    end
+  end
+
 end
