@@ -21,7 +21,7 @@ module NavigationHelpers
     when /^the "survey" page for "(.*)"$/ then "/users/#{User.find_by_email($1).id}/survey"
     when /^the creation page for "(.*)"$/ then "/admin/forms/#{Form.find_by_form_name($1).id}/form_questions/new"
     when /^the content page for "(.*)"$/ then "/admin/forms/#{Form.find_by_form_name($1).id}/form_questions"
-    when /^the "form" page for "(.*)"$/ then "/users/#{User.find_by_email($1).id}/form"
+    when /^the "(.*)" form page for "(.*)"$/ then "/users/#{User.find_by_email($2).id}/form/#{Form.find_by_form_name($1).id}"
     when /^the user content page for "(.*)"$/ then "/admin/users/#{User.find_by_email($1).id}"
     when /^the users list page$/ then "/admin/users"
 

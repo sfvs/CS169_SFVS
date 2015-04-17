@@ -27,7 +27,7 @@ Given(/^john doe filled the "(.*?)"$/) do |form|
     Given john doe has logged in
     And I am on the "profile" page for "johndoe@gmail.com"
     When I follow "General Form"
-    Then I should be on the "form" page for "johndoe@gmail.com"
+    Then I should be on the "General Form" form page for "johndoe@gmail.com"
     And I type in the following:
     | Company name                                                           | Apple           |
     | Contact person                                                         | Tomato Carrot   |
