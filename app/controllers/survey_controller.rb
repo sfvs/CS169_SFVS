@@ -6,7 +6,7 @@ class SurveyController < ApplicationController
     # @display is an array of hashes, containing question and its answers 
     # as Rows in Table Answers. something like, 
     # [{:question => "What's my name?", :answer => AnswersTable},...]
-
+    @user = User.find_by_id(params[:id])
     @current_selected_answers = [] # to hilite selected answers
     @end_of_questionnaire = false	#set default value
     current_qid = Questionnaire.get_root_question_id
