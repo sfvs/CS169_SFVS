@@ -5,10 +5,11 @@ class FormQuestionController < ApplicationController
   before_filter :validate_accessible_form
 
   def show
+    @user = User.find_by_id(params[:user_id])
     @form_type = Form.find_by_id(params[:id])
     @form_name = @form_type.form_name
     @list_of_questions = @form_type.get_sorted_form_questions
-    application = current_user.get_most_recent_application
+    application = @user.get_most_recent_application
     if application
       @saved_form = application.content
       if @saved_form.has_key?(@form_name)
@@ -18,7 +19,7 @@ class FormQuestionController < ApplicationController
   end
 
   def update
-    @user = current_user
+    @user = User.find_by_id(params[:user_id])
     @form_type = Form.find_by_id(params[:id])
     @form_name = @form_type.form_name
     @form_content = get_form_content
@@ -75,7 +76,7 @@ class FormQuestionController < ApplicationController
   private
 
   def validate_accessible_form
-    user_app_type = current_user.get_most_recent_application.application_type
+    user_app_type = User.find_by_id(params[:user_id]).get_most_recent_application.application_type
     form_type = Form.find_by_id(params[:id])
     unless user_app_type.forms.include? form_type
       flash[:alert] = "Form cannot be found."

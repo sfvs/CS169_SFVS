@@ -4,7 +4,7 @@
 %div.container-fluid
   %h1 #{@form_name}
 
-  = form_tag form_question_path(:id => @form_type), :method => :put do
+  = form_tag user_form_question_path(@user,@form_type), :method => :put do
     - answer = 0
     - @list_of_questions.each do |question|
       %p 
