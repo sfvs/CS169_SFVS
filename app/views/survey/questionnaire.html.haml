@@ -12,4 +12,4 @@
       &nbsp 
     %hr
   -if @end_of_questionnaire
-    =button_to 'Submit Questionnaire', user_path(@user), { data: { confirm: "Are you sure?" }, method: :get }
+    =button_to 'Submit Questionnaire', submit_survey_user_path(@user, :results => @results), {data: { confirm: "Are you sure?" }}
