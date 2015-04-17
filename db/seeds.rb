@@ -25,14 +25,15 @@ objects_to_create = {}
 
 create_a_user('admin@hostname.com', 'admin123', "", "", "", :admin)
 create_a_user('user2@hostname.com', 'user1234', "John Wick", "Pineapple", "512-123-1235")
-create_a_user('user3@hostname.com', 'user1234' "", "", "")
-create_a_user('user4@hostname.com', 'user1234' "", "", "")
+create_a_user('user3@hostname.com', 'user1234', "Kevin Chavez", "Apple", "232-567-4234")
+create_a_user('user4@hostname.com', 'user1234', "Paul Lee", "Orange", "185-323-3523")
 
 # Application Types
-vendor = ApplicationType.create({:app_type => 'Vendor Exhibitor'})
+vendor_non_food = ApplicationType.create({:app_type => 'Vendor Exhibitor for Non-Food Items or Services'})
 sponsor = ApplicationType.create({:app_type => 'Sponsor'})
 non_profit = ApplicationType.create({:app_type => 'Non-Profit Exhibitor'})
-other_vendor = ApplicationType.create({:app_type => 'All Other Vendors'})
+vendor_food = ApplicationType.create({:app_type => 'Vendor Exhibitor of Food Items'})
+restaurant_concessionaire = ApplicationType.create({:app_type => 'Restaurant Food Concessionaire'})
 
 # Questionnaire
 #adding seeds questions, each question has an attribute referances its parent(like a tree), the tree is as follow:
@@ -45,26 +46,28 @@ other_vendor = ApplicationType.create({:app_type => 'All Other Vendors'})
 #      /        |        \              /         |          |        \
 #(scramble)   (ssu)     (raw)      (breast)    (legs)     (wings)    (eggs)
 
-objects_to_create[:Questionnaire] = [{:question => 'What type of Exhibitor are you?'}]
+objects_to_create[:Questionnaire] = [
+	{:question => 'What type of Exhibitor are you?'}
+]
 
 #answer table has answer to referance to its question, as well as which question it leads to
 
 objects_to_create[:Answers] = [
-	{:ans => vendor.app_type, :questionnaire_id => 1, :results_to => vendor.id},
+	{:ans => vendor_non_food.app_type, :questionnaire_id => 1, :results_to => vendor_non_food.id},
 	{:ans => sponsor.app_type, :questionnaire_id => 1, :results_to => sponsor.id},
 	{:ans => non_profit.app_type, :questionnaire_id => 1, :results_to => non_profit.id},
-	{:ans => other_vendor.app_type, :questionnaire_id => 1, :results_to => other_vendor.id}
+	{:ans => vendor_food.app_type, :questionnaire_id => 1, :results_to => vendor_food.id},
+	{:ans => restaurant_concessionaire.app_type, :questionnaire_id => 1, :results_to => restaurant_concessionaire.id}
 ]
 
 # Forms
-vendor_solicitation = Form.create({:form_name => "Vendor Solicitation"})
-sponsor_solicitation = Form.create({:form_name => "Sponsor Solicitation"})
+company_information = Form.create({:form_name => "Company Information"})
 
-general_form = Form.create({:form_name => "General Form"})
+non_food_contract = Form.create({:form_name => "Exhibitor Vendor - Non Food Items and Services"})
 restaurant_contract = Form.create({:form_name => "Restaurant Concessionaire Contract"})
 sponsor_contract = Form.create({:form_name => "Sponsor Contract"})
 non_profit_contract = Form.create({:form_name => "Exhibitor Contract - Non Profit"})
-other_contract = Form.create({:form_name => "Exhibitor Contract - All other Exhibitors"})
+food_item_contract = Form.create({:form_name => "Exhibitor Contract of Food Items"})
 
 advertising_contract = Form.create({:form_name => "Advertising Contract"})
 health_permit_form = Form.create({:form_name => "Health Permit Form"})
@@ -73,63 +76,93 @@ make_agreement = Form.create({:form_name => "Agreement"})
 
 
 # Associate Application Types to forms
-vendor.forms << [
-	vendor_solicitation,
-	general_form,
-	restaurant_contract,
+vendor_non_food.forms << [
+	company_information,
+	non_food_contract,
+	advertising_contract,
 	conditions_of_agreement,
+	make_agreement
+]
+
+vendor_food.forms << [
+	company_information,
+	food_item_contract,
 	advertising_contract,
 	health_permit_form,
+	conditions_of_agreement,
 	make_agreement
 ]
 
 sponsor.forms << [
-	sponsor_solicitation,
-	general_form,
-	restaurant_contract,
-	conditions_of_agreement,
+	company_information,
+	sponsor_contract,
 	advertising_contract,
-	health_permit_form,
+	conditions_of_agreement,
 	make_agreement
 ]
 
 non_profit.forms << [
-	vendor_solicitation,
-	general_form,
+	company_information,
 	non_profit_contract,
-	conditions_of_agreement,
 	advertising_contract,
+	conditions_of_agreement,
 	make_agreement
 ]
 
-other_vendor.forms << [
-	vendor_solicitation,
-	general_form,
-	other_contract,
-	conditions_of_agreement,
+restaurant_concessionaire.forms << [
+	company_information,
+	restaurant_contract,
 	advertising_contract,
 	health_permit_form,
+	conditions_of_agreement,
 	make_agreement
 ]
 
 # create form questions for each form
 questions_for_form = {}
 
-questions_for_form[general_form]  = [
-	{:question => "Company Name", :question_type => :textbox},
-	{:question => "Contact Person", :question_type => :textbox},
+questions_for_form[company_information]  = [
 	{:question => "Mailing Address", :question_type => :textbox},
 	{:question => "City", :question_type => :textbox},
 	{:question => "State", :question_type => :textbox},
 	{:question => "Zip", :question_type => :textbox},
-	{:question => "Phone Number", :question_type => :textbox},
-	{:question => "Alternate Number", :question_type => :textbox},
 	{:question => "Fax", :question_type => :textbox},
 	{:question => "Website", :question_type => :textbox},
-	{:question => "Company name for WVF Program listing (if different from above)", :question_type => :textbox}
+	{:question => "Company name for WVF Program listing", :question_type => :textbox}
 ]
 
-# Restuarant Concessionaire Contract
+questions_for_form[non_food_contract] = [
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
+		Attach a seperate sheet if neccesary', 
+		:question_type => :textbox},
+	{:question => 'Food Guidelines...',
+		:question_type => :statement},
+	# {:question => 'Will you require a health permit?',
+	# 	:answers => "[Yes, No]", 
+	# 	:question_type => :radio_button},
+	{:question => 'Will you use a sterno?', 
+		:answers => "[Yes, No]", 
+		:question_type => :radio_button},
+	{:question => 'Exhibit Registration...', 
+		:question_type => :statement},
+	# {:question => 'Food Booth Fee',  
+	# 	:question_type => :textbox},
+	# {:question => 'City Health Permit Fee', 
+	# 	:answers => "207", 
+	# 	:question_type => :textbox},
+	# {:question => 'Advertising:', 
+	# 	:question_type => :textbox},
+	# {:question => 'Total enclosed', 
+	# 	:question_type => :textbox},
+	# {:question => 'Please make payable to...', 
+	# 	:question_type => :statement},
+	{:question => 'Will you need electricity?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Please state electrical requirements...', 
+		:question_type => :textbox}
+]
+
 questions_for_form[restaurant_contract] = [
 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
 		Attach a seperate sheet if neccesary', 
@@ -139,9 +172,9 @@ questions_for_form[restaurant_contract] = [
 	{:question => 'Will you be distributing food/beverage?', 
 		:answers => "[Yes, No]",
 	 	:question_type => :radio_button},
-	{:question => 'Will you require a health permit?',
-		:answers => "[Yes, No]", 
-		:question_type => :radio_button},
+	# {:question => 'Will you require a health permit?',
+	# 	:answers => "[Yes, No]", 
+	# 	:question_type => :radio_button},
 	{:question => 'Will you use a sterno?', 
 		:answers => "[Yes, No]", 
 		:question_type => :radio_button},
@@ -193,6 +226,8 @@ questions_for_form[advertising_contract] = 	[
 	{:question => 'Mail Information',
 		:question_type => :statement},
 	{:question => 'Authorized Signature',
+		:question_type => :textbox},
+	{:question => 'Please upload here',
 		:question_type => :textbox}
 ]
 
@@ -278,9 +313,9 @@ questions_for_form[sponsor_contract] = [
 	{:question => 'Will you be distributing food/beverage?', 
 		:answers => "[Yes, No]",
 	 	:question_type => :radio_button},
-	{:question => 'Will you require a health permit?',
-		:answers => "[Yes, No]", 
-		:question_type => :radio_button},
+	# {:question => 'Will you require a health permit?',
+	# 	:answers => "[Yes, No]", 
+	# 	:question_type => :radio_button},
 	{:question => 'Will you use a sterno?', 
 		:answers => "[Yes, No]", 
 		:question_type => :radio_button},
@@ -325,7 +360,7 @@ questions_for_form[sponsor_contract] = [
 		:question_type => :textbox}
 	]
 
-questions_for_form[other_contract] = [
+questions_for_form[food_item_contract] = [
 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
 		Attach a seperate sheet if neccesary', 
 		:question_type => :textbox},
@@ -336,9 +371,9 @@ questions_for_form[other_contract] = [
 	{:question => 'Will you be distributing food/beverage?', 
 		:answers => "[Yes, No]",
 	 	:question_type => :radio_button},
-	{:question => 'Will you require a health permit?',
-		:answers => "[Yes, No]", 
-		:question_type => :radio_button},
+	# {:question => 'Will you require a health permit?',
+	# 	:answers => "[Yes, No]", 
+	# 	:question_type => :radio_button},
 	{:question => 'Will you use a sterno?', 
 		:answers => "[Yes, No]", 
 		:question_type => :radio_button},
@@ -411,17 +446,6 @@ questions_for_form[make_agreement] = [
 	{:question => "Date:",
 		:question_type => :textbox}
 ]
-
-questions_for_form[vendor_solicitation] = [
-	{:question => 'BIG STATEMENT',
-		:question_type => :statement}
-]
-
-questions_for_form[sponsor_solicitation] = [
-	{:question => 'BIG STATEMENT',
-		:question_type => :statement}
-]
-
 
 questions_for_form.each do |form_object, form_question_attributes|
 	link_form_questions_to_form form_object, form_question_attributes

@@ -24,6 +24,7 @@ SFVSRegistrationSystem::Application.routes.draw do
     resources :form_question, :path => 'form', only: [:show, :update], on: :member
     post "submit_application", on: :member
     get "survey", to: "survey#questionnaire", on: :member
+    # post "submit_survey", to: "survey#submit_questionnaire", on: :member
   end
 
 
