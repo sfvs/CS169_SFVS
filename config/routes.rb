@@ -3,11 +3,13 @@ SFVSRegistrationSystem::Application.routes.draw do
   # namespace for the group of controllers for admin
   namespace :admin do
     root to: "admin#index"
-    post "/users", to: "users#search", as: 'search_user'
-    resources :users
-      # Need to add route to the forms (?) or might need to think about how to access and look at 
-      # each individual forms the user has.
-    resources :forms do
+    resources :users do
+      post "search", on: :collection
+      resources :applications, :only => [:show, :edit, :update] do
+        get "form", to: "application_form#show", on: :member
+      end
+    end
+    resources :forms, :only => :index do
       resources :form_questions do
         put :sort, on: :collection
       end
@@ -19,11 +21,12 @@ SFVSRegistrationSystem::Application.routes.draw do
   # name to prevent resource: user and devise routes from overlapping
   devise_for :users, :path => 'member'
   resources :users do 
+    resources :form_question, :path => 'form', only: [:show, :update], on: :member
     post "submit_application", on: :member
-    post "form", to: "form_question#save_progress", on: :member
-    get "form", to: "form_question#show", on: :member
     get "survey", to: "survey#questionnaire", on: :member
+    # post "submit_survey", to: "survey#submit_questionnaire", on: :member
   end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

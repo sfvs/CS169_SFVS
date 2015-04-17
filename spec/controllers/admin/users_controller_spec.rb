@@ -52,6 +52,18 @@ describe Admin::UsersController do
       response.should be_success
       assigns(:user).should == user
     end
+
+    it "should assign @applications" do
+      user = make_a_member :user, :email => "bravo@hostname.com"
+      @type = make_forms_for_app_type "vendor"
+      @mock_app = make_an_application @type, 2015
+      user.applications << @mock_app
+      user.save
+      get 'show', :id => user.id
+      response.should be_success
+      user.reload
+      assigns(:applications).should == user.applications
+    end
   end
 
   describe "admin delete user" do

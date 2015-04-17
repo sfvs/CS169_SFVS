@@ -6,7 +6,7 @@
       %li= form_question.question_type
     %div.span4
       %li= form_question.created_at
-    %div.span4
+    %div.span3
       %li= form_question.updated_at
     %div.form_q_button.span2
       %li= link_to "Edit", edit_admin_form_form_question_path(:form_id => @form.id, :id=> form_question.id), {:class => "btn"}

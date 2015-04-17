@@ -1,21 +1,26 @@
-class FormQuestionController < ApplicationController
-  
+class FormQuestionController < ApplicationController  
+  include ApplicationHelper
+
+  before_filter :require_valid_user
+  before_filter :validate_accessible_form
+
   def show
-    @form_type = Form.find_by_id(params[:form_id])
+    @user = User.find_by_id(params[:user_id])
+    @form_type = Form.find_by_id(params[:id])
     @form_name = @form_type.form_name
     @list_of_questions = @form_type.get_sorted_form_questions
-    application = User.find(params[:id]).get_most_recent_application
+    application = @user.get_most_recent_application
     if application
       @saved_form = application.content
       if @saved_form.has_key?(@form_name)
-        @form_answer = get_answers_to_prefill_from(@saved_form[@form_name])
+        @form_answer = get_answers_to_prefill_from(@saved_form[@form_name], @form_name)
       end
     end
   end
 
-  def save_progress
-    @user = User.find(params[:id])
-    @form_type = Form.find_by_id(params[:form_id])
+  def update
+    @user = User.find_by_id(params[:user_id])
+    @form_type = Form.find_by_id(params[:id])
     @form_name = @form_type.form_name
     @form_content = get_form_content
     @application = @user.get_most_recent_application
@@ -26,19 +31,6 @@ class FormQuestionController < ApplicationController
     elsif params[:commit] == 'Submit'
       submit
     end
-  end
-
-  def get_answers_to_prefill_from(content)
-    number_of_questions = @form_type.number_of_questions
-    form_answer = Hash.new
-    cur_num_questions = 0
-    content.each do |key, value|
-      if cur_num_questions != number_of_questions && key != "completed"
-        form_answer[cur_num_questions.to_s] = value
-        cur_num_questions += 1
-      end
-    end
-    form_answer
   end
 
   #filter that check if the form is filled correctly
@@ -80,4 +72,16 @@ class FormQuestionController < ApplicationController
       render :show
     end
   end
+
+  private
+
+  def validate_accessible_form
+    user_app_type = User.find_by_id(params[:user_id]).get_most_recent_application.application_type
+    form_type = Form.find_by_id(params[:id])
+    unless user_app_type.forms.include? form_type
+      flash[:alert] = "Form cannot be found."
+      redirect_to user_path
+    end
+  end
+
 end

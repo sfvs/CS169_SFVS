@@ -18,7 +18,7 @@
               %td= form.form_name
               %td= form.created_at
               %td= link_to "Show", admin_form_form_questions_path(form),  class: "btn btn-default admin_button"
-  - if @forms.any?
+  - if !@forms.nil?
     %div.pagination
       = will_paginate @forms, renderer: BootstrapPagination::Rails
 

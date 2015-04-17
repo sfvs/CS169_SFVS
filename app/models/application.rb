@@ -5,13 +5,8 @@ class Application < ActiveRecord::Base
   belongs_to :user
   belongs_to :application_type
 
-  @@year = 2015
-  def self.latest_year
-    @@year
-  end
-
-  def self.latest_year=(year)
-    @@year=year
+  def self.current_application_year
+    Time.now.year
   end
 
   def content
@@ -40,5 +35,15 @@ class Application < ActiveRecord::Base
   def add_content(form_content_hash)
     self.content = self.content.merge(form_content_hash)
     self.save!
+  end
+
+  def get_form(form_name)
+    form = Form.where(form_name: form_name).first
+    form.get_sorted_form_questions
+    form
+  end
+
+  def get_forms
+    self.application_type.forms
   end
 end

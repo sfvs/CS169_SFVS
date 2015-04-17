@@ -3,7 +3,7 @@ class Admin::AdminController < ApplicationController
   before_filter :require_admin
 
   def index
-
+    @admin = current_user
   end
 
   private

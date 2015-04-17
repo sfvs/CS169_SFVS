@@ -4,28 +4,48 @@ Feature: view user forms
   So that I can manage the users
   I want to view the forms filled by the users.
 
-Background: users have been added to database
+Background: application is setup with user john doe
   
-  Given the following users exist: 
+  Given application type and forms are setup for vendor and sponsor
+  Given the following form questions exist:
+  | question                                                         | form_type       | question_type | 
+  | Company name                                                     | General Form    | textbox       |
+  | Contact person                                                   | General Form    | textbox       |
+  | Mailing address                                                  | General Form    | textbox       |
+  | City                                                             | General Form    | textbox       |
+  | State                                                            | General Form    | textbox       |
+  | ZIP                                                              | General Form    | textbox       |
+  | Phone                                                            | General Form    | textbox       |
+  | Alternate                                                        | General Form    | textbox       |
+  | Fax                                                              | General Form    | textbox       |
+  | E-mail                                                           | General Form    | textbox       |
+  | Website                                                          | General Form    | textbox       |
+  | Company name for WVF Program listing (if different from above)   | General Form    | textbox       |
+
+  And user john doe exist in the database
+  And the following users exist: 
   | email            | password         | admin   |
-  | user1@gmail.com  | bear12345        | false   |
-  | user2@gmail.com  | bear12345        | false   |
   | admin@gmail.com  | admin123         | true    |
 
-  And the "General Form" with questions exists
+  And john doe has an incomplete vendor application
+  And john doe filled the "General Form"
   And I am logged into the admin page as "admin"
   And I am on the admin profile page
   And I follow "Users List"
+  And I follow "Show"
+  And I am on the user content page for "johndoe@gmail.com"
 
 Scenario: display the forms of a user
-  Given "user1@gmail.com" has filled the "General Form"
-  When I follow "More Info"
-  Then I should be on the "edit" page of "user1@gmail.com"
-  And I should see "General Form"
+  When I follow "Show"
+  Then I should see "General Form"
+  And I should see "Vendor Form"
 
-Scenario: display the contents of the form of a user
-  Given "user1@gmail.com" has filled the "General Form"
-  When I follow "More Info"
-  And I am on the "edit" page of "user1@gmail.com"
-  And I follow "General Form"
-  Then I should see "Name" as "Oski"
+Scenario: display the questions of the form of a user
+  When I follow "Show"
+  And I click the "Show" button for "General Form"
+  Then I should see "Company name"
+
+Scenario: display the content of the form of a user
+  When I follow "Show"
+  And I click the "Show" button for "General Form"
+  Then I should see disabled "Company name" with "Apple"

@@ -48,6 +48,6 @@ Scenario: completing the questionnaire
   When I follow "zuccini"
   Then I should see "chicken" selected
   And I should see "zuccini" selected
-  When I follow "Submit Questionnaire"
+  When I press "Submit Questionnaire"
   Then I should be on the "profile" page for "johndoe@gmail.com"
   And I should see "sponsor."
