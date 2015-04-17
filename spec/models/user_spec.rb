@@ -23,5 +23,15 @@ describe User do
       expect(user.get_most_recent_application).to be_nil
     end
 
+    it "should return list of users in the correct order" do
+      users = [FactoryGirl.create(:user, :email => "c@hostname.com"), FactoryGirl.create(:user, :email => "a@hostname.com"), FactoryGirl.create(:user, :email => "b@hostname.com")]
+      expect(User.get_users_by_order(:email)).to be == [users[1], users[2], users[0]]
+    end
+
+    it "should format the telephone number in the correct format" do
+      user = FactoryGirl.create( :user, :email => "malady@hostname.com")
+      user.telephone = "5105121234"
+      expect(user.format_phone_number).to be == "(510) 512-1234"
+    end
   end
 end
