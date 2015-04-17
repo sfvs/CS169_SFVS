@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   # need to refactor this, but home_controller cannot do multiple skips??
   def require_valid_user
-    authorize User.find(params[:id]), :is_profile_owner?
+    authorize current_user, :is_profile_owner?
     authorize current_user, :is_regular_user?
   end
   

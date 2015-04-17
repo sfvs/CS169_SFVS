@@ -26,7 +26,7 @@ describe FormQuestionController do
       FormQuestionController.any_instance.stub(:get_answers).and_return({})
       FormQuestionController.any_instance.stub(:get_form_content).and_return({})
       FormQuestionController.any_instance.stub(:update_application)
-      post :save_progress, :id => @user.id, :form_id => @test_form, :commit => "Submit"
+      post :update, :id => @user.id, :form_id => @test_form, :commit => "Submit"
       response.should redirect_to user_path(@user)
     end
 
@@ -42,19 +42,19 @@ describe FormQuestionController do
       FormQuestionController.any_instance.stub(:get_answers).and_return({})
       FormQuestionController.any_instance.stub(:get_form_content).and_return({})
       FormQuestionController.any_instance.stub(:update_application)
-      post :save_progress, :id => @user.id, :form_id => @test_form, :commit => "Save and Return"
+      post :update, :id => @user.id, :form_id => @test_form, :commit => "Save and Return"
       response.should redirect_to user_path(@user)
     end
 
     it "should not update the db if the form is not complete" do 
-      post :save_progress, :id => @user.id, :form_id => @form, :commit => "Submit", :form_answer => @form_answer
+      post :update, :id => @user.id, :form_id => @form, :commit => "Submit", :form_answer => @form_answer
       @user.reload
       application = @user.get_most_recent_application
       application.content.should == {}
     end
 
     it "should update db if click save" do
-      post :save_progress, :id => @user.id, :form_id => @form, :commit => "Save and Return", :form_answer => @form_answer
+      post :update, :id => @user.id, :form_id => @form, :commit => "Save and Return", :form_answer => @form_answer
       @user.reload
       application = @user.get_most_recent_application
       application.content.should == {@form.form_name => {"General Question 1" => "", "General Question 2" => "Yes", "General Question 3" => "No", "completed" => false}}
@@ -62,7 +62,7 @@ describe FormQuestionController do
 
     it "should update the db if the form is complete" do
       @completed_form_answer = {"0" => "Yes", "1" => "Yes", "2" => "No"}
-      post :save_progress, :id => @user.id, :form_id => @form, :commit => "Submit", :form_answer => @completed_form_answer
+      post :update, :id => @user.id, :form_id => @form, :commit => "Submit", :form_answer => @completed_form_answer
       @user.reload
       application = @user.get_most_recent_application
       application.content.should == {@form.form_name => {"General Question 1" => "Yes", "General Question 2" => "Yes", "General Question 3" => "No", "completed" => true}}
