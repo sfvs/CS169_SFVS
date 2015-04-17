@@ -4,9 +4,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if flash[:questionnaire_response]
-      flash[:notice] = parse_questionnaire_response(flash[:questionnaire_response]) # This line overwrites the notice from formq controller
-    end
     @application = @user.get_most_recent_application
     if @application
       @completed_forms = get_completed_forms(@application.content)
@@ -33,25 +30,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def parse_questionnaire_response(answer_id)
-    response = "Error"
-    if answer_id != nil
-      type = ApplicationType.find_by_id(answer_id.to_i)
-      unless type.nil?
-        response = "Your type is #{type.app_type}."
-        recent_application = @user.get_most_recent_application
-        if not recent_application.nil?
-          recent_application.destroy
-        end
-        app = @user.applications.create()
-        app.application_type = type
-        app.year = Application.current_application_year
-        app.save
-      end
-      response
-    end
-  end
 
   def get_completed_forms(contents)
     completed_forms = []

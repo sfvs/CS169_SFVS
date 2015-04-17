@@ -16,7 +16,7 @@ class SurveyController < ApplicationController
       if selected_answer.is_last_answer?
         @end_of_questionnaire = true
         @current_selected_answers.push(selected_answer.id) #corner case: add the last selected answer into array
-        flash[:questionnaire_response] = selected_answer.results_to
+        @results = selected_answer.results_to
         current_qid = selected_answer.questionnaire_id
       else	# selected_answer is an intermidate answer
         current_qid = selected_answer.leads_to
@@ -25,6 +25,29 @@ class SurveyController < ApplicationController
 
     @display_questions = populate_display current_qid
 
+  end
+
+  def submit_questionnaire
+    @user = User.find_by_id(params[:id])
+    response = "Error. Please try survey again or contact SFVS."
+    answer_id = params[:results]
+    if answer_id != nil
+      type = ApplicationType.find_by_id(answer_id.to_i)
+      unless type.nil?
+        response = "Your type is #{type.app_type}."
+        recent_application = @user.get_most_recent_application
+        if not recent_application.nil?
+          recent_application.destroy
+        end
+        app = @user.applications.create()
+        app.application_type = type
+        app.year = Application.current_application_year
+        app.save
+      end
+      response
+    end
+    flash[:notice] = response
+    redirect_to user_path(@user)
   end
 
   private

@@ -135,11 +135,15 @@ module ControllerMacros
 
   def make_question_answer_tree
     before :each do
+      @reply = 1
+      @type_vendor = make_forms_for_app_type "vendor"
+      @type_donor = make_forms_for_app_type "donor"
+      
       @q1 = Questionnaire.create(:question => "hello world")
       @q2 = Questionnaire.create(:question => "how are you?")
       @a1a = Answers.create(:ans => "hi", :questionnaire_id => @q1.id, :leads_to => @q2.id)
-      @a1b = Answers.create(:ans => "hello", :questionnaire_id => @q1.id)
-      @a2 = Answers.create(:ans => "I am world", :questionnaire_id => @q2.id)
+      @a1b = Answers.create(:ans => @type_donor.app_type, :questionnaire_id => @q1.id, :results_to => @type_donor.id)
+      @a2 = Answers.create(:ans => @type_vendor.app_type, :questionnaire_id => @q2.id, :results_to => @type_vendor.id)
       @q2.parent_id = @a1a.id
       @q2.save
     end
