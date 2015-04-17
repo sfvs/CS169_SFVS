@@ -12,4 +12,4 @@
       &nbsp 
     %hr
   -if @end_of_questionnaire
-    =link_to 'Submit Questionnaire', user_path()
+    =link_to 'Submit Questionnaire', user_path(), data: { confirm: "Are you sure?" }
