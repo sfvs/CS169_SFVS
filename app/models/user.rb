@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_reader :admin
   # attr_accessible :title, :body
 
-  has_many :applications
+  has_many :applications, dependent: :destroy
   def get_most_recent_application
     self.applications.where(year: Application.current_application_year).first
   end
