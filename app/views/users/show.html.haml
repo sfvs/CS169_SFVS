@@ -24,13 +24,13 @@
         %ul
           -@forms_to_build.each do |form|
             %br
-            %li= link_to "#{form.form_name}", form_user_path(:form_id => form.id, :id => @user), :class => "form_link", :id => "link_#{form.id}"
+            %li= link_to "#{form.form_name}", user_form_question_path(@user,form), :class => "form_link", :id => "link_#{form.id}"
             - if !@completed_forms.nil? && @completed_forms.include?(form.form_name)
               %span.glyphicons.icon-check 
         %br
         -unless @application.completed
-          = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post}
-          = button_to "Restart Application", survey_user_path, {:id => "questionnaire_button", method: :get}
+          = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post, data: { confirm: "Are you sure you want to submit?" }}
+          = button_to "Restart Application", survey_user_path, {:id => "questionnaire_button", method: :get, data: { confirm: "Are you sure you want to restart?" }}
       -else
         %br
         = button_to "Determine Application Type", survey_user_path, {:id => "questionnaire_button", method: :get}

@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   before_save :format_phone_number
 
-  has_many :applications
+  has_many :applications, dependent: :destroy
   def get_most_recent_application
     self.applications.where(year: Application.current_application_year).first
   end
