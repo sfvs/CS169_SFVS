@@ -64,4 +64,15 @@ describe Application do
     myApp.content.should == {"Person1" => {"yourName" => "John", "yourLastName" => "Wick"}, "Person2" => {"yourName" => "Neo", "yourLastName" => "The Chosen One"}}
   end
 
+	it "should save the amount paid" do
+		myApp = Application.new
+		myApp.year = 2015
+		myApp.content = {"Person1" => {"yourName" => "John", "yourLastName" => "Wick"}}
+		myApp.amount_paid = 250.0
+		myApp.save!
+
+		myApp.reload
+		myApp.hasPaid?.should == true
+		myApp.getAmountPaid.should == 250.0
+	end
 end
