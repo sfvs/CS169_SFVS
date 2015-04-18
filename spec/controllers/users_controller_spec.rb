@@ -31,4 +31,16 @@ describe UsersController do
       response.should be_success
     end
   end
+
+	describe "making a payment" do
+		make_a_vendor_application_for_user
+		
+		it "should allow us to make payment" do
+			User.stub(:get_most_recent_application).and_return(@mock_app)
+			@mock_app.completed = true
+			@mock_app.save
+			post :submit_payment, :id => @user.id
+			expect(response.location.starts_with?("https://www.sandbox.paypal.com")).to be_true
+		end
+	end
 end
