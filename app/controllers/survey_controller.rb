@@ -44,7 +44,6 @@ class SurveyController < ApplicationController
         app.year = Application.current_application_year
         app.save
       end
-      response
     end
     flash[:notice] = response
     redirect_to user_path(@user)

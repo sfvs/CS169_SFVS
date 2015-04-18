@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @application = @user.get_most_recent_application
     if @application
-      @completed_forms = get_completed_forms(@application.content)
+      @completed_forms = @application.get_completed_forms
       if @application.completed
         @status = "Complete"
       else
@@ -20,22 +20,19 @@ class UsersController < ApplicationController
 
   def submit_application
     user = User.find(params[:id])
-    # Anthony insert here! check if forms are completed
     application = user.get_most_recent_application
-    if application and not application.completed
-      application.completed = true
-      application.save
+    if application
+      if not application.completed #and application.all_forms_completed? 
+        application.completed = true
+        application.save
+        flash[:notice] = "Application successfully submitted."
+      # else
+      #   flash[:alert] = "One of the forms is not yet submitted."
+      end
+    else
+      flash[:alert] = "Error. Application not found. Please contact SFVS for help."
     end
     redirect_to user_path(user)
   end
 
-  private
-
-  def get_completed_forms(contents)
-    completed_forms = []
-    contents.each do |key, value|
-      completed_forms << key.to_s if value["completed"]
-    end
-    completed_forms
-  end
 end

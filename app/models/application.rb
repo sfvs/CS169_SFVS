@@ -46,4 +46,23 @@ class Application < ActiveRecord::Base
   def get_forms
     self.application_type.forms
   end
+
+  def get_completed_forms
+    # Hash, key name of form and value (true, false) depending on completed
+    completed_forms = Hash.new
+    self.content.each do |key, value|
+      completed_forms[key] = value["completed"] == true ? true : false
+    end
+    completed_forms
+  end
+
+  def all_forms_completed?
+    completed_forms = self.get_completed_forms
+    return false if completed_forms.empty?
+    completed_forms.each_value do |value|
+      return value if value == false
+    end
+    true
+  end
+
 end

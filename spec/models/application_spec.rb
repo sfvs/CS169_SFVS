@@ -1,6 +1,25 @@
 require 'spec_helper'
 
 describe Application do
+
+  # describe "application function" do
+  #   it "should be able to tell if an application has all forms are not completed" do
+  #     myApp = Application.new
+  #     results = {"a form" => true, "b form" => false}
+  #     myApp.stub(:get_completed_forms).and_return(results)
+
+  #     myApp.all_forms_completed?.should be_false
+  #   end
+
+  #   it "should be able to tell if an application has all forms completed" do
+  #     myApp = Application.new
+  #     results = {"a form" => true, "b form" => true}
+  #     myApp.stub(:get_completed_forms).and_return(results)
+
+  #     myApp.all_forms_completed?.should be_true
+  #   end
+  # end
+
   it "should be able to be created successfully" do
     myApp = Application.new
     myApp.year.should == nil
