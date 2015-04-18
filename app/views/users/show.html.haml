@@ -25,7 +25,7 @@
           -@forms_to_build.each do |form|
             %br
             %li= link_to "#{form.form_name}", user_form_question_path(@user,form), :class => "form_link", :id => "link_#{form.id}"
-            - if !@completed_forms.nil? && @completed_forms.include?(form.form_name)
+            - if @completed_forms[form.form_name]
               %span.glyphicons.icon-check 
         %br
         -unless @application.completed

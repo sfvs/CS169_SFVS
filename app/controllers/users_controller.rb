@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @application = @user.get_most_recent_application
     if @application
-      @completed_forms = get_completed_forms(@application.content)
+      @completed_forms = @application.get_completed_forms
       if @application.completed
         @status = "Complete"
       else
@@ -31,11 +31,5 @@ class UsersController < ApplicationController
 
   private
 
-  def get_completed_forms(contents)
-    completed_forms = []
-    contents.each do |key, value|
-      completed_forms << key.to_s if value["completed"]
-    end
-    completed_forms
-  end
+
 end
