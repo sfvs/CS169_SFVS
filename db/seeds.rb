@@ -74,6 +74,8 @@ advertising_sponsor_contract = Form.create({:form_name => "Advertising Contract"
 
 
 health_permit_form = Form.create({:form_name => "Health Permit Form"})
+restaurant_health_permit_form = Form.create({:form_name => "Health Permit Form"})
+
 conditions_of_agreement = Form.create({:form_name => "Conditions of Agreement"})
 make_agreement = Form.create({:form_name => "Agreement"})
 
@@ -122,7 +124,7 @@ restaurant_concessionaire.forms << [
 	company_information,
 	restaurant_contract,
 	advertising_non_sponsor_contract,
-	health_permit_form,
+	restaurant_health_permit_form,
 	conditions_of_agreement,
 	make_agreement,
 	setup_instructions
@@ -177,43 +179,49 @@ questions_for_form[company_information]  = [
 # 		:question_type => :textbox}
 # ]
 
-# questions_for_form[restaurant_contract] = [
-# 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
-# 		Attach a seperate sheet if neccesary', 
-# 		:question_type => :textbox},
-# 	{:question => 'Food Guidelines...',
-# 		:question_type => :statement},
-# 	{:question => 'Will you be distributing food/beverage?', 
-# 		:answers => "[Yes, No]",
-# 	 	:question_type => :radio_button},
-# 	# {:question => 'Will you require a health permit?',
-# 	# 	:answers => "[Yes, No]", 
-# 	# 	:question_type => :radio_button},
-# 	{:question => 'Will you use a sterno?', 
-# 		:answers => "[Yes, No]", 
-# 		:question_type => :radio_button},
-# 	{:question => 'Exhibit Registration...', 
-# 		:question_type => :statement},
-# 	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
-# 		:answers => "[150, 250]", 
-# 		:question_type => :radio_button},
-# 	# {:question => 'Food Booth Fee',  
-# 	# 	:question_type => :textbox},
-# 	# {:question => 'City Health Permit Fee', 
-# 	# 	:answers => "207", 
-# 	# 	:question_type => :textbox},
-# 	# {:question => 'Advertising:', 
-# 	# 	:question_type => :textbox},
-# 	# {:question => 'Total enclosed', 
-# 	# 	:question_type => :textbox},
-# 	# {:question => 'Please make payable to...', 
-# 	# 	:question_type => :statement},
-# 	{:question => 'Will you need electricity?',
-# 		:answers => "[Yes, No]",
-# 		:question_type => :radio_button},
-# 	{:question => 'Please state electrical requirements...', 
-# 		:question_type => :textbox}
-# ] 
+questions_for_form[restaurant_contract] = [
+	{:question => 'Product/Services Description',
+		:question_type => :statement},
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold, or N/A for none.',
+		:question_type => :message},
+	{:question => 'Food Guidelines (only Vegan foods are allowed)
+		All food items must fall under the following categories to be promoted at the World Vegetarian Festival.
+		
+		- Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance 
+		with SF Health Department guidelines. Requires high risk city health permit of $207.
+
+		- Pre packaged vegan food items may be sold or given away by Exhibitors. 
+		Requires low risk city health permit of $105.
+
+		Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
+
+		Non Food Guidelines
+		We only allow vegan items that have not have been tested on animals, and are free of leather, 
+		fur, gelatin, silk, wool or any other animal derivatives.',
+		:question_type => :statement},
+	{:question => 'Will you be distributing food/beverage samples?',
+		:answers => "[Yes]",
+		:question_type => :radio_button},
+	{:question => 'Will you use a sterno?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => "Exhibit Registration
+		Registration fee is payable in advance and applicable for 2 days. Space is limited.
+		Fee includes one booth space, one table and one chair.",
+		:question_type => :statement},
+	{:question => 'Food/Catering Booth',
+		:answers => '[$150 (Payment on or before Aug 15th), $250 (Payment after Aug 15th)]',
+		:question_type => :radio_button},
+	{:question => 'Will you need electricity?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
+		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
+		:question_type => :message}
+]
 
 questions_for_form[sponsor_contract] = [
 	{:question => 'Product/Services Description',
@@ -235,6 +243,9 @@ questions_for_form[sponsor_contract] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
+	{:question => 'Will you be distributing food/beverage samples?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
 	{:question => 'Will you use a sterno?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
@@ -301,6 +312,9 @@ questions_for_form[food_item_contract] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
+	{:question => 'Will you be distributing food/beverage samples?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
 	{:question => 'Will you use a sterno?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
@@ -449,14 +463,8 @@ questions_for_form[health_permit_form] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Will you be distributing food/beverage samples?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => 'Do you require a health permit (answer "yes" if you will be selling or giving away foods or food samples)?
 		Health permits are required and will be processed by SFVS.',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
-	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => 'Health permit Fee',
@@ -532,6 +540,34 @@ questions_for_form[health_permit_form] = [
 	# 	:question_type => :textbox},
 	# {:question => "Printed Name:",
 	# 	:question_type => :textbox}
+]
+
+questions_for_form[restaurant_health_permit_form] = [
+	{:question => 'Food Guidelines (only Vegan foods are allowed)
+		All food items must fall under the following categories to be promoted at the World Vegetarian Festival.
+		
+		- Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance 
+		with SF Health Department guidelines. Requires high risk city health permit of $207.
+
+		- Pre packaged vegan food items may be sold or given away by Exhibitors. 
+		Requires low risk city health permit of $105.
+
+		Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
+
+		Non Food Guidelines
+		We only allow vegan items that have not have been tested on animals, and are free of leather, 
+		fur, gelatin, silk, wool or any other animal derivatives.',
+		:question_type => :statement},
+	{:question => 'Health permit Fee',
+		:answers => "[High risk city health permit: $207]",
+		:question_type => :radio_button},
+	{:question => 'Additional Information
+		Email electronic copy to: wvdinfo@sfvs.org
+
+		Mail Information: San Francisco Vegetarian Society,
+		73 Rondel Place,
+		San Francisco, CA 94103',
+		:question_type => :statement}
 ]
 
 questions_for_form[setup_instructions] = [
