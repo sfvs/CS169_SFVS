@@ -2,7 +2,7 @@ class CreateFormQuestions < ActiveRecord::Migration
   def change
     create_table :form_questions do |t|
 
-      t.string :question 
+      t.text :question 
       t.string :answers, default: nil 
       t.string :form_type
       t.string :question_type
