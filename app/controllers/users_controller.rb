@@ -22,13 +22,13 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     application = user.get_most_recent_application
     if application
-      if not application.completed and application.all_forms_completed? 
+      if not application.completed #and application.all_forms_completed? 
         application.completed = true
         application.save
         flash[:notice] = "Application successfully submitted."
-      else
-        flash[:alert] = "One of the forms is not yet submitted."
-      end
+      # else
+      #   flash[:alert] = "One of the forms is not yet submitted."
+      # end
     else
       flash[:alert] = "Error. Application not found. Please contact SFVS for help."
     end
