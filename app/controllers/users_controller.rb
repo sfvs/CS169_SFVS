@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     application = user.get_most_recent_application
     if application
-      if application.all_forms_completed? and not application.completed
+      if not application.completed and application.all_forms_completed? 
         application.completed = true
         application.save
         flash[:notice] = "Application successfully submitted."
