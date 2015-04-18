@@ -72,7 +72,6 @@ food_item_contract = Form.create({:form_name => "Exhibitor Contract of Food Item
 advertising_non_sponsor_contract = Form.create({:form_name => "Advertising Contract"})
 advertising_sponsor_contract = Form.create({:form_name => "Advertising Contract"})
 
-
 health_permit_form = Form.create({:form_name => "Health Permit Form"})
 restaurant_health_permit_form = Form.create({:form_name => "Health Permit Form"})
 
@@ -147,37 +146,42 @@ questions_for_form[company_information]  = [
 
 # Main Contract Forms
 
-# questions_for_form[non_food_contract] = [
-# 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
-# 		Attach a seperate sheet if neccesary', 
-# 		:question_type => :message},
-# 	{:question => 'Food Guidelines...',
-# 		:question_type => :statement},
-# 	# {:question => 'Will you require a health permit?',
-# 	# 	:answers => "[Yes, No]", 
-# 	# 	:question_type => :radio_button},
-# 	{:question => 'Will you use a sterno?', 
-# 		:answers => "[Yes, No]", 
-# 		:question_type => :radio_button},
-# 	{:question => 'Exhibit Registration...', 
-# 		:question_type => :statement},
-# 	# {:question => 'Food Booth Fee',  
-# 	# 	:question_type => :textbox},
-# 	# {:question => 'City Health Permit Fee', 
-# 	# 	:answers => "207", 
-# 	# 	:question_type => :textbox},
-# 	# {:question => 'Advertising:', 
-# 	# 	:question_type => :textbox},
-# 	# {:question => 'Total enclosed', 
-# 	# 	:question_type => :textbox},
-# 	# {:question => 'Please make payable to...', 
-# 	# 	:question_type => :statement},
-# 	{:question => 'Will you need electricity?',
-# 		:answers => "[Yes, No]",
-# 		:question_type => :radio_button},
-# 	{:question => 'Please state electrical requirements...', 
-# 		:question_type => :textbox}
-# ]
+questions_for_form[non_food_contract] = [
+	{:question => 'Product/Services Description',
+		:question_type => :statement},
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold, or N/A for none.',
+		:question_type => :message},
+	{:question => 'Non Food Guidelines
+		We only allow vegan items that have not have been tested on animals, and are free of leather, 
+		fur, gelatin, silk, wool or any other animal derivatives.',
+		:question_type => :statement},
+	{:question => 'Will you use a sterno?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => "Exhibit Registration
+		Registration fee is payable in advance and applicable for 2 days. Space is limited.
+		Fee includes health permit fees and processing, one booth space,
+		one chair and one table (6' x 2.5').",
+		:question_type => :statement},
+	{:question => 'Exhibit Booth',
+		:answers => '[Regular Booth "B" - Open Courtyard: $150 (Payment on or before Aug 15th),
+		Regular Booth "B" - Open Courtyard: $250 (Payment after Aug 15th),
+		Regular Booth "C" - Gallery Bldg: $200 (Payment on or before Aug 15th),
+		Regular Booth "C" - Gallery Bldg: $300 (Payment after Aug 15th)]',
+		:question_type => :radio_button},
+	{:question => 'Additional Chair $5 Each', 
+		:answers => "[0, 1, 2, 3, 4, 5]",
+		:question_type => :radio_button},
+	{:question => 'Will you need electricity? ($75 fee)',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
+		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
+		:question_type => :message}
+]
 
 questions_for_form[restaurant_contract] = [
 	{:question => 'Product/Services Description',
@@ -426,26 +430,93 @@ questions_for_form[advertising_non_sponsor_contract] = 	[
 		:question_type => :textbox}
 ]
 
-# questions_for_form[conditions_of_agreement] = [
-# 	{:question => 'Company/Organization', 
-# 		:question_type => :textbox},
-# 	{:question => 'Conditions of Agreement ......', 
-# 		:answers => "[Agree]",
-# 		:question_type => :radio_button}
-# ]
+# Agreement Forms
 
-# questions_for_form[make_agreement] = [
-# 	{:question => 'Agreement...',
-# 		:question_type => :statement},
-# 	{:question => "Name:",
-# 		:question_type => :textbox},
-# 	{:question => "Signature:",
-# 		:question_type => :textbox},
-# 	{:question => "Title:",
-# 		:question_type => :textbox},
-# 	{:question => "Date:",
-# 		:question_type => :textbox}
-# ]
+questions_for_form[conditions_of_agreement] = [
+	{:question => "Conditions of Agreement
+		1. The Contract for participation shall not become a binding contract between the Exhibitor 
+		and the San Francisco Vegetarian Society (hereafter referred to as SFVS) until the contract 
+		has been signed by SFVS.
+
+		2. Exhibitors shall be responsible for the setup and tear down of their own exhibit.
+		All garbage shall be placed in appropriate trash containers and cardboard boxes must be broken apart for recycling.
+		A $50 cleaning fee may be assessed to booths not left clean as determined by SFVS and may result 
+		in Exhibitor's non-participation in future World Vegetarian Festival (WVF) celebration.
+
+		3. No Exhibitor shall exhibit any merchandise or service other than that specified in the contract.
+		The Exhibitor may not promote in their product display or literature any items that do not meet the SFVS
+		food and / or non-food guidelines.Exhibit space shall not be sublet or shared without the permission of SFVS.
+		
+		4. The Exhibitor's property shall be placed on display and exhibited at the Exhibitor's own risk and neither SFVS
+		nor the Recreation & Parks Dept of the City and County of San Francisco shall be responsible for the death or injury
+		to any person or for damage, including consequential damages, or loss of property of the Exhibitor, its officers,
+		agents, employees, or invitees resulting from any cause whatsoever and the Exhibitor hereby indemnifies and holds
+		SFVS and / or City and County of San Francisco harmless for any suit, action or claim arising out of any action
+		or failure to act by the Exhibitor.
+		
+		5. If the Exhibitor fails to comply in any respect with the terms, conditions, rules or regulations of this contract,
+		all rights of the Exhibitor hereunder shall cease and terminate.
+		
+		6. Should any contingency interrupt or prevent the holding of the WVF Celebration, including but not limited to war,
+		terrorism, acts of God, strikes, lockouts or other labor or individual disturbances, riots, failure to secure
+		materials or labor, fire, lighting, tempest, flood, explosion or any other cause, then SFVS shall in no way whatsoever
+		be liable to the Exhibitor.
+		
+		7. The Exhibitor will exhibit in a proper manner, and will keep the exhibit space open and staffed at all time during the
+		WVF Celebration hours. SFVS reserves the right to restrict exhibits to a maximum noise level and to suitable methods of
+		operation and display. SFVS shall have the final decision as to what constitutes a proper exhibit and such decision shall
+		be final and binding.  If for any reason any exhibit or its contents are deemed objectionable by SFVS, the exhibit will be
+		removed.  This provision includes persons, things, conduct, printed matter or any item or attire that SFVS may consider
+		objectionable to the WVF Celebration's intent. SFVS further reserves the right to relocate exhibits or exhibitors when in
+		its opinion such relocations are necessary to maintain the character and / or good order of the WVF Celebration.
+
+		8. The Exhibitor agrees that no display may be dismantled or goods removed during the entire period of the agreed upon 
+		time slot. The Exhibitor agrees also to remove its exhibit, equipment and other exhibit items from the grounds of the 
+		WVF Celebration at the end of the agreed upon time slot. In the event of failure to do so, the Exhibitor agrees to
+		pay for such additional costs as may be incurred.
+		
+		9. The Exhibitor shall not: (a) commit any nuisance; (b) cause any unusual or objectionable smoke or odor to emanate 
+		from its space; (c) do anything which would interfere with the effectiveness of any utility, ventilating or 
+		air-conditioning systems on the facilities of the WVF Celebration, nor interfere with free access or passage to
+		the facilities of the WVF Celebration; (d) interfere with the effectiveness of or accessibility to the electrical,
+		plumbing, gas or compressed air systems; (e) overload any floor, ceiling or wall; (f) do or permit to be done any 
+		act which might invalidate any insurance policy carried by SFVS or the City and County of San Francisco.
+		
+		10. If the exhibit space is not occupied by the opening of the WVF Celebration, this will be considered as a no-show
+		and the space will be deemed forfeited. This forfeited space may be resold, reassigned or used by the SFVS management
+		without obligations on the part of SFVS for any refund whatsoever.
+		
+		11. The Exhibitor will confine its activities to the exhibit space allotted and will not solicit beyond the boundaries hereto.
+		
+		12. The SFVS reserves the right to decline any applications at its discretion.
+
+		Upon the original or facsimile copy of this contract being accepted and signed by an authorized
+		member of the SFVS, this becomes a binding agreement and the Company / Organization listed
+		above is subject to and agrees with all conditions stated on the contract.  SFVS reserves the right
+		to assign space in order to benefit the overall event.", 
+		:answers => "[Agree]",
+		:question_type => :radio_button}
+]
+
+questions_for_form[make_agreement] = [
+	{:question => 'Agreement:
+		I certify that I have read the World Vegetarian Festival exhibitor information and contract
+		and agree to all terms and guidelines specified therein.',
+		:answers => "[Agree]",
+		:question_type => :radio_button},
+	{:question => 'Company/Organization', 
+		:question_type => :textbox},
+	{:question => "Name:",
+		:question_type => :textbox},
+	{:question => "Signature:",
+		:question_type => :textbox},
+	{:question => "Title:",
+		:question_type => :textbox},
+	{:question => "Date:",
+		:question_type => :textbox}
+]
+
+# Health Permit Forms
 
 questions_for_form[health_permit_form] = [
 	{:question => 'Food Guidelines (only Vegan foods are allowed)
