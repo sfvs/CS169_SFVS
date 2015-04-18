@@ -69,7 +69,10 @@ sponsor_contract = Form.create({:form_name => "Sponsor Contract"})
 non_profit_contract = Form.create({:form_name => "Exhibitor Contract - Non Profit"})
 food_item_contract = Form.create({:form_name => "Exhibitor Contract of Food Items"})
 
-advertising_contract = Form.create({:form_name => "Advertising Contract"})
+advertising_non_sponsor_contract = Form.create({:form_name => "Advertising Contract"})
+advertising_sponsor_contract = Form.create({:form_name => "Advertising Contract"})
+
+
 health_permit_form = Form.create({:form_name => "Health Permit Form"})
 conditions_of_agreement = Form.create({:form_name => "Conditions of Agreement"})
 make_agreement = Form.create({:form_name => "Agreement"})
@@ -81,7 +84,7 @@ setup_instructions = Form.create({:form_name => "Setup Instructions"})
 vendor_non_food.forms << [
 	company_information,
 	non_food_contract,
-	advertising_contract,
+	advertising_non_sponsor_contract,
 	conditions_of_agreement,
 	make_agreement,
 	setup_instructions
@@ -90,7 +93,7 @@ vendor_non_food.forms << [
 vendor_food.forms << [
 	company_information,
 	food_item_contract,
-	advertising_contract,
+	advertising_non_sponsor_contract,
 	health_permit_form,
 	conditions_of_agreement,
 	make_agreement,
@@ -100,7 +103,7 @@ vendor_food.forms << [
 sponsor.forms << [
 	company_information,
 	sponsor_contract,
-	advertising_contract,
+	advertising_sponsor_contract,
 	conditions_of_agreement,
 	make_agreement,
 	setup_instructions
@@ -109,7 +112,7 @@ sponsor.forms << [
 non_profit.forms << [
 	company_information,
 	non_profit_contract,
-	advertising_contract,
+	advertising_non_sponsor_contract,
 	conditions_of_agreement,
 	make_agreement,
 	setup_instructions
@@ -118,7 +121,7 @@ non_profit.forms << [
 restaurant_concessionaire.forms << [
 	company_information,
 	restaurant_contract,
-	advertising_contract,
+	advertising_non_sponsor_contract,
 	health_permit_form,
 	conditions_of_agreement,
 	make_agreement,
@@ -127,6 +130,8 @@ restaurant_concessionaire.forms << [
 
 # create form questions for each form
 questions_for_form = {}
+
+# General Information Forms
 
 questions_for_form[company_information]  = [
 	{:question => "Mailing Address", :question_type => :textbox},
@@ -138,103 +143,266 @@ questions_for_form[company_information]  = [
 	{:question => "Company name for WVF Program listing", :question_type => :textbox}
 ]
 
-questions_for_form[non_food_contract] = [
-	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
-		Attach a seperate sheet if neccesary', 
-		:question_type => :textbox},
-	{:question => 'Food Guidelines...',
+# Main Contract Forms
+
+# questions_for_form[non_food_contract] = [
+# 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
+# 		Attach a seperate sheet if neccesary', 
+# 		:question_type => :message},
+# 	{:question => 'Food Guidelines...',
+# 		:question_type => :statement},
+# 	# {:question => 'Will you require a health permit?',
+# 	# 	:answers => "[Yes, No]", 
+# 	# 	:question_type => :radio_button},
+# 	{:question => 'Will you use a sterno?', 
+# 		:answers => "[Yes, No]", 
+# 		:question_type => :radio_button},
+# 	{:question => 'Exhibit Registration...', 
+# 		:question_type => :statement},
+# 	# {:question => 'Food Booth Fee',  
+# 	# 	:question_type => :textbox},
+# 	# {:question => 'City Health Permit Fee', 
+# 	# 	:answers => "207", 
+# 	# 	:question_type => :textbox},
+# 	# {:question => 'Advertising:', 
+# 	# 	:question_type => :textbox},
+# 	# {:question => 'Total enclosed', 
+# 	# 	:question_type => :textbox},
+# 	# {:question => 'Please make payable to...', 
+# 	# 	:question_type => :statement},
+# 	{:question => 'Will you need electricity?',
+# 		:answers => "[Yes, No]",
+# 		:question_type => :radio_button},
+# 	{:question => 'Please state electrical requirements...', 
+# 		:question_type => :textbox}
+# ]
+
+# questions_for_form[restaurant_contract] = [
+# 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
+# 		Attach a seperate sheet if neccesary', 
+# 		:question_type => :textbox},
+# 	{:question => 'Food Guidelines...',
+# 		:question_type => :statement},
+# 	{:question => 'Will you be distributing food/beverage?', 
+# 		:answers => "[Yes, No]",
+# 	 	:question_type => :radio_button},
+# 	# {:question => 'Will you require a health permit?',
+# 	# 	:answers => "[Yes, No]", 
+# 	# 	:question_type => :radio_button},
+# 	{:question => 'Will you use a sterno?', 
+# 		:answers => "[Yes, No]", 
+# 		:question_type => :radio_button},
+# 	{:question => 'Exhibit Registration...', 
+# 		:question_type => :statement},
+# 	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
+# 		:answers => "[150, 250]", 
+# 		:question_type => :radio_button},
+# 	# {:question => 'Food Booth Fee',  
+# 	# 	:question_type => :textbox},
+# 	# {:question => 'City Health Permit Fee', 
+# 	# 	:answers => "207", 
+# 	# 	:question_type => :textbox},
+# 	# {:question => 'Advertising:', 
+# 	# 	:question_type => :textbox},
+# 	# {:question => 'Total enclosed', 
+# 	# 	:question_type => :textbox},
+# 	# {:question => 'Please make payable to...', 
+# 	# 	:question_type => :statement},
+# 	{:question => 'Will you need electricity?',
+# 		:answers => "[Yes, No]",
+# 		:question_type => :radio_button},
+# 	{:question => 'Please state electrical requirements...', 
+# 		:question_type => :textbox}
+# ] 
+
+# questions_for_form[sponsor_contract] = [
+# 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
+# 		Attach a seperate sheet if neccesary', 
+# 		:question_type => :textbox},
+# 	{:question => 'Food Guidelines...',
+# 		:question_type => :statement},
+# 	{:question => 'Will you be distributing food/beverage?', 
+# 		:answers => "[Yes, No]",
+# 	 	:question_type => :radio_button},
+# 	# {:question => 'Will you require a health permit?',
+# 	# 	:answers => "[Yes, No]", 
+# 	# 	:question_type => :radio_button},
+# 	{:question => 'Will you use a sterno?', 
+# 		:answers => "[Yes, No]", 
+# 		:question_type => :radio_button},
+# 	{:question => 'Exhibit Registration...', 
+# 		:question_type => :statement},
+# 	{:question => "Principal Sponsor ($3000)
+# 		-Promiment exhibitor location
+# 		-Name on all publicity
+# 		-Full page ad in event program
+# 		-Product exclusivity
+# 		-Logo link on SFVS website
+# 		-Booth (12'x8')
+# 		-Two tables with two chairs",
+# 		:question_type => :statement},
+# 	{:question => "Major Sponsor ($2000)
+# 		-Name on special publicity
+# 		-Half page ad in event program
+# 		-Logo link on SFVS website
+# 		-Booth (12'x8')
+# 		-Two tables with two chairs",
+# 		:question_type => :statement},
+# 	{:question => "Associate Sponsor ($1000)
+# 		-Newsletter recognition
+# 		-Quarter page ad in event program
+# 		-Booth (8'x8')
+# 		-One table with two chairs",
+# 		:question_type => :statement},
+# 	{:question => "Supporting Sponsor [non-exhibiting] ($500)
+# 		-Newsletter recognition
+# 		-Quarter page ad in event program",
+# 		:question_type => :statement},
+# 	{:question => "Included above are 6' x 2.5' table(s), chairs, health permits, and electricity (except non-exhibitor)",
+# 		:question_type => :statement},
+# 	{:question => 'Sponsorship type',
+# 		:answers => "[Principal Sponsor ($3000), Major Sponsor ($2000), 
+# 			Associate Sponsor ($1000), Supporting Sponsor [non-exhibiting] ($500)]", 
+# 		:question_type => :radio_button},	
+# 	{:question => 'Will you need electricity?',
+# 		:answers => "[Yes, No]",
+# 		:question_type => :radio_button},
+# 	{:question => 'Please state electrical requirements...', 
+# 		:question_type => :textbox}
+# 	]
+
+# questions_for_form[food_item_contract] = [
+# 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
+# 		Attach a seperate sheet if neccesary', 
+# 		:question_type => :textbox},
+# 	{:question => 'Food Guidelines...',
+# 		:question_type => :statement},
+# 	{:question => 'Non-Food Guidelines...',
+# 		:question_type => :statement},
+# 	{:question => 'Will you be distributing food/beverage?', 
+# 		:answers => "[Yes, No]",
+# 	 	:question_type => :radio_button},
+# 	# {:question => 'Will you require a health permit?',
+# 	# 	:answers => "[Yes, No]", 
+# 	# 	:question_type => :radio_button},
+# 	{:question => 'Will you use a sterno?', 
+# 		:answers => "[Yes, No]", 
+# 		:question_type => :radio_button},
+# 	{:question => 'Do you guarantee your products on display at the Festival to be vegan?', 
+# 		:answers => "[Yes, No]", 
+# 		:question_type => :radio_button},
+# 	{:question => 'Exhibit Registration...', 
+# 		:question_type => :statement},
+# 	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
+# 		:answers => "[150, 250]", 
+# 		:question_type => :radio_button},
+# 	{:question => "Regular Booth 'B' - Open Courtyard", 
+# 		:answers => "[150 (Before July 15), 250 (After July 15)]",
+# 	 	:question_type => :radio_button},
+# 	{:question => "Regular Booth 'C' - Gallery Building", 
+# 		:answers => "[200 (Before July 15), 300 (After July 15)]",
+# 	 	:question_type => :radio_button},
+# 	{:question => "Health Permit Fee", 
+# 		:answers => "[High risk city health permit ($207), 
+# 			Low risk city health permit free ($105)]",
+# 	 	:question_type => :radio_button},
+# 	 {:question => "Electricity Fee", 
+# 		:answers => "[75, N/A]",
+# 	 	:question_type => :radio_button},
+# 	{:question => "Number of additional chairs ($5 each)",
+# 		:question_type => :textbox},
+# 	{:question => 'Will you need electricity?',
+# 		:answers => "[Yes, No]",
+# 		:question_type => :radio_button},
+# 	{:question => 'Please state electrical requirements...', 
+# 		:question_type => :textbox}
+# 	]
+
+questions_for_form[non_profit_contract] = 	[
+	{:question => 'Product/Services Description',
 		:question_type => :statement},
-	# {:question => 'Will you require a health permit?',
-	# 	:answers => "[Yes, No]", 
-	# 	:question_type => :radio_button},
-	{:question => 'Will you use a sterno?', 
-		:answers => "[Yes, No]", 
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold, or N/A for none.',
+		:question_type => :message},
+	{:question => 'Non-Profit Registration',
+		:question_type => :statement},
+	{:question => 'Registration fee is payable in advance and applicable for 2 days.
+		Space is limited. The fee includes one booth space (approx 8 x 6 ft), one table and one chair.
+		Booth is inside the building. NO REFUNDS AFTER AUGUST 15.',
+		:question_type => :statement},
+	{:question => 'Non-Profit Booth Payment',
+		:answers => "[On or before Aug 15th: $165, After Aug 15th: $215]",
 		:question_type => :radio_button},
-	{:question => 'Exhibit Registration...', 
-		:question_type => :statement},
-	# {:question => 'Food Booth Fee',  
-	# 	:question_type => :textbox},
-	# {:question => 'City Health Permit Fee', 
-	# 	:answers => "207", 
-	# 	:question_type => :textbox},
-	# {:question => 'Advertising:', 
-	# 	:question_type => :textbox},
-	# {:question => 'Total enclosed', 
-	# 	:question_type => :textbox},
-	# {:question => 'Please make payable to...', 
-	# 	:question_type => :statement},
-	{:question => 'Will you need electricity?',
+	{:question => 'Additional Chair $5 Each', 
+		:answers => "[0, 1, 2, 3, 4, 5]",
+		:question_type => :radio_button},
+	{:question => 'Will you need electricity? ($75 fee)',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-	{:question => 'Please state electrical requirements...', 
+	{:question => 'Please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
+		Equipment Watts (not to exceed 1920 watts or 16 amps)',
+		:question_type => :message}
+]
+
+# Advertising Forms
+
+questions_for_form[advertising_sponsor_contract] = 	[
+	{:question => 'Ads - Program Book Size  8 1/2" x 11" (2,000 copies)
+		All ads are one color (black print)',
+		:question_type => :statement},
+	{:question => 'Please select a size of your advertisement:',
+		:answers => '[Full Page (8.5"w x 11"h), Half Page (8.5"w x 5.5"h), Quarter Page (4.25"w x 5.5"h)]',
+		:question_type => :checkbox},
+	{:question => 'Deadline: July 1',
+		:question_type => :statement},
+	{:question => 'Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi', 
+		:question_type => :statement},
+	{:question => 'Enclosed camera-ready ad/logo and mail to address below, or',
+		:question_type => :statement},
+	{:question => 'Email electronic copy to: wvdinfo@sfvs.org, or',
+		:question_type => :statement},
+	# {:question => 'Please upload here',
+	# 	:question_type => :textbox},
+	{:question => 'Mail Information: San Francisco Vegetarian Society,
+		73 Rondel Place,
+		San Francisco, CA 94103',
+		:question_type => :statement},
+	{:question => 'Authorized Signature',
 		:question_type => :textbox}
 ]
 
-questions_for_form[restaurant_contract] = [
-	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
-		Attach a seperate sheet if neccesary', 
-		:question_type => :textbox},
-	{:question => 'Food Guidelines...',
+questions_for_form[advertising_non_sponsor_contract] = 	[
+	{:question => 'Ads - Program Book Size  8 1/2" x 11" (2,000 copies)
+		All ads are one color (black print)',
 		:question_type => :statement},
-	{:question => 'Will you be distributing food/beverage?', 
-		:answers => "[Yes, No]",
-	 	:question_type => :radio_button},
-	# {:question => 'Will you require a health permit?',
-	# 	:answers => "[Yes, No]", 
-	# 	:question_type => :radio_button},
-	{:question => 'Will you use a sterno?', 
-		:answers => "[Yes, No]", 
-		:question_type => :radio_button},
-	{:question => 'Exhibit Registration...', 
-		:question_type => :statement},
-	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
-		:answers => "[150, 250]", 
-		:question_type => :radio_button},
-	# {:question => 'Food Booth Fee',  
-	# 	:question_type => :textbox},
-	# {:question => 'City Health Permit Fee', 
-	# 	:answers => "207", 
-	# 	:question_type => :textbox},
-	# {:question => 'Advertising:', 
-	# 	:question_type => :textbox},
-	# {:question => 'Total enclosed', 
-	# 	:question_type => :textbox},
-	# {:question => 'Please make payable to...', 
-	# 	:question_type => :statement},
-	{:question => 'Will you need electricity?',
+	{:question => 'Half Page (8.5"w x 5.5"h): $300',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-	{:question => 'Please state electrical requirements...', 
-		:question_type => :textbox}
-] 
-
-questions_for_form[advertising_contract] = 	[
-	{:question => 'Full Page',
-		:answers => "[Free, $500, N/A]",
+	{:question => 'Quarter Page (4.25"w x 5.5"h): $200',
+		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-	{:question => 'Half Page',
-		:answers => "[Free, $300, N/A]",
+	{:question => 'One Eigth Page (4.25"w x 2.75"h): $100',
+		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-	{:question => 'Quarter Page',
-		:answers => "[Free, $200, N/A]",
-		:question_type => :radio_button},
-	{:question => 'One Eigth Page',
-		:answers => "[$100, N/A]",
-		:question_type => :radio_button},
-	{:question => 'Business Card Size',
-		:answers => "[$75, $50]",
+	{:question => 'Business Card Size (3.5"w x 2"h): $50',
+		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => 'Total Enclosed', 
 		:question_type => :textbox},
-	{:question => 'Encosed camera-ready ad/ logo...',
-		:question_type => :textbox},
-	{:question => 'Email electronic copy...',
-		:question_type => :textbox},
-	{:question => 'Mail Information',
+	{:question => 'Deadline: August 31',
+		:question_type => :statement},
+	{:question => 'Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi', 
+		:question_type => :statement},
+	{:question => 'Enclosed camera-ready ad/logo and mail to address below, or',
+		:question_type => :statement},
+	{:question => 'Email electronic copy to: wvdinfo@sfvs.org, or',
+		:question_type => :statement},
+	# {:question => 'Please upload here',
+	# 	:question_type => :textbox},
+	{:question => 'Mail Information: San Francisco Vegetarian Society,
+		73 Rondel Place,
+		San Francisco, CA 94103',
 		:question_type => :statement},
 	{:question => 'Authorized Signature',
-		:question_type => :textbox},
-	{:question => 'Please upload here',
 		:question_type => :textbox}
 ]
 
@@ -308,136 +476,6 @@ questions_for_form[health_permit_form] = [
 	{:question => "Date:",
 		:question_type => :textbox},
 	{:question => "Printed Name:",
-		:question_type => :textbox}
-]
-
-questions_for_form[sponsor_contract] = [
-	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
-		Attach a seperate sheet if neccesary', 
-		:question_type => :textbox},
-	{:question => 'Food Guidelines...',
-		:question_type => :statement},
-	{:question => 'Will you be distributing food/beverage?', 
-		:answers => "[Yes, No]",
-	 	:question_type => :radio_button},
-	# {:question => 'Will you require a health permit?',
-	# 	:answers => "[Yes, No]", 
-	# 	:question_type => :radio_button},
-	{:question => 'Will you use a sterno?', 
-		:answers => "[Yes, No]", 
-		:question_type => :radio_button},
-	{:question => 'Exhibit Registration...', 
-		:question_type => :statement},
-	{:question => "Principal Sponsor ($3000)
-		-Promiment exhibitor location
-		-Name on all publicity
-		-Full page ad in event program
-		-Product exclusivity
-		-Logo link on SFVS website
-		-Booth (12'x8')
-		-Two tables with two chairs",
-		:question_type => :statement},
-	{:question => "Major Sponsor ($2000)
-		-Name on special publicity
-		-Half page ad in event program
-		-Logo link on SFVS website
-		-Booth (12'x8')
-		-Two tables with two chairs",
-		:question_type => :statement},
-	{:question => "Associate Sponsor ($1000)
-		-Newsletter recognition
-		-Quarter page ad in event program
-		-Booth (8'x8')
-		-One table with two chairs",
-		:question_type => :statement},
-	{:question => "Supporting Sponsor [non-exhibiting] ($500)
-		-Newsletter recognition
-		-Quarter page ad in event program",
-		:question_type => :statement},
-	{:question => "Included above are 6' x 2.5' table(s), chairs, health permits, and electricity (except non-exhibitor)",
-		:question_type => :statement},
-	{:question => 'Sponsorship type',
-		:answers => "[Principal Sponsor ($3000), Major Sponsor ($2000), 
-			Associate Sponsor ($1000), Supporting Sponsor [non-exhibiting] ($500)]", 
-		:question_type => :radio_button},	
-	{:question => 'Will you need electricity?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
-	{:question => 'Please state electrical requirements...', 
-		:question_type => :textbox}
-	]
-
-questions_for_form[food_item_contract] = [
-	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
-		Attach a seperate sheet if neccesary', 
-		:question_type => :textbox},
-	{:question => 'Food Guidelines...',
-		:question_type => :statement},
-	{:question => 'Non-Food Guidelines...',
-		:question_type => :statement},
-	{:question => 'Will you be distributing food/beverage?', 
-		:answers => "[Yes, No]",
-	 	:question_type => :radio_button},
-	# {:question => 'Will you require a health permit?',
-	# 	:answers => "[Yes, No]", 
-	# 	:question_type => :radio_button},
-	{:question => 'Will you use a sterno?', 
-		:answers => "[Yes, No]", 
-		:question_type => :radio_button},
-	{:question => 'Do you guarantee your products on display at the Festival to be vegan?', 
-		:answers => "[Yes, No]", 
-		:question_type => :radio_button},
-	{:question => 'Exhibit Registration...', 
-		:question_type => :statement},
-	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
-		:answers => "[150, 250]", 
-		:question_type => :radio_button},
-	{:question => "Regular Booth 'B' - Open Courtyard", 
-		:answers => "[150 (Before July 15), 250 (After July 15)]",
-	 	:question_type => :radio_button},
-	{:question => "Regular Booth 'C' - Gallery Building", 
-		:answers => "[200 (Before July 15), 300 (After July 15)]",
-	 	:question_type => :radio_button},
-	{:question => "Health Permit Fee", 
-		:answers => "[High risk city health permit ($207), 
-			Low risk city health permit free ($105)]",
-	 	:question_type => :radio_button},
-	 {:question => "Electricity Fee", 
-		:answers => "[75, N/A]",
-	 	:question_type => :radio_button},
-	{:question => "Number of additional chairs ($5 each)",
-		:question_type => :textbox},
-	{:question => 'Will you need electricity?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
-	{:question => 'Please state electrical requirements...', 
-		:question_type => :textbox}
-	]
-
-questions_for_form[non_profit_contract] = 	[
-	{:question => 'Product/Service Description',
-		:question_type => :textbox},
-	{:question => 'Non-Profit Registration',
-		:question_type => :statement},
-	{:question => 'Non-Profit Booth',
-		:answers => "[$165, $215]",
-		:question_type => :radio_button},
-	{:question => 'Non-Profit Booth Fee',
-		:question_type => :textbox},
-	{:question => 'Electricity Fee, $75',
-		:question_type => :textbox},
-	{:question => 'Additional Chair $5 Each', 
-		:question_type => :textbox},
-	{:question => 'Advertising',
-		:question_type => :textbox},
-	{:question => 'TOTAL ENCLOSED',
-		:question_type => :textbox},
-	{:question => 'Please make check payable to...',
-		:question_type => :statement},
-	{:question => 'Will you need electricity?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
-	{:question => 'Please state electrical requirements...',
 		:question_type => :textbox}
 ]
 
