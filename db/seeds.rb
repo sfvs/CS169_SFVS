@@ -29,10 +29,20 @@ create_a_user('user3@hostname.com', 'user1234', "Kevin Chavez", "Apple", "232-56
 create_a_user('user4@hostname.com', 'user1234', "Paul Lee", "Orange", "185-323-3523")
 
 # Application Types
-vendor_non_food = ApplicationType.create({:app_type => 'Vendor Exhibitor for Non-Food Items or Services'})
-sponsor = ApplicationType.create({:app_type => 'Sponsor'})
-non_profit = ApplicationType.create({:app_type => 'Non-Profit Exhibitor'})
-vendor_food = ApplicationType.create({:app_type => 'Vendor Exhibitor of Food Items'})
+vendor_non_food = ApplicationType.create({:app_type => 'Vendor Exhibitor for Non-Food Items or Services', 
+										  :description => 'Vendors who DO NOT sell or giveaway any food items.
+										  - All other types of businesses can use this form.
+										  - Non-profit organizations need to use another form.'})
+sponsor = ApplicationType.create({:app_type => 'Sponsor',
+								  :description => 'Any exhibitor or vendor who is willing to co-sponsor the event 
+								  					for a productexclusivity and also be included in the festival 
+								  					advertising and promotional campaign at no additional cost.'})
+non_profit = ApplicationType.create({:app_type => 'Non-Profit Exhibitor',
+									 :description => 'Any IRS registered tax exempt organization.'})
+vendor_food = ApplicationType.create({:app_type => 'Vendor Exhibitor of Food Items',
+									  :description => 'Vendors who Do sell or giveaway any food items.  
+									  					- All types of businesses can use this form.
+									  					- Non-profit organizations need to use another form.'})
 restaurant_concessionaire = ApplicationType.create({:app_type => 'Restaurant Food Concessionaire'})
 
 # Questionnaire
@@ -47,17 +57,29 @@ restaurant_concessionaire = ApplicationType.create({:app_type => 'Restaurant Foo
 #(scramble)   (ssu)     (raw)      (breast)    (legs)     (wings)    (eggs)
 
 objects_to_create[:Questionnaire] = [
-	{:question => 'What type of Exhibitor are you?'}
+	{:question => 'Choose your allpication type. (Click on apllication to view detail)'},
+	{:question => vendor_non_food.description, :parent_id => 1},
+	{:question => vendor_food.description, :parent_id => 1},
+	{:question => non_profit.description, :parent_id => 1},
+	{:question => sponsor.description, :parent_id => 1}
 ]
 
 #answer table has answer to referance to its question, as well as which question it leads to
 
 objects_to_create[:Answers] = [
-	{:ans => vendor_non_food.app_type, :questionnaire_id => 1, :results_to => vendor_non_food.id},
-	{:ans => sponsor.app_type, :questionnaire_id => 1, :results_to => sponsor.id},
-	{:ans => non_profit.app_type, :questionnaire_id => 1, :results_to => non_profit.id},
-	{:ans => vendor_food.app_type, :questionnaire_id => 1, :results_to => vendor_food.id},
-	{:ans => restaurant_concessionaire.app_type, :questionnaire_id => 1, :results_to => restaurant_concessionaire.id}
+	{:ans => vendor_non_food.app_type, :questionnaire_id => 1, :leads_to => 2},
+	{:ans => sponsor.app_type, :questionnaire_id => 1, :leads_to => 3},
+	{:ans => non_profit.app_type, :questionnaire_id => 1, :leads_to => 4},
+	{:ans => vendor_food.app_type, :questionnaire_id => 1, :leads_to => 5},
+	{:ans => restaurant_concessionaire.app_type, :questionnaire_id => 1, :results_to => restaurant_concessionaire.id},
+	{:ans => 'I am a ' + vendor_non_food.app_type, :questionnaire_id => 2, :results_to => vendor_non_food.id},
+	{:ans => 'I am a ' + vendor_food.app_type, :questionnaire_id => 3, :results_to => vendor_food.id},
+	{:ans => 'I am a ' + sponsor.app_type, :questionnaire_id => 4, :results_to => sponsor.id},
+	{:ans => 'I am a ' + non_profit.app_type, :questionnaire_id => 5, :results_to => non_profit.id}
+	# {:ans => vendor_non_food.app_type, :questionnaire_id => 1, :results_to => restaurant_concessionaire.id},
+	# {:ans => sponsor.app_type, :questionnaire_id => 1, :results_to => vendor_non_food.id},
+	# {:ans => non_profit.app_type, :questionnaire_id => 1, :results_to => sponsor.id},
+	# {:ans => vendor_food.app_type, :questionnaire_id => 1, :results_to => non_profit.id}
 ]
 
 # Forms
