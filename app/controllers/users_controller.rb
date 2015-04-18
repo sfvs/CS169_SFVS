@@ -38,6 +38,10 @@ class UsersController < ApplicationController
 	def submit_payment
 		user = User.find(params[:id])
 		application = user.get_most_recent_application
+		if not application.complete
+			flash[:alert] = "You must first complete and submit the application."
+			redirect_to user_path(user)
+		end
 		if application.hasPaid?
 			#flash[:payment_notice] = "You have already paid for this application."
 			flash[:alert] = "You have already paid for this application."
