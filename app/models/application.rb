@@ -56,4 +56,11 @@ class Application < ActiveRecord::Base
     completed_forms
   end
 
+  def all_forms_completed?
+    self.get_completed_forms.each_value do |value|
+      return value if value == false
+    end
+    true
+  end
+
 end

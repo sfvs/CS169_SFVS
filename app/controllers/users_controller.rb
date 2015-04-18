@@ -20,16 +20,12 @@ class UsersController < ApplicationController
 
   def submit_application
     user = User.find(params[:id])
-    # Anthony insert here! check if forms are completed
     application = user.get_most_recent_application
-    if application and not application.completed
+    if application and application.all_forms_completed? and not application.completed
       application.completed = true
       application.save
     end
     redirect_to user_path(user)
   end
-
-  private
-
 
 end
