@@ -271,66 +271,42 @@ questions_for_form[company_information]  = [
 # 		:question_type => :textbox}
 # 	]
 
-# questions_for_form[food_item_contract] = [
-# 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
-# 		Attach a seperate sheet if neccesary', 
-# 		:question_type => :textbox},
-# 	{:question => 'Food Guidelines...',
-# 		:question_type => :statement},
-# 	{:question => 'Non-Food Guidelines...',
-# 		:question_type => :statement},
-# 	{:question => 'Will you be distributing food/beverage?', 
-# 		:answers => "[Yes, No]",
-# 	 	:question_type => :radio_button},
-# 	# {:question => 'Will you require a health permit?',
-# 	# 	:answers => "[Yes, No]", 
-# 	# 	:question_type => :radio_button},
-# 	{:question => 'Will you use a sterno?', 
-# 		:answers => "[Yes, No]", 
-# 		:question_type => :radio_button},
-# 	{:question => 'Do you guarantee your products on display at the Festival to be vegan?', 
-# 		:answers => "[Yes, No]", 
-# 		:question_type => :radio_button},
-# 	{:question => 'Exhibit Registration...', 
-# 		:question_type => :statement},
-# 	{:question => 'Food/Catering Booth Fee\n On or before July 15: $150\n After July 15:$250', 
-# 		:answers => "[150, 250]", 
-# 		:question_type => :radio_button},
-# 	{:question => "Regular Booth 'B' - Open Courtyard", 
-# 		:answers => "[150 (Before July 15), 250 (After July 15)]",
-# 	 	:question_type => :radio_button},
-# 	{:question => "Regular Booth 'C' - Gallery Building", 
-# 		:answers => "[200 (Before July 15), 300 (After July 15)]",
-# 	 	:question_type => :radio_button},
-# 	{:question => "Health Permit Fee", 
-# 		:answers => "[High risk city health permit ($207), 
-# 			Low risk city health permit free ($105)]",
-# 	 	:question_type => :radio_button},
-# 	 {:question => "Electricity Fee", 
-# 		:answers => "[75, N/A]",
-# 	 	:question_type => :radio_button},
-# 	{:question => "Number of additional chairs ($5 each)",
-# 		:question_type => :textbox},
-# 	{:question => 'Will you need electricity?',
-# 		:answers => "[Yes, No]",
-# 		:question_type => :radio_button},
-# 	{:question => 'Please state electrical requirements...', 
-# 		:question_type => :textbox}
-# 	]
-
-questions_for_form[non_profit_contract] = 	[
+questions_for_form[food_item_contract] = [
 	{:question => 'Product/Services Description',
 		:question_type => :statement},
 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold, or N/A for none.',
 		:question_type => :message},
-	{:question => 'Non-Profit Registration',
+	{:question => 'Food Guidelines (only Vegan foods are allowed)
+		All food items must fall under the following categories to be promoted at the World Vegetarian Festival.
+		
+		- Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance 
+		with SF Health Department guidelines. Requires high risk city health permit of $207.
+
+		- Pre packaged vegan food items may be sold or given away by Exhibitors. 
+		Requires low risk city health permit of $105.
+
+		Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
+
+		Non Food Guidelines
+		We only allow vegan items that have not have been tested on animals, and are free of leather, 
+		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Registration fee is payable in advance and applicable for 2 days.
-		Space is limited. The fee includes one booth space (approx 8 x 6 ft), one table and one chair.
-		Booth is inside the building. NO REFUNDS AFTER AUGUST 15.',
+	{:question => 'Will you use a sterno?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => "Exhibit Registration
+		Registration fee is payable in advance and applicable for 2 days. Space is limited.
+		Fee includes health permit fees and processing, one booth space,
+		one chair and one table (6' x 2.5').",
 		:question_type => :statement},
-	{:question => 'Non-Profit Booth Payment',
-		:answers => "[On or before Aug 15th: $165, After Aug 15th: $215]",
+	{:question => 'Exhibit Booth',
+		:answers => '[Regular Booth "B" - Open Courtyard: $150 (Payment on or before Aug 15th),
+		Regular Booth "B" - Open Courtyard: $250 (Payment after Aug 15th),
+		Regular Booth "C" - Gallery Bldg: $200 (Payment on or before Aug 15th),
+		Regular Booth "C" - Gallery Bldg: $300 (Payment after Aug 15th)]',
 		:question_type => :radio_button},
 	{:question => 'Additional Chair $5 Each', 
 		:answers => "[0, 1, 2, 3, 4, 5]",
@@ -338,8 +314,32 @@ questions_for_form[non_profit_contract] = 	[
 	{:question => 'Will you need electricity? ($75 fee)',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-	{:question => 'Please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
-		Equipment Watts (not to exceed 1920 watts or 16 amps)',
+	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
+		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
+		:question_type => :message}
+]
+
+questions_for_form[non_profit_contract] = 	[
+	{:question => 'Product/Services Description',
+		:question_type => :statement},
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold, or N/A for none.',
+		:question_type => :message},
+	{:question => 'Non-Profit Registration
+		Registration fee is payable in advance and applicable for 2 days.
+		Space is limited. The fee includes one booth space (approx 8 x 6 ft), one table and one chair.
+		Booth is inside the building. NO REFUNDS AFTER AUGUST 15.',
+		:question_type => :statement},
+	{:question => 'Non-Profit Booth',
+		:answers => "[Payment on or before Aug 15th: $165, Payment after Aug 15th: $215]",
+		:question_type => :radio_button},
+	{:question => 'Additional Chair $5 Each', 
+		:answers => "[0, 1, 2, 3, 4, 5]",
+		:question_type => :radio_button},
+	{:question => 'Will you need electricity? ($75 fee)',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
+		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
 		:question_type => :message}
 ]
 
@@ -352,20 +352,19 @@ questions_for_form[advertising_sponsor_contract] = 	[
 	{:question => 'Please select a size of your advertisement:',
 		:answers => '[Full Page (8.5"w x 11"h), Half Page (8.5"w x 5.5"h), Quarter Page (4.25"w x 5.5"h)]',
 		:question_type => :checkbox},
-	{:question => 'Deadline: July 1',
-		:question_type => :statement},
-	{:question => 'Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi', 
-		:question_type => :statement},
-	{:question => 'Enclosed camera-ready ad/logo and mail to address below, or',
-		:question_type => :statement},
-	{:question => 'Email electronic copy to: wvdinfo@sfvs.org, or',
-		:question_type => :statement},
-	# {:question => 'Please upload here',
-	# 	:question_type => :textbox},
-	{:question => 'Mail Information: San Francisco Vegetarian Society,
+	{:question => 'Additional Information
+		Deadline: July 1
+		Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi
+
+		Enclosed camera-ready ad/logo and mail to address below, or
+		Email electronic copy to: wvdinfo@sfvs.org
+
+		Mail Information: San Francisco Vegetarian Society,
 		73 Rondel Place,
 		San Francisco, CA 94103',
 		:question_type => :statement},
+	# {:question => 'Please upload here',
+	# 	:question_type => :textbox},
 	{:question => 'Authorized Signature',
 		:question_type => :textbox}
 ]
@@ -386,110 +385,143 @@ questions_for_form[advertising_non_sponsor_contract] = 	[
 	{:question => 'Business Card Size (3.5"w x 2"h): $50',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-	{:question => 'Total Enclosed', 
-		:question_type => :textbox},
-	{:question => 'Deadline: August 31',
-		:question_type => :statement},
-	{:question => 'Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi', 
-		:question_type => :statement},
-	{:question => 'Enclosed camera-ready ad/logo and mail to address below, or',
-		:question_type => :statement},
-	{:question => 'Email electronic copy to: wvdinfo@sfvs.org, or',
-		:question_type => :statement},
-	# {:question => 'Please upload here',
-	# 	:question_type => :textbox},
-	{:question => 'Mail Information: San Francisco Vegetarian Society,
+	{:question => 'Additional Information
+		Deadline: August 31
+		Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi
+
+		Enclosed camera-ready ad/logo and mail to address below, or
+		Email electronic copy to: wvdinfo@sfvs.org
+
+		Mail Information: San Francisco Vegetarian Society,
 		73 Rondel Place,
 		San Francisco, CA 94103',
 		:question_type => :statement},
+	# {:question => 'Please upload here',
+	# 	:question_type => :textbox},
 	{:question => 'Authorized Signature',
 		:question_type => :textbox}
 ]
 
-questions_for_form[conditions_of_agreement] = [
-	{:question => 'Company/Organization', 
-		:question_type => :textbox},
-	{:question => 'Conditions of Agreement ......', 
-		:answers => "[Agree]",
-		:question_type => :radio_button}
-]
+# questions_for_form[conditions_of_agreement] = [
+# 	{:question => 'Company/Organization', 
+# 		:question_type => :textbox},
+# 	{:question => 'Conditions of Agreement ......', 
+# 		:answers => "[Agree]",
+# 		:question_type => :radio_button}
+# ]
+
+# questions_for_form[make_agreement] = [
+# 	{:question => 'Agreement...',
+# 		:question_type => :statement},
+# 	{:question => "Name:",
+# 		:question_type => :textbox},
+# 	{:question => "Signature:",
+# 		:question_type => :textbox},
+# 	{:question => "Title:",
+# 		:question_type => :textbox},
+# 	{:question => "Date:",
+# 		:question_type => :textbox}
+# ]
 
 questions_for_form[health_permit_form] = [
-	{:question => "1. Name of Event:",
-		:question_type => :textbox},
-	{:question => "Location:",
-		:question_type => :textbox},
-	{:question => "Date(s):",
-		:question_type => :textbox},
-	{:question => "Number of booths:",
-		:question_type => :textbox},
-	{:question => "Number of Carts:",
-		:question_type => :textbox},
-	{:question => "Start Time:",
-		:question_type => :textbox},
-	{:question => "2. Company Name:",
-		:question_type => :textbox},
-	{:question => "Address:",
-		:question_type => :textbox},
-	{:question => "Phone:",
-		:question_type => :textbox},
-	{:question => "Fax:",
-		:question_type => :textbox0},
-	{:question => "Email:",
-		:question_type => :textbox},
-	{:question => "On-Site Representative:",
-		:question_type => :textbox},
-	{:question => "3. Name of Facility:",
-		:question_type => :textbox},
-	{:question => "Name & Address:",
-		:question_type => :textbox},
-	{:question => "Phone:",
-		:question_type => :textbox},
-	{:question => "Fax:",
-		:question_type => :textbox},
-	{:question => "E-mail:",
-		:question_type => :textbox},
-	{:question => "Travel Time:",
-		:question_type => :textbox},
-	{:question => "Plumbed Sink:",
-		:question_type => :textbox},
-	{:question => "Warm H20:",
-		:question_type => :textbox},
-	{:question => "3 compartment sink:",
-		:question_type => :textbox},
-	{:question => "Other method approved:",
-		:question_type => :textbox},
-	{:question => "Hot:",
-		:question_type => :textbox},
-	{:question => "Cold:",
-		:question_type => :textbox},
-	{:question => "Food Item:",
-		:question_type => :textbox},
-	{:question => "Off-Site Prep:",
-		:question_type => :textbox},
-	{:question => "Cooking Procedures:",
-		:question_type => :textbox},
-	{:question => "Holding Methods:",
-		:question_type => :textbox},
-	{:question => "Applicant Signaure:",
-		:question_type => :textbox},
-	{:question => "Date:",
-		:question_type => :textbox},
-	{:question => "Printed Name:",
-		:question_type => :textbox}
-]
+	{:question => 'Food Guidelines (only Vegan foods are allowed)
+		All food items must fall under the following categories to be promoted at the World Vegetarian Festival.
+		
+		- Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance 
+		with SF Health Department guidelines. Requires high risk city health permit of $207.
 
-questions_for_form[make_agreement] = [
-	{:question => 'Agreement...',
+		- Pre packaged vegan food items may be sold or given away by Exhibitors. 
+		Requires low risk city health permit of $105.
+
+		Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
+
+		Non Food Guidelines
+		We only allow vegan items that have not have been tested on animals, and are free of leather, 
+		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => "Name:",
-		:question_type => :textbox},
-	{:question => "Signature:",
-		:question_type => :textbox},
-	{:question => "Title:",
-		:question_type => :textbox},
-	{:question => "Date:",
-		:question_type => :textbox}
+	{:question => 'Will you be distributing food/beverage samples?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Do you require a health permit (answer "yes" if you will be selling or giving away foods or food samples)?
+		Health permits are required and will be processed by SFVS.',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Health permit Fee',
+		:answers => "[High risk city health permit: $207, Low risk city health permit: $105]",
+		:question_type => :radio_button},
+	{:question => 'Additional Information
+		Email electronic copy to: wvdinfo@sfvs.org
+
+		Mail Information: San Francisco Vegetarian Society,
+		73 Rondel Place,
+		San Francisco, CA 94103',
+		:question_type => :statement}
+
+	# {:question => "1. Name of Event:",
+	# 	:question_type => :textbox},
+	# {:question => "Location:",
+	# 	:question_type => :textbox},
+	# {:question => "Date(s):",
+	# 	:question_type => :textbox},
+	# {:question => "Number of booths:",
+	# 	:question_type => :textbox},
+	# {:question => "Number of Carts:",
+	# 	:question_type => :textbox},
+	# {:question => "Start Time:",
+	# 	:question_type => :textbox},
+	# {:question => "2. Company Name:",
+	# 	:question_type => :textbox},
+	# {:question => "Address:",
+	# 	:question_type => :textbox},
+	# {:question => "Phone:",
+	# 	:question_type => :textbox},
+	# {:question => "Fax:",
+	# 	:question_type => :textbox0},
+	# {:question => "Email:",
+	# 	:question_type => :textbox},
+	# {:question => "On-Site Representative:",
+	# 	:question_type => :textbox},
+	# {:question => "3. Name of Facility:",
+	# 	:question_type => :textbox},
+	# {:question => "Name & Address:",
+	# 	:question_type => :textbox},
+	# {:question => "Phone:",
+	# 	:question_type => :textbox},
+	# {:question => "Fax:",
+	# 	:question_type => :textbox},
+	# {:question => "E-mail:",
+	# 	:question_type => :textbox},
+	# {:question => "Travel Time:",
+	# 	:question_type => :textbox},
+	# {:question => "Plumbed Sink:",
+	# 	:question_type => :textbox},
+	# {:question => "Warm H20:",
+	# 	:question_type => :textbox},
+	# {:question => "3 compartment sink:",
+	# 	:question_type => :textbox},
+	# {:question => "Other method approved:",
+	# 	:question_type => :textbox},
+	# {:question => "Hot:",
+	# 	:question_type => :textbox},
+	# {:question => "Cold:",
+	# 	:question_type => :textbox},
+	# {:question => "Food Item:",
+	# 	:question_type => :textbox},
+	# {:question => "Off-Site Prep:",
+	# 	:question_type => :textbox},
+	# {:question => "Cooking Procedures:",
+	# 	:question_type => :textbox},
+	# {:question => "Holding Methods:",
+	# 	:question_type => :textbox},
+	# {:question => "Applicant Signaure:",
+	# 	:question_type => :textbox},
+	# {:question => "Date:",
+	# 	:question_type => :textbox},
+	# {:question => "Printed Name:",
+	# 	:question_type => :textbox}
 ]
 
 questions_for_form[setup_instructions] = [
