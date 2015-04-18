@@ -14,6 +14,10 @@
           %strong="Application Year: #{@year}"
         %p
           %strong="Application Status: #{@status}"
+        %p
+          %strong="Amount Paid: $#{@application.amount_paid}"
+        -unless @application.hasPaid?
+          %br= button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
       -else
         %p Please take survey below to determine your application type.
       = button_to "Edit Profile", edit_user_registration_path, {method: :get}
