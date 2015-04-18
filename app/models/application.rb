@@ -1,13 +1,27 @@
 require 'json'
 
 class Application < ActiveRecord::Base	
-  attr_accessible :year, :content, :completed
+  attr_accessible :year, :content, :completed, :amount_paid
   belongs_to :user
   belongs_to :application_type
 
   def self.current_application_year
     Time.now.year
   end
+
+	def getAmountPaid
+		amnt = read_attribute(:amount_paid)
+		if not amnt or amnt == 0
+			return 0
+		else
+			return amnt
+		end
+	end
+
+	def hasPaid?
+		return getAmountPaid != 0
+	end
+
 
   def content
   	# has content been parsed yet? If not, let's do that..
