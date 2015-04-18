@@ -19,7 +19,7 @@ class Application < ActiveRecord::Base
 	end
 
 	def hasPaid?
-		return getAmountPaid != 0
+		return amount_paid != 0
 	end
 
 
