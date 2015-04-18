@@ -57,11 +57,11 @@ restaurant_concessionaire = ApplicationType.create({:app_type => 'Restaurant Foo
 #(scramble)   (ssu)     (raw)      (breast)    (legs)     (wings)    (eggs)
 
 objects_to_create[:Questionnaire] = [
-	{:question => 'Choose your allpication type. (Click on apllication to view detail)'},
+	{:question => 'Choose your application type. (Click on application to view detail)'},
 	{:question => vendor_non_food.description, :parent_id => 1},
-	{:question => vendor_food.description, :parent_id => 1},
+	{:question => sponsor.description, :parent_id => 1},
 	{:question => non_profit.description, :parent_id => 1},
-	{:question => sponsor.description, :parent_id => 1}
+	{:question => vendor_food.description, :parent_id => 1}
 ]
 
 #answer table has answer to referance to its question, as well as which question it leads to
@@ -73,9 +73,9 @@ objects_to_create[:Answers] = [
 	{:ans => vendor_food.app_type, :questionnaire_id => 1, :leads_to => 5},
 	{:ans => restaurant_concessionaire.app_type, :questionnaire_id => 1, :results_to => restaurant_concessionaire.id},
 	{:ans => 'I am a ' + vendor_non_food.app_type, :questionnaire_id => 2, :results_to => vendor_non_food.id},
-	{:ans => 'I am a ' + vendor_food.app_type, :questionnaire_id => 3, :results_to => vendor_food.id},
-	{:ans => 'I am a ' + sponsor.app_type, :questionnaire_id => 4, :results_to => sponsor.id},
-	{:ans => 'I am a ' + non_profit.app_type, :questionnaire_id => 5, :results_to => non_profit.id}
+	{:ans => 'I am a ' + sponsor.app_type, :questionnaire_id => 3, :results_to => sponsor.id},
+	{:ans => 'I am a ' + non_profit.app_type, :questionnaire_id => 4, :results_to => non_profit.id},
+	{:ans => 'I am a ' + vendor_food.app_type, :questionnaire_id => 5, :results_to => vendor_food.id}
 	# {:ans => vendor_non_food.app_type, :questionnaire_id => 1, :results_to => restaurant_concessionaire.id},
 	# {:ans => sponsor.app_type, :questionnaire_id => 1, :results_to => vendor_non_food.id},
 	# {:ans => non_profit.app_type, :questionnaire_id => 1, :results_to => sponsor.id},
@@ -189,13 +189,10 @@ questions_for_form[non_food_contract] = [
 		one chair and one table (6' x 2.5').",
 		:question_type => :statement},
 	{:question => 'Exhibit Booth',
-		:answers => '[Regular Booth "B" - Open Courtyard: $150 (Payment on or before Aug 15th),
-		Regular Booth "B" - Open Courtyard: $250 (Payment after Aug 15th),
-		Regular Booth "C" - Gallery Bldg: $200 (Payment on or before Aug 15th),
-		Regular Booth "C" - Gallery Bldg: $300 (Payment after Aug 15th)]',
+		:answers => '[Regular Booth "B" - Open Courtyard: $150 (Payment on or before Aug 15th),Regular Booth "B" - Open Courtyard: $250 (Payment after Aug 15th),Regular Booth "C" - Gallery Bldg: $200 (Payment on or before Aug 15th),Regular Booth "C" - Gallery Bldg: $300 (Payment after Aug 15th)]',
 		:question_type => :radio_button},
 	{:question => 'Additional Chair $5 Each', 
-		:answers => "[0, 1, 2, 3, 4, 5]",
+		:answers => "[0, 1, 2, 3, 4]",
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity? ($75 fee)',
 		:answers => "[Yes, No]",
@@ -707,7 +704,10 @@ questions_for_form[setup_instructions] = [
 		:question_type => :statement},
 	{:question => 'Emergency and first aid services will be provided at the SFVS Volunteer Booth 
 		located at the middle of the Gallery.',
-		:question_type => :statement}
+		:question_type => :statement},
+	{:question => 'Please Confirm',
+		:answers => "[Confirm]",
+		:question_type => :radio_button}
 ]
 
 questions_for_form.each do |form_object, form_question_attributes|
