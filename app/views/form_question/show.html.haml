@@ -15,7 +15,8 @@
           = text_field_tag "form_answer[#{answer.to_s}]", f_answer, size: 20
           - answer += 1 
         - elsif (question.question_type == "radio_button")
-          -String(String(question.answers)[1..-2]).split(', ').each do |choice|
+          -String(String(question.answers)[1..-2]).split(',').each do |selection|
+            - choice = selection.strip
             - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
               - if @form_answer[answer.to_s] == choice
                 - r_checked = true
@@ -24,7 +25,8 @@
           - answer += 1
         - elsif (question.question_type == "checkbox")
           - check_ans = 0
-          - String(String(question.answers)[1..-2]).split(',').strip.each do |choice|
+          - String(String(question.answers)[1..-2]).split(',').each do |selection|
+            - choice = selection.strip
             - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
               - if @form_answer[answer.to_s]["check_box_ans"][check_ans.to_s] == choice
                 - c_checked = true

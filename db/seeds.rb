@@ -398,7 +398,7 @@ questions_for_form[advertising_sponsor_contract] = 	[
 		:question_type => :statement},
 	{:question => 'Please select a size of your advertisement:',
 		:answers => '[Full Page (8.5"w x 11"h), Half Page (8.5"w x 5.5"h), Quarter Page (4.25"w x 5.5"h)]',
-		:question_type => :checkbox},
+		:question_type => :radio_button},
 	{:question => 'Additional Information
 		Deadline: July 1
 		Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi
