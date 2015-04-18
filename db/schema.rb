@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150414062844) do
+ActiveRecord::Schema.define(:version => 20150417194225) do
 
   create_table "answers", :force => true do |t|
     t.string   "ans"
@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(:version => 20150414062844) do
 
   create_table "application_types", :force => true do |t|
     t.string   "app_type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.string   "description", :default => "", :null => false
   end
 
   create_table "application_types_forms", :id => false, :force => true do |t|
