@@ -215,61 +215,71 @@ questions_for_form[company_information]  = [
 # 		:question_type => :textbox}
 # ] 
 
-# questions_for_form[sponsor_contract] = [
-# 	{:question => 'Please provide a description of all items being displayed, promoted and/or sold. 
-# 		Attach a seperate sheet if neccesary', 
-# 		:question_type => :textbox},
-# 	{:question => 'Food Guidelines...',
-# 		:question_type => :statement},
-# 	{:question => 'Will you be distributing food/beverage?', 
-# 		:answers => "[Yes, No]",
-# 	 	:question_type => :radio_button},
-# 	# {:question => 'Will you require a health permit?',
-# 	# 	:answers => "[Yes, No]", 
-# 	# 	:question_type => :radio_button},
-# 	{:question => 'Will you use a sterno?', 
-# 		:answers => "[Yes, No]", 
-# 		:question_type => :radio_button},
-# 	{:question => 'Exhibit Registration...', 
-# 		:question_type => :statement},
-# 	{:question => "Principal Sponsor ($3000)
-# 		-Promiment exhibitor location
-# 		-Name on all publicity
-# 		-Full page ad in event program
-# 		-Product exclusivity
-# 		-Logo link on SFVS website
-# 		-Booth (12'x8')
-# 		-Two tables with two chairs",
-# 		:question_type => :statement},
-# 	{:question => "Major Sponsor ($2000)
-# 		-Name on special publicity
-# 		-Half page ad in event program
-# 		-Logo link on SFVS website
-# 		-Booth (12'x8')
-# 		-Two tables with two chairs",
-# 		:question_type => :statement},
-# 	{:question => "Associate Sponsor ($1000)
-# 		-Newsletter recognition
-# 		-Quarter page ad in event program
-# 		-Booth (8'x8')
-# 		-One table with two chairs",
-# 		:question_type => :statement},
-# 	{:question => "Supporting Sponsor [non-exhibiting] ($500)
-# 		-Newsletter recognition
-# 		-Quarter page ad in event program",
-# 		:question_type => :statement},
-# 	{:question => "Included above are 6' x 2.5' table(s), chairs, health permits, and electricity (except non-exhibitor)",
-# 		:question_type => :statement},
-# 	{:question => 'Sponsorship type',
-# 		:answers => "[Principal Sponsor ($3000), Major Sponsor ($2000), 
-# 			Associate Sponsor ($1000), Supporting Sponsor [non-exhibiting] ($500)]", 
-# 		:question_type => :radio_button},	
-# 	{:question => 'Will you need electricity?',
-# 		:answers => "[Yes, No]",
-# 		:question_type => :radio_button},
-# 	{:question => 'Please state electrical requirements...', 
-# 		:question_type => :textbox}
-# 	]
+questions_for_form[sponsor_contract] = [
+	{:question => 'Product/Services Description',
+		:question_type => :statement},
+	{:question => 'Please provide a description of all items being displayed, promoted and/or sold, or N/A for none.',
+		:question_type => :message},
+	{:question => 'Food Guidelines (only Vegan foods are allowed)
+		All food items must fall under the following categories to be promoted at the World Vegetarian Festival.
+		
+		- Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance 
+		with SF Health Department guidelines. Requires high risk city health permit of $207.
+
+		- Pre packaged vegan food items may be sold or given away by Exhibitors. 
+		Requires low risk city health permit of $105.
+
+		Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
+
+		Non Food Guidelines
+		We only allow vegan items that have not have been tested on animals, and are free of leather, 
+		fur, gelatin, silk, wool or any other animal derivatives.',
+		:question_type => :statement},
+	{:question => 'Will you use a sterno?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => "Sponsor Information
+		Principal Sponsor ($3,000)
+		- Booth (12' x 8')
+		- Prominent Exhibit Location
+		- Two tables with two chairs
+		- Name on all publicity
+		- Full page ad in event program
+		- Logo Link on SFVS website
+		- Product Exclusivity
+
+		Major Sponsor ($2,000)
+		- Booth (12' x 8')
+		- Two tables with two chairs
+		- Name on special publicity
+		- Half page ad in event program
+		- Logo Link on SFVS website
+ 
+		Associate Sponsor ($1,000)
+		- Booth (8' x 8')
+		- One tables with two chairs
+		- Newsletter recognition
+		- Quarter page ad in program
+
+		Supporting Sponsor (non exhibiting) ($500)
+		- Newsletter recognition
+		- Quarter page ad in program
+
+		Included above are 6' x 2.5' table/s, chairs, health permits, and electricity (except non-exhibitor).",
+		:question_type => :statement},
+	{:question => 'Please select your Sponsorship type:',
+		:answers => "[Principal Sponsor, Major Sponsor, Associate Sponsor, Supporting Sponsor (non exhibiting)]",
+		:question_type => :radio_button},
+	{:question => 'Will you need electricity?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
+	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
+		List Equipment & Watts (below 1000 watts or 12 amps). If no, write N/A',
+		:question_type => :message}
+]
 
 questions_for_form[food_item_contract] = [
 	{:question => 'Product/Services Description',
