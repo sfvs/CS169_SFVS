@@ -21,9 +21,16 @@ class UsersController < ApplicationController
   def submit_application
     user = User.find(params[:id])
     application = user.get_most_recent_application
-    if application and application.all_forms_completed? and not application.completed
-      application.completed = true
-      application.save
+    if application
+      if application.all_forms_completed? and not application.completed
+        application.completed = true
+        application.save
+        flash[:notice] = "Application successfully submitted."
+      else
+        flash[:alert] = "One of the forms is not yet submitted."
+      end
+    else
+      flash[:alert] = "Error. Application not found. Please contact SFVS for help."
     end
     redirect_to user_path(user)
   end
