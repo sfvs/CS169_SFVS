@@ -395,11 +395,11 @@ questions_for_form[non_profit_contract] = 	[
 # Advertising Forms
 
 questions_for_form[advertising_sponsor_contract] = 	[
-	{:question => 'Ads - Program Book Size  8 1/2" x 11" (2,000 copies)
+	{:question => 'Ads - Program Book Size  8 1/2-in x 11-in (2,000 copies)
 		All ads are one color (black print)',
 		:question_type => :statement},
 	{:question => 'Please select a size of your advertisement:',
-		:answers => '[Full Page (8.5"w x 11"h), Half Page (8.5"w x 5.5"h), Quarter Page (4.25"w x 5.5"h)]',
+		:answers => '[Full Page (8.5-in x 11-in), Half Page (8.5-in x 5.5-in), Quarter Page (4.25-in x 5.5-in)]',
 		:question_type => :radio_button},
 	{:question => 'Additional Information
 		Deadline: July 1
@@ -417,19 +417,19 @@ questions_for_form[advertising_sponsor_contract] = 	[
 ]
 
 questions_for_form[advertising_non_sponsor_contract] = 	[
-	{:question => 'Ads - Program Book Size  8 1/2" x 11" (2,000 copies)
+	{:question => 'Ads - Program Book Size  8 1/2-in x 11-in (2,000 copies)
 		All ads are one color (black print)',
 		:question_type => :statement},
-	{:question => 'Half Page (8.5"w x 5.5"h): $300',
+	{:question => 'Half Page (8.5-in x 5.5-in): $300',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-	{:question => 'Quarter Page (4.25"w x 5.5"h): $200',
+	{:question => 'Quarter Page (4.25-in x 5.5-in): $200',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-	{:question => 'One Eigth Page (4.25"w x 2.75"h): $100',
+	{:question => 'One Eigth Page (4.25-in x 2.75-in): $100',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
-	{:question => 'Business Card Size (3.5"w x 2"h): $50',
+	{:question => 'Business Card Size (3.5-in x 2-in): $50',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => 'Additional Information
