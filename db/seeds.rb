@@ -94,10 +94,10 @@ non_profit_contract = Form.create({:form_name => "Exhibitor Contract - Non Profi
 food_item_contract = Form.create({:form_name => "Exhibitor Contract of Food Items"})
 
 advertising_non_sponsor_contract = Form.create({:form_name => "Advertising Contract"})
-advertising_sponsor_contract = Form.create({:form_name => "Advertising Contract"})
+advertising_sponsor_contract = Form.create({:form_name => "Advertising Contract for Sponsors"})
 
 health_permit_form = Form.create({:form_name => "Health Permit Form"})
-restaurant_health_permit_form = Form.create({:form_name => "Health Permit Form"})
+restaurant_health_permit_form = Form.create({:form_name => "Health Permit Form for Restaurant Concessionaires"})
 
 conditions_of_agreement = Form.create({:form_name => "Conditions of Agreement"})
 make_agreement = Form.create({:form_name => "Agreement"})
