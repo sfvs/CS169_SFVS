@@ -1,7 +1,7 @@
 - answer = 0
 - @list_of_questions.each do |question|
   %div.control-group
-    %p= "#{question.question}"
+    %p= simple_format(question.question)
     %div.controls
       - if (question.question_type == "textbox")
         - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)

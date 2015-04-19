@@ -35,14 +35,7 @@ class SurveyController < ApplicationController
       type = ApplicationType.find_by_id(answer_id.to_i)
       unless type.nil?
         response = "Your type is #{type.app_type}."
-        recent_application = @user.get_most_recent_application
-        if not recent_application.nil?
-          recent_application.destroy
-        end
-        app = @user.applications.create()
-        app.application_type = type
-        app.year = Application.current_application_year
-        app.save
+        @user.create_an_application type
       end
     end
     flash[:notice] = response

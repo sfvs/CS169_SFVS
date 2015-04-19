@@ -94,10 +94,10 @@ non_profit_contract = Form.create({:form_name => "Exhibitor Contract - Non Profi
 food_item_contract = Form.create({:form_name => "Exhibitor Contract of Food Items"})
 
 advertising_non_sponsor_contract = Form.create({:form_name => "Advertising Contract"})
-advertising_sponsor_contract = Form.create({:form_name => "Advertising Contract"})
+advertising_sponsor_contract = Form.create({:form_name => "Advertising Contract for Sponsors"})
 
 health_permit_form = Form.create({:form_name => "Health Permit Form"})
-restaurant_health_permit_form = Form.create({:form_name => "Health Permit Form"})
+restaurant_health_permit_form = Form.create({:form_name => "Health Permit Form for Restaurant Concessionaires"})
 
 conditions_of_agreement = Form.create({:form_name => "Conditions of Agreement"})
 make_agreement = Form.create({:form_name => "Agreement"})
@@ -519,9 +519,9 @@ questions_for_form[make_agreement] = [
 	{:question => 'Agreement:
 		I certify that I have read the World Vegetarian Festival exhibitor information and contract
 		and agree to all terms and guidelines specified therein.',
-		:answers => "[Agree]",
-		:question_type => :radio_button},
-	{:question => 'Company/Organization', 
+		:answers => "[I Agree to the terms and conditions]",
+		:question_type => :checkbox},
+	{:question => 'Company/Organization:', 
 		:question_type => :textbox},
 	{:question => "Name:",
 		:question_type => :textbox},
@@ -704,7 +704,7 @@ questions_for_form[setup_instructions] = [
 		14. Emergency and first aid services will be provided at the SFVS Volunteer Booth 
 		located at the middle of the Gallery.",
 
-		:answers => "[Confirm]",
+		:answers => "[I Agree to the terms and conditions]",
 		:question_type => :checkbox}
 ]
 
