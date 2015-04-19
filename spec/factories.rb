@@ -8,7 +8,10 @@ FactoryGirl.define do
   end
   
   factory :form_question do
-    
+    question "How are you?"
+    answers "[Good!,Great!,Wonderful!]"
+    question_type :checkbox
+    order 0
   end
 
   factory :application do
