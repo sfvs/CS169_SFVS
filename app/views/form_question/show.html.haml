@@ -4,41 +4,47 @@
 %div.container-fluid
   %h1 #{@form_name}
 
-  = form_tag user_form_question_path(@user,@form_type), :method => :put do
+  = form_tag user_form_question_path(@user,@form_type), {:method => :put, :class => "form-inline"} do
     - answer = 0
     - @list_of_questions.each do |question|
-      %p 
-        %font{:color => "black"} #{simple_format(question.question)}
-        - if (question.question_type == "textbox")
-          - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
-            - f_answer = @form_answer[answer.to_s]
-          = text_field_tag "form_answer[#{answer.to_s}]", f_answer, size: 20
-          - answer += 1 
-        - elsif (question.question_type == "radio_button")
-          -String(String(question.answers)[1..-2]).split(',').each do |selection|
-            - choice = selection.strip
-            - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
-              - if @form_answer[answer.to_s] == choice
-                - r_checked = true
-            = label :form_answer, answer, choice
-            = radio_button_tag "form_answer[#{answer.to_s}]", choice, r_checked
-          - answer += 1
-        - elsif (question.question_type == "checkbox")
-          - check_ans = 0
-          - String(String(question.answers)[1..-2]).split(',').each do |selection|
-            - choice = selection.strip
-            - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
-              - if @form_answer[answer.to_s]["check_box_ans"][check_ans.to_s] == choice
-                - c_checked = true
-            = label :form_answer, answer, choice
-            = check_box_tag "form_answer[#{answer.to_s}][check_box_ans][#{check_ans.to_s}]", choice, c_checked
-            = check_ans += 1
-          - answer += 1
-        - elsif (question.question_type == "message")
-          - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
-            - f_answer = @form_answer[answer.to_s]
-          = text_area_tag "form_answer[#{answer.to_s}]", f_answer, size: "60x5"
-          - answer += 1            
+      %div.control-group 
+        =simple_format(question.question)
+        %label.control-label
+          %div.controls
+            - if (question.question_type == "textbox")
+              - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
+                - f_answer = @form_answer[answer.to_s]
+              = text_field_tag "form_answer[#{answer.to_s}]", f_answer, size: 20
+              - answer += 1
+            - elsif (question.question_type == "radio_button")
+              %label.radio
+                -String(String(question.answers)[1..-2]).split(',').each do |selection|
+                  - choice = selection.strip
+                  - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
+                    - if @form_answer[answer.to_s] == choice
+                      - r_checked = true
+                  %label.radio.inline
+                    = label :form_answer, answer, choice, {:class => "radio.inline"}
+                    = radio_button_tag "form_answer[#{answer.to_s}]", choice, r_checked
+                - answer += 1
+            - elsif (question.question_type == "checkbox")
+              - check_ans = 0
+              %label.radio
+                - String(String(question.answers)[1..-2]).split(',').each do |selection|
+                  - choice = selection.strip
+                  - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
+                    - if @form_answer[answer.to_s]["check_box_ans"][check_ans.to_s] == choice
+                      - c_checked = true
+                  %label.checkbox.inline
+                    = label :form_answer, answer, choice
+                    = check_box_tag "form_answer[#{answer.to_s}][check_box_ans][#{check_ans.to_s}]", choice, c_checked
+                  - check_ans += 1
+              - answer += 1
+            - elsif (question.question_type == "message")
+              - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
+                - f_answer = @form_answer[answer.to_s]
+              = text_area_tag "form_answer[#{answer.to_s}]", f_answer, size: "60x5"
+              - answer += 1
 
     = submit_tag 'Save and Return'
     = submit_tag 'Submit'
