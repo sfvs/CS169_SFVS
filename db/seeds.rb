@@ -191,13 +191,13 @@ questions_for_form[non_food_contract] = [
 		one chair and one table (6' x 2.5').",
 		:question_type => :statement},
 	{:question => 'Exhibit Booth',
-		:answers => '[Regular Booth "B" - Open Courtyard: $150 (Payment on or before Aug 15th),Regular Booth "B" - Open Courtyard: $250 (Payment after Aug 15th),Regular Booth "C" - Gallery Bldg: $200 (Payment on or before Aug 15th),Regular Booth "C" - Gallery Bldg: $300 (Payment after Aug 15th)]',
+		:answers => '[Regular Booth "B" - Open Courtyard: Payment on or before Aug 15th ($150),Regular Booth "B" - Open Courtyard: Payment after Aug 15th ($250),Regular Booth "C" - Gallery Bldg: Payment on or before Aug 15th ($200),Regular Booth "C" - Gallery Bldg: Payment after Aug 15th ($300)]',
 		:question_type => :radio_button},
 	{:question => 'Additional Chair $5 Each', 
-		:answers => "[0, 1, 2, 3, 4]",
+		:answers => "[0, 1 ($5), 2 ($10), 3 ($15), 4 ($20)]",
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity? ($75 fee)',
-		:answers => "[Yes, No]",
+		:answers => "[Yes ($75), No]",
 		:question_type => :radio_button},
 	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
 		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
@@ -238,7 +238,7 @@ questions_for_form[restaurant_contract] = [
 		Fee includes one booth space, one table and one chair.",
 		:question_type => :statement},
 	{:question => 'Food/Catering Booth',
-		:answers => '[$150 (Payment on or before Aug 15th), $250 (Payment after Aug 15th)]',
+		:answers => '[Payment on or before Aug 15th ($150),Payment after Aug 15th ($250)]',
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity?',
 		:answers => "[Yes, No]",
@@ -278,7 +278,7 @@ questions_for_form[sponsor_contract] = [
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => "Sponsor Information
-		Principal Sponsor ($3,000)
+		Principal Sponsor - $3,000
 		- Booth (12' x 8')
 		- Prominent Exhibit Location
 		- Two tables with two chairs
@@ -287,27 +287,27 @@ questions_for_form[sponsor_contract] = [
 		- Logo Link on SFVS website
 		- Product Exclusivity
 
-		Major Sponsor ($2,000)
+		Major Sponsor - $2,000
 		- Booth (12' x 8')
 		- Two tables with two chairs
 		- Name on special publicity
 		- Half page ad in event program
 		- Logo Link on SFVS website
  
-		Associate Sponsor ($1,000)
+		Associate Sponsor - $1,000
 		- Booth (8' x 8')
 		- One tables with two chairs
 		- Newsletter recognition
 		- Quarter page ad in program
 
-		Supporting Sponsor (non exhibiting) ($500)
+		Supporting Sponsor (non exhibiting) - $500
 		- Newsletter recognition
 		- Quarter page ad in program
 
 		Included above are 6' x 2.5' table/s, chairs, health permits, and electricity (except non-exhibitor).",
 		:question_type => :statement},
 	{:question => 'Please select your Sponsorship type:',
-		:answers => "[Principal Sponsor, Major Sponsor, Associate Sponsor, Supporting Sponsor (non exhibiting)]",
+		:answers => "[Principal Sponsor ($3,000), Major Sponsor ($2,000), Associate Sponsor ($1,000), Supporting Sponsor (non exhibiting) ($500)]",
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity?',
 		:answers => "[Yes, No]",
@@ -358,10 +358,10 @@ questions_for_form[food_item_contract] = [
 		Regular Booth "C" - Gallery Bldg: $300 (Payment after Aug 15th)]',
 		:question_type => :radio_button},
 	{:question => 'Additional Chair $5 Each', 
-		:answers => "[0, 1, 2, 3, 4, 5]",
+		:answers => "[0, 1 ($5), 2 ($10), 3 ($15), 4 ($20)]",
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity? ($75 fee)',
-		:answers => "[Yes, No]",
+		:answers => "[Yes ($75), No]",
 		:question_type => :radio_button},
 	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
 		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
@@ -382,10 +382,10 @@ questions_for_form[non_profit_contract] = 	[
 		:answers => "[Payment on or before Aug 15th: $165, Payment after Aug 15th: $215]",
 		:question_type => :radio_button},
 	{:question => 'Additional Chair $5 Each', 
-		:answers => "[0, 1, 2, 3, 4, 5]",
+		:answers => "[0, 1 ($5), 2 ($10), 3 ($15), 4 ($20)]",
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity? ($75 fee)',
-		:answers => "[Yes, No]",
+		:answers => "[Yes ($75), No]",
 		:question_type => :radio_button},
 	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
 		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
@@ -421,16 +421,16 @@ questions_for_form[advertising_non_sponsor_contract] = 	[
 		All ads are one color (black print)',
 		:question_type => :statement},
 	{:question => 'Half Page (8.5-in x 5.5-in): $300',
-		:answers => "[Yes, No]",
+		:answers => "[Yes ($300), No]",
 		:question_type => :radio_button},
 	{:question => 'Quarter Page (4.25-in x 5.5-in): $200',
-		:answers => "[Yes, No]",
+		:answers => "[Yes ($200), No]",
 		:question_type => :radio_button},
 	{:question => 'One Eigth Page (4.25-in x 2.75-in): $100',
-		:answers => "[Yes, No]",
+		:answers => "[Yes ($100), No]",
 		:question_type => :radio_button},
 	{:question => 'Business Card Size (3.5-in x 2-in): $50',
-		:answers => "[Yes, No]",
+		:answers => "[Yes ($50), No]",
 		:question_type => :radio_button},
 	{:question => 'Additional Information
 		Deadline: August 31
@@ -556,7 +556,7 @@ questions_for_form[health_permit_form] = [
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => 'Health permit Fee',
-		:answers => "[High risk city health permit: $207, Low risk city health permit: $105]",
+		:answers => "[High risk city health permit ($207), Low risk city health permit ($105)]",
 		:question_type => :radio_button},
 	{:question => 'Additional Information
 		Email electronic copy to: wvdinfo@sfvs.org
@@ -647,7 +647,7 @@ questions_for_form[restaurant_health_permit_form] = [
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
 	{:question => 'Health permit Fee',
-		:answers => "[High risk city health permit: $207]",
+		:answers => "[High risk city health permit ($207)]",
 		:question_type => :radio_button},
 	{:question => 'Additional Information
 		Email electronic copy to: wvdinfo@sfvs.org
