@@ -23,6 +23,7 @@ class FormQuestionController < ApplicationController
     @form_type = Form.find_by_id(params[:id])
     @form_name = @form_type.form_name
     @form_content = get_form_content
+    logger.debug "form content: #{@form_content}"
     @application = @user.get_most_recent_application
     if params[:commit] == "Save and Return"
       update_application(false)
@@ -41,19 +42,30 @@ class FormQuestionController < ApplicationController
   # Form an array of answers using the params
   def get_answers
     answers_list = []
-    unless params[:form_answer].nil?
-      params[:form_answer].each do |key, value|
-        answers_list << value
-      end
+    logger.debug "params #{params[:form_answer]}"
+    num_questions = @form_type.number_of_questions
+    (0..(num_questions - 1)).each do |index|
+      answers_list[index] = params[:form_answer].has_key?(index.to_s) ? params[:form_answer][index.to_s] : nil
     end
+    logger.debug "answers: #{answers_list}"
     answers_list
   end
 
   def get_form_content
-    @questions_list = @form_type.get_list_of_questions
+    @questions_list = @form_type.get_sorted_form_questions
     form_content = {
-      @form_name => Hash[@questions_list.zip get_answers]
+      @form_name => Hash.new
     }
+    answer_list = get_answers
+    index = 0
+    @questions_list.each do |question|
+      if question.question_type == "statement"
+        form_content[@form_name][question.question] = "No Answer Required For Statement Questions"
+      else
+        form_content[@form_name][question.question] = answer_list[index]
+      end
+      index += 1
+    end
     form_content
   end
 

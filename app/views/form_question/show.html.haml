@@ -45,6 +45,8 @@
               - f_answer = @form_answer[answer.to_s]
             = text_area_tag "form_answer[#{answer.to_s}]", f_answer, size: "60x5"
             - answer += 1
+          - elsif (question.question_type == "statement")
+            - answer += 1
 
     = submit_tag 'Save and Return'
     = submit_tag 'Submit'

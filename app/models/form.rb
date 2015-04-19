@@ -15,9 +15,7 @@ class Form < ActiveRecord::Base
   def get_list_of_questions
     questions_list = []
     form_questions = self.get_sorted_form_questions.each do |question|
-      if question.question_type != "statement"
-        questions_list << question.question
-      end
+      questions_list << question.question
     end
     questions_list
   end
