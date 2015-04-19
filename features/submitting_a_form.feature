@@ -76,4 +76,4 @@ Scenario: see completed form message after submission
   And I press "Submit"
   Then I should see "Submitted General Form"
   When I follow "General Form"
-  Then I should see "Company name" with "Apple"
+  Then I should see disabled "Company name" with "Apple"
