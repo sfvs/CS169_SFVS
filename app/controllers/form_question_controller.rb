@@ -12,6 +12,7 @@ class FormQuestionController < ApplicationController
     @list_of_questions = @form_type.get_sorted_form_questions
     application = @user.get_most_recent_application
     if application
+      @disable = application.get_completed_forms[@form_name]
       @saved_form = application.content
       if @saved_form.has_key?(@form_name)
         @form_answer = get_answers_to_prefill_from(@saved_form[@form_name], @form_name)
