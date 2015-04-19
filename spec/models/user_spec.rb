@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe User do
   describe "user functions" do
-
     it "tells me what is my most recent application" do
       #create user
       app_year = stub_app_year 2015
@@ -21,6 +20,47 @@ describe User do
 
       app_year = stub_app_year 2016
       expect(user.get_most_recent_application).to be_nil
+    end
+
+    describe "making applications" do
+      before :each do
+        @type = make_forms_for_app_type "sponsor"
+        @user = FactoryGirl.create(:user)
+        @app_year = stub_app_year 2015
+      end
+
+      it "should create an application" do
+        User.any_instance.stub(:get_most_recent_application).and_return(nil)
+        
+        @user.create_an_application @type
+        @user.reload
+        @user.applications.count.should be == 1
+      end
+
+      it "should correctly delete the most recent application and create a new application" do
+        mock_app = FactoryGirl.create(:application)
+        mock_app.user = @user
+        mock_app.year = @app_year
+        mock_app.application_type = @type
+        mock_app.completed = false
+        mock_app.save
+
+        @user.create_an_application @type
+
+        Application.find_by_id(mock_app).should be_nil
+        @user.get_most_recent_application.should_not be == mock_app
+      end
+
+      it "should be able to make a new application some new year in the future" do
+        # ApplicationType.stub(:find_by_id).with(@reply).and_return(@type)
+        old_year = stub_app_year 2015
+        type_donor = make_forms_for_app_type "sponsor"
+        @user.create_an_application type_donor
+
+        new_year = stub_app_year 2018        
+        @user.create_an_application @type
+        @user.applications.length.should be == 2
+      end
     end
   end
 

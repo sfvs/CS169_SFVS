@@ -23,4 +23,16 @@ class User < ActiveRecord::Base
   def format_phone_number
     self.telephone = number_to_phone(self.telephone, area_code: true) unless self.telephone.nil?
   end
+
+  def create_an_application(type)
+    recent_application = self.get_most_recent_application
+    if not recent_application.nil?
+      recent_application.destroy
+    end
+    app = self.applications.create()
+    app.application_type = type
+    app.year = Application.current_application_year
+    app.save
+  end
+
 end
