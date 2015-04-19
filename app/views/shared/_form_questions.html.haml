@@ -1,8 +1,7 @@
 - answer = 0
 - @list_of_questions.each do |question|
   %div.control-group
-    %label.control-label 
-      #{question.question}
+    %p= "#{question.question}"
     %div.controls
       - if (question.question_type == "textbox")
         - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
@@ -24,7 +23,7 @@
         - check_ans = 0
         - String(String(question.answers)[1..-2]).split(',').each do |selection|
           - choice = selection.strip
-          - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s)
+          - if !@form_answer.nil? && @form_answer.has_key?(answer.to_s) && !@form_answer[answer.to_s].nil?
             - if @form_answer[answer.to_s]["check_box_ans"][check_ans.to_s] == choice
               - c_checked = true
           %div.checkbox

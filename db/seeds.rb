@@ -511,8 +511,8 @@ questions_for_form[conditions_of_agreement] = [
 		member of the SFVS, this becomes a binding agreement and the Company / Organization listed
 		above is subject to and agrees with all conditions stated on the contract.  SFVS reserves the right
 		to assign space in order to benefit the overall event.", 
-		:answers => "[Agree]",
-		:question_type => :radio_button}
+		:answers => "[I Agree to the terms and conditions]",
+		:question_type => :checkbox}
 ]
 
 questions_for_form[make_agreement] = [
@@ -659,53 +659,53 @@ questions_for_form[restaurant_health_permit_form] = [
 ]
 
 questions_for_form[setup_instructions] = [
-	{:question => 'For your convenience, we have arranged a Friday set-up time from 2:00 - 4:00 p.m.',
-		:question_type => :statement},
-	{:question => 'On the day of the event, check-in and set-up time: 8:00 - 9:30 a.m. 
+	{:question => "Set-up and Clean-up
+		1. For your convenience, we have arranged a Friday set-up time from 2:00 - 4:00 p.m.
+		
+		2. On the day of the event, check-in and set-up time: 8:00 - 9:30 a.m. 
 		Please complete set up by 9:30 a.m. After 9:30 a.m., SFVS reserves the right 
-		to assign an empty booth without any further obligation.',
-		:question_type => :statement},
-	{:question => 'The building facilities will be locked the evenings of Friday and Saturday. 
-		You may leave non-valuables items inside the Gallery. There are no security guards in the evening.',
-		:question_type => :statement},
-	{:question => "Exhibitors' gallery must be vacated Sunday by 7:00 p.m.",
-		:question_type => :statement},
-	{:question => 'Area(s) rented must be swept and, if necessary, mopped at the end of each day. 
+		to assign an empty booth without any further obligation.
+
+		3. The building facilities will be locked the evenings of Friday and Saturday. 
+		You may leave non-valuables items inside the Gallery. There are no security guards in the evening.
+
+		4. Exhibitors' gallery must be vacated Sunday by 7:00 p.m.
+		
+		5. Area(s) rented must be swept and, if necessary, mopped at the end of each day. 
 		Please bring your own brooms, mops and dust pans. A $50 cleaning fee may be assessed to booths 
-		not left clean as determined by SFVS.',
-		:question_type => :statement},
-	{:question => 'SFVS has GARBAGE, RECYCLING and COMPOST dumpsters adequately marked behind the 
+		not left clean as determined by SFVS.
+		
+		6. SFVS has GARBAGE, RECYCLING and COMPOST dumpsters adequately marked behind the 
 		building. Do not use the County Fair Building dumpster. Garbage must be taken with 
 		ou on departure or placed in the marked SFVS dumpster located at the back of the Gallery building. 
-		Cardboard boxes must be broken apart for recycling.',
-		:question_type => :statement},
-	{:question => "Screws, tacks or tape must not be used to fasten items to walls, 
-		cabinets,windowsills, doorways or ceiling. Scotch brand, blue painter's tape may be used.",
-		:question_type => :statement},
-	{:question => 'If you need to hang a heavy banner, you may need to supply your own banner 
-		stands and you are advised to do your set-up on a Friday.',
-		:question_type => :statement},
-	{:question => "Flyers, advertising or information materials can only be posted in the exhibitor's exhibit space.",
-		:question_type => :statement},
-	{:question => 'Loading and unloading is located at the Lincoln Way entrance. 
+		Cardboard boxes must be broken apart for recycling.
+
+		7. Screws, tacks or tape must not be used to fasten items to walls, 
+		cabinets,windowsills, doorways or ceiling. Scotch brand, blue painter's tape may be used.
+
+		8. If you need to hang a heavy banner, you may need to supply your own banner 
+		stands and you are advised to do your set-up on a Friday.
+
+		9. Flyers, advertising or information materials can only be posted in the exhibitor's exhibit space.
+
+		10. Loading and unloading is located at the Lincoln Way entrance. 
 		No permanent parking allowed. These are reserved spaces and your vehicle 
-		may be towed by the County Fair building management.',
-		:question_type => :statement},
-	{:question => 'Parking inside the park is limited to 4 hours. 
+		may be towed by the County Fair building management.
+
+		11. Parking inside the park is limited to 4 hours. 
 		You may park on Lincoln Way or at the UCSF garage (See directions page). 
-		There is also a whole day public garage parking located in the Park by the Japanese Tea Garden.',
-		:question_type => :statement},
-	{:question => 'No propane gas tank is allowed for heating or cooking inside the building.',
-		:question_type => :statement},
-	{:question => 'No animals or pets are allowed inside the premises with the exception of 
-		guide or service dogs or animals needed by the disabled.',
-		:question_type => :statement},
-	{:question => 'Emergency and first aid services will be provided at the SFVS Volunteer Booth 
-		located at the middle of the Gallery.',
-		:question_type => :statement},
-	{:question => 'Please Confirm',
+		There is also a whole day public garage parking located in the Park by the Japanese Tea Garden.
+
+		12. No propane gas tank is allowed for heating or cooking inside the building.
+
+		13. No animals or pets are allowed inside the premises with the exception of 
+		guide or service dogs or animals needed by the disabled.
+
+		14. Emergency and first aid services will be provided at the SFVS Volunteer Booth 
+		located at the middle of the Gallery.",
+
 		:answers => "[Confirm]",
-		:question_type => :radio_button}
+		:question_type => :checkbox}
 ]
 
 questions_for_form.each do |form_object, form_question_attributes|
