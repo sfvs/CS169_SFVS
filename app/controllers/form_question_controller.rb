@@ -41,8 +41,10 @@ class FormQuestionController < ApplicationController
   # Form an array of answers using the params
   def get_answers
     answers_list = []
-    params[:form_answer].each do |key, value|
-      answers_list << value
+    unless params[:form_answer].nil?
+      params[:form_answer].each do |key, value|
+        answers_list << value
+      end
     end
     answers_list
   end
