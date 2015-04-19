@@ -1,10 +1,8 @@
 %nav.navbar.navbar-fixed-top
   %nav.navbar-inner
     %div.container-fluid
-      = link_to "SFVS", user_path, class: "brand navi_header"
+      = link_to "SFVS", "http://www.sfvs.org/", class: "brand navi_header"
       %ul.nav
         %li= link_to "Home", user_path(current_user)
-        %li= link_to "Item 1", user_path(current_user)
-        %li= link_to "Item 2", user_path(current_user)
       %ul.nav.pull-right
         %li= link_to "Logout", destroy_user_session_path, {method: :delete}
