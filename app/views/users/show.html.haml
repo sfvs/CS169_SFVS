@@ -15,7 +15,7 @@
         %p
           %strong="Application Status: #{@status}"
         %p
-          %strong="Amount Paid: $#{@application.amount_paid}"
+          %strong="Amount Paid: $#{@application_cost}"
         -unless @application.hasPaid?
           %br= button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
       -else

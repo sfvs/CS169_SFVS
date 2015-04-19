@@ -281,7 +281,7 @@ questions_for_form[sponsor_contract] = [
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
 	{:question => "Sponsor Information
-		Principal Sponsor - $3,000
+		Principal Sponsor - $3000
 		- Booth (12' x 8')
 		- Prominent Exhibit Location
 		- Two tables with two chairs
@@ -290,14 +290,14 @@ questions_for_form[sponsor_contract] = [
 		- Logo Link on SFVS website
 		- Product Exclusivity
 
-		Major Sponsor - $2,000
+		Major Sponsor - $2000
 		- Booth (12' x 8')
 		- Two tables with two chairs
 		- Name on special publicity
 		- Half page ad in event program
 		- Logo Link on SFVS website
  
-		Associate Sponsor - $1,000
+		Associate Sponsor - $1000
 		- Booth (8' x 8')
 		- One tables with two chairs
 		- Newsletter recognition
@@ -310,7 +310,7 @@ questions_for_form[sponsor_contract] = [
 		Included above are 6' x 2.5' table/s, chairs, health permits, and electricity (except non-exhibitor).",
 		:question_type => :statement},
 	{:question => 'Please select your Sponsorship type:',
-		:answers => "[Principal Sponsor ($3,000), Major Sponsor ($2,000), Associate Sponsor ($1,000), Supporting Sponsor (non exhibiting) ($500)]",
+		:answers => "[Principal Sponsor ($3000), Major Sponsor ($2000), Associate Sponsor ($1000), Supporting Sponsor (non exhibiting) ($500)]",
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity?',
 		:answers => "[Yes, No]",
