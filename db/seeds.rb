@@ -14,6 +14,8 @@ end
 def link_form_questions_to_form(form,questions)
 	question_objects = []
 	questions.each_with_index do |question_attributes,index|
+		question_str = question_attributes[:question]
+		question_attributes[:question] = question_str.gsub(/\t/, '')
 		question_attributes[:form_type] = form.form_name
 		question_attributes[:order] = index + 1
 		question_objects << FormQuestion.create(question_attributes)
@@ -409,11 +411,9 @@ questions_for_form[advertising_sponsor_contract] = 	[
 		Mail Information: San Francisco Vegetarian Society,
 		73 Rondel Place,
 		San Francisco, CA 94103',
-		:question_type => :statement},
+		:question_type => :statement}
 	# {:question => 'Please upload here',
 	# 	:question_type => :textbox},
-	{:question => 'Authorized Signature',
-		:question_type => :textbox}
 ]
 
 questions_for_form[advertising_non_sponsor_contract] = 	[
@@ -442,11 +442,9 @@ questions_for_form[advertising_non_sponsor_contract] = 	[
 		Mail Information: San Francisco Vegetarian Society,
 		73 Rondel Place,
 		San Francisco, CA 94103',
-		:question_type => :statement},
+		:question_type => :statement}
 	# {:question => 'Please upload here',
 	# 	:question_type => :textbox},
-	{:question => 'Authorized Signature',
-		:question_type => :textbox}
 ]
 
 # Agreement Forms
