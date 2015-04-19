@@ -23,7 +23,6 @@ class FormQuestionController < ApplicationController
     @form_type = Form.find_by_id(params[:id])
     @form_name = @form_type.form_name
     @form_content = get_form_content
-    logger.debug "form content: #{@form_content}"
     @application = @user.get_most_recent_application
     if params[:commit] == "Save and Return"
       update_application(false)
@@ -42,12 +41,10 @@ class FormQuestionController < ApplicationController
   # Form an array of answers using the params
   def get_answers
     answers_list = []
-    logger.debug "params #{params[:form_answer]}"
     num_questions = @form_type.number_of_questions
     (0..(num_questions - 1)).each do |index|
       answers_list[index] = params[:form_answer].has_key?(index.to_s) ? params[:form_answer][index.to_s] : nil
     end
-    logger.debug "answers: #{answers_list}"
     answers_list
   end
 
