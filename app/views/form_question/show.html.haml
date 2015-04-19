@@ -24,7 +24,7 @@
                     - if @form_answer[answer.to_s] == choice
                       - r_checked = true
                   %label.radio.inline
-                    = label :form_answer, answer, choice, {:class => "radio.inline"}
+                    = label :form_answer, answer, choice
                     = radio_button_tag "form_answer[#{answer.to_s}]", choice, r_checked
                 - answer += 1
             - elsif (question.question_type == "checkbox")
