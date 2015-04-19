@@ -30,6 +30,5 @@ module FormQuestionHelper
     end
     logger.debug "content: #{form_content}"
     form_content
-
   end
 end
