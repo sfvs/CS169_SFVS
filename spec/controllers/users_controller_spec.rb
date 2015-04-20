@@ -16,10 +16,20 @@ describe UsersController do
 
     it "should mark an incomplete application as complete when submit is pressed" do
       User.stub(:get_most_recent_application).and_return(@mock_app)
+      Application.any_instance.stub(:all_forms_completed?).and_return(true)
       post :submit_application, :id => @user.id
       response.should redirect_to user_path
       @mock_app.reload
       expect(@mock_app.completed).to be_true
+    end
+
+    it "should not mark an application as complete when there are still incompleted forms" do
+      User.stub(:get_most_recent_application).and_return(@mock_app)
+      Application.any_instance.stub(:all_forms_completed?).and_return(false)
+      post :submit_application, :id => @user.id
+      response.should redirect_to user_path
+      @mock_app.reload
+      expect(@mock_app.completed).to be_false
     end
 
     it "should show the completed user profile" do
