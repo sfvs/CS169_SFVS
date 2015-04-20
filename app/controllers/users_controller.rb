@@ -28,7 +28,7 @@ class UsersController < ApplicationController
         application.save
         flash[:notice] = "Application successfully submitted."
       else
-        flash[:alert] = "One of the forms is not yet submitted."
+        flash[:alert] = "One or more forms have yet to be submitted."
       end
     else
       flash[:alert] = "Error. Application not found. Please contact SFVS for help."
