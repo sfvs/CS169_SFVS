@@ -32,6 +32,12 @@ describe UsersController do
       expect(@mock_app.completed).to be_false
     end
 
+    it "should not do anything if an application was not found" do
+      User.stub(:get_most_recent_application).and_return(nil)
+      post :submit_application, :id => @user.id
+      response.should redirect_to user_path
+    end
+
     it "should show the completed user profile" do
       @mock_app.completed = true
       @mock_app.save
