@@ -77,7 +77,7 @@ assosciate_sponsor_non_food_description = "Associate Sponsors who provide $1000 
 non_profit_description = 'Any IRS registered tax exempt organization.'
 
 sponsor_definition = 'Any exhibitor or vendor who is willing to co-sponsor the event 
-					for a productexclusivity and also be included in the festival 
+					for a product exclusivity and also be included in the festival 
 					advertising and promotional campaign at no additional cost.'
 # Application Types
 
