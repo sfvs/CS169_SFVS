@@ -1,4 +1,4 @@
-Feature: view application status and steps to complete application
+Feature: submitting an application
  
   As an avid user
   So that I can complete the application
@@ -14,11 +14,13 @@ Background: users have been added to database
 
   Given I am on the "profile" page for "johndoe@gmail.com"
 
-Scenario: view current application status
-  Then I should see my "email" as "johndoe@gmail.com"
-  And I should see "vendor"
-  And I should see "2015"
-  And I should see a "button" with id "submit_app_button"
-  And I should see a "button" with id "logout_button"
-  And I should see a "button" with id "questionnaire_button"
-  And I should see "Incomplete"
+Scenario: submitting an incomplete final application
+  When I press "Submit Application"
+  Then I should see "Incomplete"
+
+Scenario: submitting with all forms complete
+  When john doe has submitted all forms
+  And I press "Submit Application"
+  Then I should see "Complete"
+  And I should not see "Determine Application Type"
+  And I should not see "Submit Application"
