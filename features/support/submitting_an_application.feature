@@ -2,8 +2,7 @@ Feature: submitting an application
  
   As an avid user
   So that I can complete the application
-  I want to be view my current application status
-  and find steps to complete my application.
+  I want to be submit my application.
 
 Background: users have been added to database
   
