@@ -43,12 +43,12 @@ class FormQuestionController < ApplicationController
   def update_application(completed)
     @form_content[@form_name][:completed] = completed
     @application.add_content(@form_content)
+    @application.calculate_current_application_cost
   end
 
   def submit
     if form_completed?
       update_application(true)
-      @application.calculate_current_application_cost
       flash[:notice] = "Submitted #{@form_name}"
       redirect_to user_path(@user)
     else
