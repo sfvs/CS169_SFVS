@@ -2,7 +2,7 @@
 = render 'shared/navi_bar'
 
 %div.container-fluid
-  %h1 Questionnaire
+  %h1 Application Type Questionnaire
   %h2 #{@response}
   %hr
   - @display_questions.each do |statement|
@@ -12,4 +12,4 @@
       &nbsp 
     %hr
   -if @end_of_questionnaire
-    =button_to 'Submit Questionnaire', submit_survey_user_path(@user, :results => @results), {data: { confirm: "Are you sure?" }}
+    =button_to 'Fill up Questionaire Form', submit_survey_user_path(@user, :results => @results), {data: { confirm: "Are you sure?" }}
