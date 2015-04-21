@@ -79,4 +79,12 @@ class Application < ActiveRecord::Base
     true
   end
 
+  def calculate_current_application_cost
+    # regex everything in the format ($##)
+    payments = read_attribute(:content).scan(/\(\$[[:digit:]]+\)/)
+    amount_to_be_paid = payments.map{ |price| price.match(/[[:digit:]]+/)[0].to_i }
+    self.amount_paid = amount_to_be_paid.sum
+    self.save
+  end
+
 end

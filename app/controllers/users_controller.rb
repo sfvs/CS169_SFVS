@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       @year = @application.year
       @type = @application.application_type.app_type
       @forms_to_build = @application.application_type.forms
+      @application_cost = @application.amount_paid
     end
   end
 
