@@ -3,8 +3,25 @@
 
 %div.container-fluid
 
-%h1 Edit User
+  %h1 Edit User
+  = form_tag admin_user_path(@user), {:method => :put, :class => "form-inline"} do
+    %div.control-group
+      %div.controls
+        %div
+          %label
+            Enter the Company Name:
+            = text_field :user, 'company_name', size: 50
+        %div
+          %label
+            Enter the Contact Person:
+            = text_field :user, 'contact_person', size: 50
+        %div
+          %label
+            Enter the Telephone Number:
+            = text_field :user, 'telephone', size: 50
 
-= button_to "Delete User", admin_user_path(@user), {:class => "btn btn-danger", method: :delete, data: { confirm: "Are you sure?"}}
+    = submit_tag 'Update User', :class => "btn btn-default"
+    = submit_tag 'Cancel', :class => "btn btn-default"
 
-= button_to "Back", admin_user_path(@user), {:class => "btn btn-default", method: :get}
+  = button_to "Delete User", admin_user_path(@user), {:class => "btn btn-danger", method: :delete, data: { confirm: "Are you sure?"}}
+  = button_to "Back", admin_user_path(@user), {:class => "btn btn-default", method: :get}

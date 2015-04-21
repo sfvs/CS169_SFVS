@@ -3,6 +3,7 @@ class Admin::UsersController < Admin::AdminController
   require 'will_paginate/array'
 
   before_filter :require_admin
+  before_filter :pressed_cancel?, :only => [:create, :update]
 
   def index
     # Check order of users params[:order]
@@ -18,6 +19,13 @@ class Admin::UsersController < Admin::AdminController
 
   def edit
     @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update_attributes(params[:user])
+    flash[:notice] = "User #{@user.email} has been updated"
+    redirect_to admin_user_path(@user)
   end
 
   def create
@@ -39,5 +47,11 @@ class Admin::UsersController < Admin::AdminController
     end
     redirect_to admin_user_path(@user)
     return
+  end
+
+  def pressed_cancel?
+    if params[:commit] == 'Cancel'
+      redirect_to admin_user_path(params[:id])
+    end
   end
 end
