@@ -80,9 +80,20 @@ class Application < ActiveRecord::Base
   end
 
   def update_application(completed, form_content, form_name)
+    form_content[form_name].update(self.sanitize_form_content(form_name, form_content[form_name]))
     form_content[form_name][:completed] = completed
     self.add_content(form_content)
     self.calculate_current_application_cost
+  end
+
+  def sanitize_form_content(form_name, form_contents_actual)
+    # remove quotes for Json parsing, and removed parenthesis for payment calculation.
+    form = Form.find_by_form_name(form_name)
+    text_questions = form.form_questions.where(:question_type => [:message,:textbox])
+    text_questions.each do |form_question|
+      form_contents_actual[form_question.question].gsub!(/["$]/, '')
+    end
+    form_contents_actual
   end
 
   def calculate_current_application_cost
