@@ -28,5 +28,4 @@ class Form < ActiveRecord::Base
       order += 1
     end
   end
-
 end

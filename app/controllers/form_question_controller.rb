@@ -27,7 +27,7 @@ class FormQuestionController < ApplicationController
     @form_content = get_form_content(@form_type, params[:form_answer])
     @application = @user.get_most_recent_application
     if params[:commit] == "Save and Return"
-      update_application(false)
+      @application.update_application(false, @form_content, @form_name)
       flash[:notice] = "#{@form_name} successfully saved."
       redirect_to user_path(@user)
     elsif params[:commit] == 'Submit'
@@ -35,20 +35,11 @@ class FormQuestionController < ApplicationController
     end
   end
 
-  #filter that check if the form is filled correctly
-  def form_completed?
-  	!(@form_content[@form_name].has_value?("") || @form_content[@form_name].has_value?(nil))
-  end
-
-  def update_application(completed)
-    @form_content[@form_name][:completed] = completed
-    @application.add_content(@form_content)
-    @application.calculate_current_application_cost
-  end
+  private
 
   def submit
-    if form_completed?
-      update_application(true)
+    if form_completed?(@form_content, @form_name)
+      @application.update_application(true, @form_content, @form_name)
       flash[:notice] = "Submitted #{@form_name}"
       redirect_to user_path(@user)
     else
@@ -58,8 +49,6 @@ class FormQuestionController < ApplicationController
       render :show
     end
   end
-
-  private
 
   def validate_accessible_form
     user_app_type = User.find_by_id(params[:user_id]).get_most_recent_application.application_type

@@ -28,7 +28,6 @@ module FormQuestionHelper
       end
       index += 1
     end
-    logger.debug "content: #{form_content}"
     form_content
   end
 end
