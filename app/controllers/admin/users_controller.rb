@@ -24,7 +24,7 @@ class Admin::UsersController < Admin::AdminController
   def update
     @user = User.find(params[:id])
     @user.update_attributes(params[:user])
-    flash[:notice] = "User #{@user.email} has been updated"
+    flash[:notice] = "User #{@user.email} has been updated."
     redirect_to admin_user_path(@user)
   end
 

@@ -95,6 +95,27 @@ describe Admin::UsersController do
     end
   end
 
+  describe "admin edit user information" do
+    it "should update the user" do
+      user = make_a_member :user, :email => "user1@hostname.com"
+      put 'update', :id => user.id, :user => {"company_name" => "Soy"}
+      user = user.reload
+      user.company_name.should == "Soy"
+    end
+
+    it "should redirect to user content page" do
+      user = make_a_member :user, :email => "user1@hostname.com"
+      put 'update', :id => user.id, :user => {"company_name" => "Soy"}
+      response.should redirect_to '/admin/users/' + user.id.to_s
+    end
+
+    it "should assign the notice with success message" do
+      user = make_a_member :user, :email => "user1@hostname.com"
+      put 'update', :id => user.id, :user => {"company_name" => "Soy"}
+      flash[:notice].should == "User #{user.email} has been updated."
+    end
+  end
+
   describe "admin create user page" do
     it "should route to create new user page" do
       expect(:get => "admin/users/new").to route_to(:controller => "admin/users", :action => "new")
