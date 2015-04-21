@@ -12,9 +12,11 @@ class Admin::ApplicationFormController < Admin::AdminController
     @application = Application.find(params[:id])
     if @application.content.has_key?(params[:form_type])
       @form_answer = get_answers_to_prefill_from(@application.content[params[:form_type]], params[:form_type])
+      logger.debug "contets: #{@form_answer}"
     end
     form = @application.get_form(params[:form_type])
-    @list_of_questions = form.form_questions
+    @list_of_questions = form.form_questions.sort_by {|question| question.order}
+    logger.debug "questions: #{@list_of_questions}"
     @form_name = form.form_name
   end
 end
