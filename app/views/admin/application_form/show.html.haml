@@ -4,7 +4,7 @@
 %div.container-fluid
   %h1 #{@form_name}
 
-  = form_tag user_form_question_path, {:class => "form-inline"} do
+  = form_tag "", {:class => "form-inline"} do
     = render "shared/form_questions"
 
   = button_to "Back", admin_user_application_path, {:class => "btn btn-default", method: :get}
