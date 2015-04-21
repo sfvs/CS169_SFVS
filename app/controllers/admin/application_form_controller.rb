@@ -9,13 +9,7 @@ class Admin::ApplicationFormController < Admin::AdminController
     # They should not be able to modify at this page
     # Note might need to write a method to get the form_contents
     @disable = true
-    @application = Application.find(params[:id])
-    if @application.content.has_key?(params[:form_type])
-      @form_answer = get_answers_to_prefill_from(@application.content[params[:form_type]], params[:form_type])
-    end
-    form = @application.get_form(params[:form_type])
-    @list_of_questions = form.form_questions.sort_by {|question| question.order}
-    @form_name = form.form_name
+    @user, @application, @form, @list_of_questions, @form_name, @form_answer = prepare_display
   end
 
   def edit
