@@ -4,21 +4,22 @@
 %div.container-fluid
 
   %h1 Edit User
-  = form_tag admin_user_path(@user), {:method => :put, :class => "form-inline"} do
+  = form_tag admin_user_path(@user), {:method => :put, :class => "form-horizontal"} do
     %div.control-group
-      %div.controls
-        %div
-          %label
-            Enter the Company Name:
-            = text_field :user, 'company_name', size: 50
-        %div
-          %label
-            Enter the Contact Person:
-            = text_field :user, 'contact_person', size: 50
-        %div
-          %label
-            Enter the Telephone Number:
-            = text_field :user, 'telephone', size: 50
+      %label.span3.control-label
+        Enter the Company Name:
+      %div.span9
+        = text_field :user, 'company_name', size: 50
+    %div.control-group
+      %label.span3.control-label
+        Enter the Contact Person:
+      %div.span9
+        = text_field :user, 'contact_person', size: 50
+    %div.control-group
+      %label.span3.control-label
+        Enter the Telephone Number:
+      %div.span9
+        = text_field :user, 'telephone', size: 50
 
     = submit_tag 'Update User', :class => "btn btn-default"
     = submit_tag 'Cancel', :class => "btn btn-default"
