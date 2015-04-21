@@ -7,6 +7,8 @@ SFVSRegistrationSystem::Application.routes.draw do
       post "search", on: :collection
       resources :applications, :only => [:show, :edit, :update] do
         get "form", to: "application_form#show", on: :member
+        get "edit_form", to: "application_form#edit", on: :member
+        put "edit_form", to: "application_form#update", on: :member
       end
     end
     resources :forms, :only => :index do
