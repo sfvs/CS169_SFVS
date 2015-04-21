@@ -35,6 +35,8 @@ class FormQuestionController < ApplicationController
     end
   end
 
+  private
+
   def submit
     if form_completed?(@form_content, @form_name)
       @application.update_application(true, @form_content, @form_name)
@@ -47,8 +49,6 @@ class FormQuestionController < ApplicationController
       render :show
     end
   end
-
-  private
 
   def validate_accessible_form
     user_app_type = User.find_by_id(params[:user_id]).get_most_recent_application.application_type

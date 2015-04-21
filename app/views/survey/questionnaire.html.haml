@@ -2,14 +2,16 @@
 = render 'shared/navi_bar'
 
 %div.container-fluid
-  %h1 Questionnaire
-  %h2 #{@response}
+  %h1 Application Type Questionnaire
+  %h5
+    -if @end_of_questionnaire
+      Please press 'Fill up Questionaire Form' at the bottom to continue
   %hr
   - @display_questions.each do |statement|
-    %h5.fit #{statement[:question]}      
+    %h5.fit #{simple_format(statement[:question])}      
     - statement[:answer].each do |a|
       =link_to "#{a.ans}", survey_user_path(:ans => a.id), :class => ("selected" if (@current_selected_answers.include?(a.id)))
       &nbsp 
     %hr
   -if @end_of_questionnaire
-    =button_to 'Submit Questionnaire', submit_survey_user_path(@user, :results => @results), {data: { confirm: "Are you sure?" }}
+    =button_to 'Fill up Questionaire Form', submit_survey_user_path(@user, :results => @results), {data: { confirm: "Are you sure?" }}

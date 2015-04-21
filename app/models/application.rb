@@ -82,5 +82,15 @@ class Application < ActiveRecord::Base
   def update_application(completed, form_content, form_name)
     form_content[form_name][:completed] = completed
     self.add_content(form_content)
+    self.calculate_current_application_cost
   end
+
+  def calculate_current_application_cost
+    # regex everything in the format ($##)
+    payments = read_attribute(:content).scan(/\(\$[[:digit:]]+\)/)
+    amount_to_be_paid = payments.map{ |price| price.match(/[[:digit:]]+/)[0].to_i }
+    self.amount_paid = amount_to_be_paid.sum
+    self.save
+  end
+
 end

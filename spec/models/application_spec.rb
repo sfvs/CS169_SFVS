@@ -75,4 +75,22 @@ describe Application do
 		myApp.hasPaid?.should == true
 		myApp.getAmountPaid.should == 250.0
 	end
+
+  describe "payment calculations" do
+    it "should be able to calculate payment based off of content" do
+      type = make_forms_for_app_type "vendor"
+      mock_app = make_an_application(type, 2015)
+      mock_app.content = {"some form 1" => {
+        "a question without cost" => "hello",
+        "question with cost" => "run ($23)"},
+        "some form 2" => {
+        "a question with fake cost" => "hi $321",
+        "question with fake cost" => "ran ($453 fee)",
+        "another question with cost" => "tom ($11)"}
+      }
+      mock_app.save!
+      mock_app.calculate_current_application_cost
+      mock_app.getAmountPaid.should be == 34
+    end
+  end
 end
