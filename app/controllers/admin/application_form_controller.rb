@@ -22,8 +22,6 @@ class Admin::ApplicationFormController < Admin::AdminController
     @form_name = params[:form_type]
     @form = Form.where(form_name: @form_name).first
     @form_content = get_form_content(@form, params[:form_answer])
-    logger.debug "form_answer: #{params[:form_answer]}"
-    logger.debug "form_content: #{@form_content}"
     @application = @user.get_most_recent_application
     submit
   end
@@ -41,7 +39,7 @@ class Admin::ApplicationFormController < Admin::AdminController
   def submit
     if form_completed?
       update_application(true)
-      flash[:notice] = "Submitted #{@form_name}"
+      flash[:notice] = "Updated #{@form_name}"
       redirect_to admin_user_application_path(:user_id => params[:user_id], :id => params[:id])
     else
       flash[:alert] = "There are missing fields in the form"
