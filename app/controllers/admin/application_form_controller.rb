@@ -20,21 +20,16 @@ class Admin::ApplicationFormController < Admin::AdminController
 
   def edit
     @disable = false
-    @user = User.find_by_id(params[:user_id])
-    @application = Application.find(params[:id])
-    if @application.content.has_key?(params[:form_type])
-      @form_answer = get_answers_to_prefill_from(@application.content[params[:form_type]], params[:form_type])
-    end
-    @form = @application.get_form(params[:form_type])
-    @list_of_questions = @form.form_questions.sort_by {|question| question.order}
-    @form_name = @form.form_name
+    @user, @application, @form, @list_of_questions, @form_name, @form_answer = prepare_display
   end
 
   def update
     @user = User.find_by_id(params[:user_id])
-    @form_type = Form.find_by_id(params[:id])
-    @form_name = @form_type.form_name
-    @form_content = get_form_content(@form_type, params[:form_answer])
+    @form_name = params[:form_type]
+    @form = Form.where(form_name: @form_name).first
+    @form_content = get_form_content(@form, params[:form_answer])
+    logger.debug "form_answer: #{params[:form_answer]}"
+    logger.debug "form_content: #{@form_content}"
     @application = @user.get_most_recent_application
     submit
   end
@@ -58,8 +53,19 @@ class Admin::ApplicationFormController < Admin::AdminController
       flash[:alert] = "There are missing fields in the form"
       @list_of_questions = @form.get_sorted_form_questions
       @form_answer = params[:form_answer]
-      render :show
+      render :edit
     end
   end
 
+  def prepare_display
+    user = User.find_by_id(params[:user_id])
+    application = Application.find(params[:id])
+    if application.content.has_key?(params[:form_type])
+      form_answer = get_answers_to_prefill_from(application.content[params[:form_type]], params[:form_type])
+    end
+    form = application.get_form(params[:form_type])
+    list_of_questions = form.form_questions.sort_by {|question| question.order}
+    form_name = form.form_name
+    return user, application, form, list_of_questions, form_name, form_answer
+  end
 end
