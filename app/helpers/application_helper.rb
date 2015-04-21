@@ -15,4 +15,8 @@ module ApplicationHelper
     end
     form_answer
   end
+
+  def form_completed?(form_content, form_name)
+    !(form_content[form_name].has_value?("") || form_content[form_name].has_value?(nil))
+  end
 end

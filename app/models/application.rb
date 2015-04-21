@@ -79,4 +79,8 @@ class Application < ActiveRecord::Base
     true
   end
 
+  def update_application(completed, form_content, form_name)
+    form_content[form_name][:completed] = completed
+    self.add_content(form_content)
+  end
 end
