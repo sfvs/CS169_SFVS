@@ -22,14 +22,14 @@ Background: users have been added to database
 Scenario: successful update should redirect to user content page
 	When I click on More Info for "user1@gmail.com"
 	And I press "Edit"
-	And I erase and fill in "Enter the Company Name" with "Soy"
+	And I erase and fill in "user_company_name" with "Soy"
 	And I press "Update User"
 	Then I should be on the user content page for "user1@gmail.com"
 
 Scenario: successfully update user information
 	When I click on More Info for "user1@gmail.com"
 	And I press "Edit"
-	And I erase and fill in "Enter the Company Name" with "Soy"
+	And I erase and fill in "user_company_name" with "Soy"
 	And I press "Update User"
 	And I am on the admin profile page
 	When I follow "Users List"
