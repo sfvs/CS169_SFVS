@@ -93,4 +93,25 @@ describe Application do
       mock_app.getAmountPaid.should be == 34
     end
   end
+
+  describe "sanitizing the user inputs" do
+    it "should remove double quotes and remove any dollar signs" do
+      type = FactoryGirl.create(:application_type,{:app_type => "vendor"})
+      type.forms << make_many_forms(1)
+      mock_app = make_an_application(type, 2015)
+      mock_form = type.forms[0]
+      Form.stub(:find_by_form_name).and_return(mock_form)
+
+      form_content = {}
+      mock_form.form_questions.each do |question|
+        form_content[question.question] = 'some answer"sdfwef"fwe$$2dfsf$$vsdv'
+      end
+      safe_content = mock_app.sanitize_form_content(mock_form.form_name, form_content)
+
+      safe_content.each do |k,v|
+        form_content[k].should_not match /["$]/
+      end
+    end
+  end
+
 end
