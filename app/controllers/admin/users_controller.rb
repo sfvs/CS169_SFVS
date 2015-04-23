@@ -39,7 +39,7 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def search
-    @user = User.where(email: params[:user_email][:email], admin: false).first
+    @user = User.where("email=? and admin=?", params[:user_email][:email], false).first
     if @user.nil?
       flash[:alert] = "No user with e-mail: #{params[:user_email][:email]}"
       redirect_to admin_users_path
