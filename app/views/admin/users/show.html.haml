@@ -19,7 +19,7 @@
       - if !@applications.nil?
         - @applications.each do |application|
           %tr
-            %td Application
+            %td= application.application_type.app_type
             %td= application.year
             %td= application.completed == true ? "Complete" : "Incomplete"
             %td= application.created_at
