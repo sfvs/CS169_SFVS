@@ -33,4 +33,4 @@ Scenario: create a new account
   And I fill in "user_password" with "123456789"
   And I fill in "user_password_confirmation" with "123456789"
   When I press "Sign up"
-  Then I should be on the "profile" page for "johndoe2@gmail.com"
+  Then I should be on the "login" page
