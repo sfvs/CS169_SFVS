@@ -18,7 +18,7 @@ class Admin::ApplicationFormController < Admin::AdminController
   def update
     @user = User.find_by_id(params[:user_id])
     @form_name = params[:form_type]
-    @form = Form.where(form_name: @form_name).first
+    @form = Form.where("form_name=?", @form_name).first
     @form_content = get_form_content(@form, params[:form_answer])
     @application = @user.get_most_recent_application
     submit

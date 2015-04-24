@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def get_answers_to_prefill_from(content, form_type)
-    number_of_questions = Form.where(form_name: form_type)[0].number_of_questions
+    number_of_questions = Form.where("form_name=?", form_type).first.number_of_questions
     form_answer = Hash.new
     cur_num_questions = 0
     content.each do |key, value|
