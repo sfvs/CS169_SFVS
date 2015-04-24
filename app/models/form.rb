@@ -16,7 +16,7 @@ class Form < ActiveRecord::Base
     questions_list = []
     form_questions = self.get_sorted_form_questions.each do |question|
       questions_list << question.question
-    end    
+    end
     questions_list
   end
 

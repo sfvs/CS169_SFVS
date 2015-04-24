@@ -52,6 +52,18 @@ describe Admin::UsersController do
       response.should be_success
       assigns(:user).should == user
     end
+
+    it "should assign @applications" do
+      user = make_a_member :user, :email => "bravo@hostname.com"
+      @type = make_forms_for_app_type "vendor"
+      @mock_app = make_an_application @type, 2015
+      user.applications << @mock_app
+      user.save
+      get 'show', :id => user.id
+      response.should be_success
+      user.reload
+      assigns(:applications).should == user.applications
+    end
   end
 
   describe "admin delete user" do
@@ -80,6 +92,27 @@ describe Admin::UsersController do
     it "should route to user edit page" do
       user = make_a_member :user
       expect(:get => "admin/users/#{user.id}/edit").to route_to(:controller => "admin/users", :action => "edit", :id => "#{user.id}")
+    end
+  end
+
+  describe "admin edit user information" do
+    it "should update the user" do
+      user = make_a_member :user, :email => "user1@hostname.com"
+      put 'update', :id => user.id, :user => {"company_name" => "Soy"}
+      user = user.reload
+      user.company_name.should == "Soy"
+    end
+
+    it "should redirect to user content page" do
+      user = make_a_member :user, :email => "user1@hostname.com"
+      put 'update', :id => user.id, :user => {"company_name" => "Soy"}
+      response.should redirect_to '/admin/users/' + user.id.to_s
+    end
+
+    it "should assign the notice with success message" do
+      user = make_a_member :user, :email => "user1@hostname.com"
+      put 'update', :id => user.id, :user => {"company_name" => "Soy"}
+      flash[:notice].should == "User #{user.email} has been updated."
     end
   end
 

@@ -17,6 +17,7 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form = Form.find(params[:form_id])
     set_attr
     @form.form_questions.create(params[:form_question])
+    @form.update_form_questions_order
     flash[:notice] = "Form Question was succesfully created"
     redirect_to admin_form_form_questions_path(@form)
   end
@@ -26,7 +27,7 @@ class Admin::FormQuestionsController < Admin::AdminController
     @form_question.destroy
     # update the ordering of the questions
     @form = Form.find_by_id(params[:form_id])
-    @form.update_form_questions_order()
+    @form.update_form_questions_order
     flash[:notice] = "Question deleted."
     redirect_to admin_form_form_questions_path(Form.find(params[:form_id]))
   end

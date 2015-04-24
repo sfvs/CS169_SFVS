@@ -111,15 +111,20 @@ module ControllerMacros
 
   ### Create Application helpers
 
+  def stub_app_year(year)
+    Application.stub(:current_application_year).and_return(year)
+    year
+  end
+
   def make_a_vendor_application_for_user
     before(:each) do
-      Application.latest_year = 2015
+      @app_year = stub_app_year 2015
       @type = make_forms_for_app_type "vendor"
-      @mock_app = make_an_application @type, Application.latest_year
+      @mock_app = make_an_application @type, @app_year
       @user.applications << @mock_app
       @user.save
     end
-  end
+  end 
 
   def make_an_application(type,year)
     app = FactoryGirl.create(:application)
@@ -133,11 +138,15 @@ module ControllerMacros
 
   def make_question_answer_tree
     before :each do
+      @reply = 1
+      @type_vendor = make_forms_for_app_type "vendor"
+      @type_donor = make_forms_for_app_type "donor"
+      
       @q1 = Questionnaire.create(:question => "hello world")
       @q2 = Questionnaire.create(:question => "how are you?")
       @a1a = Answers.create(:ans => "hi", :questionnaire_id => @q1.id, :leads_to => @q2.id)
-      @a1b = Answers.create(:ans => "hello", :questionnaire_id => @q1.id)
-      @a2 = Answers.create(:ans => "I am world", :questionnaire_id => @q2.id)
+      @a1b = Answers.create(:ans => @type_donor.app_type, :questionnaire_id => @q1.id, :results_to => @type_donor.id)
+      @a2 = Answers.create(:ans => @type_vendor.app_type, :questionnaire_id => @q2.id, :results_to => @type_vendor.id)
       @q2.parent_id = @a1a.id
       @q2.save
     end

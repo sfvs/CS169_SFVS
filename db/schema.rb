@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150403031612) do
+ActiveRecord::Schema.define(:version => 20150418033809) do
 
   create_table "answers", :force => true do |t|
     t.string   "ans"
@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(:version => 20150403031612) do
 
   create_table "application_types", :force => true do |t|
     t.string   "app_type"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.string   "description", :default => "", :null => false
   end
 
   create_table "application_types_forms", :id => false, :force => true do |t|
@@ -37,15 +38,17 @@ ActiveRecord::Schema.define(:version => 20150403031612) do
     t.integer  "user_id"
     t.integer  "application_type_id"
     t.integer  "year"
-    t.string   "content"
+    t.text     "content"
     t.boolean  "completed",           :default => false, :null => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.decimal  "amount_paid",         :default => 0.0
+    t.string   "payment_id"
   end
 
   create_table "form_questions", :force => true do |t|
-    t.string   "question"
-    t.string   "answers"
+    t.text     "question"
+    t.text     "answers"
     t.string   "form_type"
     t.string   "question_type"
     t.integer  "order"
@@ -87,6 +90,9 @@ ActiveRecord::Schema.define(:version => 20150403031612) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
     t.boolean  "admin",                  :default => false, :null => false
+    t.string   "contact_person",         :default => "",    :null => false
+    t.string   "company_name",           :default => "",    :null => false
+    t.string   "telephone",              :default => "",    :null => false
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

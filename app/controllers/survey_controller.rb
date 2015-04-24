@@ -6,17 +6,17 @@ class SurveyController < ApplicationController
     # @display is an array of hashes, containing question and its answers 
     # as Rows in Table Answers. something like, 
     # [{:question => "What's my name?", :answer => AnswersTable},...]
-
+    @user = User.find_by_id(params[:id])
     @current_selected_answers = [] # to hilite selected answers
     @end_of_questionnaire = false	#set default value
     current_qid = Questionnaire.get_root_question_id
+    selected_answer = Answers.find_by_id(params[:ans])
 
-    unless params[:ans].nil? # got an answer
-      selected_answer = Answers.find(params[:ans])
+    unless selected_answer.nil? # got an answer
       if selected_answer.is_last_answer?
         @end_of_questionnaire = true
         @current_selected_answers.push(selected_answer.id) #corner case: add the last selected answer into array
-        flash[:questionnaire_response] = selected_answer.results_to
+        @results = selected_answer.results_to
         current_qid = selected_answer.questionnaire_id
       else	# selected_answer is an intermidate answer
         current_qid = selected_answer.leads_to
@@ -25,6 +25,21 @@ class SurveyController < ApplicationController
 
     @display_questions = populate_display current_qid
 
+  end
+
+  def submit_questionnaire
+    @user = User.find_by_id(params[:id])
+    response = "Error. Please try survey again or contact SFVS."
+    answer_id = params[:results]
+    if answer_id != nil
+      type = ApplicationType.find_by_id(answer_id.to_i)
+      unless type.nil?
+        response = "Your type is #{type.app_type}."
+        @user.create_an_application type
+      end
+    end
+    flash[:notice] = response
+    redirect_to user_path(@user)
   end
 
   private

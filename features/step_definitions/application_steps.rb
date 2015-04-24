@@ -46,6 +46,15 @@ Given(/^john doe has an incomplete vendor application$/) do
   }
 end
 
+Given(/^john doe has submitted all forms$/) do
+  steps %Q{
+    When I follow "General Form"  
+    And I press "Submit"
+    When I follow "Vendor Form"  
+    And I press "Submit"
+  }
+end
+
 Given(/^john doe has logged in$/) do
   steps %Q{
     Given I login as "johndoe@gmail.com" and password "bear12345"

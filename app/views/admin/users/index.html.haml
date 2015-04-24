@@ -7,7 +7,7 @@
       %h1 Admin Page
       %h3 Users List
   %div.user_search
-    = form_tag admin_search_user_path do
+    = form_tag search_admin_users_path do
       = label :user_email, :email, 'Search by e-mail'
       = text_field :user_email, 'email', size: 30
       = submit_tag 'Search', :class => "btn btn-default"
@@ -15,18 +15,24 @@
     %thead
       %tr
         %th ID
-        %th E-mail
+        %th= link_to "E-mail", admin_users_path(:order => :email)
+        %th= link_to "Company Name", admin_users_path(:order => :company_name)
+        %th= link_to "Contact Person", admin_users_path(:order => :contact_person)
+        %th Telephone Number
         %th Created At
         %th Actions
     %tbody
-      - if @users.any?
+      - if !@users.nil?
         - @users.each do |user|
           %tr
             %td= user.id
             %td= user.email
+            %td= user.company_name
+            %td= user.contact_person
+            %td= user.telephone
             %td= user.created_at
             %td= link_to "Show", admin_user_path(user), :class => "btn btn-default admin_button"
-  - if @users.any?
+  - if !@users.nil?
     %div.pagination
       = will_paginate @users, renderer: BootstrapPagination::Rails
 

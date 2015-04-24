@@ -25,6 +25,13 @@ describe Form do
         order += 1
       end
     end
+
+    it "should get me a list of questions" do
+      form = make_a_form_with_questions
+      Form.any_instance.stub(:get_sorted_form_questions).and_return(form.form_questions)
+
+      form.get_list_of_questions.length.should be == 3
+    end
   end
 
   describe "working with some form questions" do

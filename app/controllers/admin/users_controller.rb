@@ -1,18 +1,31 @@
 class Admin::UsersController < Admin::AdminController
 
+  require 'will_paginate/array'
+
   before_filter :require_admin
+  before_filter :pressed_cancel?, :only => [:create, :update]
 
   def index
-    @users = User.where(admin: false).paginate(:page => params[:page], :per_page => 10)
+    # Check order of users params[:order]
+    # Call a User model method to return a sorted list of users 
+    @users = User.get_users_by_order(params[:order]).paginate(:page => params[:page], :per_page => 10)
   end
 
   def show
     @user = User.find(params[:id])
     # List the forms for the user
+    @applications = @user.applications
   end
 
   def edit
     @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update_attributes(params[:user])
+    flash[:notice] = "User #{@user.email} has been updated."
+    redirect_to admin_user_path(@user)
   end
 
   def create
@@ -34,5 +47,11 @@ class Admin::UsersController < Admin::AdminController
     end
     redirect_to admin_user_path(@user)
     return
+  end
+
+  def pressed_cancel?
+    if params[:commit] == 'Cancel'
+      redirect_to admin_user_path(params[:id])
+    end
   end
 end

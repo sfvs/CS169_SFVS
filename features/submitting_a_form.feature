@@ -30,14 +30,14 @@ Background: application is setup with user john doe
 
 Scenario: save and return to profile page
   When I follow "General Form"
-  Then I should be on the "form" page for "johndoe@gmail.com"
+  Then I should be on the "General Form" form page for "johndoe@gmail.com"
   When I fill out the form completely   
   And I press "Save and Return"
   Then I should be on the "profile" page for "johndoe@gmail.com"
 
 Scenario: fail submitting the form
   When I follow "General Form"
-  Then I should be on the "form" page for "johndoe@gmail.com"
+  Then I should be on the "General Form" form page for "johndoe@gmail.com"
   And I type in the following:
   | Company name                                                           | Apple           |
   | Contact person                                                         | Tomato Carrot   |
@@ -56,14 +56,14 @@ Scenario: fail submitting the form
 
 Scenario: succeed submitting the form
   When I follow "General Form"
-  Then I should be on the "form" page for "johndoe@gmail.com"
+  Then I should be on the "General Form" form page for "johndoe@gmail.com"
   When I fill out the form completely   
   And I press "Submit"
   Then I should be on the "profile" page for "johndoe@gmail.com"
 
 Scenario: save and return, and see prefilled fields
   When I follow "General Form"
-  Then I should be on the "form" page for "johndoe@gmail.com"
+  Then I should be on the "General Form" form page for "johndoe@gmail.com"
   When I fill out the form completely   
   And I press "Save and Return"
   Then I should see "General Form successfully saved."
@@ -76,4 +76,4 @@ Scenario: see completed form message after submission
   And I press "Submit"
   Then I should see "Submitted General Form"
   When I follow "General Form"
-  Then I should see "Company name" with "Apple"
+  Then I should see disabled "Company name" with "Apple"
