@@ -15,11 +15,34 @@
 
 }
 
-
 .admin_button {
 	text-decoration: none;
 }
 
 .navi_header {
 	text-decoration: none;
+}
+
+.search_btn {
+  position: absolute;
+  left: 230px;
+}
+
+.user_search {
+  position: relative;
+  right: 23px;
+}
+
+.search_fields {
+  display: inline-block;
+}
+
+.user_filter {
+  position: relative;
+  left: 100px;
+}
+
+.filter_btn {
+  position: absolute;
+  left: 230px;
 }
