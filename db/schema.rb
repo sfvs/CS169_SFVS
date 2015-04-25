@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20150418033809) do
     t.string   "app_type"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
-    t.string   "description", :default => "", :null => false
+    t.text     "description", :default => "", :null => false
   end
 
   create_table "application_types_forms", :id => false, :force => true do |t|
