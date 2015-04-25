@@ -72,7 +72,7 @@ class Application < ActiveRecord::Base
 
   def all_forms_completed?
     completed_forms = self.get_completed_forms
-    return false if completed_forms.empty?
+    return false if completed_forms.length != self.application_type.forms.length    
     completed_forms.each_value do |value|
       return value if value == false
     end

@@ -3,20 +3,32 @@ require 'spec_helper'
 describe Application do
 
   describe "application function" do
+    before :each do
+      type = make_forms_for_app_type "vendor" # this makes 3 forms
+      @myApp = Application.new
+      @myApp.application_type = type
+      @myApp.save
+    end
+
     it "should be able to tell if an application has all forms are not completed" do
-      myApp = Application.new
       results = {"a form" => true, "b form" => false}
       Application.any_instance.stub(:get_completed_forms).and_return(results)
 
-      myApp.all_forms_completed?.should be_false
+      @myApp.all_forms_completed?.should be_false
+    end
+
+    it "should be able to tell if an application is not completed with some unstarted forms" do
+      results = {"a form" => true}
+      Application.any_instance.stub(:get_completed_forms).and_return(results)
+
+      @myApp.all_forms_completed?.should be_false
     end
 
     it "should be able to tell if an application has all forms completed" do
-      myApp = Application.new
-      results = {"a form" => true, "b form" => true}
+      results = {"a form" => true, "b form" => true, "c form" => true}
       Application.any_instance.stub(:get_completed_forms).and_return(results)
 
-      myApp.all_forms_completed?.should be_true
+      @myApp.all_forms_completed?.should be_true
     end
   end
 
