@@ -43,7 +43,6 @@ describe Admin::FormQuestionsController do
       updated_form_q.question_type.should eq "statement"
     end
   end
-
   describe "admin delete form question" do
     it "should delete the form question" do
       lambda do
