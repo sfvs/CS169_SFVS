@@ -124,25 +124,43 @@ describe Admin::UsersController do
 
   describe "search user by e-mail" do
     it "should assign the alert with warning when invalid e-mail" do
-      post 'search', :user_email => {:email => "invalid@email.com"}
+      post 'search', :user_email => "invalid@email.com"
       flash[:alert].should == "No user with e-mail: invalid@email.com"
     end
 
     it "should route to users list page with invalid e-mail" do
-      post 'search', :user_email => {:email => "invalid@email.com"}
+      post 'search', :user_email => "invalid@email.com"
       response.should redirect_to '/admin/users'
     end
 
     it "should route to users list page with admin e-mail" do
       admin = make_a_member :admin, :email => "admin@gmail.com"
-      post 'search', :user_email => {:email => "admin@gmail.com"}
+      post 'search', :user_email => "admin@gmail.com"
       response.should redirect_to '/admin/users'
     end
 
     it "should route to the user content page with valid e-mail" do
       user = make_a_member :user, :email => "user1@hostname.com"
-      post 'search', :user_email => {:email => "user1@hostname.com"}
+      post 'search', :user_email => "user1@hostname.com"
       response.should redirect_to '/admin/users/' + user.id.to_s
+    end
+  end
+
+  describe "filter users by year" do
+    it "should assign @users with users with application of that year" do
+      user = make_a_member :user, :email => "filterme@hostname.com"
+      users_list = []
+      users_list << user
+      User.stub(:get_users_filtered_by).and_return(users_list)
+      post 'filter', :app_year => 2015
+      assigns(:users).should == users_list
+    end
+
+    it "should render the correct view" do
+      user = make_a_member :user, :email => "filterme@hostname.com"
+      User.stub(:get_users_filtered_by).and_return([user])
+      post 'filter', :app_year => 2015
+      expect(response).to render_template(:index)
     end
   end
 end

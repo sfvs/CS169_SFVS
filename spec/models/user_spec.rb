@@ -75,6 +75,18 @@ describe User do
     expect(user.format_phone_number).to be == "(510) 512-1234"
   end
 
+  describe "filtering users" do
+    before :each do
+      @user = FactoryGirl.create :user, :email => "rspecftw@hostname.com"
+    end
+
+    make_a_vendor_application_for_user
+
+    it "should return the list of users that have application of specified year" do
+      expect(User.get_users_filtered_by(2015)).to be == [@user]
+    end
+  end
+
   describe "deleting a user" do
     it "remove every application that user has" do
       app_year = stub_app_year 2015
