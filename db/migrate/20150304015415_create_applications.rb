@@ -6,6 +6,7 @@ class CreateApplications < ActiveRecord::Migration
       t.integer :year
       t.text :content
       t.boolean :completed, null: false, default: false
+      t.boolean :approved, null: false, default: false
       t.timestamps
     end
   end

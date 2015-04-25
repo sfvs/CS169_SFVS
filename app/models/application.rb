@@ -1,7 +1,7 @@
 require 'json'
 
 class Application < ActiveRecord::Base	
-  attr_accessible :year, :content, :completed, :amount_paid
+  attr_accessible :year, :content, :completed, :approved, :amount_paid
   belongs_to :user
   belongs_to :application_type
 
