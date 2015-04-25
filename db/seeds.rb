@@ -164,7 +164,6 @@ sponsor_health_permit_form = Form.create({:form_name => "Sponsor Health Permit F
 restaurant_health_permit_form = Form.create({:form_name => "Health Permit Form for Restaurant Concessionaires"})
 
 conditions_of_agreement = Form.create({:form_name => "Conditions of Agreement"})
-make_agreement = Form.create({:form_name => "Agreement"})
 
 setup_instructions = Form.create({:form_name => "Setup Instructions"})
 
@@ -177,7 +176,6 @@ vendor_food.forms << [
 	advertising_contract,
 	health_permit_form,
 	conditions_of_agreement,
-	make_agreement,
 	setup_instructions
 ]
 
@@ -186,7 +184,6 @@ vendor_non_food.forms << [
 	non_food_contract,
 	advertising_contract,
 	conditions_of_agreement,
-	make_agreement,
 	setup_instructions
 ]
 
@@ -196,7 +193,6 @@ sponsor_food.forms << [
 	advertising_sponsor_contract,
 	sponsor_health_permit_form,
 	conditions_of_agreement,
-	make_agreement,
 	setup_instructions
 ]
 
@@ -205,7 +201,6 @@ sponsor_non_food.forms << [
 	sponsor_non_food_contract,
 	advertising_sponsor_contract,
 	conditions_of_agreement,
-	make_agreement,
 	setup_instructions
 ]
 
@@ -215,7 +210,6 @@ associate_sponsor_food.forms << [
 	advertising_associate_sponsor_contract,
 	health_permit_form,
 	conditions_of_agreement,
-	make_agreement,
 	setup_instructions
 ]
 
@@ -224,7 +218,6 @@ associate_sponsor_non_food.forms << [
 	associate_sponsor_non_food_contract,
 	advertising_associate_sponsor_contract,
 	conditions_of_agreement,
-	make_agreement,
 	setup_instructions
 ]
 
@@ -233,7 +226,6 @@ non_profit.forms << [
 	non_profit_contract,
 	advertising_contract,
 	conditions_of_agreement,
-	make_agreement,
 	setup_instructions
 ]
 
@@ -243,7 +235,6 @@ restaurant_concessionaire.forms << [
 	advertising_contract,
 	restaurant_health_permit_form,
 	conditions_of_agreement,
-	make_agreement,
 	setup_instructions
 ]
 
@@ -284,9 +275,6 @@ questions_for_form[food_item_contract] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => "Exhibit Registration
 		Registration fee is payable in advance and applicable for 2 days. Space is limited.
 		Fee includes health permit fees and processing, one booth space,
@@ -318,9 +306,6 @@ questions_for_form[non_food_contract] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => "Exhibit Registration
 		Registration fee is payable in advance and applicable for 2 days. Space is limited.
 		Fee includes health permit fees and processing, one booth space,
@@ -363,9 +348,6 @@ questions_for_form[sponsor_food_contract] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => "Sponsor Information
 		Sponsor ($3000)
 		- Booth (12' x 8')
@@ -395,9 +377,6 @@ questions_for_form[sponsor_non_food_contract] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => "Sponsor Information
 		Sponsor ($3000)
 		- Booth (12' x 8')
@@ -438,9 +417,6 @@ questions_for_form[associate_sponsor_food_contract] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => "Sponsor Information
 		Associate Sponsor ($1000)
 		- Booth (8' x 8')
@@ -467,9 +443,6 @@ questions_for_form[associate_sponsor_non_food_contract] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => "Sponsor Information
 		Associate Sponsor ($1000)
 		- Booth (8' x 8')
@@ -507,9 +480,6 @@ questions_for_form[restaurant_contract] = [
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => "Exhibit Registration
 		Registration fee is payable in advance and applicable for 2 days. Space is limited.
 		Fee includes one booth space, one table and one chair.",
@@ -678,26 +648,14 @@ questions_for_form[conditions_of_agreement] = [
 		member of the SFVS, this becomes a binding agreement and the Company / Organization listed
 		above is subject to and agrees with all conditions stated on the contract.  SFVS reserves the right
 		to assign space in order to benefit the overall event.", 
-		:answers => "[I Agree to the terms and conditions]",
-		:question_type => :checkbox}
-]
-
-questions_for_form[make_agreement] = [
-	{:question => 'Agreement:
-		I certify that I have read the World Vegetarian Festival exhibitor information and contract
-		and agree to all terms and guidelines specified therein.',
-		:answers => "[I Agree to the terms and conditions]",
+		:answers => "[I certify that I have read the World Vegetarian Festival exhibitor information and contract
+		and agree to all terms and guidelines specified therein.]",
 		:question_type => :checkbox},
-	{:question => 'Company/Organization:', 
+	{:question => 'Do you guarantee your products on display at the Festival to be vegan?',
+		:answers => "[Yes]",
+		:question_type => :checkbox},
+	{:question => "Name Initials:",
 		:question_type => :textbox},
-	{:question => "Name:",
-		:question_type => :textbox},
-	{:question => "Signature:",
-		:question_type => :textbox},
-	{:question => "Title:",
-		:question_type => :textbox},
-	{:question => "Date:",
-		:question_type => :textbox}
 ]
 
 # Health Permit Forms
@@ -705,29 +663,18 @@ questions_for_form[make_agreement] = [
 questions_for_form[health_permit_form] = [
 	{:question => 'Food Guidelines (only Vegan foods are allowed)
 		All food items must fall under the following categories to be promoted at the World Vegetarian Festival.
-		
-		- Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance 
-		with SF Health Department guidelines. Requires high risk city health permit of $207.
+		Health permits are required and will be processed by SFVS.
 
-		- Pre packaged vegan food items may be sold or given away by Exhibitors. 
-		Requires low risk city health permit of $105.
-
-		Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
+		Select the type of Health permit you require:',
+		:answers => "[High risk city health permit ($207) - Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance with SF Health Department guidelines.,
+		Low risk city health permit ($105) - Pre packaged vegan food items may be sold or given away by Exhibitors.]",
+		:question_type => :radio_button},
+	{:question => 'Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
 
 		Non Food Guidelines
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	# {:question => 'Do you require a health permit (answer "yes" if you will be selling or giving away foods or food samples)?
-	# 	Health permits are required and will be processed by SFVS.',
-	# 	:answers => "[Yes, No]",
-	# 	:question_type => :radio_button},
-	{:question => 'Select the type of Health permit you require:',
-		:answers => "[High risk city health permit ($207), Low risk city health permit ($105)]",
-		:question_type => :radio_button},
-	{:question => 'Will you be distributing food/beverage samples?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => 'Will you use a sterno?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
@@ -743,25 +690,18 @@ questions_for_form[health_permit_form] = [
 questions_for_form[sponsor_health_permit_form] = [
 	{:question => 'Food Guidelines (only Vegan foods are allowed)
 		All food items must fall under the following categories to be promoted at the World Vegetarian Festival.
-		
-		- Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance 
-		with SF Health Department guidelines. Requires high risk city health permit.
+		Health permits are required and will be processed by SFVS.
 
-		- Pre packaged vegan food items may be sold or given away by Exhibitors. 
-		Requires low risk city health permit.
-
-		Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
+		Select the type of Health permit you require:',
+		:answers => "[High risk city health permit - Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance with SF Health Department guidelines.
+		,Low risk city health permit - Pre packaged vegan food items may be sold or given away by Exhibitors.]",
+		:question_type => :radio_button},
+	{:question => 'Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
 
 		Non Food Guidelines
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Select the type of Health permit you require:',
-		:answers => "[High risk city health permit, Low risk city health permit]",
-		:question_type => :radio_button},
-	{:question => 'Will you be distributing food/beverage samples?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => 'Will you use a sterno?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
@@ -777,25 +717,17 @@ questions_for_form[sponsor_health_permit_form] = [
 questions_for_form[restaurant_health_permit_form] = [
 	{:question => 'Food Guidelines (only Vegan foods are allowed)
 		All food items must fall under the following categories to be promoted at the World Vegetarian Festival.
-		
-		- Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance 
-		with SF Health Department guidelines. Requires high risk city health permit of $207.
+		Health permits are required and will be processed by SFVS.
 
-		- Pre packaged vegan food items may be sold or given away by Exhibitors. 
-		Requires low risk city health permit of $105.
-
-		Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
+		Select the type of Health permit you require:',
+		:answers => "[High risk city health permit ($207) - Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance with SF Health Department guidelines.]",
+		:question_type => :checkbox},
+	{:question => 'Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
 
 		Non Food Guidelines
 		We only allow vegan items that have not have been tested on animals, and are free of leather, 
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
-	{:question => 'Health permit Fee',
-		:answers => "[High risk city health permit ($207)]",
-		:question_type => :checkbox},
-	{:question => 'Will you be distributing food/beverage samples?',
-		:answers => "[Yes, No]",
-		:question_type => :radio_button},
 	{:question => 'Will you use a sterno?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
