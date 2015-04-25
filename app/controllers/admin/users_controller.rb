@@ -50,7 +50,8 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def filter
-    # redirect_to admin_users_path(@users)
+    @users = User.get_users_filtered_by(params[:app_year]).paginate(:page => params[:page], :per_page => 10)
+    render :index
   end
 
   def pressed_cancel?

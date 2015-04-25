@@ -35,4 +35,11 @@ class User < ActiveRecord::Base
     app.save
   end
 
+  def self.get_users_filtered_by(year)
+    users_list = []
+    unfiltered_list = User.includes(:applications).where("applications.year=?", year)
+    unfiltered_list.each do |user|
+      users_list << user
+    end
+  end
 end
