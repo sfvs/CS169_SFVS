@@ -22,7 +22,7 @@ module FormQuestionHelper
     index = 0
     @questions_list.each do |question|
       if question.question_type == "statement"
-        form_content[form.form_name][question.question] = "No Answer Required For Statement Questions"
+        form_content[form.form_name][question.question] = nil
       else
         form_content[form.form_name][question.question] = answer_list[index]
       end
