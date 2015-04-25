@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if @application
       @completed_forms = @application.get_completed_forms
       if @application.completed
-        @status = "Complete"
+        @status = "Submitted - In Review"
       else
         @status = "Incomplete"
       end

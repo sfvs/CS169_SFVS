@@ -24,10 +24,12 @@ Background: users have been added to database
   And I am on the "profile" page for "johndoe@gmail.com"
 
 Scenario: I cannot pay when my application is incomplete.
-  Then I should see "Please take survey"
+  When PENDING
+  Then I should see "Incomplete"
 	# Wait for iteration4-1 for payment verification
 
 Scenario: I can pay when my application is complete
-  Then I should see "Please take survey"
+  When PENDING
+  Then I should see "Submitted - In Review"
 	# Wait for iteration4-1 for payment verification
 
