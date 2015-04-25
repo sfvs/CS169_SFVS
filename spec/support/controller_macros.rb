@@ -77,6 +77,7 @@ module ControllerMacros
         :question_type => "textbox",
         :order => (shift+1)
       })
+      shift = shift + 1
     end
   end
 
