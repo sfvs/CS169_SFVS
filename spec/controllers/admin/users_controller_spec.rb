@@ -145,4 +145,22 @@ describe Admin::UsersController do
       response.should redirect_to '/admin/users/' + user.id.to_s
     end
   end
+
+  describe "filter users by year" do
+    it "should assign @users with users with application of that year" do
+      user = make_a_member :user, :email => "filterme@hostname.com"
+      users_list = []
+      users_list << user
+      User.stub(:get_users_filtered_by).and_return(users_list)
+      post 'filter', :app_year => 2015
+      assigns(:users).should == users_list
+    end
+
+    it "should render the correct view" do
+      user = make_a_member :user, :email => "filterme@hostname.com"
+      User.stub(:get_users_filtered_by).and_return([user])
+      post 'filter', :app_year => 2015
+      expect(response).to render_template(:index)
+    end
+  end
 end
