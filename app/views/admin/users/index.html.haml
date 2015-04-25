@@ -11,13 +11,13 @@
       %div.user_search
         = form_tag search_admin_users_path do
           = label :user_email, :email, 'Search by e-mail'
-          = text_field :user_email, 'email', size: 30
+          = text_field_tag 'user_email', nil, placeholder: 'User Email'
           = submit_tag 'Search', :class => "btn btn-default search_btn"
     %li.search_fields
       %div.user_filter
-        = form_tag "" do
+        = form_tag filter_admin_users_path do
           = label :app_year, :year, 'Filter Users by year'
-          = text_field :app_year, 'year', size: 20
+          = text_field_tag 'app_year', nil, placeholder: 'Application Year'
           = submit_tag 'Filter', :class => 'btn btn-default filter_btn'
   %table.table.table-hover
     %thead

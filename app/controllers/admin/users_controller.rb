@@ -39,14 +39,18 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def search
-    @user = User.where("email=? and admin=?", params[:user_email][:email], false).first
+    @user = User.where("email=? and admin=?", params[:user_email], false).first
     if @user.nil?
-      flash[:alert] = "No user with e-mail: #{params[:user_email][:email]}"
+      flash[:alert] = "No user with e-mail: #{params[:user_email]}"
       redirect_to admin_users_path
       return
     end
     redirect_to admin_user_path(@user)
     return
+  end
+
+  def filter
+    # redirect_to admin_users_path(@users)
   end
 
   def pressed_cancel?
