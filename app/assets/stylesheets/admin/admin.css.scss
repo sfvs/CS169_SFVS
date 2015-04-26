@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.users_view {
+  
+}
+
 .admin_list_link {
 	text-decoration: none;
 }
@@ -75,6 +79,7 @@
   padding-right: 10px;
 }
 
+// Footer Styling
 
 * {
   margin: 0;
@@ -102,6 +107,48 @@ html, body {
 
 #footer_content {
   text-align: center;
-  padding: 20px;
+  padding-top: 30px;
   color: white;
+  letter-spacing: 2px;
+  font-size: 20px;
+}
+
+// Users List (Users Index Page Styles)
+
+.users_index_title {
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.users_search_fields {
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #8AC007;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.users_content {
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #8AC007;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
 }
