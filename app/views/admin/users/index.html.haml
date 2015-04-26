@@ -1,4 +1,4 @@
-- body_class "users_view"
+- body_class "users_index"
 
 %div.page-wrap
   = render 'admin/navi_bar'
@@ -7,8 +7,8 @@
     %div.container-fluid
       %div.row
         %div.span12
-          %h1 Admin Page
-          %h3 Users List
+          %h1.admin_titles Admin Page
+          %h3.admin_titles Users List
 
   %div.users_search_fields
     %div.container-fluid
@@ -25,7 +25,7 @@
               = label_tag 'app_year', 'Filter Users by year'
               = text_field_tag 'app_year', nil, placeholder: 'Application Year'
               = submit_tag 'Filter', :class => 'btn btn-default filter_btn'
-              
+
   %div.users_content
     %div.container-fluid
       %table.table.table-hover

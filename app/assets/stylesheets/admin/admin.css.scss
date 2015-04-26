@@ -2,8 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.users_view {
-  
+.admin_index {
+  background-image: image-url(image_path("admin_bg.jpg"));
+}
+
+.users_index {
+  background-image: image-url(image_path("admin_bg.jpg"));
+}
+
+.admin_titles {
+  color: white;
 }
 
 .admin_list_link {
@@ -60,7 +68,7 @@
   border-radius: 25px;
   border: 2px solid #8AC007;
   margin-left: 380px;
-  margin-top: 20px;
+  margin-top: 100px;
   margin-right: 10px;
   padding-left: 15px;
   padding-right: 15px;
@@ -72,51 +80,17 @@
   background-color: white;
   border-radius: 25px;
   border: 2px solid #8AC007;
-  margin-top: 20px;
+  margin-top: 100px;
   padding-top: 25px;
   padding-bottom: 25px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
-// Footer Styling
-
-* {
-  margin: 0;
-}
-
-html, body {
-  height: 100%;
-}
-
-.page-wrap {
-  min-height: 100%;
-  /* equal to footer height */
-  margin-bottom: -142px; 
-}
-.page-wrap:after {
-  content: "";
-  display: block;
-}
-.site-footer, .page-wrap:after {
-  height: 142px; 
-}
-.site-footer {
-  background: #8AC007;
-}
-
-#footer_content {
-  text-align: center;
-  padding-top: 30px;
-  color: white;
-  letter-spacing: 2px;
-  font-size: 20px;
-}
-
 // Users List (Users Index Page Styles)
 
 .users_index_title {
-  margin-top: 15px;
+  margin-top: 50px;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
