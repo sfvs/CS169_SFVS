@@ -2,12 +2,13 @@
 = render 'admin/navi_bar'
 
 %div.container-fluid
-  %h1 Form Content
+  %h1= "Contents of #{@form.form_name}"
 
-  %p= "Contents of #{@form.form_name}"
+  %p To rearrange the order of the questions drag and drop the questions in the wanted order.
+  %br
 
   %div.row.header
-    %div.span5
+    %div.span3
       %p Form Question
     %div.span2
       %p Type
@@ -15,8 +16,8 @@
       %p Created At
     %div.span3
       %p Update At
-    %div.span3
-      %p Actions
+    %div.span5
+      %p More
             
   %ul.sortable
     - if !@form_questions.nil?
