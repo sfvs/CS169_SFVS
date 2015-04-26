@@ -1,15 +1,19 @@
 - body_class "users_view"
-= render 'admin/navi_bar'
+%div.page-wrap
+  = render 'admin/navi_bar'
 
-%div.admin_index_page
-  %div.admin_info
-    %div.container-fluid
-      %h2= "Welcome Admin"
-      %p= "Email: #{@admin.email}"
-      = button_to "Edit Profile", edit_user_registration_path, {:class => "btn btn-default", method: :get}
-      %br
-      = button_to "Logout", destroy_user_session_path, { :class => "btn btn-default", method: :delete}
+  %div.admin_index_page
+    %div.admin_info
+      %div.container-fluid
+        %h2= "Welcome Admin"
+        %p= "Email: #{@admin.email}"
+        = button_to "Edit Profile", edit_user_registration_path, {:class => "btn btn-default", method: :get}
+        %br
+        = button_to "Logout", destroy_user_session_path, { :class => "btn btn-default", method: :delete}
 
-  %div.about_us_container
-    %div.container-fluid
-      = render 'shared/about_festival'
+    %div.about_us_container
+      %div.container-fluid
+        = render 'shared/about_festival'
+
+%div.site-footer
+  %p#footer_content SFVS
