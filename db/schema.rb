@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150418033615) do
+ActiveRecord::Schema.define(:version => 20150426045036) do
 
   create_table "answers", :force => true do |t|
     t.string   "ans"
@@ -44,7 +44,8 @@ ActiveRecord::Schema.define(:version => 20150418033615) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.decimal  "amount_paid",         :default => 0.0
-    t.boolean  "has_paid",            :default => false
+    t.string   "payment_id"
+    t.boolean  "has_paid",            :default => false, :null => false
   end
 
   create_table "form_questions", :force => true do |t|
