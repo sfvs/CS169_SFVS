@@ -1,9 +1,9 @@
 - body_class "users_view"
 = render 'shared/navi_bar'
 
-%div.container-fluid
-  %div.row
-    %div.span5
+%div.users_index_page
+  %div.users_information
+    %div.container-fluid
       %h2= "Welcome"
       %p
         %strong= "Email: #{@user.email}"
@@ -22,7 +22,9 @@
         %p Please take survey below to determine your application type.
       = button_to "Edit Profile", edit_user_registration_path, {method: :get}
       = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
-    %div.span5
+
+  %div.users_forms
+    %div.container-fluid
       -if @application
         %h3= "Application Forms"
         %ul
@@ -39,5 +41,6 @@
         %br
         = button_to "Determine Application Type", survey_user_path(@user), {:id => "questionnaire_button", method: :get}
 
-    %div.span6
+  %div.users_about_us
+    %div.container-fluid
       = render 'shared/about_festival'
