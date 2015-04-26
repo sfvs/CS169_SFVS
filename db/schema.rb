@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20150418033809) do
     t.integer  "year"
     t.text     "content"
     t.boolean  "completed",           :default => false, :null => false
+    t.boolean  "approved",            :default => false, :null => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.decimal  "amount_paid",         :default => 0.0
