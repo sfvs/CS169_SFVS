@@ -28,7 +28,7 @@
         %th= link_to "Contact Person", admin_users_path(:order => :contact_person)
         %th Telephone Number
         %th Created At
-        %th Actions
+        %th More Details
     %tbody
       - if !@users.nil? && !@users.empty?
         - @users.each do |user|
@@ -39,7 +39,7 @@
             %td= user.contact_person
             %td= user.telephone
             %td= user.created_at
-            %td= link_to "Show", admin_user_path(user), :class => "btn btn-default admin_button"
+            %td= link_to "View User", admin_user_path(user), :class => "btn btn-default admin_button"
   - if !@users.nil? && !@users.empty?
     %div.pagination
       = will_paginate @users, renderer: BootstrapPagination::Rails

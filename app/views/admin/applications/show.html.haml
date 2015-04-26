@@ -11,7 +11,7 @@
         %th Form
         %th Status
         %th Created At
-        %th Actions
+        %th More
     %tbody
       - if !@app_forms.nil?
         - @app_forms.each do |form|
@@ -21,7 +21,7 @@
             %td= form.created_at
             %td 
               %ul
-                %li= link_to "Show", form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
-                %li= link_to "Edit", edit_form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
+                %li= link_to "View Form", form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
+                %li= link_to "Edit Form", edit_form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
 
   = button_to "Back", admin_user_path(@user), {:class => "btn btn-default", method: :get}

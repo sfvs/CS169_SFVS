@@ -10,14 +10,14 @@
         %tr
           %th Form
           %th Created At
-          %th Actions
+          %th More
       %tbody
         - if !@forms.nil?
           - @forms.each do |form|
             %tr
               %td= form.form_name
               %td= form.created_at
-              %td= link_to "Show", admin_form_form_questions_path(form),  class: "btn btn-default admin_button"
+              %td= link_to "View Form", admin_form_form_questions_path(form),  class: "btn btn-default admin_button"
   - if !@forms.nil?
     %div.pagination
       = will_paginate @forms, renderer: BootstrapPagination::Rails

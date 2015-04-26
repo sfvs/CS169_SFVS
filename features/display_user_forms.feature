@@ -32,20 +32,20 @@ Background: application is setup with user john doe
   And I am logged into the admin page as "admin"
   And I am on the admin profile page
   And I follow "Users List"
-  And I follow "Show"
+  And I follow "View User"
   And I am on the user content page for "johndoe@gmail.com"
 
 Scenario: display the forms of a user
-  When I follow "Show"
+  When I follow "View Application"
   Then I should see "General Form"
   And I should see "Vendor Form"
 
 Scenario: display the questions of the form of a user
-  When I follow "Show"
-  And I click the "Show" button for "General Form"
+  When I follow "View Application"
+  And I click the "View Form" button for "General Form"
   Then I should see "Company name"
 
 Scenario: display the content of the form of a user
-  When I follow "Show"
-  And I click the "Show" button for "General Form"
+  When I follow "View Application"
+  And I click the "View Form" button for "General Form"
   Then I should see disabled "Company name" with "Apple"
