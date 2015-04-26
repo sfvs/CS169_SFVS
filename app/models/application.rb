@@ -1,27 +1,13 @@
 require 'json'
 
 class Application < ActiveRecord::Base	
-  attr_accessible :year, :content, :completed, :approved, :amount_paid
+  attr_accessible :year, :content, :completed, :approved, :amount_paid, :has_paid
   belongs_to :user
   belongs_to :application_type
 
   def self.current_application_year
     Time.now.year
   end
-
-	def getAmountPaid
-		amnt = read_attribute(:amount_paid)
-		if not amnt or amnt == 0
-			return 0
-		else
-			return amnt
-		end
-	end
-
-	def hasPaid?
-		return amount_paid != 0
-	end
-
 
   def content
   	# has content been parsed yet? If not, let's do that..
@@ -83,7 +69,6 @@ class Application < ActiveRecord::Base
     form_content[form_name].update(self.sanitize_form_content(form_name, form_content[form_name]))
     form_content[form_name][:completed] = completed
     self.add_content(form_content)
-    self.calculate_current_application_cost
   end
 
   def sanitize_form_content(form_name, form_contents_actual)
@@ -96,10 +81,14 @@ class Application < ActiveRecord::Base
     form_contents_actual
   end
 
-  def calculate_current_application_cost
-    # regex everything in the format ($##)
-    payments = read_attribute(:content).scan(/\(\$[[:digit:]]+\)/)
-    amount_to_be_paid = payments.map{ |price| price.match(/[[:digit:]]+/)[0].to_i }
+  def grab_application_cost_description
+    # regex everything in the format ($## word). ex ($75 electricity fee)
+    read_attribute(:content).scan(/\((\$[[:digit:]]+) ([[[:digit:]][[:alpha:]][[:space:]]]+)\)/i)
+  end
+
+  def calculate_current_application_cost all_costs
+    cost_list = all_costs.map { |cost,item| cost }
+    amount_to_be_paid = cost_list.map{ |price| price.match(/[[:digit:]]+/)[0].to_i }
     self.amount_paid = amount_to_be_paid.sum
     self.save
   end

@@ -84,25 +84,37 @@ describe Application do
 		myApp.save!
 
 		myApp.reload
-		myApp.hasPaid?.should == true
-		myApp.getAmountPaid.should == 250.0
+		myApp.has_paid.should == false
+		myApp.amount_paid.should == 250.0
 	end
 
   describe "payment calculations" do
+    it "should be able to calculate the total cost from a list of costs" do
+      type = make_forms_for_app_type "vendor"
+      mock_app = make_an_application(type, 2015)
+      mock_app.calculate_current_application_cost [["$22","hat"],["$12","shoe"]]
+      mock_app.amount_paid.should be == 34
+    end
+
     it "should be able to calculate payment based off of content" do
       type = make_forms_for_app_type "vendor"
       mock_app = make_an_application(type, 2015)
       mock_app.content = {"some form 1" => {
         "a question without cost" => "hello",
-        "question with cost" => "run ($23)"},
+        "question with cost" => "run ($77 electricity fee)"},
         "some form 2" => {
         "a question with fake cost" => "hi $321",
-        "question with fake cost" => "ran ($453 fee)",
-        "another question with cost" => "tom ($11)"}
+        "question with fake cost" => "ran ($45fee)",
+        "question with cost but no description" => "ran ($45)",
+        "another question with cost but no description 2" => "ran ($45 )",
+        "another question with cost" => "tom ($11 chairs)"}
       }
       mock_app.save!
-      mock_app.calculate_current_application_cost
-      mock_app.getAmountPaid.should be == 34
+      cost_description = mock_app.grab_application_cost_description
+      cost_description.should be == [["$77","electricity fee"],["$11","chairs"]]
+
+      mock_app.calculate_current_application_cost cost_description
+      mock_app.amount_paid.should be == 88
     end
   end
 

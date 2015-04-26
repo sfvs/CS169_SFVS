@@ -14,10 +14,13 @@
           %strong="Application Year: #{@year}"
         %p
           %strong="Application Status: #{@status}"
-        %p
-          %strong="Total Cost: $#{@application_cost}"
-        -unless @application.hasPaid?
-          %br= button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
+        -unless @application.has_paid
+          %p
+            %strong Cost Description
+            -@cost_description.each do |cost,item|
+              %p="-- #{cost} #{item}"
+            ="Total Cost: $#{@application_cost}"
+          = button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
       -else
         = button_to "Click Here to Start Application", survey_user_path(@user), {:id => "questionnaire_button", method: :get}
       = button_to "Edit Profile", edit_user_registration_path, {method: :get}
