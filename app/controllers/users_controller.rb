@@ -7,7 +7,9 @@ class UsersController < ApplicationController
     @application = @user.get_most_recent_application
     if @application
       @completed_forms = @application.get_completed_forms
-      if @application.completed
+      if @application.approved
+        @status = "Complete"
+      elsif @application.completed
         @status = "Submitted - In Review"
       else
         @status = "Incomplete"
@@ -15,7 +17,11 @@ class UsersController < ApplicationController
       @year = @application.year
       @type = @application.application_type.app_type
       @forms_to_build = @application.application_type.forms
-      @application_cost = @application.amount_paid
+      unless @application.has_paid
+        @cost_description = @application.grab_application_cost_description
+        @application.calculate_current_application_cost @cost_description
+        @application_cost = @application.amount_paid
+      end
     end
   end
 
@@ -44,7 +50,7 @@ class UsersController < ApplicationController
 			redirect_to user_path(user)
 			return
 		end
-		if application.hasPaid?
+		if application.has_paid
 			#flash[:payment_notice] = "You have already paid for this application."
 			flash[:alert] = "You have already paid for this application."
 			redirect_to user_path(user)

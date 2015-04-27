@@ -281,16 +281,16 @@ questions_for_form[food_item_contract] = [
 		one chair and one table (6' x 2.5').",
 		:question_type => :statement},
 	{:question => 'Exhibit Booth',
-		:answers => "[Regular Booth 'B' - Open Courtyard: Payment on or before Aug 15th ($150),
-		Regular Booth 'B' - Open Courtyard: Payment after Aug 15th ($250),
-		Regular Booth 'C' - Gallery Bldg: Payment on or before Aug 15th ($200),
-		Regular Booth 'C' - Gallery Bldg: Payment after Aug 15th ($300)]",
+		:answers => "[Regular Booth 'B' - Open Courtyard: Payment on or before Aug 15th ($150 Booth Fee),
+		Regular Booth 'B' - Open Courtyard: Payment after Aug 15th ($250 Booth Fee),
+		Regular Booth 'C' - Gallery Bldg: Payment on or before Aug 15th ($200 Booth Fee),
+		Regular Booth 'C' - Gallery Bldg: Payment after Aug 15th ($300 Booth Fee)]",
 		:question_type => :radio_button},
 	{:question => 'Additional Chair $5 Each', 
-		:answers => "[0, 1 ($5), 2 ($10)]",
+		:answers => "[0, 1 ($5 Chair Fee x1), 2 ($10 Chair Fee x2)]",
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity? - $75 fee',
-		:answers => "[Yes ($75), No]",
+		:answers => "[Yes ($75 Electricity Fee), No]",
 		:question_type => :radio_button},
 	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
 		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
@@ -312,16 +312,16 @@ questions_for_form[non_food_contract] = [
 		one chair and one table (6' x 2.5').",
 		:question_type => :statement},
 	{:question => 'Exhibit Booth',
-		:answers => "[Regular Booth 'B' - Open Courtyard: Payment on or before Aug 15th ($150),
-		Regular Booth 'B' - Open Courtyard: Payment after Aug 15th ($250),
-		Regular Booth 'C' - Gallery Bldg: Payment on or before Aug 15th ($200),
-		Regular Booth 'C' - Gallery Bldg: Payment after Aug 15th ($300)]",
+		:answers => "[Regular Booth 'B' - Open Courtyard: Payment on or before Aug 15th ($150 Booth Fee),
+		Regular Booth 'B' - Open Courtyard: Payment after Aug 15th ($250 Booth Fee),
+		Regular Booth 'C' - Gallery Bldg: Payment on or before Aug 15th ($200 Booth Fee),
+		Regular Booth 'C' - Gallery Bldg: Payment after Aug 15th ($300 Booth Fee)]",
 		:question_type => :radio_button},
 	{:question => 'Additional Chair $5 Each', 
-		:answers => "[0, 1 ($5), 2 ($10)]",
+		:answers => "[0, 1 ($5 Chair Fee x1), 2 ($10 Chair Fee x2)]",
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity? - $75 fee',
-		:answers => "[Yes ($75), No]",
+		:answers => "[Yes ($75 Electricity Fee), No]",
 		:question_type => :radio_button},
 	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
 		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
@@ -349,7 +349,7 @@ questions_for_form[sponsor_food_contract] = [
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
 	{:question => "Sponsor Information
-		Sponsor ($3000)
+		Sponsor ($3000 Sponsor Fee)
 		- Booth (12' x 8')
 		- Prominent Exhibit Location
 		- Two tables with two chairs
@@ -378,7 +378,7 @@ questions_for_form[sponsor_non_food_contract] = [
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
 	{:question => "Sponsor Information
-		Sponsor ($3000)
+		Sponsor ($3000 Sponsor Fee)
 		- Booth (12' x 8')
 		- Prominent Exhibit Location
 		- Two tables with two chairs
@@ -418,7 +418,7 @@ questions_for_form[associate_sponsor_food_contract] = [
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
 	{:question => "Sponsor Information
-		Associate Sponsor ($1000)
+		Associate Sponsor ($1000 Associate Sponsor Fee)
 		- Booth (8' x 8')
 		- One tables with two chairs
 		- Newsletter recognition
@@ -444,7 +444,7 @@ questions_for_form[associate_sponsor_non_food_contract] = [
 		fur, gelatin, silk, wool or any other animal derivatives.',
 		:question_type => :statement},
 	{:question => "Sponsor Information
-		Associate Sponsor ($1000)
+		Associate Sponsor ($1000 Associate Sponsor Fee)
 		- Booth (8' x 8')
 		- One tables with two chairs
 		- Newsletter recognition
@@ -485,10 +485,10 @@ questions_for_form[restaurant_contract] = [
 		Fee includes one booth space, one table and one chair.",
 		:question_type => :statement},
 	{:question => 'Food/Catering Booth',
-		:answers => '[Payment on or before Aug 15th ($150),Payment after Aug 15th ($250)]',
+		:answers => '[Payment on or before Aug 15th ($150 Booth Fee),Payment after Aug 15th ($250 Booth Fee)]',
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity? - $75 fee',
-		:answers => "[Yes ($75), No]",
+		:answers => "[Yes ($75 Electricity Fee), No]",
 		:question_type => :radio_button},
 	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
 		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
@@ -506,13 +506,13 @@ questions_for_form[non_profit_contract] = 	[
 		Booth is inside the building. NO REFUNDS AFTER AUGUST 15.',
 		:question_type => :statement},
 	{:question => 'Non-Profit Booth',
-		:answers => "[Payment on or before Aug 15th ($165), Payment after Aug 15th ($215)]",
+		:answers => "[Payment on or before Aug 15th ($165 Booth Fee), Payment after Aug 15th ($215 Booth Fee)]",
 		:question_type => :radio_button},
 	{:question => 'Additional Chair $5 Each', 
-		:answers => "[0, 1 ($5), 2 ($10)]",
+		:answers => "[0, 1 ($5 Chair Fee x1), 2 ($10 Chair Fee x2)]",
 		:question_type => :radio_button},
 	{:question => 'Will you need electricity? - $75 fee',
-		:answers => "[Yes ($75), No]",
+		:answers => "[Yes ($75 Electricity Fee), No]",
 		:question_type => :radio_button},
 	{:question => 'If yes, please state electrical requirements (including watts and/or amps) and type of equipment you will be bringing.
 		List Equipment & Watts (not to exceed 1920 watts or 16 amps). If no, write N/A',
@@ -526,10 +526,10 @@ questions_for_form[advertising_contract] = 	[
 		All ads are one color (black print).',
 		:question_type => :statement},
 	{:question => 'Please select a size of your advertisement:',
-		:answers => "[Half Page: 8.5-in x 5.5-in ($300),
-		Quarter Page: 4.25-in x 5.5-in ($200),
-		One Eigth Page: 4.25-in x 2.75-in ($100),
-		Business Card Size: 3.5-in x 2-in ($50)]",
+		:answers => "[Half Page: 8.5-in x 5.5-in ($300 Advertisement Fee),
+		Quarter Page: 4.25-in x 5.5-in ($200 Advertisement Fee),
+		One Eigth Page: 4.25-in x 2.75-in ($100 Advertisement Fee),
+		Business Card Size: 3.5-in x 2-in ($50 Advertisement Fee)]",
 		:question_type => :radio_button},
 	{:question => 'Additional Information
 		Deadline: August 31
@@ -666,8 +666,8 @@ questions_for_form[health_permit_form] = [
 		Health permits are required and will be processed by SFVS.
 
 		Select the type of Health permit you require:',
-		:answers => "[High risk city health permit ($207) - Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance with SF Health Department guidelines.,
-		Low risk city health permit ($105) - Pre packaged vegan food items may be sold or given away by Exhibitors.]",
+		:answers => "[High risk city health permit ($207 High Risk Health Permit Fee) - Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance with SF Health Department guidelines.,
+		Low risk city health permit ($105 Low Risk Health Permit Fee) - Pre packaged vegan food items may be sold or given away by Exhibitors.]",
 		:question_type => :radio_button},
 	{:question => 'Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
 
@@ -720,7 +720,7 @@ questions_for_form[restaurant_health_permit_form] = [
 		Health permits are required and will be processed by SFVS.
 
 		Select the type of Health permit you require:',
-		:answers => "[High risk city health permit ($207) - Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance with SF Health Department guidelines.]",
+		:answers => "[High risk city health permit ($207 High Risk Health Permit Fee) - Unpackaged vegan food or beverage samples may be sold or given away for free by Exhibitor in accordance with SF Health Department guidelines.]",
 		:question_type => :checkbox},
 	{:question => 'Use of recyclable, compostable or biodegradable supplies are highly encouraged in order to conserve the environment.
 
