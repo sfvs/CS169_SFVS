@@ -2,14 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.admin_index {
-  background-image: image-url(image_path("admin_bg.jpg"));
-}
-
-.users_index {
-  background-image: image-url(image_path("admin_bg.jpg"));
-}
-
 .admin_titles {
   color: white;
 }
@@ -63,9 +55,11 @@
   float: left;
 }
 
+// Admin Index Page Styling
+
 .admin_info {
   background-color: white;
-  border-radius: 25px;
+  border-radius: 15px;
   border: 2px solid #8AC007;
   margin-left: 380px;
   margin-top: 100px;
@@ -73,18 +67,59 @@
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 25px;
-  padding-bottom: 417px;
+  padding-bottom: 16px;
 }
 
 .about_us_container {
   background-color: white;
-  border-radius: 25px;
+  border-radius: 15px;
   border: 2px solid #8AC007;
   margin-top: 100px;
   padding-top: 25px;
   padding-bottom: 25px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.admin_btns {
+  margin-top: 404px;
+}
+
+#edit_btn {
+  background-color: #33CC33;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 90px;
+  padding-right: 90px;
+  opacity: 0.7;
+}
+
+#edit_btn:hover {
+  opacity: 1.0;
+}
+
+
+#logout_btn {
+  background-color: #CC3300;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 102px;
+  padding-right: 102px;
+  opacity: 0.7;
+}
+
+#logout_btn:hover {
+  opacity: 1.0;
+}
+
+#but_1 {
+  margin-bottom: 15px;
 }
 
 // Users List (Users Index Page Styles)
@@ -125,4 +160,10 @@
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 10px;
+}
+
+.effect1 {
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+     -moz-box-shadow: 0 10px 6px -6px #777;
+          box-shadow: 0 10px 6px -6px #777;
 }

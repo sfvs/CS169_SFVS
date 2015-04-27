@@ -3,14 +3,17 @@
   = render 'admin/navi_bar'
 
   %div.admin_index_page
-    %div.admin_info
+    %div.admin_info.effect1
       %div.container-fluid
         %h2= "Welcome Admin"
         %p= "Email: #{@admin.email}"
-        = button_to "Edit Profile", edit_user_registration_path, {:class => "btn btn-default", method: :get}
-        %br
-        = button_to "Logout", destroy_user_session_path, { :class => "btn btn-default", method: :delete}
+        %div.admin_btns
+          %div#but_1
+            = link_to "Edit Profile", edit_user_registration_path, :id => "edit_btn"
+          %br
+          %div#but_2
+            = link_to "Logout", destroy_user_session_path, :id => "logout_btn"
 
-    %div.about_us_container
+    %div.about_us_container.effect1
       %div.container-fluid
         = render 'shared/about_festival'
