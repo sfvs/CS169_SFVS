@@ -8,7 +8,9 @@
 
 def create_a_user(email, password, contact_person = "", company_name  = "", phone_number  = "", admin_status = :user)
 	admin = :admin == admin_status
-	User.create({:email => email, :password => password, :admin => admin, :contact_person => contact_person, :company_name => company_name, :telephone => phone_number}, :without_protection => true)
+	user = User.create({:email => email, :password => password, :admin => admin, :contact_person => contact_person, :company_name => company_name, :telephone => phone_number}, :without_protection => true)
+	user.skip_confirmation!
+	user.save!
 end
 
 def link_form_questions_to_form(form,questions)
