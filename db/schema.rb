@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20150426045036) do
     t.string   "app_type"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
-    t.string   "description", :default => "", :null => false
+    t.text     "description", :default => "", :null => false
   end
 
   create_table "application_types_forms", :id => false, :force => true do |t|
@@ -38,8 +38,9 @@ ActiveRecord::Schema.define(:version => 20150426045036) do
     t.integer  "user_id"
     t.integer  "application_type_id"
     t.integer  "year"
-    t.text     "content"
+    t.text     "content",             :default => "",    :null => false
     t.boolean  "completed",           :default => false, :null => false
+    t.boolean  "approved",            :default => false, :null => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.decimal  "amount_paid",         :default => 0.0
@@ -49,7 +50,7 @@ ActiveRecord::Schema.define(:version => 20150426045036) do
 
   create_table "form_questions", :force => true do |t|
     t.text     "question"
-    t.string   "answers"
+    t.text     "answers"
     t.string   "form_type"
     t.string   "question_type"
     t.integer  "order"

@@ -12,7 +12,7 @@
             = link_to "Edit Profile", edit_user_registration_path, :id => "edit_btn"
           %br
           %div#but_2
-            = link_to "Logout", destroy_user_session_path, :id => "logout_btn"
+            = button_to "Logout", destroy_user_session_path, {:id => "logout_btn", method: :delete}
 
     %div.about_us_container.effect1
       %div.container-fluid
