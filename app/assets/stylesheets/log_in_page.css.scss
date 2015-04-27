@@ -2,6 +2,7 @@ html {
   position: relative;
   min-height: 100%;
 }
+
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
@@ -78,4 +79,76 @@ body {
 
 .regis_alert li {
   display: block;
+}
+
+.login_btn {
+  background-color: #33CC33;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 102px;
+  padding-right: 102px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+.login_btn:hover {
+  opacity: 1.0;
+  color: white;
+  text-decoration: none;
+}
+
+#lgin_btn {
+  margin-bottom: 10px;
+}
+
+.new_user_btn {
+  background-color: #33CC33;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 93px;
+  padding-right: 93px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+.new_user_btn:hover {
+  text-decoration: none;
+  color: white;
+  opacity: 1.0;
+}
+
+.forgot_btn {
+  background-color: #CC3300;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 50px;
+  padding-right: 50px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+.forgot_btn:hover {
+  text-decoration: none;
+  color: white;
+  opacity: 1.0;
+}
+
+#fgt_btn {
+  margin-top: 10px;
+}
+
+#login_header {
+  margin-left: 60px;
 }

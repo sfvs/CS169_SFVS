@@ -2,7 +2,7 @@
 = render 'shared/navi_bar'
 
 %div.users_index_page
-  %div.users_information
+  %div.users_information.effect1
     %div.container-fluid
       %h2= "Welcome"
       %p
@@ -35,7 +35,7 @@
           = button_to "Logout", destroy_user_session_path, {:id => "logout_btn", method: :delete}
 
   - if @application
-    %div.users_forms
+    %div.users_forms.effect1
       %div.container-fluid
         -if @application
           %h3= "Please fill out the forms below"
@@ -69,6 +69,6 @@
             73 Rondel Place,
             San Francisco, CA 94103
 
-  %div.users_about_us
+  %div.users_about_us.effect1
     %div.container-fluid
       = render 'shared/about_festival'

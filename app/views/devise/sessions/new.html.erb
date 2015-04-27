@@ -3,7 +3,9 @@
 <%= render "shared/background_cycler" %>
 
 <div class="login_container">
-  <h2>Sign In</h2>
+  <div id="login_header">
+    <h2>Sign In</h2>
+  </div>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
@@ -24,7 +26,7 @@
     <% end -%>
 
     <div class="actions">
-      <%= f.submit "Log in", class: "btn btn-default" %>
+      <%= f.submit "Log in", class: "login_btn" %>
     </div>
   <% end %>
 

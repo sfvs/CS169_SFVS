@@ -1,57 +1,56 @@
 - body_class "users_index"
 
-%div.page-wrap
-  = render 'admin/navi_bar'
+= render 'admin/navi_bar'
 
-  %div.users_index_title
-    %div.container-fluid
-      %div.row
-        %div.span12
-          %h1.admin_titles Admin Page
-          %h3.admin_titles Users List
+%div.users_index_title
+  %div.container-fluid
+    %div.row
+      %div.span12
+        %h1.admin_titles Admin Page
+        %h3.admin_titles Users List
 
-  %div.users_search_fields
-    %div.container-fluid
-      %ul
-        %li.search_fields
-          %div.user_search
-            = form_tag search_admin_users_path do
-              = label_tag 'user_email', 'Search by e-mail'
-              = text_field_tag 'user_email', nil, placeholder: 'User Email'
-              = submit_tag 'Search', :class => "btn btn-default search_btn"
-        %li.search_fields
-          %div.user_filter
-            = form_tag filter_admin_users_path do
-              = label_tag 'app_year', 'Filter Users by year'
-              = text_field_tag 'app_year', nil, placeholder: 'Application Year'
-              = submit_tag 'Filter', :class => 'btn btn-default filter_btn'
+%div.users_search_fields.effect1
+  %div.container-fluid
+    %ul
+      %li.search_fields
+        %div.user_search
+          = form_tag search_admin_users_path do
+            = label_tag 'user_email', 'Search by e-mail'
+            = text_field_tag 'user_email', nil, placeholder: 'User Email'
+            = submit_tag 'Search', :class => "btn btn-default search_btn"
+      %li.search_fields
+        %div.user_filter
+          = form_tag filter_admin_users_path do
+            = label_tag 'app_year', 'Filter Users by year'
+            = text_field_tag 'app_year', nil, placeholder: 'Application Year'
+            = submit_tag 'Filter', :class => 'btn btn-default filter_btn'
 
-  %div.users_content
-    %div.container-fluid
-      %table.table.table-hover
-        %thead
-          %tr
-            %th ID
-            %th= link_to "E-mail", admin_users_path(:order => :email)
-            %th= link_to "Company Name", admin_users_path(:order => :company_name)
-            %th= link_to "Contact Person", admin_users_path(:order => :contact_person)
-            %th Telephone Number
-            %th Created At
-            %th More Details
-        %tbody
-          - if !@users.nil? && !@users.empty?
-            - @users.each do |user|
-              %tr
-                %td= user.id
-                %td= user.email
-                %td= user.company_name
-                %td= user.contact_person
-                %td= user.telephone
-                %td= user.created_at
-                %td= link_to "View User", admin_user_path(user), :class => "btn btn-default admin_button"
-      - if !@users.nil? && !@users.empty?
-        %div.pagination
-          = will_paginate @users, renderer: BootstrapPagination::Rails
+%div.users_content.effect1
+  %div.container-fluid
+    %table.table.table-hover
+      %thead
+        %tr
+          %th ID
+          %th= link_to "E-mail", admin_users_path(:order => :email)
+          %th= link_to "Company Name", admin_users_path(:order => :company_name)
+          %th= link_to "Contact Person", admin_users_path(:order => :contact_person)
+          %th Telephone Number
+          %th Created At
+          %th More Details
+      %tbody
+        - if !@users.nil? && !@users.empty?
+          - @users.each do |user|
+            %tr
+              %td= user.id
+              %td= user.email
+              %td= user.company_name
+              %td= user.contact_person
+              %td= user.telephone
+              %td= user.created_at
+              %td= link_to "View User", admin_user_path(user), :class => "btn btn-default admin_button"
+    - if !@users.nil? && !@users.empty?
+      %div.pagination
+        = will_paginate @users, renderer: BootstrapPagination::Rails
 
-      = button_to "Create User", new_admin_user_path, {:class => "btn btn-default", method: :get}
-      = button_to "Back", admin_root_path, {:class => "btn btn-default", method: :get}
+    = button_to "Create User", new_admin_user_path, {:class => "btn btn-default", method: :get}
+    = button_to "Back", admin_root_path, {:class => "btn btn-default", method: :get}

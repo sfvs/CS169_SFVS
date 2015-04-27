@@ -14,7 +14,7 @@ Background: users have been added to database
   Given I am on the "profile" page for "johndoe@gmail.com"
 
 Scenario: view current application status
-  When I press "Edit Profile"
+  When I follow "Edit Profile"
   Then the "user_email" field should contain "johndoe@gmail.com"
   When I fill in "user_email" with "doejohn@gmail.com"
   And I fill in "user_current_password" with "bear12345"
