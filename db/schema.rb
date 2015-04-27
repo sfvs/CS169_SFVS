@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150418033809) do
+ActiveRecord::Schema.define(:version => 20150426045036) do
 
   create_table "answers", :force => true do |t|
     t.string   "ans"
@@ -38,12 +38,14 @@ ActiveRecord::Schema.define(:version => 20150418033809) do
     t.integer  "user_id"
     t.integer  "application_type_id"
     t.integer  "year"
-    t.text     "content"
+    t.text     "content",             :default => "",    :null => false
     t.boolean  "completed",           :default => false, :null => false
+    t.boolean  "approved",            :default => false, :null => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.decimal  "amount_paid",         :default => 0.0
     t.string   "payment_id"
+    t.boolean  "has_paid",            :default => false, :null => false
   end
 
   create_table "form_questions", :force => true do |t|
