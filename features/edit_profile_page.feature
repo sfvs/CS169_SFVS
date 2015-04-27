@@ -16,8 +16,9 @@ Background: users have been added to database
 Scenario: view current application status
   When I follow "Edit Profile"
   Then the "user_email" field should contain "johndoe@gmail.com"
-  When I fill in "user_email" with "doejohn@gmail.com"
+  When I fill in "user_company_name" with "pineapple"
   And I fill in "user_current_password" with "bear12345"
   And I press "Update"
-  Then I should be on the "profile" page for "doejohn@gmail.com"
-  And I should see "doejohn@gmail.com"
+  Then I should be on the "profile" page for "johndoe@gmail.com"
+  And I follow "Edit Profile"
+  And the "user_company_name" field should contain "pineapple"
