@@ -9,14 +9,6 @@
         %p= "Email: #{@admin.email}"
         = button_to "Edit Profile", edit_user_registration_path, {:class => "btn btn-default", method: :get}
         = button_to "Logout", destroy_user_session_path, { :class => "btn btn-default", method: :delete}
-      %div.span6.admin_link
-        %br
-        %br 
-        = link_to admin_users_path, class: "btn btn-success admin_button" do
-          %span.glyphicon.icon-user Users List
-        %br
-        %br  
-        = link_to admin_forms_path, class: "btn btn-success admin_button " do
-          %span.glyphicon.icon-pencil Forms List
-      %div.span6
+
+      %div.span8
         = render 'shared/about_festival'

@@ -20,6 +20,6 @@ Scenario: submitting an incomplete final application
 Scenario: submitting with all forms complete
   When john doe has submitted all forms
   And I press "Submit Application"
-  Then I should see "Complete"
-  And I should not see "Determine Application Type"
+  Then I should see "Submitted - In Review"
+  And I should not see "Click Here to Start Application"
   And I should not see "Submit Application"

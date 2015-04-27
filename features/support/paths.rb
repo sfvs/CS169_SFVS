@@ -24,6 +24,8 @@ module NavigationHelpers
     when /^the "(.*)" form page for "(.*)"$/ then "/users/#{User.find_by_email($2).id}/form/#{Form.find_by_form_name($1).id}"
     when /^the user content page for "(.*)"$/ then "/admin/users/#{User.find_by_email($1).id}"
     when /^the users list page$/ then "/admin/users"
+    when /^the "Application" page for "(.*)"$/ then "/admin/users/#{User.find_by_email($1).id}/applications/1"
+    when /^the edit form page for General Form of "(.*)"$/ then  "/admin/users/#{User.find_by_email($1).id}/applications/1/edit_form?form_type=General+Form"
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

@@ -1,10 +1,10 @@
-Feature: view user forms
-	
-  As an admin
-  So that I can manage the users
-  I want to view the forms filled by the users.
+Feature: edit form for user
 
-Background: application is setup with user john doe
+As an admin
+so that I can change/fix a user's forms
+I want to be able to edit the user's forms and resubmit them
+
+Background: users have been added to database
   
   Given application type and forms are setup for vendor and sponsor
   Given the following form questions exist:
@@ -22,30 +22,32 @@ Background: application is setup with user john doe
   | Website                                                          | General Form    | textbox       |
   | Company name for WVF Program listing (if different from above)   | General Form    | textbox       |
 
-  And user john doe exist in the database
-  And the following users exist: 
-  | email            | password         | admin   |
-  | admin@gmail.com  | admin123         | true    |
-
+  Given the following users exist: 
+  | email             | password         | admin   |
+  | johndoe@gmail.com | bear12345        | false   |
+  | admin@gmail.com   | admin123         | true    |
+  
   And john doe has an incomplete vendor application
   And john doe filled the "General Form"
   And I am logged into the admin page as "admin"
   And I am on the admin profile page
-  And I follow "Users List"
-  And I follow "View User"
-  And I am on the user content page for "johndoe@gmail.com"
+  When I go to the edit form page for General Form of "johndoe@gmail.com"
 
-Scenario: display the forms of a user
-  When I follow "View Application"
-  Then I should see "General Form"
-  And I should see "Vendor Form"
+Scenario: Press back
+  And I press "Back"
+  Then I should be on the "Application" page for "johndoe@gmail.com"
 
-Scenario: display the questions of the form of a user
-  When I follow "View Application"
-  And I click the "View Form" button for "General Form"
-  Then I should see "Company name"
+Scenario: Press Submit without modifying the form
+  And I press "Submit"
+  Then I should be on the "Application" page for "johndoe@gmail.com"
 
-Scenario: display the content of the form of a user
-  When I follow "View Application"
-  And I click the "View Form" button for "General Form"
-  Then I should see disabled "Company name" with "Apple"
+Scenario: Changing the form
+  And I should see "Company name" with "Apple"
+  And I type in the following:
+  | Company name     | Google  |
+  And I press "Submit"
+  Then I go to the edit form page for General Form of "johndoe@gmail.com"
+  Then I should see "Company name" with "Google"
+
+
+

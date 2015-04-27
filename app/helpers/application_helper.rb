@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def get_answers_to_prefill_from(content, form_type)
-    number_of_questions = Form.where(form_name: form_type)[0].number_of_questions
+    number_of_questions = Form.where("form_name=?", form_type).first.number_of_questions
     form_answer = Hash.new
     cur_num_questions = 0
     content.each do |key, value|
@@ -17,6 +17,16 @@ module ApplicationHelper
   end
 
   def form_completed?(form_content, form_name)
-    !(form_content[form_name].has_value?("") || form_content[form_name].has_value?(nil))
+    index = 0
+    ordered_list_of_questions = Form.where("form_name=?", form_name).first.get_sorted_form_questions
+    form_content[form_name].each do |question, value|
+      if form_content[form_name].has_value?("") || form_content[form_name].has_value?(nil)
+        if ordered_list_of_questions[index].question_type != "message" && ordered_list_of_questions[index].question_type != "statement"
+          return false if value == nil || value == ""
+        end
+      end
+      index += 1
+    end 
+    return true
   end
 end

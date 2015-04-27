@@ -14,17 +14,20 @@
           %strong="Application Year: #{@year}"
         %p
           %strong="Application Status: #{@status}"
-        %p
-          %strong="Amount Paid: $#{@application_cost}"
-        -unless @application.hasPaid?
-          %br= button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
+        -unless @application.has_paid
+          %p
+            %strong Cost Description
+            -@cost_description.each do |cost,item|
+              %p="-- #{cost} #{item}"
+            ="Total Cost: $#{@application_cost}"
+          = button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
       -else
-        %p Please take survey below to determine your application type.
+        = button_to "Click Here to Start Application", survey_user_path(@user), {:id => "questionnaire_button", method: :get}
       = button_to "Edit Profile", edit_user_registration_path, {method: :get}
       = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
     %div.span5
       -if @application
-        %h3= "Application Forms"
+        %h3= "Please fill out the forms below"
         %ul
           -@forms_to_build.each do |form|
             %br
@@ -33,11 +36,22 @@
               %span.glyphicons.icon-check 
         %br
         -unless @application.completed
-          = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post, data: { confirm: "Are you sure you want to submit?" }}
-          = button_to "Restart Application", survey_user_path(@user), {:id => "questionnaire_button", method: :get, data: { confirm: "Are you sure you want to restart?" }}
-      -else
-        %br
-        = button_to "Determine Application Type", survey_user_path(@user), {:id => "questionnaire_button", method: :get}
+          = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post, data: { confirm: "Your current application will be finalized. Are you sure you want to submit?" }}
+          = button_to "Restart Application", survey_user_path(@user), {:id => "questionnaire_button", method: :get, data: { confirm: "Your current application will be reset. Are you sure you want to restart?" }}
+        %p
+          Additional Information for Health Form:
+          %br
+          Mail Health Form to address below or email Health Form electronic copy to: wvdinfo@sfvs.org
+        %p
+          Additional Information For Advertisements: 
+          %br
+          Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi
+          %br
+          Enclosed camera-ready ad/logo and mail to address below, or Email electronic copy to: wvdinfo@sfvs.org
+          %br
+          Mail Information: San Francisco Vegetarian Society,
+          73 Rondel Place,
+          San Francisco, CA 94103
 
     %div.span6
       = render 'shared/about_festival'

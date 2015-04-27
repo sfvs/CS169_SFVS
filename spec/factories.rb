@@ -18,6 +18,7 @@ FactoryGirl.define do
     year 2000
     content {}
     completed false
+    approved false
   end
 
   factory :user do

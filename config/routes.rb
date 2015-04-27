@@ -5,6 +5,7 @@ SFVSRegistrationSystem::Application.routes.draw do
     root to: "admin#index"
     resources :users do
       post "search", on: :collection
+      post "filter", on: :collection
       resources :applications, :only => [:show, :edit, :update] do
         get "form", to: "application_form#show", on: :member
         get "edit_form", to: "application_form#edit", on: :member

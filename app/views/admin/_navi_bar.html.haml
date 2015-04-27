@@ -4,7 +4,11 @@
       = link_to "SFVS", "http://www.sfvs.org/", class: "brand navi_header"
       %ul.nav
         %li= link_to "Home", admin_root_path
-        %li= link_to "Users", admin_users_path
-        %li= link_to "Forms", admin_forms_path
+        %li
+          = link_to admin_users_path do
+            %span.glyphicon.icon-user Users List
+        %li
+          = link_to admin_forms_path do
+            %span.glyphicon.icon-pencil Forms List
       %ul.nav.pull-right
-        %li= link_to "Logout", destroy_user_session_path, {method: :delete}
+        %li= link_to "Logout", destroy_user_session_path, {method: :delete} 

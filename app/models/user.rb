@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
 
   has_many :applications, dependent: :destroy
   def get_most_recent_application
-    self.applications.where(year: Application.current_application_year).first
+    self.applications.where("year=?", Application.current_application_year).first
   end
 
   def self.get_users_by_order(order)
@@ -36,4 +36,7 @@ class User < ActiveRecord::Base
     app.save
   end
 
+  def self.get_users_filtered_by(year)
+    users_list = User.includes(:applications).where("applications.year=?", year)
+  end
 end
