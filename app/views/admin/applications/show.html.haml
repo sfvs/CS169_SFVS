@@ -24,4 +24,6 @@
                 %li= link_to "View Form", form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
                 %li= link_to "Edit Form", edit_form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
 
+  = button_to 'Approve', "", {:class => "btn btn-default", method: :post}
+  = button_to 'Reject', "", {:class => "btn btn-default", method: :post}
   = button_to "Back", admin_user_path(@user), {:class => "btn btn-default", method: :get}
