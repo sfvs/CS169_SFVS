@@ -11,4 +11,9 @@ class Admin::ApplicationsController < Admin::AdminController
     @completed_forms = @application.get_completed_forms
   end
 
+  def approve
+    @application = Application.find(params[:id])
+    @application.update_attribute(:approved, params[:approve])
+    redirect_to admin_user_path(params[:user_id])
+  end
 end

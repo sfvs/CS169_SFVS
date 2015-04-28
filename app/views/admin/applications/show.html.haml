@@ -23,7 +23,7 @@
               %ul
                 %li= link_to "View Form", form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
                 %li= link_to "Edit Form", edit_form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
-                
-  = button_to "Approve", accept_admin_user_application_path(@application), {:class => "btn btn-default", method: :post}
-  = button_to "Reject", reject_admin_user_application_path(@application), {:class => "btn btn-default", method: :post}
+
+  = button_to "Approve", approve_admin_user_application_path(@user, @application, :approve => true), {:class => "btn btn-default", method: :post}
+  = button_to "Reject", approve_admin_user_application_path(@user, @application, :approve => false), {:class => "btn btn-default", method: :post}
   = button_to "Back", admin_user_path(@user), {:class => "btn btn-default", method: :get}

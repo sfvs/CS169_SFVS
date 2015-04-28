@@ -10,8 +10,7 @@ SFVSRegistrationSystem::Application.routes.draw do
         get "form", to: "application_form#show", on: :member
         get "edit_form", to: "application_form#edit", on: :member
         put "edit_form", to: "application_form#update", on: :member
-        post "accept", to: "applications#accept", on: :member
-        post "reject", to: "applications#reject", on: :member
+        post "approve", to: "applications#approve", on: :member
       end
     end
     resources :forms, :only => :index do
