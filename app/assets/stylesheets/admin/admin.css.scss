@@ -61,7 +61,7 @@
   background-color: white;
   border-radius: 15px;
   border: 2px solid #8AC007;
-  margin-left: 380px;
+  margin-left: 270px;
   margin-top: 100px;
   margin-right: 10px;
   padding-left: 15px;
@@ -85,13 +85,13 @@
   margin-top: 100px;
 }
 
-#u_link {
+.link_content {
   background-color: #33CC33;
   border-radius: 25px;
   color: white;
   text-decoration: none;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   padding-left: 102px;
   padding-right: 102px;
   opacity: 0.7;
@@ -99,8 +99,29 @@
   -webkit-transition: linear 0.2s;
 }
 
-#u_link:hover {
+.link_content:hover {
   opacity: 1.0;
+}
+
+.link_title {
+  text-align: center;
+}
+
+.link_description {
+  font-size: 80%;
+  text-align: left;
+  opacity: 0;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+.link_content:hover .link_description {
+  opacity: 0.75;
+}
+
+.admin_users_link {
+  margin-top: 4px;
+  margin-bottom: 10px;
 }
 
 #f_link {
@@ -108,10 +129,10 @@
   border-radius: 25px;
   color: white;
   text-decoration: none;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 102px;
-  padding-right: 102px;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  padding-left: 100px;
+  padding-right: 100px;
   opacity: 0.7;
   transition: linear 0.2s;
   -webkit-transition: linear 0.2s;

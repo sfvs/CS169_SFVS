@@ -18,11 +18,19 @@
       %div.container-fluid
         %div.admin_users_link
           = link_to admin_users_path, :id => "u_link" do
-            %span.glyphicon.icon-user Users List
-        %br
-        %div.admin_forms_link
-          = link_to admin_forms_path, :id => "f_link" do
-            %span.glyphicon.icon-pencil Forms List
+            %div.link_content
+              %div.link_title
+                %span.glyphicon.icon-user Users List
+              %br
+              %div.link_description
+                %p 
+                  View all registered users, and applications they 
+                  %br submitted. Also, review and approve applications.
+        / %br
+        / %div.admin_forms_link
+        /   = link_to admin_forms_path, :id => "f_link" do
+        /     %div.link_title
+        /       %span.glyphicon.icon-pencil Forms List
 
     %div.about_us_container.effect1
       %div.container-fluid
