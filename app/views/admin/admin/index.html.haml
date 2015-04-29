@@ -14,6 +14,16 @@
           %div#but_2
             = button_to "Logout", destroy_user_session_path, {:id => "logout_btn", method: :delete}
 
+    %div.admin_links
+      %div.container-fluid
+        %div.admin_users_link
+          = link_to admin_users_path, :id => "u_link" do
+            %span.glyphicon.icon-user Users List
+        %br
+        %div.admin_forms_link
+          = link_to admin_forms_path, :id => "f_link" do
+            %span.glyphicon.icon-pencil Forms List
+
     %div.about_us_container.effect1
       %div.container-fluid
         = render 'shared/about_festival'

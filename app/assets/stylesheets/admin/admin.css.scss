@@ -81,6 +81,46 @@
   padding-right: 10px;
 }
 
+.admin_links {
+  margin-top: 100px;
+}
+
+#u_link {
+  background-color: #33CC33;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 102px;
+  padding-right: 102px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#u_link:hover {
+  opacity: 1.0;
+}
+
+#f_link {
+  background-color: #33CC33;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 102px;
+  padding-right: 102px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#f_link:hover {
+  opacity: 1.0;
+}
+
 .admin_btns {
   margin-top: 404px;
 }
