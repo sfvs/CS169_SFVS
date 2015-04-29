@@ -13,6 +13,7 @@
         %th Application
         %th Year
         %th Status
+        %th Approved/Pending
         %th Created At
         %th More Details
     %tbody
@@ -22,6 +23,7 @@
             %td= application.application_type.app_type
             %td= application.year
             %td= application.completed == true ? "Submitted" : "Incomplete"
+            %td= application.approved == true ? "Approved" : "Pending"
             %td= application.created_at
             %td 
               %ul
