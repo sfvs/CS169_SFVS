@@ -18,11 +18,11 @@ Background: users have been added to database
 
 Scenario: See a list of forms
   Given I am on the admin profile page
-  When I follow "Forms List"
+  When I go to the admin "forms" page
   Then I should see "General Form"
 
 Scenario: clicking on "More Information" next to the form should display its contents
   Given I am on the admin profile page
-  When I follow "Forms List"
+  When I go to the admin "forms" page
   And I click on More Information for "General Form"
   Then I should see "General Question"

@@ -31,7 +31,7 @@ Background: application is setup with user john doe
   And john doe filled the "General Form"
   And I am logged into the admin page as "admin"
   And I am on the admin profile page
-  And I follow "Users List"
+  And I go to the admin "users" page
   And I follow "View User"
   And I am on the user content page for "johndoe@gmail.com"
 

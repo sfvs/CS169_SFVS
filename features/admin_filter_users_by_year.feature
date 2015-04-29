@@ -17,7 +17,7 @@ Background: application is setup with user john doe
 
   And I am logged into the admin page as "admin"
   And I am on the admin profile page
-  And I follow "Users List"
+  And I go to the admin "users" page
 
 Scenario: users should be listed if they have the application for the input year
   Given I fill in "Filter Users by year" with "2015"
