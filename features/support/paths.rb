@@ -18,6 +18,7 @@ module NavigationHelpers
     when /^the "registration" page$/ then "/member/sign_up"
     when /^the "registration failed" page$/ then "/member"
     when /^the admin profile page$/ then '/admin'
+    when /^the admin "(.*)" page$/ then '/admin/' + $1
     when /^the "survey" page for "(.*)"$/ then "/users/#{User.find_by_email($1).id}/survey"
     when /^the creation page for "(.*)"$/ then "/admin/forms/#{Form.find_by_form_name($1).id}/form_questions/new"
     when /^the content page for "(.*)"$/ then "/admin/forms/#{Form.find_by_form_name($1).id}/form_questions"

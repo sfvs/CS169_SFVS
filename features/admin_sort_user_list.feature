@@ -17,7 +17,7 @@ Background: users have been added to database
 
   And I am logged into the admin page as "admin"
   Given I am on the admin profile page
-  When I follow "Users List"
+  When I go to the admin "users" page
 
 Scenario: sort users by e-mail
   When I follow "E-mail"

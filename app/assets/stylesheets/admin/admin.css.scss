@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.admin_titles {
+  
+}
+
 .admin_list_link {
 	text-decoration: none;
 }
@@ -45,4 +49,197 @@
 .filter_btn {
   position: absolute;
   left: 230px;
+}
+
+.admin_index_page div {
+  float: left;
+}
+
+// Admin Index Page Styling
+
+.admin_info {
+  background-color: white;
+  border-radius: 15px;
+  border: 2px solid #8AC007;
+  margin-left: 270px;
+  margin-top: 100px;
+  margin-right: 3px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
+
+.about_us_container {
+  background-color: white;
+  border-radius: 15px;
+  border: 2px solid #8AC007;
+  margin-top: 100px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.admin_links {
+  margin-top: 96px;
+}
+
+.u_link_content {
+  background-color: #33CC33;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+.u_link_content:hover {
+  opacity: 1.0;
+}
+
+.link_title {
+  text-align: center;
+}
+
+.link_description {
+  font-size: 80%;
+  text-align: left;
+  opacity: 0;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+.u_link_content:hover .link_description {
+  opacity: 0.75;
+}
+
+.f_link_content {
+  background-color: #6392c0;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 120px;
+  padding-bottom: 100px;
+  padding-left: 30px;
+  padding-right: 60px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+.f_link_content:hover .link_description {
+  opacity: 0.75;
+}
+
+.f_link_content:hover {
+  opacity: 1.0;
+}
+
+.admin_users_link {
+  margin-top: 4px;
+  margin-bottom: 15px;
+}
+
+.admin_btns {
+  margin-top: 404px;
+}
+
+#edit_btn {
+  background-color: #33CC33;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 90px;
+  padding-right: 90px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#edit_btn:hover {
+  opacity: 1.0;
+}
+
+
+#logout_btn {
+  background-color: #CC3300;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 102px;
+  padding-right: 102px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#logout_btn:hover {
+  opacity: 1.0;
+}
+
+#but_1 {
+  margin-bottom: 10px;
+}
+
+// Users List (Users Index Page Styles)
+
+.users_index_title {
+  margin-top: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.users_search_fields {
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #8AC007;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.users_content {
+  background-color: white;
+  border-radius: 10px;
+  border: 2px solid #8AC007;
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+}
+
+.effect1 {
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+     -moz-box-shadow: 0 10px 6px -6px #777;
+          box-shadow: 0 10px 6px -6px #777;
+}
+
+.effect2 {
+  border-radius: 25px;
+  -webkit-box-shadow: 0 10px 6px -6px #777;
+     -moz-box-shadow: 0 10px 6px -6px #777;
+          box-shadow: 0 10px 6px -6px #777;
 }

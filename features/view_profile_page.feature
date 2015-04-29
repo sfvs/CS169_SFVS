@@ -19,6 +19,6 @@ Scenario: view current application status
   And I should see "vendor"
   And I should see "2015"
   And I should see a "button" with id "submit_app_button"
-  And I should see a "button" with id "logout_button"
+  And I should see a "button" with id "logout_btn"
   And I should see a "button" with id "questionnaire_button"
   And I should see "Incomplete"

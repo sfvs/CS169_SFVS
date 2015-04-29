@@ -16,7 +16,7 @@ Background: users have been added to database
   And the "General Form" with questions exists
   And I am logged into the admin page as "admin"
   And I am on the admin profile page
-  And I follow "Forms List"
+  And I go to the admin "forms" page
   And I click on More Information for "General Form"
 
 Scenario: creating a textbox form question

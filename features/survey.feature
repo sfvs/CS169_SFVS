@@ -30,7 +30,7 @@ Background: on the questionnaire form
 
   And john doe has logged in
   And I am on the "profile" page for "johndoe@gmail.com"
-  Given I press "Click Here to Start Application"
+  Given I follow "Click Here to Start Application"
 
 Scenario: selecting an answer
   Then I should see "Which one came first?"

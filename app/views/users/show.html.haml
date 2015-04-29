@@ -1,9 +1,9 @@
 - body_class "users_view"
 = render 'shared/navi_bar'
 
-%div.container-fluid
-  %div.row
-    %div.span5
+%div.users_index_page
+  %div.users_information.effect1
+    %div.container-fluid
       %h2= "Welcome"
       %p
         %strong= "Email: #{@user.email}"
@@ -21,37 +21,54 @@
               %p="-- #{cost} #{item}"
             ="Total Cost: $#{@application_cost}"
           = button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
+          %br
       -else
-        = button_to "Click Here to Start Application", survey_user_path(@user), {:id => "questionnaire_button", method: :get}
-      = button_to "Edit Profile", edit_user_registration_path, {method: :get}
-      = button_to "Logout", destroy_user_session_path, {:id => "logout_button", method: :delete}
-    %div.span5
-      -if @application
-        %h3= "Please fill out the forms below"
-        %ul
-          -@forms_to_build.each do |form|
-            %br
-            %li= link_to "#{form.form_name}", user_form_question_path(@user,form), :class => "form_link", :id => "link_#{form.id}"
-            - if @completed_forms[form.form_name]
-              %span.glyphicons.icon-check 
+        %div.user_btn1
+          %div.but_3
+            = link_to "Click Here to Start Application", survey_user_path(@user), :id => "quest_btn"
         %br
-        -unless @application.completed
-          = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post, data: { confirm: "Your current application will be finalized. Are you sure you want to submit?" }}
-          = button_to "Restart Application", survey_user_path(@user), {:id => "questionnaire_button", method: :get, data: { confirm: "Your current application will be reset. Are you sure you want to restart?" }}
-        %p
-          Additional Information for Health Form:
-          %br
-          Mail Health Form to address below or email Health Form electronic copy to: wvdinfo@sfvs.org
-        %p
-          Additional Information For Advertisements: 
-          %br
-          Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi
-          %br
-          Enclosed camera-ready ad/logo and mail to address below, or Email electronic copy to: wvdinfo@sfvs.org
-          %br
-          Mail Information: San Francisco Vegetarian Society,
-          73 Rondel Place,
-          San Francisco, CA 94103
+      %div.user_btns
+        %div#but_1
+          = link_to "Edit Profile", edit_user_registration_path, :id => "edit_btn"
+        %br
+        %div#but_2
+          = button_to "Logout", destroy_user_session_path, {:id => "logout_btn", method: :delete}
 
-    %div.span6
+  - if @application
+    %div.users_forms.effect1
+      %div.container-fluid
+        -if @application
+          %h3= "Please fill out the forms below"
+          %ul
+            -@forms_to_build.each do |form|
+              %br
+              %li= link_to "#{form.form_name}", user_form_question_path(@user,form), :class => "form_link", :id => "link_#{form.id}"
+              - if @completed_forms[form.form_name]
+                %span.glyphicons.icon-check 
+          %br
+          -unless @application.completed
+            %div.users_btns2
+              %div.user_submit_btn
+                = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post, data: { confirm: "Your current application will be finalized. Are you sure you want to submit?" }}
+              %br
+              %div.user_restart_btn
+                = button_to "Restart Application", survey_user_path(@user), {:id => "questionnaire_button", method: :get, data: { confirm: "Your current application will be reset. Are you sure you want to restart?" }}
+          %br
+          %br
+          %br
+          %p Additional Information for Health Form:
+          %p Mail Health Form to address below or email Health Form electronic copy to: wvdinfo@sfvs.org
+          %p
+            Additional Information For Advertisements: 
+            %br
+            Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi
+            %br
+            Enclosed camera-ready ad/logo and mail to address below, or Email electronic copy to: wvdinfo@sfvs.org
+            %br
+            Mail Information: San Francisco Vegetarian Society,
+            73 Rondel Place,
+            San Francisco, CA 94103
+
+  %div.users_about_us.effect1
+    %div.container-fluid
       = render 'shared/about_festival'

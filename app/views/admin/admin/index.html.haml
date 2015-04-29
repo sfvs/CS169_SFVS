@@ -1,14 +1,43 @@
-- body_class "users_view"
-= render 'admin/navi_bar'
+- body_class "admin_index"
+%div.page-wrap
+  = render 'admin/navi_bar'
 
-%div.admin_index_page
-  %div.container-fluid
-    %div.row
-      %div.span4
+  %div.admin_index_page
+    %div.admin_info.effect1
+      %div.container-fluid
         %h2= "Welcome Admin"
         %p= "Email: #{@admin.email}"
-        = button_to "Edit Profile", edit_user_registration_path, {:class => "btn btn-default", method: :get}
-        = button_to "Logout", destroy_user_session_path, { :class => "btn btn-default", method: :delete}
+        %div.admin_btns
+          %div#but_1
+            = link_to "Edit Profile", edit_user_registration_path, :id => "edit_btn"
+          %br
+          %div#but_2
+            = button_to "Logout", destroy_user_session_path, {:id => "logout_btn", method: :delete}
 
-      %div.span8
+    %div.admin_links
+      %div.container-fluid
+        %div.admin_users_link.effect2
+          = link_to admin_users_path, :id => "u_link" do
+            %div.u_link_content
+              %div.link_title
+                %span.glyphicon.icon-user Users List
+              %br
+              %div.link_description
+                %p 
+                  View all registered users, and applications they 
+                  %br submitted. Also, review and approve applications.
+        %br
+        %div.admin_forms_link.effect2
+          = link_to admin_forms_path, :id => "f_link" do
+            %div.f_link_content
+              %div.link_title
+                %span.glyphicon.icon-pencil Forms List
+              %br
+              %div.link_description
+                %p
+                  View all the forms, and add, edit, reorder or 
+                  %br remove questions from the forms.
+
+    %div.about_us_container.effect1
+      %div.container-fluid
         = render 'shared/about_festival'

@@ -14,11 +14,11 @@ Background: users have been added to database
   Given I am on the "profile" page for "johndoe@gmail.com"
 
 Scenario: view current application status
-  When I press "Edit Profile"
+  When I follow "Edit Profile"
   Then the "user_email" field should contain "johndoe@gmail.com"
   When I fill in "user_company_name" with "pineapple"
   And I fill in "user_current_password" with "bear12345"
   And I press "Update"
   Then I should be on the "profile" page for "johndoe@gmail.com"
-  And I press "Edit Profile"
+  And I follow "Edit Profile"
   And the "user_company_name" field should contain "pineapple"
