@@ -78,6 +78,8 @@ assosciate_sponsor_non_food_description = "Associate Sponsors who provide $1000 
 
 non_profit_description = 'Any IRS registered tax exempt organization.'
 
+restaurant_description = 'Caterers and restaurants who will sell food at the festival.'
+
 sponsor_definition = 'Any exhibitor or vendor who is willing to co-sponsor the event 
 					for a product exclusivity and also be included in the festival 
 					advertising and promotional campaign at no additional cost.'
@@ -90,7 +92,7 @@ sponsor_non_food = ApplicationType.create({:app_type => 'Sponsor (Non-Food and S
 associate_sponsor_food = ApplicationType.create({:app_type => 'Associate Sponsor (Food Items)',:description => assosciate_sponsor_food_description})
 associate_sponsor_non_food = ApplicationType.create({:app_type => 'Associate Sponsor (Non-Food and Services)',:description => assosciate_sponsor_non_food_description})
 non_profit = ApplicationType.create({:app_type => 'Non-Profit Exhibitor',:description => non_profit_description})
-restaurant_concessionaire = ApplicationType.create({:app_type => 'Restaurant Food Concessionaire'})
+restaurant_concessionaire = ApplicationType.create({:app_type => 'Restaurant Food Concessionaire',:description => restaurant_description})
 
 # Questionnaire
 #adding seeds questions, each question has an attribute referances its parent(like a tree), the tree is as follow:
@@ -110,11 +112,12 @@ objects_to_create[:Questionnaire] = [
 	{:question => vendor_non_food.description, :parent_id => 1}, #3
 	{:question => sponsor_definition, :parent_id => 1}, #4
 	{:question => non_profit.description, :parent_id => 1}, #5
+	{:question => restaurant_concessionaire.description, :parent_id => 1}, #6
 
-	{:question => sponsor_food.description, :parent_id => 4}, #6
-	{:question => sponsor_non_food.description, :parent_id => 4}, #7
-	{:question => associate_sponsor_food.description, :parent_id => 4}, #8
-	{:question => associate_sponsor_non_food.description, :parent_id => 4}, #9
+	{:question => sponsor_food.description, :parent_id => 4}, #7
+	{:question => sponsor_non_food.description, :parent_id => 4}, #8
+	{:question => associate_sponsor_food.description, :parent_id => 4}, #9
+	{:question => associate_sponsor_non_food.description, :parent_id => 4}, #10
 ]
 
 #answer table has answer to referance to its question, as well as which question it leads to
@@ -124,25 +127,22 @@ objects_to_create[:Answers] = [
 	{:ans => vendor_non_food.app_type, :questionnaire_id => 1, :leads_to => 3},
 	{:ans => "Sponsor", :questionnaire_id => 1, :leads_to => 4},
 	{:ans => non_profit.app_type, :questionnaire_id => 1, :leads_to => 5},
-	{:ans => restaurant_concessionaire.app_type, :questionnaire_id => 1, :results_to => restaurant_concessionaire.id},
+	{:ans => restaurant_concessionaire.app_type, :questionnaire_id => 1, :leads_to => 6},
 	
-	{:ans => sponsor_food.app_type, :questionnaire_id => 4, :leads_to => 6},
-	{:ans => sponsor_non_food.app_type, :questionnaire_id => 4, :leads_to => 7},
-	{:ans => associate_sponsor_food.app_type, :questionnaire_id => 4, :leads_to => 8},
-	{:ans => associate_sponsor_non_food.app_type, :questionnaire_id => 4, :leads_to => 9},
+	{:ans => sponsor_food.app_type, :questionnaire_id => 4, :leads_to => 7},
+	{:ans => sponsor_non_food.app_type, :questionnaire_id => 4, :leads_to => 8},
+	{:ans => associate_sponsor_food.app_type, :questionnaire_id => 4, :leads_to => 9},
+	{:ans => associate_sponsor_non_food.app_type, :questionnaire_id => 4, :leads_to => 10},
 
 	{:ans => 'I am a ' + vendor_food.app_type, :questionnaire_id => 2, :results_to => vendor_food.id},
 	{:ans => 'I am a ' + vendor_non_food.app_type, :questionnaire_id => 3, :results_to => vendor_non_food.id},
 	{:ans => 'I am a ' + non_profit.app_type, :questionnaire_id => 5, :results_to => non_profit.id},
+	{:ans => 'I am a ' + restaurant_concessionaire.app_type, :questionnaire_id => 6, :results_to => restaurant_concessionaire.id},
 
-	{:ans => 'I am a ' + sponsor_food.app_type, :questionnaire_id => 6, :results_to => sponsor_food.id},
-	{:ans => 'I am a ' + sponsor_non_food.app_type, :questionnaire_id => 7, :results_to => sponsor_non_food.id},
-	{:ans => 'I am a ' + associate_sponsor_food.app_type, :questionnaire_id => 8, :results_to => associate_sponsor_food.id},
-	{:ans => 'I am a ' + associate_sponsor_non_food.app_type, :questionnaire_id => 9, :results_to => associate_sponsor_non_food.id},
-	# {:ans => vendor_non_food.app_type, :questionnaire_id => 1, :results_to => restaurant_concessionaire.id},
-	# {:ans => sponsor.app_type, :questionnaire_id => 1, :results_to => vendor_non_food.id},
-	# {:ans => non_profit.app_type, :questionnaire_id => 1, :results_to => sponsor.id},
-	# {:ans => vendor_food.app_type, :questionnaire_id => 1, :results_to => non_profit.id}
+	{:ans => 'I am a ' + sponsor_food.app_type, :questionnaire_id => 7, :results_to => sponsor_food.id},
+	{:ans => 'I am a ' + sponsor_non_food.app_type, :questionnaire_id => 8, :results_to => sponsor_non_food.id},
+	{:ans => 'I am a ' + associate_sponsor_food.app_type, :questionnaire_id => 9, :results_to => associate_sponsor_food.id},
+	{:ans => 'I am a ' + associate_sponsor_non_food.app_type, :questionnaire_id => 10, :results_to => associate_sponsor_non_food.id}
 ]
 
 # Forms
