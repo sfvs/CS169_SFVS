@@ -24,7 +24,8 @@ Background: application is setup with user john doe
   | Company name for WVF Program listing (if different from above)   | General Form    | textbox       |
 
   And user john doe exist in the database
-  And john doe has an incomplete vendor application
+  And the year is "2020"
+  And john doe has a 2020 incomplete vendor application
   And john doe has logged in
   And I am on the "profile" page for "johndoe@gmail.com"
 
