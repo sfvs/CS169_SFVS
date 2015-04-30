@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       unless @application.has_paid
         @cost_description = @application.grab_application_cost_description
         @application.calculate_current_application_cost @cost_description
-        @application_cost = @application.amount_paid
+        @application_cost = @application.amount_due
       end
     end
   end
