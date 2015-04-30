@@ -19,7 +19,7 @@
             %strong Cost Description
             -@cost_description.each do |cost,item|
               %p="-- #{cost} #{item}"
-            ="Total Cost: $#{@application_cost}"
+            ="Total Cost: #{number_to_currency(@application_cost)}"
         %p
         %strong= "Payment Status: "
         -if @application.hasPaid? and @application.pay_status == 2
