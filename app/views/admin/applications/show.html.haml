@@ -9,15 +9,15 @@
   %div.container-fluid
     %table.table.table-hover
       %thead
-        %tr
+        %tr.row
           %th Form
           %th Status
           %th Created At
-          %th More
+          %th.span6#app_more More
       %tbody
         - if !@app_forms.nil?
           - @app_forms.each do |form|
-            %tr
+            %tr.row
               %td= form.form_name
               %td= @completed_forms[form.form_name] == true ? "Complete" : "Incomplete"
               %td= form.created_at

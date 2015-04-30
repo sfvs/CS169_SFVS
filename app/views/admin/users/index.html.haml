@@ -52,6 +52,6 @@
       %div.pagination
         = will_paginate @users, renderer: BootstrapPagination::Rails
 
-    = link_to "Create User", new_admin_user_path, :id => ""
+    = link_to "Create User", new_admin_user_path, :id => "aprove_btn"
     %div.back_user_btn
       = link_to "Back", admin_root_path, :id => "back_btn"
