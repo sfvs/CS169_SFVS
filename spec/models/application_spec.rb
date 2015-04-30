@@ -58,12 +58,8 @@ describe Application do
     myApp.content["depth1"]["depth2"]["depth3"].should == "hello world"
   end
 
-  it " should give the current applicationt time" do
+  it "should give the current application time if not set" do
     Application.current_application_year.should == Time.now.year
-
-    @test_time = Time.parse("2032-1-2")
-    Application.current_application_year = @test_time.year
-    Application.current_application_year.should == @test_time.year
   end
 
   it "should merge new contents with old one" do 
