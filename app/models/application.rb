@@ -9,7 +9,7 @@ class Application < ActiveRecord::Base
     attr_accessor :current_application_year
   end
 
-  @@current_application_year = Time.now.year
+  self.current_application_year = Time.now.year
 
   def content
   	# has content been parsed yet? If not, let's do that..
