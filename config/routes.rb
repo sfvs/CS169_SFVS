@@ -21,7 +21,14 @@ SFVSRegistrationSystem::Application.routes.draw do
   end
 
   root :to => 'home#index'
-  
+
+	# These two routes are for payment processing
+	# verify_payment is post request from paypal
+	# payment_receipt is thankyou notice to the user
+	# and redirects back to root  
+	post "/verify_payment", :to => "payment#verify_payment"
+	post "/payment_receipt", :to => "payment#thankyou"
+
   # name to prevent resource: user and devise routes from overlapping
   devise_for :users, :path => 'member'
   resources :users do 
@@ -30,7 +37,6 @@ SFVSRegistrationSystem::Application.routes.draw do
     get "survey", to: "survey#questionnaire", on: :member
     post "submit_survey", to: "survey#submit_questionnaire", on: :member
 		post "submit_payment", on: :member
-		get "verify_payment", on: :member
   end
 
 
