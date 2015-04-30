@@ -24,5 +24,6 @@
       - if !@form_questions.nil?
         = render @form_questions
 
-  = button_to "Add Form Question", new_admin_form_form_question_path, {:class => "btn btn-default", method: :get}
-  = button_to "Back", admin_forms_path, {:class => "btn btn-default", method: :get}
+  = link_to "Add Form Question", new_admin_form_form_question_path, {:id => "aprove_btn", method: :get}
+  %div.back_user_btn 
+  = link_to "Back", admin_forms_path, :id => "back_btn"
