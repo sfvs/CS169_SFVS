@@ -7,6 +7,11 @@
       %div.container-fluid
         %h2= "Welcome Admin"
         %p= "Email: #{@admin.email}"
+        = form_tag admin_update_app_year_path do
+          = label_tag 'app_year', "Current Application Year: #{@app_year}"
+          = text_field_tag 'app_year', nil, placeholder: 'Update Application Year'
+          = submit_tag 'Update', :class => "btn btn-default search_btn", data: { confirm: "Do you want to start a new application year for all users?" }
+
         %div.admin_btns
           %div#but_1
             = link_to "Edit Profile", edit_user_registration_path, :id => "edit_btn"

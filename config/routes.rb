@@ -3,6 +3,8 @@ SFVSRegistrationSystem::Application.routes.draw do
   # namespace for the group of controllers for admin
   namespace :admin do
     root to: "admin#index"
+    post "update_app_year", to: "admin#update_app_year"
+
     resources :users do
       post "search", on: :collection
       post "filter", on: :collection
