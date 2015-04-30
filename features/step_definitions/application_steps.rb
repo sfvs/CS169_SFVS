@@ -42,7 +42,7 @@ Given(/^john doe has an incomplete vendor application$/) do
   steps %Q{
     Given the following applications exist: 
     | user_id | application_type_id | completed | year |
-    | 1       | 1                   | false     | 2015 |
+    | 1       | 1                   | false     | 2012 |
   }
 end
 
