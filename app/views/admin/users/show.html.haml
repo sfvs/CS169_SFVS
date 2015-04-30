@@ -1,34 +1,34 @@
 - body_class "users_view"
 = render 'admin/navi_bar'
 
-%div.container-fluid
+%div.users_index_title.effect1
+  %div.container-fluid
+    %h1 User Content
+    %h4= "Contents of user: #{@user.email}"
 
-  %h1 User Content
+%div.user_content.effect1
+  %div.container-fluid
+    %table.table.table-hover
+      %thead
+        %tr
+          %th Application
+          %th Year
+          %th Status
+          %th Approved/Pending
+          %th Created At
+          %th More Details
+      %tbody
+        - if !@applications.nil?
+          - @applications.each do |application|
+            %tr
+              %td= application.application_type.app_type
+              %td= application.year
+              %td= application.completed == true ? "Submitted" : "Incomplete"
+              %td= application.approved == true ? "Approved" : "Pending"
+              %td= application.created_at
+              %td= link_to "View Application", admin_user_application_path(:user_id => @user.id, :id => application.id), :id => "view_btn"
 
-  %p= "Contents of user: #{@user.email}"
-
-  %table.table.table-hover
-    %thead
-      %tr
-        %th Application
-        %th Year
-        %th Status
-        %th Approved/Pending
-        %th Created At
-        %th More Details
-    %tbody
-      - if !@applications.nil?
-        - @applications.each do |application|
-          %tr
-            %td= application.application_type.app_type
-            %td= application.year
-            %td= application.completed == true ? "Submitted" : "Incomplete"
-            %td= application.approved == true ? "Approved" : "Pending"
-            %td= application.created_at
-            %td 
-              %ul
-                %li= link_to "View Application", admin_user_application_path(:user_id => @user.id, :id => application.id), :class => "btn btn-default admin_button"
-                %li= link_to "Not working", "", :class => "btn btn-default admin_button"
-
-  = button_to "Edit User", edit_admin_user_path(@user), {:class => "btn btn-default", method: :get}
-  = button_to "Back", admin_users_path, {:class => "btn btn-default", method: :get}
+    %div.edit_user_btn
+      = link_to "Edit User", edit_admin_user_path(@user), id: "user_edit_btn"
+    %div.back_user_btn  
+      = link_to "Back", admin_users_path, id: "back_btn"
