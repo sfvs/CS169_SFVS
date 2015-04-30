@@ -59,9 +59,10 @@ describe Application do
   end
 
   it " should give the current applicationt time" do
-    @test_time = Time.parse("2011-1-2")
-    Time.stub(:now).and_return(@test_time)
+    Application.current_application_year.should == Time.now.year
 
+    @test_time = Time.parse("2032-1-2")
+    Application.current_application_year = @test_time.year
     Application.current_application_year.should == @test_time.year
   end
 
