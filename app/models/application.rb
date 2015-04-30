@@ -89,7 +89,7 @@ class Application < ActiveRecord::Base
   def calculate_current_application_cost all_costs
     cost_list = all_costs.map { |cost,item| cost }
     amount_to_be_paid = cost_list.map{ |price| price.match(/[[:digit:]]+/)[0].to_i }
-    self.amount_paid = amount_to_be_paid.sum
+    self.amount_due = amount_to_be_paid.sum
     self.save
   end
 
