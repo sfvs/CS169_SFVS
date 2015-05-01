@@ -1,3 +1,7 @@
+require 'net/http'
+require 'net/https'
+require 'uri'
+
 class PaymentController < ActionController::Base
   # this controller method should be called
   # by PayPal from the notification hook
@@ -5,7 +9,7 @@ class PaymentController < ActionController::Base
 
   def verify_payment
     # lookup the application by invoice number/item number
-    item_number = params[:item_number]
+    item_number = params[:invoice]
     if (item_number.empty?)
       print("A user tried to make a payment with an empty invoice number. Canceling transaction.")
       redirect_to root_path
