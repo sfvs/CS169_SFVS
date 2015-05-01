@@ -1,6 +1,6 @@
 The MIT License (MIT)
 
-Copyright (c) 2015 Neil Kumar, Ashley Carlson, Christopher Coale, HyunSik Kang, Alan Ly, Anthony Yu 
+Copyright (c) 2015 Neil Kumar, Ashley Carlson, Christopher Coale, Hyun Sik Kang, Alan Ly, Anthony Yu 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
