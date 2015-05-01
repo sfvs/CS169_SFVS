@@ -2,7 +2,7 @@
 
 = render 'admin/navi_bar'
 
-%div.users_index_title
+%div.users_index_title.effect1
   %div.container-fluid
     %div.row
       %div.span12
@@ -47,10 +47,11 @@
               %td= user.contact_person
               %td= user.telephone
               %td= user.created_at
-              %td= link_to "View User", admin_user_path(user), :class => "btn btn-default admin_button"
+              %td= link_to "View User", admin_user_path(user), :id => "view_btn"
     - if !@users.nil? && !@users.empty?
       %div.pagination
         = will_paginate @users, renderer: BootstrapPagination::Rails
 
-    = button_to "Create User", new_admin_user_path, {:class => "btn btn-default", method: :get}
-    = button_to "Back", admin_root_path, {:class => "btn btn-default", method: :get}
+    = link_to "Create User", new_admin_user_path, :id => "aprove_btn"
+    %div.back_user_btn
+      = link_to "Back", admin_root_path, :id => "back_btn"
