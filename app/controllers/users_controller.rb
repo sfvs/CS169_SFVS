@@ -21,18 +21,15 @@ class UsersController < ApplicationController
         @cost_description = @application.grab_application_cost_description
         @application.calculate_current_application_cost @cost_description
         @application_cost = @application.amount_due
-        @application_status_msg = ""
       end
 
-      if @application.has_paid
-        messages = {Application::PAYSTATUS_PENDING => "Pending", 
-          Application::PAYSTATUS_PAID => "Payment received! Thank you!",
-          Application::PAYSTATUS_DECLINED => "An error occurred while processing your payment. While your application is submitted, you will need to contact support to submit payment." }
+      messages = {Application::PAYSTATUS_UNPAID => "Not Paid",
+        Application::PAYSTATUS_PENDING => "Pending", 
+        Application::PAYSTATUS_PAID => "Payment received! Thank you!",
+        Application::PAYSTATUS_DECLINED => "An error occurred while processing your payment. While your application is submitted, you will need to contact support to submit payment." }
 
 
-        @application_status_msg = messages[@application.pay_status]
-      end
-
+      @application_status_msg = messages[@application.pay_status]
     end
   end
 

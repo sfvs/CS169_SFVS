@@ -23,7 +23,7 @@
         %p
         %strong= "Payment Status: "
         ="#{@application_status_msg}"
-        -if !@application.has_paid 
+        -if !@application.has_paid and @application.complete
           = button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
           %br=" If you have just submitted a payment and still see the 'Pay Now' button, please refresh the page as it takes a few moments for the payment to process."
         %br
