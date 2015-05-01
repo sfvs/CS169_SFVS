@@ -42,45 +42,45 @@ class UsersController < ApplicationController
     redirect_to user_path(user)
   end
 
-	def submit_payment
-		user = User.find(params[:id])
-		application = user.get_most_recent_application
-		if (application.invoice_number.empty?)
-			timestamp = Time.now.to_i
-			application.invoice_number = "#{timestamp}" + "#{application.id}"
-			application.save!
-		end
-		if not application.completed
-			flash[:alert] = "You must first complete and submit the application."
-			redirect_to user_path(user)
-			return
-		end
-		if application.hasPaid?
-			flash[:alert] = "You have already paid for this application."
-			redirect_to user_path(user)
-		else
-			redirect_to get_paypal_url(user, application.invoice_number)
-		end
-	end
+  def submit_payment
+    user = User.find(params[:id])
+    application = user.get_most_recent_application
+    if (application.invoice_number.empty?)
+      timestamp = Time.now.to_i
+      application.invoice_number = "#{timestamp}" + "#{application.id}"
+      application.save!
+    end
+    if not application.completed
+      flash[:alert] = "You must first complete and submit the application."
+      redirect_to user_path(user)
+      return
+    end
+    if application.hasPaid?
+      flash[:alert] = "You have already paid for this application."
+      redirect_to user_path(user)
+    else
+      redirect_to get_paypal_url(user, application.invoice_number)
+    end
+  end
 
   private
 
-	def get_paypal_url(user, invoice_number)
-		base_url = request.protocol + request.host
-		app = user.get_most_recent_application
-		values = {
+  def get_paypal_url(user, invoice_number)
+    base_url = request.protocol + request.host
+    app = user.get_most_recent_application
+    values = {
         business: "sfvsteam-business@gmail.com",
         cmd: "_xclick",
         upload: 1,
-				return: base_url + "/payment_receipt",
+        return: base_url + "/payment_receipt",
         invoice: invoice_number,
         amount: app.amount_due,
         item_name: "SFVS Registration Fee",
         item_number: invoice_number,
         quantity: '1',
-				notify_url: base_url + "/verify_payment"
+        notify_url: base_url + "/verify_payment"
     }
 
-		return "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
-	end
+    return "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
 end
