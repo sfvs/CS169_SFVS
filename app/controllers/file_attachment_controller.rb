@@ -9,7 +9,7 @@ class FileAttachmentController < ApplicationController
     incoming_file = params[:file_attachment]
     type = params[:file_type]
     if incoming_file.blank?
-      flash[:alert] = "There was nothing uploaded."
+      flash[:alert] = "There was nothing to upload."
       redirect_to user_path
       return
     end
