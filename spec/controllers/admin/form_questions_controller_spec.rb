@@ -42,7 +42,13 @@ describe Admin::FormQuestionsController do
       updated_form_q.question.should eq "RSpec test question"
       updated_form_q.question_type.should eq "statement"
     end
+
+    it "should prefill the checkbox answer fields" do
+      form_question = FactoryGirl.create :form_question
+      subject.send(:get_answers_to_populate, form_question.question_type, form_question).should == ["Good!","Great!","Wonderful!"]
+    end
   end
+
   describe "admin delete form question" do
     it "should delete the form question" do
       lambda do

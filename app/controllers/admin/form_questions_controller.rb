@@ -35,6 +35,11 @@ class Admin::FormQuestionsController < Admin::AdminController
   def edit
     @form = Form.find(params[:form_id])
     @form_question = FormQuestion.find(params[:id])
+    if @form_question.question_type == "checkbox"
+      @check_answer = get_answers_to_populate(@form_question.question_type, @form_question)
+    elsif  @form_question.question_type == "radio_button"
+      @radio_answer = get_answers_to_populate(@form_question.question_type, @form_question)
+    end
   end
 
   def update
@@ -77,5 +82,13 @@ class Admin::FormQuestionsController < Admin::AdminController
     if params[:commit] == 'Cancel'
       redirect_to admin_form_form_questions_path(:form_id => params[:form_id])
     end
+  end
+
+  def get_answers_to_populate(q_type, question)
+    answers = []
+    String(String(question.answers)[1..-2]).split(',').each do |selection|
+      answers << selection.strip
+    end
+    answers
   end
 end
