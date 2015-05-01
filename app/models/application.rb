@@ -1,6 +1,6 @@
 require 'json'
 
-class Application < ActiveRecord::Base	
+class Application < ActiveRecord::Base  
   attr_accessible :year, :content, :completed, :approved, :amount_paid, :amount_due, :has_paid, :pay_receipt, :pay_status, :invoice_number, :payment_id
   belongs_to :user
   belongs_to :application_type
@@ -17,7 +17,7 @@ class Application < ActiveRecord::Base
   self.current_application_year = Time.now.year
 
   def content
-  	# has content been parsed yet? If not, let's do that..
+    # has content been parsed yet? If not, let's do that..
     if not @hashed_val
       val = read_attribute(:content)
       if (val == "" or val == nil)
@@ -100,9 +100,9 @@ class Application < ActiveRecord::Base
     self.save
   end
 
-	def hasPaid?
-		return read_attribute(:has_paid)
-	end
+  def hasPaid?
+    return read_attribute(:has_paid)
+  end
 
   def pay_status_string
     case read_attribute(:pay_status)
