@@ -1,6 +1,6 @@
 class SurveyController < ApplicationController
 
-  before_filter :require_valid_user
+  before_filter :validate_user_authorization
   
   def questionnaire
     # @display is an array of hashes, containing question and its answers 
