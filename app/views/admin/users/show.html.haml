@@ -13,6 +13,7 @@
         %th Application
         %th Year
         %th Status
+        %th Payment Status
         %th Approved/Pending
         %th Created At
         %th More Details
@@ -23,6 +24,7 @@
             %td= application.application_type.app_type
             %td= application.year
             %td= application.completed == true ? "Submitted" : "Incomplete"
+            %td= application.pay_status_string
             %td= application.approved == true ? "Approved" : "Pending"
             %td= application.created_at
             %td 
