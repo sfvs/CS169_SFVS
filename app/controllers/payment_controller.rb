@@ -22,8 +22,7 @@ class PaymentController < ActionController::Base
 
   def update_application_with_response(application, response, gross)
     payment_status = {"Complete" => Application::PAYSTATUS_PAID, "Pending" => Application::PAYSTATUS_PENDING}
-    print(response)
-    print(params.to_s)
+ 
     if (response != "VERIFIED" or (params[:payment_status] != "Complete" and params[:payment_status] != "Pending") )
       application.pay_status = Application::PAYSTATUS_DECLINED
       print("PayPal could not verify the information provided by the user. Please manually inspect this payment.")
@@ -51,9 +50,8 @@ class PaymentController < ActionController::Base
 
     if (not params_are_valid?(application))
       print("invalid post request. Canceling transaction.")
-      print(params[:mc_gross])
     else
-      print("RAW REQUEST: " + request.raw_post)
+      print("RAW PAYPAL REQUEST: " + request.raw_post)
       result = get_paypal_response(request.raw_post)
       update_application_with_response(application, result, params[:mc_gross].to_f)
     end

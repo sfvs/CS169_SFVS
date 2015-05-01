@@ -22,13 +22,8 @@
             ="Total Cost: #{number_to_currency(@application_cost)}"
         %p
         %strong= "Payment Status: "
-        -if @application.hasPaid? and @application.pay_status == Application::PAYSTATUS_PAID
-          ="Payment received. Thank you!"
-        -elsif @application.pay_status == Application::PAYSTATUS_DECLINED
-          ="An error occurred while processing your payment. While your application is submitted, you will need to contact support to submit payment." 
-        -elsif @application.pay_status == Application::PAYSTATUS_PENDING
-          ="Pending"
-        -else 
+        ="#{@application_status_msg}"
+        -if !@application.has_paid 
           = button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
           %br=" If you have just submitted a payment and still see the 'Pay Now' button, please refresh the page as it takes a few moments for the payment to process."
         %br
