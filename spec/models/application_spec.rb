@@ -93,7 +93,7 @@ describe Application do
       type = make_forms_for_app_type "vendor"
       mock_app = make_an_application(type, 2015)
       mock_app.calculate_current_application_cost [["$22","hat"],["$12","shoe"]]
-      mock_app.amount_paid.should be == 34
+      mock_app.amount_due.should be == 34
     end
 
     it "should be able to calculate payment based off of content" do
@@ -114,7 +114,7 @@ describe Application do
       cost_description.should be == [["$77","electricity fee"],["$11","chairs"]]
 
       mock_app.calculate_current_application_cost cost_description
-      mock_app.amount_paid.should be == 88
+      mock_app.amount_due.should be == 88
     end
   end
 
