@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 		redirect_to root_path unless current_user.id.to_s == params[:id]
   end
   
+
   private
 
   def user_not_authorized
