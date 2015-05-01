@@ -53,6 +53,14 @@ Given(/^john doe has a 2020 incomplete vendor application$/) do
   }
 end
 
+Given(/^john doe has a 2020 complete vendor application$/) do
+  steps %Q{
+    Given the following applications exist: 
+    | user_id | application_type_id | completed | year |
+    | 1       | 1                   | true     | 2020 |
+  }
+end
+
 Given(/^john doe has submitted all forms$/) do
   steps %Q{
     When I follow "General Form"  
