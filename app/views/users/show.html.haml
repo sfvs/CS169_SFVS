@@ -22,11 +22,11 @@
             ="Total Cost: #{number_to_currency(@application_cost)}"
         %p
         %strong= "Payment Status: "
-        -if @application.hasPaid? and @application.pay_status == 2
+        -if @application.hasPaid? and @application.pay_status == Application::PAYSTATUS_PAID
           ="Payment received. Thank you!"
-        -elsif @application.pay_status == 3
+        -elsif @application.pay_status == Application::PAYSTATUS_DECLINED
           ="An error occurred while processing your payment. While your application is submitted, you will need to contact support to submit payment." 
-        -elsif @application.pay_status == 1
+        -elsif @application.pay_status == Application::PAYSTATUS_PENDING
           ="Pending"
         -else 
           = button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
