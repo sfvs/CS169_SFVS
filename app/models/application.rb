@@ -10,9 +10,11 @@ class Application < ActiveRecord::Base
   PAYSTATUS_PAID = 2
   PAYSTATUS_DECLINED = 3
 
-  def self.current_application_year
-    Time.now.year
+  class << self
+    attr_accessor :current_application_year
   end
+
+  self.current_application_year = Time.now.year
 
   def content
   	# has content been parsed yet? If not, let's do that..

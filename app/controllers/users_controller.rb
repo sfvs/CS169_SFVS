@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :require_valid_user
+  before_filter :validate_user_authorization
 
   def show
     @user = User.find(params[:id])

@@ -27,7 +27,8 @@ Background: application is setup with user john doe
   | email            | password         | admin   |
   | admin@gmail.com  | admin123         | true    |
 
-  And john doe has an incomplete vendor application
+  And the year is "2020"
+  And john doe has a 2020 incomplete vendor application
   And john doe filled the "General Form"
   And I am logged into the admin page as "admin"
   And I am on the admin profile page
