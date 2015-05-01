@@ -52,11 +52,11 @@ class PaymentController < ActionController::Base
     application.amount_paid = gross
     application.has_paid = true
     if (params[:payment_status] == "Completed")
-      application.pay_status = 2
+      application.pay_status = Application::PAYSTATUS_PAID
     elsif (params[:payment_status] == "Pending")
-      application.pay_status = 1
+      application.pay_status = Application::PAYSTATUS_PENDING
     else
-      application.pay_status = 3
+      application.pay_status = Application::PAYSTATUS_DECLINED
     end
 
     application.payment_id = txn_id
