@@ -1,0 +1,2 @@
+class FileAttachmentsController < ApplicationController
+end

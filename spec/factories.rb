@@ -1,4 +1,7 @@
-FactoryGirl.define do  
+FactoryGirl.define do  factory :file_attachment, :class => 'FileAttachments' do
+    
+  end
+  
   factory :application_type do
     app_type "vendor"
   end
