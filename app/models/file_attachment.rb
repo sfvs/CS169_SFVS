@@ -3,6 +3,7 @@ class FileAttachment < ActiveRecord::Base
   belongs_to :application
   
   validates :check_valid_file_type, presence: true
+  validates :check_file_extension, presence:true, allow_blank: true
 
   def uploaded_file=(incoming_file)
     self.filename = incoming_file.original_filename
@@ -25,6 +26,10 @@ class FileAttachment < ActiveRecord::Base
 
   def check_valid_file_type
     !self.file_type.match(/^health_form$|^advertisement$/).nil?
+  end
+
+  def check_file_extension
+    !self.content_type.match(/application\/pdf|image\/tiff/).nil?
   end
 
 end

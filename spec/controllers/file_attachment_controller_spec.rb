@@ -14,6 +14,11 @@ describe FileAttachmentController do
       expect(flash[:alert].empty?).to be_false
     end
 
+    it "should not upload empty files" do
+      post :upload_file, :id => @user.id, :file_type => "health_form", :file_attachment => nil
+      expect(@mock_app.file_attachments.size).to be 0
+    end
+
     it "should create a new file_attachment and upload the health_form" do
       type = "health_form"
       User.stub(:get_most_recent_application).and_return(@mock_app)

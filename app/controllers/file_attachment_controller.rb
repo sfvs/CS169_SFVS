@@ -8,7 +8,11 @@ class FileAttachmentController < ApplicationController
   def upload_file
     incoming_file = params[:file_attachment]
     type = params[:file_type]
-    return if incoming_file.blank?
+    if incoming_file.blank?
+      flash[:alert] = "There was nothing uploaded."
+      redirect_to user_path
+      return
+    end
 
     application = User.find_by_id(params[:id]).get_most_recent_application
 

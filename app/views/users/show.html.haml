@@ -61,7 +61,7 @@
             %br Advertisement Submitted
           
           =form_tag upload_file_user_path, :multipart => true do
-            =file_field_tag :file_attachment
+            =file_field_tag :file_attachment, accept: 'application/pdf'
             =hidden_field_tag :file_type, :advertisement
             =submit_tag "Submit"
 
@@ -71,7 +71,7 @@
             / link_to "You Uploaded Health Form", download_file_user_path(:file_type => @health_form_file.file_type)
           
           =form_tag upload_file_user_path, :multipart => true do
-            =file_field_tag :file_attachment
+            =file_field_tag :file_attachment, accept: 'application/pdf'
             =hidden_field_tag :file_type, :health_form
             =submit_tag "Submit"
 
