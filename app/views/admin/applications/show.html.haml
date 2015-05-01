@@ -1,34 +1,37 @@
 - body_class "users_view"
 = render 'admin/navi_bar'
 
-%div.container-fluid
-  
-  %h1 Application Contents
+%div.users_index_title.effect1
+  %div.container-fluid
+    %h1 Application Contents
+    
+%div.user_content.effect1
+  %div.container-fluid
+    %table.table.table-hover
+      %thead
+        %tr.row
+          %th Form
+          %th Status
+          %th Created At
+          %th.span6#app_more More
+      %tbody
+        - if !@app_forms.nil?
+          - @app_forms.each do |form|
+            %tr.row
+              %td= form.form_name
+              %td= @completed_forms[form.form_name] == true ? "Complete" : "Incomplete"
+              %td= form.created_at
+              %td 
+                %ul
+                  %li= link_to "View Form", form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :id => "view_btn"
+                  %li= link_to "Edit Form", edit_form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :id => "form_edit_btn"
+    
+    %p
+      User Uploaded Files
+      %br
+      = link_to_if @health_form_file, "Health Form", download_file_user_path(:file_type => :health_form)
+      %br
+      = link_to_if @advertisement_file, "Advertisement", download_file_user_path(:file_type => :advertisement), disabled: true
 
-  %table.table.table-hover
-    %thead
-      %tr
-        %th Form
-        %th Status
-        %th Created At
-        %th More
-    %tbody
-      - if !@app_forms.nil?
-        - @app_forms.each do |form|
-          %tr
-            %td= form.form_name
-            %td= @completed_forms[form.form_name] == true ? "Complete" : "Incomplete"
-            %td= form.created_at
-            %td 
-              %ul
-                %li= link_to "View Form", form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
-                %li= link_to "Edit Form", edit_form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
-  %p
-    User Uploaded Files
-    %br
-    = link_to_if @health_form_file, "Health Form", download_file_user_path(:file_type => :health_form)
-    %br
-    = link_to_if @advertisement_file, "Advertisement", download_file_user_path(:file_type => :advertisement), disabled: true
-
-  = button_to "Approve", approve_admin_user_application_path(@user, @application, :approve => true), {:class => "btn btn-default", method: :post}
-  = button_to "Back", admin_user_path(@user), {:class => "btn btn-default", method: :get}
+    = button_to "Approve", approve_admin_user_application_path(@user, @application, :approve => true), {:id => "aprove_btn", method: :post}
+    = link_to "Back", admin_user_path(@user), :id => "back_btn"

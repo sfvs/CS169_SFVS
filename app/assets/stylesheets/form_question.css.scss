@@ -1,3 +1,17 @@
 // Place all the styles related to the form_question controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.users_form ul {
+    width:750px;
+    list-style-type:none;
+    list-style-position:outside;
+    margin:0px;
+    padding:0px;
+}
+
+.users_form li{
+    padding:12px; 
+    border-bottom:1px solid #eee;
+    position:relative;
+}

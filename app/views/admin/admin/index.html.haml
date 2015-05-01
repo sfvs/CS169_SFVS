@@ -7,10 +7,12 @@
       %div.container-fluid
         %h2= "Welcome Admin"
         %p= "Email: #{@admin.email}"
-        = form_tag admin_update_app_year_path do
+        = form_tag admin_update_app_year_path, :class => "form-horizontal" do
           = label_tag 'app_year', "Current Application Year: #{@app_year}"
           = text_field_tag 'app_year', nil, placeholder: 'Update Application Year'
-          = submit_tag 'Update', :class => "btn btn-default", data: { confirm: "Do you want to start a new application year for all users?" }
+          %br
+          %div#update_field
+            = submit_tag 'Update', :id => "update_btn", data: { confirm: "Do you want to start a new application year for all users?" }
 
         %div.admin_btns
           %div#but_1
