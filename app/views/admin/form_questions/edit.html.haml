@@ -10,7 +10,7 @@
       %div.controls
         %label
           Enter the question:
-          = text_field :form_question, 'question', size: 50
+          = text_area :form_question, 'question'
 
         %div.select_type
           %p Select Question Type:
@@ -50,22 +50,22 @@
           %div
             %label
               Checkbox Answer 1:
-              = text_field :check_answer, 0, size: 20
+              = text_area_tag "check_answer[0]", (@check_answer[0] if !@check_answer.nil?)
 
           %div
             %label
               Checkbox Answer 2:
-              = text_field :check_answer, 1, size: 20
+              = text_area_tag "check_answer[1]", (@check_answer[1] if !@check_answer.nil?)
 
           %div
             %label
               Checkbox Answer 3:
-              = text_field :check_answer, 2, size: 20
+              = text_area_tag "check_answer[2]", (@check_answer[2] if !@check_answer.nil?)
 
           %div
             %label
               Checkbox Answer 4:
-              = text_field :check_answer, 3, size: 20
+              = text_area_tag "check_answer[3]", (@check_answer[3] if !@check_answer.nil?)
 
         %div.radio_button_fields
           %label Enter Radio Button Answers:
@@ -73,22 +73,21 @@
           %div
             %label
               Radio Button Answer 1:
-              = text_field :radio_answer, 4, size: 20
+              = text_area_tag "radio_answer[0]", (@radio_answer[0] if !@radio_answer.nil?)
 
           %div
             %label
               Radio Button Answer 2:
-              = text_field :radio_answer, 5, size: 20
-
+              = text_area_tag "radio_answer[1]", (@radio_answer[1] if !@radio_answer.nil?)
           %div
             %label
               Radio Button Answer 3:
-              = text_field :radio_answer, 6, size: 20
+              = text_area_tag "radio_answer[2]", (@radio_answer[2] if !@radio_answer.nil?)
 
           %div
             %label
               Radio Button Answer 4:
-              = text_field :radio_answer, 7, size: 20
+              = text_area_tag "radio_answer[3]", (@radio_answer[3] if !@radio_answer.nil?)
 
     = submit_tag 'Update Form Question', :class => "btn btn-default"
     = submit_tag 'Cancel', :class => "btn btn-default"
