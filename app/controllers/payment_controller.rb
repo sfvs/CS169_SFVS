@@ -41,7 +41,7 @@ class PaymentController < ActionController::Base
     
     # make sure paypal verified this payment info
     if (result.body.to_s != "VERIFIED")
-      application.pay_status = 3 # rejected, please manually inspect
+      application.pay_status = Application::PAYSTATUS_DECLINED # rejected, please manually inspect
       application.save!
       logger.warn("PayPal could not verify the information provided by the user. Please manually inspect this payment.")
       redirect_to root_path
