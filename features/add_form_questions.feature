@@ -20,7 +20,7 @@ Background: users have been added to database
   And I click on More Information for "General Form"
 
 Scenario: creating a textbox form question
-  Given I press "Add Form Question"
+  Given I follow "Add Form Question"
   And I am on the creation page for "General Form"
   When I fill in "Enter the question" with "This is a test question"
   And I select "form_question_question_type_textbox"
@@ -29,7 +29,7 @@ Scenario: creating a textbox form question
   And I should see "This is a test question"
 
 Scenario: creating a statement form question
-  Given I press "Add Form Question"
+  Given I follow "Add Form Question"
   And I am on the creation page for "General Form"
   When I fill in "Enter the question" with "This is a test question"
   And I select "form_question_question_type_statement"
@@ -38,7 +38,7 @@ Scenario: creating a statement form question
   And I should see "This is a test question"
 
 Scenario: creating a checkbox form question
-  Given I press "Add Form Question"
+  Given I follow "Add Form Question"
   And I am on the creation page for "General Form"
   When I fill in "Enter the question" with "This is a test question"
   And I select "form_question_question_type_checkbox"
@@ -47,7 +47,7 @@ Scenario: creating a checkbox form question
   And I should see "This is a test question"
 
 Scenario: creating a radio button form question
-  Given I press "Add Form Question"
+  Given I follow "Add Form Question"
   And I am on the creation page for "General Form"
   When I fill in "Enter the question" with "This is a test question"
   And I select "form_question_question_type_radio_button"
@@ -56,6 +56,6 @@ Scenario: creating a radio button form question
   And I should see "This is a test question"
 
 Scenario: cancelling and returning to previous page
-  Given I press "Add Form Question"
+  Given I follow "Add Form Question"
   And I press "Cancel"
   Then I should be on the content page for "General Form"
