@@ -1,4 +1,4 @@
-FactoryGirl.define do  factory :file_attachment, :class => 'FileAttachments' do
+FactoryGirl.define do  factory :file_attachment do
     
   end
   

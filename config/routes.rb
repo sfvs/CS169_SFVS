@@ -32,7 +32,7 @@ SFVSRegistrationSystem::Application.routes.draw do
     get "survey", to: "survey#questionnaire", on: :member
     post "submit_survey", to: "survey#submit_questionnaire", on: :member
 
-    post "upload_file", to: "file_attachments#upload_file", on: :member
+    post "upload_file", to: "file_attachment#upload_file", on: :member
 
     post "submit_application", on: :member
     

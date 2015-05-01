@@ -62,6 +62,10 @@
             =file_field_tag :file_attachment
             =hidden_field_tag :file_type, 'health_file'
             =submit_tag "Submit"
+            
+          / = form_for(@document) do |f|
+          /   = f.file_field :file
+          /   = f.submit
           %p
             Additional Information For Advertisements: 
             %br
