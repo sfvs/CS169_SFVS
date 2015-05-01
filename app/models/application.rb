@@ -5,6 +5,11 @@ class Application < ActiveRecord::Base
   belongs_to :user
   belongs_to :application_type
 
+  PAYSTATUS_UNPAID = 0
+  PAYSTATUS_PENDING = 1
+  PAYSTATUS_PAID = 2
+  PAYSTATUS_DECLINED = 3
+
   def self.current_application_year
     Time.now.year
   end
@@ -96,4 +101,19 @@ class Application < ActiveRecord::Base
 	def hasPaid?
 		return read_attribute(:has_paid)
 	end
+
+  def pay_status_string
+    case read_attribute(:pay_status)
+    when PAYSTATUS_UNPAID
+      "Not Paid"
+    when PAYSTATUS_PENDING
+      "Pending"
+    when PAYSTATUS_PAID
+      "Paid"
+    when PAYSTATUS_DECLINED
+      "Declined"
+    else
+      "Unknown"
+    end
+  end
 end
