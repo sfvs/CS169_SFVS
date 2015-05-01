@@ -58,6 +58,10 @@
           %br
           %p Additional Information for Health Form:
           %p Mail Health Form to address below or email Health Form electronic copy to: wvdinfo@sfvs.org
+          =form_tag upload_file_user_path, :multipart => true do
+            =file_field_tag :file_attachment
+            =hidden_field_tag :file_type, 'health_file'
+            =submit_tag "Submit"
           %p
             Additional Information For Advertisements: 
             %br

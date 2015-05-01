@@ -48,14 +48,6 @@ ActiveRecord::Schema.define(:version => 20150501034755) do
     t.boolean  "has_paid",            :default => false, :null => false
   end
 
-  create_table "attachments", :force => true do |t|
-    t.string  "filename"
-    t.string  "content_type"
-    t.binary  "data"
-    t.string  "file_type"
-    t.integer "applications_id"
-  end
-
   create_table "file_attachments", :force => true do |t|
     t.string   "filename"
     t.string   "content_type"

@@ -29,14 +29,13 @@ SFVSRegistrationSystem::Application.routes.draw do
   resources :users do 
     resources :form_question, :path => 'form', only: [:show, :update], on: :member
     
-    resources :file_attachments, :path => 'file_attachments', only: [:index], on: :member do
-      post "upload_advertisement", on: :collection
-      post "upload_health_form", on: :collection
-    end
-
-    post "submit_application", on: :member
     get "survey", to: "survey#questionnaire", on: :member
     post "submit_survey", to: "survey#submit_questionnaire", on: :member
+
+    post "upload_file", to: "file_attachments#upload_file", on: :member
+
+    post "submit_application", on: :member
+    
 		post "submit_payment", on: :member
 		get "verify_payment", on: :member
   end
