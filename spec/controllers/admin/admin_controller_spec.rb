@@ -33,5 +33,27 @@ describe Admin::AdminController do
         expect(response.body).to include("Forms List")
       end
     end
+
+    describe "changing the application year" do
+      after :each do
+        # resetting class variables
+        Application.current_application_year = Time.now.year
+      end
+      it "should correctly update with a valid year" do
+        Application.current_application_year = 2000
+
+        put 'update_app_year', :app_year => "2001"
+        Application.current_application_year.should be == 2001
+      end
+
+      it "should do nothing for an invalid year" do
+        Application.current_application_year = 2000
+
+        put 'update_app_year', :app_year => "20000"
+        Application.current_application_year.should be == 2000
+        put 'update_app_year', :app_year => "2230a"
+        Application.current_application_year.should be == 2000
+      end
+    end
   end
 end

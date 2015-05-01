@@ -17,9 +17,9 @@ Background: users have been added to database
   | email               | password         | admin   |
   | user2@hostname.com  | user1234         | false   |
 
-
   Given user john doe exist in the database
-  And john doe has an incomplete vendor application
+  And the year is "2020"
+  And john doe has a 2020 incomplete vendor application
   And john doe has logged in
   And I am on the "profile" page for "johndoe@gmail.com"
 

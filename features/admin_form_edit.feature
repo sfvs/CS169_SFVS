@@ -27,7 +27,8 @@ Background: users have been added to database
   | johndoe@gmail.com | bear12345        | false   |
   | admin@gmail.com   | admin123         | true    |
   
-  And john doe has an incomplete vendor application
+  And the year is "2020"
+  And john doe has a 2020 incomplete vendor application
   And john doe filled the "General Form"
   And I am logged into the admin page as "admin"
   And I am on the admin profile page

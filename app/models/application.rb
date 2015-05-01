@@ -5,9 +5,11 @@ class Application < ActiveRecord::Base
   belongs_to :user
   belongs_to :application_type
 
-  def self.current_application_year
-    Time.now.year
+  class << self
+    attr_accessor :current_application_year
   end
+
+  self.current_application_year = Time.now.year
 
   def content
   	# has content been parsed yet? If not, let's do that..
