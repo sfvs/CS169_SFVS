@@ -6,9 +6,14 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   # need to refactor this, but home_controller cannot do multiple skips??
-  def require_valid_user
-    authorize current_user, :is_profile_owner?
-    authorize current_user, :is_regular_user?
+  def validate_user_authorization
+    user = User.find_by_id(params[:id])
+    require_valid_user user
+  end
+  
+  def require_valid_user user
+    authorize user, :is_profile_owner?
+    authorize user, :is_regular_user?
   end
   
   private
