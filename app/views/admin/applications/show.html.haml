@@ -23,6 +23,12 @@
               %ul
                 %li= link_to "View Form", form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
                 %li= link_to "Edit Form", edit_form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :class => "btn btn-default admin_button"
+  %p
+    User Uploaded Files
+    %br
+    = link_to_if @health_form_file, "Health Form", download_file_user_path(:file_type => :health_form)
+    %br
+    = link_to_if @advertisement_file, "Advertisement", download_file_user_path(:file_type => :advertisement), disabled: true
 
   = button_to "Approve", approve_admin_user_application_path(@user, @application, :approve => true), {:class => "btn btn-default", method: :post}
   = button_to "Back", admin_user_path(@user), {:class => "btn btn-default", method: :get}

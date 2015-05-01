@@ -9,6 +9,8 @@ class Admin::ApplicationsController < Admin::AdminController
     @application = Application.find(params[:id])
     @app_forms = @application.get_forms
     @completed_forms = @application.get_completed_forms
+    @health_form_file = @application.file_attachments.find_by_file_type(:health_form)
+    @advertisement_file = @application.file_attachments.find_by_file_type(:advertisement)
   end
 
   def approve
