@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(:version => 20150501162408) do
     t.string   "content_type"
     t.binary   "data"
     t.string   "file_type"
-    t.integer  "applications_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer  "application_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "form_questions", :force => true do |t|

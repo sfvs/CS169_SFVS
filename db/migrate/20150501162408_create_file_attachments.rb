@@ -6,7 +6,7 @@ class CreateFileAttachments < ActiveRecord::Migration
       t.column :content_type, :string
       t.column :data, :binary
       t.column :file_type, :string
-      t.belongs_to :applications, index:true
+      t.belongs_to :application, index:true
 
       t.timestamps
     end

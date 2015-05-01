@@ -1,18 +1,27 @@
 class FileAttachmentController < ApplicationController
 
+  def download_file
+    @attachment = FileAttachment.find_by_file_type(params[:file_type])
+    send_data @attachment.data, :filename => @attachment.filename, :type => @attachment.content_type
+  end
+
   def upload_file
-    return if params[:file_attachment].blank?
     incoming_file = params[:file_attachment]
+    type = params[:file_type]
+    return if incoming_file.blank?
 
-    @attachment = FileAttachments.create
-    @attachment.filename = File.basename(incoming_file.original_filename)
-    @attachment.content_type = incoming_file.content_type
-    @attachment.data = incoming_file.read 
+    application = User.find_by_id(params[:id]).get_most_recent_application
 
-    if @attachment.save
-        flash[:notice] = "Thank you for your submission..."
+    attachment = application.file_attachments.find_by_file_type(type)
+    if attachment.nil?
+      attachment = application.file_attachments.build
+      attachment.file_type = type
+    end
+    attachment.uploaded_file = incoming_file
+    if attachment.save
+      flash[:notice] = "Thank you for your submission..."
     else
-        flash[:error] = "There was a problem submitting your attachment."
+      flash[:alert] = "There was a problem submitting your attachment."
     end
     redirect_to user_path
   end

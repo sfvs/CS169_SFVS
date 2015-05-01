@@ -1,5 +1,7 @@
-FactoryGirl.define do  factory :file_attachment do
-    
+FactoryGirl.define do  
+
+  factory :file_attachment do
+    file_type "health_form"  
   end
   
   factory :application_type do

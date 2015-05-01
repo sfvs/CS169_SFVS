@@ -135,6 +135,15 @@ module ControllerMacros
     app
   end
 
+  # make file attachments
+
+  def make_a_file_attachment file
+    f = FactoryGirl.create(:file_attachment)
+    f.uploaded_file = file
+    f.save
+    f
+  end
+
   # Create Questionnaire, and Answer Helpers
 
   def make_question_answer_tree

@@ -4,7 +4,7 @@ class Application < ActiveRecord::Base
   attr_accessible :year, :content, :completed, :approved, :amount_paid, :has_paid
   belongs_to :user
   belongs_to :application_type
-  has_many :file_attachments
+  has_many :file_attachments, dependent: :destroy
 
   class << self
     attr_accessor :current_application_year

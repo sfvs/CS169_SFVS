@@ -17,8 +17,10 @@ class UsersController < ApplicationController
       @year = @application.year
       @type = @application.application_type.app_type
       @forms_to_build = @application.application_type.forms
-      debugger
-      @document = @application.file_attachments[0]
+      
+      @health_form_file = @application.file_attachments.find_by_file_type(:health_form)
+      @advertisement_file = @application.file_attachments.find_by_file_type(:advertisement)
+      
       unless @application.has_paid
         @cost_description = @application.grab_application_cost_description
         @application.calculate_current_application_cost @cost_description
