@@ -7,7 +7,7 @@ class PaymentController < ActionController::Base
     # lookup the application by invoice number/item number
     item_number = params[:item_number]
     if (item_number.empty?)
-      logger.warn("A user tried to make a payment with an empty invoice number. Canceling transaction.")
+      print("A user tried to make a payment with an empty invoice number. Canceling transaction.")
       redirect_to root_path
       return
     end
@@ -15,7 +15,7 @@ class PaymentController < ActionController::Base
     application = Application.find_by_invoice_number!(item_number)
     txn_id = params[:txn_id]
     if (application.has_paid == true or application.payment_id == txn_id)
-      logger.warn("A user attempted to pay for an application that has already been paid for. Canceling transaction.")
+      print("A user attempted to pay for an application that has already been paid for. Canceling transaction.")
       redirect_to root_path
       return
     end
@@ -23,7 +23,7 @@ class PaymentController < ActionController::Base
     # verify amount_due == mc_gross (from paypal/post)
     gross = params[:mc_gross].to_f
     if (gross != application.amount_due)
-      logger.warn("A user attempted to forge a payment. Canceling transaction.")
+      print("A user attempted to forge a payment. Canceling transaction.")
       redirect_to root_path
       return
     end
@@ -44,7 +44,7 @@ class PaymentController < ActionController::Base
     if (result.body.to_s != "VERIFIED")
       application.pay_status = Application::PAYSTATUS_DECLINED # rejected, please manually inspect
       application.save!
-      logger.warn("PayPal could not verify the information provided by the user. Please manually inspect this payment.")
+      print("PayPal could not verify the information provided by the user. Please manually inspect this payment.")
       redirect_to root_path
       return
     end
