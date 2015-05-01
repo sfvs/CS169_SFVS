@@ -19,9 +19,14 @@
             %strong Cost Description
             -@cost_description.each do |cost,item|
               %p="-- #{cost} #{item}"
-            ="Total Cost: $#{@application_cost}"
+            ="Total Cost: #{number_to_currency(@application_cost)}"
+        %p
+        %strong= "Payment Status: "
+        ="#{@application_status_msg}"
+        -if !@application.has_paid and @application.completed
           = button_to 'Pay Now', submit_payment_user_path(@user), {:id => 'submit_payment_button', method: :post}
-          %br
+          %br=" If you have just submitted a payment and still see the 'Pay Now' button, please refresh the page as it takes a few moments for the payment to process."
+        %br
       -else
         %div.user_btn1
           %div.but_3

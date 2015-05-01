@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150426045036) do
+ActiveRecord::Schema.define(:version => 20150430215821) do
 
   create_table "answers", :force => true do |t|
     t.string   "ans"
@@ -44,8 +44,12 @@ ActiveRecord::Schema.define(:version => 20150426045036) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.decimal  "amount_paid",         :default => 0.0
-    t.string   "payment_id"
+    t.string   "payment_id",          :default => "",    :null => false
     t.boolean  "has_paid",            :default => false, :null => false
+    t.decimal  "amount_due",          :default => 0.0,   :null => false
+    t.text     "pay_receipt",         :default => "",    :null => false
+    t.integer  "pay_status",          :default => 0,     :null => false
+    t.string   "invoice_number",      :default => "",    :null => false
   end
 
   create_table "form_questions", :force => true do |t|
