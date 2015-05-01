@@ -30,6 +30,7 @@ class PaymentController < ActionController::Base
 
     # we need to send a post request to PayPal with the txn_id to get the info
     # and verify that the payment info is correct
+    print("RAW REQUEST: " + request.raw_post)
     paypal_url_cmd = "https://www.sandbox.paypal.com/cgi-bin/webscr"
     req_body = "cmd=_notify-validate&" + request.raw_post
     url = URI.parse(paypal_url_cmd)
