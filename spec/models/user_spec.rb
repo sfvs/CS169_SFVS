@@ -22,6 +22,11 @@ describe User do
       expect(user.get_most_recent_application).to be_nil
     end
 
+    it "should detect a used e-mail" do
+      user = FactoryGirl.create(:admin)
+      expect(User.valid_email?("platoisaman@admin.com")).to be == false
+    end
+
     describe "making applications" do
       before :each do
         @type = make_forms_for_app_type "sponsor"

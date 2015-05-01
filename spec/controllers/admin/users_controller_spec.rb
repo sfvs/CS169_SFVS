@@ -125,14 +125,14 @@ describe Admin::UsersController do
       User.stub(:valid_email?).and_return(true)
       user_info = {:email => "new_user@gmail.com", :password => "user1234", :admin => false}
       post 'create', :user => user_info
-      User.where("email=?", "new_user@gmail.com").first.should != nil
+      User.where("email=?", "new_user@gmail.com").first.should_not == nil
     end
 
     it "should create a new admin user" do
       User.stub(:valid_email?).and_return(true)
       user_info = {:email => "new_admin@gmail.com", :password => "admin123", :admin => true}
       post 'create', :user => user_info
-      User.where("email=?", "new_admin@gmail.com").first.should != nil
+      User.where("email=?", "new_admin@gmail.com").first.should_not == nil
     end
 
     it "should redirect to users list page" do
@@ -147,10 +147,6 @@ describe Admin::UsersController do
       user_info = {:email => "platoisaman@admin.com", :password => "admin123", :admin => true}
       post 'create', :user => user_info
       response.should redirect_to '/admin/users/new'
-    end
-
-    it "should detect a used e-mail" do
-      valid_email?("platoisaman@admin.com").should == false
     end
   end 
 

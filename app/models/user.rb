@@ -39,4 +39,8 @@ class User < ActiveRecord::Base
   def self.get_users_filtered_by(year)
     users_list = User.includes(:applications).where("applications.year=?", year)
   end
+
+  def self.valid_email?(email)
+    !User.exists?(['email LIKE ?', "%#{email}%"])
+  end
 end

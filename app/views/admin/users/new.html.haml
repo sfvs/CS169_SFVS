@@ -1,3 +1,18 @@
 %h1 Create New User
 
+= form_tag admin_users_path do
+  
+  Email:
+  = email_field :user, 'email', size: 50, :required => true
+
+  Password:
+  = password_field :user, 'password', size: 50, :required => true
+
+  User Type:
+  = radio_button :user, 'admin', true, :required => true
+  Administrator
+  = radio_button :user, 'admin', false, :required => true
+  Regular
+  = submit_tag "Create User"
+
 = button_to "Back", admin_users_path, {:class => "btn btn-default", method: :get}
