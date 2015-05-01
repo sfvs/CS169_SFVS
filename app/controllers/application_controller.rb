@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   def require_valid_user
     authorize current_user, :is_profile_owner?
     authorize current_user, :is_regular_user?
+		redirect_to root_path unless current_user.id.to_s == params[:id]
   end
   
   private
