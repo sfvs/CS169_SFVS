@@ -1,6 +1,13 @@
+require 'timecop'
+
 # Step to make a scenerio pending.
 Given /^PENDING/ do
   pending
+end
+
+Given(/^the year is "(.*)"/) do |time|
+  Timecop.freeze(Time.local(time))
+  Application.current_application_year = Time.now.year
 end
 
 Given(/^the following application types exist:$/) do |table|
@@ -38,11 +45,11 @@ Given(/^user john doe exist in the database$/) do
   }
 end
 
-Given(/^john doe has an incomplete vendor application$/) do
+Given(/^john doe has a 2020 incomplete vendor application$/) do
   steps %Q{
     Given the following applications exist: 
     | user_id | application_type_id | completed | year |
-    | 1       | 1                   | false     | 2015 |
+    | 1       | 1                   | false     | 2020 |
   }
 end
 

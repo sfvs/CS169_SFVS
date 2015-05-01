@@ -2,7 +2,7 @@ class FormQuestionController < ApplicationController
   include ApplicationHelper
   include FormQuestionHelper
 
-  before_filter :require_valid_user
+  before_filter :validate_user_auth
   before_filter :validate_accessible_form
 
   def show
@@ -59,4 +59,8 @@ class FormQuestionController < ApplicationController
     end
   end
 
+  def validate_user_auth
+    user = User.find_by_id(params[:user_id])
+    require_valid_user user
+  end
 end

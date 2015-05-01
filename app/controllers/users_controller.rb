@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :require_valid_user
+  before_filter :validate_user_authorization
 
   def show
     @user = User.find(params[:id])
@@ -98,6 +98,5 @@ class UsersController < ApplicationController
 
 		return "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
 	end
-
-
+  
 end
