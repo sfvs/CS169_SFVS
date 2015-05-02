@@ -1,4 +1,11 @@
 FactoryGirl.define do  
+
+  factory :file_attachment do
+    data 'some_content'
+    content_type 'application/pdf'
+    file_type "health_form"  
+  end
+  
   factory :application_type do
     app_type "vendor"
   end

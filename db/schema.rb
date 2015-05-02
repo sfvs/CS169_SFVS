@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150430215821) do
+ActiveRecord::Schema.define(:version => 20150501162408) do
 
   create_table "answers", :force => true do |t|
     t.string   "ans"
@@ -50,6 +50,16 @@ ActiveRecord::Schema.define(:version => 20150430215821) do
     t.text     "pay_receipt",         :default => "",    :null => false
     t.integer  "pay_status",          :default => 0,     :null => false
     t.string   "invoice_number",      :default => "",    :null => false
+  end
+
+  create_table "file_attachments", :force => true do |t|
+    t.string   "filename"
+    t.string   "content_type"
+    t.binary   "data",           :limit => 5242880
+    t.string   "file_type"
+    t.integer  "application_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "form_questions", :force => true do |t|

@@ -61,18 +61,42 @@
           %br
           %br
           %br
-          %p Additional Information for Health Form:
-          %p Mail Health Form to address below or email Health Form electronic copy to: wvdinfo@sfvs.org
+          %strong Advertisement Submission
+          -unless @advertisement_file.nil?
+            %br Advertisement Submitted
+          
+          =form_tag upload_file_user_path, :multipart => true do
+            =file_field_tag :file_attachment, accept: 'application/pdf'
+            =hidden_field_tag :file_type, :advertisement
+            =submit_tag "Submit"
+
+          %strong Health Permit Form Submission if Applicable
+          -unless @health_form_file.nil?
+            %br Health Form Submitted
+          
+          =form_tag upload_file_user_path, :multipart => true do
+            =file_field_tag :file_attachment, accept: 'application/pdf'
+            =hidden_field_tag :file_type, :health_form
+            =submit_tag "Submit"
+          %p Note: File Sizes need to be less than 4MBs
+          %p
+            Additional Information for Health Form:
+            %br
+            Mail Health Form to address below or email Health Form electronic copy to: wvdinfo@sfvs.org
+            %br
+            Please include Company Name, Application Year, and Email.
           %p
             Additional Information For Advertisements: 
             %br
-            Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi
+            Minimum Specs: Tiff or PDF file; 1600 x 1200 pixels; 300 dpi;
             %br
             Enclosed camera-ready ad/logo and mail to address below, or Email electronic copy to: wvdinfo@sfvs.org
             %br
             Mail Information: San Francisco Vegetarian Society,
             73 Rondel Place,
             San Francisco, CA 94103
+            %br
+            Please include Company Name, Application Year, and Email.
 
   %div.users_about_us.effect1
     %div.container-fluid

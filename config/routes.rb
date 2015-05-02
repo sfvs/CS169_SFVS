@@ -35,9 +35,15 @@ SFVSRegistrationSystem::Application.routes.draw do
   devise_for :users, :path => 'member'
   resources :users do 
     resources :form_question, :path => 'form', only: [:show, :update], on: :member
-    post "submit_application", on: :member
+    
     get "survey", to: "survey#questionnaire", on: :member
     post "submit_survey", to: "survey#submit_questionnaire", on: :member
+
+    get "download_file", to: "file_attachment#download_file", on: :member
+    post "upload_file", to: "file_attachment#upload_file", on: :member
+
+    post "submit_application", on: :member
+    
     post "submit_payment", on: :member
   end
 
