@@ -44,7 +44,7 @@ SFVSRegistrationSystem::Application.routes.draw do
 
     post "submit_application", on: :member
     
-		post "submit_payment", on: :member
+    post "submit_payment", on: :member
   end
 
 
