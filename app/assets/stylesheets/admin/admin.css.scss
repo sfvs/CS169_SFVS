@@ -43,7 +43,7 @@
 
 .user_filter {
   position: relative;
-  left: 100px;
+  left: 200px;
 }
 
 .filter_btn {
@@ -198,6 +198,24 @@
   opacity: 1.0;
 }
 
+#submit_payment_button {
+  background-color: #6392c0;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 93px;
+  padding-right: 93px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#submit_payment_button:hover {
+  opacity: 1.0;  
+}
+
 #logout_btn {
   background-color: #CC3300;
   border-radius: 25px;
@@ -275,6 +293,29 @@
   opacity: 1.0;
 }
 
+#save_and_ret_btn {
+  background-color: #6392c0;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  margin-left: 350px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 475px;
+  padding-right: 460px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#save_and_ret_btn:hover {
+  opacity: 1.0;
+}
+
+.user_aprove_btn {
+  margin-top: 20px;
+}
+
 #submit_btn {
   background-color: #6392c0;
   border-radius: 25px;
@@ -291,6 +332,64 @@
 }
 
 #submit_btn:hover {
+  opacity: 1.0;
+}
+
+#submit_app_btn {
+  background-color: #6392c0;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  margin-left: 200px;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 60px;
+  padding-right: 60px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#submit_app_btn:hover {
+  opacity: 1.0;
+}
+
+#search_filter_btn {
+  background-color: #6392c0;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 60px;
+  padding-right: 60px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#search_filter_btn:hover {
+  opacity: 1.0;
+}
+
+#restart_app_btn {
+  background-color: #CC3300;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  margin-left: 200px;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 60px;
+  padding-right: 60px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#restart_app_btn:hover {
   opacity: 1.0;
 }
 

@@ -1,93 +1,97 @@
 - body_class "users_view"
 = render 'admin/navi_bar'
 
-%div.container-fluid
+%div.users_index_title.effect1
+  %div.container-fluid
   
-  %h1 Edit Form Question
+    %h1 Edit Form Question
 
-  = form_tag admin_form_form_question_path(:form_id => @form.id, :id => @form_question.id), {:method => :put, :class => "form-inline"} do
-    %div.control-group
-      %div.controls
-        %label
-          Enter the question:
-          = text_area :form_question, 'question'
+%div.users_content.effect1
+  %div.container-fluid
+    = form_tag admin_form_form_question_path(:form_id => @form.id, :id => @form_question.id), {:method => :put, :class => "form-inline"} do
+      %div.control-group
+        %div.controls
+          %label
+            Enter the question:
+            = text_area :form_question, 'question'
 
-        %div.select_type
-          %p Select Question Type:
-          %div.radio
-            %label.radio
-              =radio_button :form_question, 'question_type', "textbox", options = {onclick: "javascript:selectedOption()"}
-              Textfield
+          %div.select_type
+            %p Select Question Type:
+            %div.radio
+              %label.radio
+                =radio_button :form_question, 'question_type', "textbox", options = {onclick: "javascript:selectedOption()"}
+                Textfield
 
-          %div.radio
-            %label.radio
-              =radio_button :form_question, 'question_type', "checkbox", options = {onclick: "javascript:selectedOption()"}
-              Checkbox
+            %div.radio
+              %label.radio
+                =radio_button :form_question, 'question_type', "checkbox", options = {onclick: "javascript:selectedOption()"}
+                Checkbox
 
-          %div.radio
-            %label.radio
-              =radio_button :form_question, 'question_type', "radio_button", options = {onclick: "javascript:selectedOption()"}
-              Radio Button
+            %div.radio
+              %label.radio
+                =radio_button :form_question, 'question_type', "radio_button", options = {onclick: "javascript:selectedOption()"}
+                Radio Button
 
-          %div.radio
-            %label.radio
-              =radio_button :form_question, 'question_type', "statement", options = {onclick: "javascript:selectedOption()"}
-              Statement
+            %div.radio
+              %label.radio
+                =radio_button :form_question, 'question_type', "statement", options = {onclick: "javascript:selectedOption()"}
+                Statement
 
-          %div.radio
-            %label.radio
-              =radio_button :form_question, 'question_type', "message", options = {onclick: "javascript:selectedOption()"}
-              Message
+            %div.radio
+              %label.radio
+                =radio_button :form_question, 'question_type', "message", options = {onclick: "javascript:selectedOption()"}
+                Message
 
-        / %div
-        /   = label_tag "answer_count", "Number of Answers for Checkbox/Radio Button", id: 'count_label'
-        /   = text_field_tag 'answer_count', nil, maxlength: 1, size: 1
-        /   = button_to_function "OK", "createFields()", id: "ok_but"
+          / %div
+          /   = label_tag "answer_count", "Number of Answers for Checkbox/Radio Button", id: 'count_label'
+          /   = text_field_tag 'answer_count', nil, maxlength: 1, size: 1
+          /   = button_to_function "OK", "createFields()", id: "ok_but"
 
-        %div.checkbox_fields
-          %label Enter Checkbox Answers:
+          %div.checkbox_fields
+            %label Enter Checkbox Answers:
 
-          %div
-            %label
-              Checkbox Answer 1:
-              = text_area_tag "check_answer[0]", (@check_answer[0] if !@check_answer.nil?)
+            %div
+              %label
+                Checkbox Answer 1:
+                = text_area_tag "check_answer[0]", (@check_answer[0] if !@check_answer.nil?)
 
-          %div
-            %label
-              Checkbox Answer 2:
-              = text_area_tag "check_answer[1]", (@check_answer[1] if !@check_answer.nil?)
+            %div
+              %label
+                Checkbox Answer 2:
+                = text_area_tag "check_answer[1]", (@check_answer[1] if !@check_answer.nil?)
 
-          %div
-            %label
-              Checkbox Answer 3:
-              = text_area_tag "check_answer[2]", (@check_answer[2] if !@check_answer.nil?)
+            %div
+              %label
+                Checkbox Answer 3:
+                = text_area_tag "check_answer[2]", (@check_answer[2] if !@check_answer.nil?)
 
-          %div
-            %label
-              Checkbox Answer 4:
-              = text_area_tag "check_answer[3]", (@check_answer[3] if !@check_answer.nil?)
+            %div
+              %label
+                Checkbox Answer 4:
+                = text_area_tag "check_answer[3]", (@check_answer[3] if !@check_answer.nil?)
 
-        %div.radio_button_fields
-          %label Enter Radio Button Answers:
+          %div.radio_button_fields
+            %label Enter Radio Button Answers:
 
-          %div
-            %label
-              Radio Button Answer 1:
-              = text_area_tag "radio_answer[0]", (@radio_answer[0] if !@radio_answer.nil?)
+            %div
+              %label
+                Radio Button Answer 1:
+                = text_area_tag "radio_answer[0]", (@radio_answer[0] if !@radio_answer.nil?)
 
-          %div
-            %label
-              Radio Button Answer 2:
-              = text_area_tag "radio_answer[1]", (@radio_answer[1] if !@radio_answer.nil?)
-          %div
-            %label
-              Radio Button Answer 3:
-              = text_area_tag "radio_answer[2]", (@radio_answer[2] if !@radio_answer.nil?)
+            %div
+              %label
+                Radio Button Answer 2:
+                = text_area_tag "radio_answer[1]", (@radio_answer[1] if !@radio_answer.nil?)
+            %div
+              %label
+                Radio Button Answer 3:
+                = text_area_tag "radio_answer[2]", (@radio_answer[2] if !@radio_answer.nil?)
 
-          %div
-            %label
-              Radio Button Answer 4:
-              = text_area_tag "radio_answer[3]", (@radio_answer[3] if !@radio_answer.nil?)
+            %div
+              %label
+                Radio Button Answer 4:
+                = text_area_tag "radio_answer[3]", (@radio_answer[3] if !@radio_answer.nil?)
 
-    = submit_tag 'Update Form Question', :class => "btn btn-default"
-    = submit_tag 'Cancel', :class => "btn btn-default"
+      = submit_tag 'Update Form Question', :id => "aprove_btn"
+      %div.back_user_btn
+        = submit_tag 'Cancel', :id => "back_btn"

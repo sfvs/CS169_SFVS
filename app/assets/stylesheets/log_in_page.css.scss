@@ -29,6 +29,18 @@ body {
   height: 350px;
 }
 
+.resend_container {
+  background-color: white;
+  border-radius: 25px;
+  border: 2px solid #8AC007;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  padding: 60px 0px 70px 60px;
+  width: 320px;
+  height: 250px;
+}
+
 .edit_container {
   background-color: white;
   border-radius: 25px;
@@ -152,4 +164,22 @@ body {
 
 #login_header {
   margin-left: 60px;
+}
+
+#resend_btn {
+  background-color: #6392c0;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 18px;
+  padding-right: 18px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#resend_btn:hover {
+  opacity: 1.0;
 }

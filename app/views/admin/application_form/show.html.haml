@@ -1,10 +1,13 @@
 - body_class "users_view"
 = render 'admin/navi_bar'
 
-%div.container-fluid
-  %h1 #{@form_name}
+%div.users_index_title.effect1
+  %div.container-fluid
+    %h1 #{@form_name}
 
-  = form_tag edit_form_admin_user_application_path, {:class => "form-inline"} do
-    = render "shared/form_questions"
+%div.users_content.effect1
+  %div.container-fluid
+    = form_tag edit_form_admin_user_application_path, {:class => "form-inline"} do
+      = render "shared/form_questions"
 
-  = button_to "Back", admin_user_application_path, {:class => "btn btn-default", method: :get}
+    = link_to "Back", admin_user_application_path, :id => "back_btn"

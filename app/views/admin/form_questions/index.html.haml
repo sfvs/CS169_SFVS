@@ -1,13 +1,15 @@
 - body_class "users_view"
 = render 'admin/navi_bar'
 
-%div.container-fluid
-  %h1= "Contents of #{@form.form_name}"
+%div.users_index_title.effect1
+  %div.container-fluid
+    %h1= "Contents of #{@form.form_name}"
 
-  %p To rearrange the order of the questions drag and drop the questions in the wanted order.
-  %br
+    %p To rearrange the order of the questions drag and drop the questions in the wanted order.
+    %br
 
-  %div
+%div.users_content.effect1
+  %div.container-fluid
     %div.row.header#form_q_header
       %div.span3
         %p Form Question
@@ -24,6 +26,7 @@
       - if !@form_questions.nil?
         = render @form_questions
 
+  %div.user_aprove_btn
   = link_to "Add Form Question", new_admin_form_form_question_path, {:id => "aprove_btn", method: :get}
   %div.back_user_btn 
   = link_to "Back", admin_forms_path, :id => "back_btn"

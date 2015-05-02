@@ -1,15 +1,17 @@
 - body_class "users_view"
 = render 'shared/navi_bar'
 
-%div.user_forms.effect1
-  %div.user_form_container
-    %div.container-fluid
-      %h1 #{@form_name}
+%div.users_index_title.effect1
+  %div.container-fluid
+    %h1 #{@form_name}
 
-      = form_tag user_form_question_path(@user,@form_type), {:method => :put, :class => "form-inline"} do
-        = render "shared/form_questions"
+%div.users_content.effect1
+  %div.container-fluid
+    = form_tag user_form_question_path(@user,@form_type), {:method => :put, :class => "form-inline"} do
+      = render "shared/form_questions"
 
-        = submit_tag 'Save and Return', disabled: @disable
-        = submit_tag 'Submit', disabled: @disable
+      = submit_tag 'Save and Return', {:id => "save_and_ret_btn", disabled: @disable}
+      = submit_tag 'Submit', {:id => "aprove_btn", disabled: @disable}
 
-      = button_to 'Back', user_path(@user), {:class => "btn btn-default", method: :get}
+    %div.back_user_btn
+      = link_to 'Back', user_path(@user), :id => "back_btn"
