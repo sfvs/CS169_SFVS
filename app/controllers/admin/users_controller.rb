@@ -9,6 +9,9 @@ class Admin::UsersController < Admin::AdminController
     # Check order of users params[:order]
     # Call a User model method to return a sorted list of users 
     @users = User.get_users_by_order(params[:order]).paginate(:page => params[:page], :per_page => 10)
+    gon.push({
+      :emails => User.get_all_email_in_text(@users)
+      })
   end
 
   def show

@@ -33,7 +33,7 @@ SFVSRegistrationSystem::Application.configure do
   config.assets.compress = false
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  config.assets.debug = false
 
   # for devise setup
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }

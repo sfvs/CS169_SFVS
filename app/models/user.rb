@@ -39,4 +39,12 @@ class User < ActiveRecord::Base
   def self.get_users_filtered_by(year)
     users_list = User.includes(:applications).where("applications.year=?", year)
   end
+
+  def self.get_all_email_in_text(users)
+    txt = ""
+    users.each do |entry|
+      txt = txt + entry.email + ", "
+    end
+    txt = txt[0..-2]
+  end
 end

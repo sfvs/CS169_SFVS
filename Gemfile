@@ -15,6 +15,8 @@ gem 'dotenv-rails'
 gem 'gon'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'zeroclipboard-rails'
+gem 'thin'
 
 group :development, :test do
   gem 'sqlite3'
