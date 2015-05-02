@@ -52,11 +52,9 @@
       %div.pagination
         = will_paginate @users, renderer: BootstrapPagination::Rails
 
-
-    .demo-area
-      %p
-        %button#emails Get emails
-      %textarea#testarea{:cols => "50", :rows => "3", :style => "display:none;"}
+    %p
+      %button#emails Get emails
+    %textarea#testarea{:cols => "50", :rows => "3", :style => "display:none;"}
     :javascript
       $("#emails").on("click", function(){
         $("#testarea").show();
