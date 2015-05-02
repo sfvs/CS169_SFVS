@@ -52,25 +52,6 @@
                 %span.glyphicons.icon-check 
           %br
           -unless @application.completed
-            %strong Advertisement Submission
-            -unless @advertisement_file.nil?
-              %br Advertisement Submitted
-            
-            =form_tag upload_file_user_path, :multipart => true do
-              =file_field_tag :file_attachment, accept: 'application/pdf'
-              =hidden_field_tag :file_type, :advertisement
-              =submit_tag "Submit"
-
-            %strong Health Permit Form Submission if Applicable
-            -unless @health_form_file.nil?
-              %br Health Form Submitted
-            
-            =form_tag upload_file_user_path, :multipart => true do
-              =file_field_tag :file_attachment, accept: 'application/pdf'
-              =hidden_field_tag :file_type, :health_form
-              =submit_tag "Submit"
-            %p Note: File Sizes need to be less than 4MBs
-
             %div.users_btns2
               %div.user_submit_btn
                 = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post, data: { confirm: "Your current application will be finalized. Are you sure you want to submit?" }}
@@ -80,6 +61,24 @@
           %br
           %br
           %br
+          %strong Advertisement Submission
+          -unless @advertisement_file.nil?
+            %br Advertisement Submitted
+          
+          =form_tag upload_file_user_path, :multipart => true do
+            =file_field_tag :file_attachment, accept: 'application/pdf'
+            =hidden_field_tag :file_type, :advertisement
+            =submit_tag "Submit"
+
+          %strong Health Permit Form Submission if Applicable
+          -unless @health_form_file.nil?
+            %br Health Form Submitted
+          
+          =form_tag upload_file_user_path, :multipart => true do
+            =file_field_tag :file_attachment, accept: 'application/pdf'
+            =hidden_field_tag :file_type, :health_form
+            =submit_tag "Submit"
+          %p Note: File Sizes need to be less than 4MBs
           %p
             Additional Information for Health Form:
             %br
