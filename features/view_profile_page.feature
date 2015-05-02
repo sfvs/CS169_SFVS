@@ -19,9 +19,9 @@ Scenario: view current application status
   Then I should see my "email" as "johndoe@gmail.com"
   And I should see "vendor"
   And I should see "2020"
-  And I should see a "button" with id "submit_app_button"
+  And I should see a "button" with id "submit_app_btn"
   And I should see a "button" with id "logout_btn"
-  And I should see a "button" with id "questionnaire_button"
+  And I should see a "button" with id "restart_app_btn"
   And I should see "Incomplete"
 
 Scenario: get a new application for a future year

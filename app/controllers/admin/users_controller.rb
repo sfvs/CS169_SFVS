@@ -32,6 +32,14 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def create
+    if User.valid_email?(params[:user][:email])
+      User.create(params[:user], :without_protection => true)
+      flash[:notice] = "New user created"
+      redirect_to admin_users_path
+    else
+      flash[:alert] = "E-mail already taken"
+      redirect_to new_admin_user_path
+    end
   end
 
   def destroy

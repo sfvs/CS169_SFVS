@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     users_list = User.includes(:applications).where("applications.year=?", year)
   end
 
+  def self.valid_email?(email)
+    !User.exists?(['email LIKE ?', "%#{email}%"])
+  end
+
   def self.get_all_email_in_text(users)
     txt = ""
     users.each do |entry|

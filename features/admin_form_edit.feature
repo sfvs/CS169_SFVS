@@ -35,7 +35,7 @@ Background: users have been added to database
   When I go to the edit form page for General Form of "johndoe@gmail.com"
 
 Scenario: Press back
-  And I press "Back"
+  And I follow "Back"
   Then I should be on the "Application" page for "johndoe@gmail.com"
 
 Scenario: Press Submit without modifying the form
