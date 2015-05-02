@@ -1,18 +1,36 @@
-%h1 Create New User
+- body_class "admin_view"
 
-= form_tag admin_users_path do
-  
-  Email:
-  = email_field :user, 'email', size: 50, :required => true
+= render 'admin/navi_bar'
 
-  Password:
-  = password_field :user, 'password', size: 50, :required => true
+%div.users_index_title.effect1
+  %div.container-fluid
+    %h1 Create New User
 
-  User Type:
-  = radio_button :user, 'admin', true, :required => true
-  Administrator
-  = radio_button :user, 'admin', false, :required => true
-  Regular
-  = submit_tag "Create User"
+%div.users_content.effect1
+  %div.container-fluid
+    = form_tag admin_users_path do
+      %ul
+        %li
+          %label
+            Email:
+            = email_field :user, 'email', size: 50, :required => true
 
-= button_to "Back", admin_users_path, {:class => "btn btn-default", method: :get}
+        %li
+          %label
+            Password:
+            = password_field :user, 'password', size: 50, :required => true
+
+        %li
+          %label
+            User Type:
+          %label
+            = radio_button :user, 'admin', true, :required => true
+            Administrator
+          %label
+            = radio_button :user, 'admin', false, :required => true
+            Regular
+
+        %li
+          = submit_tag "Create User", :id => "aprove_btn"
+
+    = link_to "Back", admin_users_path, :id => "back_btn"
