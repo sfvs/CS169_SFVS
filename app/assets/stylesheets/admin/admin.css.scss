@@ -317,6 +317,46 @@
   opacity: 1.0;
 }
 
+#submit_app_btn {
+  background-color: #6392c0;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  margin-left: 200px;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 60px;
+  padding-right: 60px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#submit_app_btn:hover {
+  opacity: 1.0;
+}
+
+#restart_app_btn {
+  background-color: #CC3300;
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  margin-left: 200px;
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 60px;
+  padding-right: 60px;
+  opacity: 0.7;
+  transition: linear 0.2s;
+  -webkit-transition: linear 0.2s;
+}
+
+#restart_app_btn:hover {
+  opacity: 1.0;
+}
+
 #delete_btn_centered {
   background-color: #CC3300;
   border-radius: 25px;

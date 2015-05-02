@@ -54,10 +54,12 @@
           -unless @application.completed
             %div.users_btns2
               %div.user_submit_btn
-                = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_button", method: :post, data: { confirm: "Your current application will be finalized. Are you sure you want to submit?" }}
+                = button_to "Submit Application", submit_application_user_path(@user), {:id => "submit_app_btn", method: :post, data: { confirm: "Your current application will be finalized. Are you sure you want to submit?" }}
               %br
               %div.user_restart_btn
-                = button_to "Restart Application", survey_user_path(@user), {:id => "questionnaire_button", method: :get, data: { confirm: "Your current application will be reset. Are you sure you want to restart?" }}
+                = button_to "Restart Application", survey_user_path(@user), {:id => "restart_app_btn", method: :get, data: { confirm: "Your current application will be reset. Are you sure you want to restart?" }}
+          %br
+          %br
           %br
           %br
           %br
