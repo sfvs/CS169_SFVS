@@ -47,8 +47,8 @@ class User < ActiveRecord::Base
   def self.get_all_email_in_text(users)
     txt = ""
     users.each do |entry|
-      txt = txt + entry.email + "\n"
+      txt = txt + entry.email + ", "
     end
-    txt = txt[0..-2]
+    txt = txt[0..-3]
   end
 end
