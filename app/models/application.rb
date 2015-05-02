@@ -1,10 +1,15 @@
 require 'json'
 
-class Application < ActiveRecord::Base	
-  attr_accessible :year, :content, :completed, :approved, :amount_paid, :has_paid
+class Application < ActiveRecord::Base  
+  attr_accessible :year, :content, :completed, :approved, :amount_paid, :amount_due, :has_paid, :pay_receipt, :pay_status, :invoice_number, :payment_id
   belongs_to :user
   belongs_to :application_type
   has_many :file_attachments, dependent: :destroy
+
+  PAYSTATUS_UNPAID = 0
+  PAYSTATUS_PENDING = 1
+  PAYSTATUS_PAID = 2
+  PAYSTATUS_DECLINED = 3
 
   class << self
     attr_accessor :current_application_year
@@ -13,7 +18,7 @@ class Application < ActiveRecord::Base
   self.current_application_year = Time.now.year
 
   def content
-  	# has content been parsed yet? If not, let's do that..
+    # has content been parsed yet? If not, let's do that..
     if not @hashed_val
       val = read_attribute(:content)
       if (val == "" or val == nil)
@@ -92,8 +97,26 @@ class Application < ActiveRecord::Base
   def calculate_current_application_cost all_costs
     cost_list = all_costs.map { |cost,item| cost }
     amount_to_be_paid = cost_list.map{ |price| price.match(/[[:digit:]]+/)[0].to_i }
-    self.amount_paid = amount_to_be_paid.sum
+    self.amount_due = amount_to_be_paid.sum
     self.save
   end
 
+  def hasPaid?
+    return read_attribute(:has_paid)
+  end
+
+  def pay_status_string
+    case read_attribute(:pay_status)
+    when PAYSTATUS_UNPAID
+      "Not Paid"
+    when PAYSTATUS_PENDING
+      "Pending"
+    when PAYSTATUS_PAID
+      "Paid"
+    when PAYSTATUS_DECLINED
+      "Declined"
+    else
+      "Unknown"
+    end
+  end
 end

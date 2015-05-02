@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
     authorize user, :is_regular_user?
   end
   
+
   private
 
   def user_not_authorized
