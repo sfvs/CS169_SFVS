@@ -26,12 +26,17 @@
                   %li= link_to "View Form", form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :id => "view_btn"
                   %li= link_to "Edit Form", edit_form_admin_user_application_path(:user_id => @user.id, :id => @application.id, :form_type => form.form_name), :id => "form_edit_btn"
     
-    %p
-      User Uploaded Files
-      %br
-      = link_to_if @health_form_file, "Health Form", download_file_user_path(:file_type => :health_form)
-      %br
-      = link_to_if @advertisement_file, "Advertisement", download_file_user_path(:file_type => :advertisement), disabled: true
+    %h4 User Uploaded Files
+    %table.table.table-hover
+      %thead
+        %tr.row
+          %th Health Form
+          %th Advertisement
+      %tbody
+        %tr.row
+          %td= link_to_if @health_form_file, "Health Form", download_file_user_path(:file_type => :health_form)
+          %td= link_to_if @advertisement_file, "Advertisement", download_file_user_path(:file_type => :advertisement), disabled: true
+      
 
     = button_to "Approve", approve_admin_user_application_path(@user, @application, :approve => true), {:id => "aprove_btn", method: :post}
     = link_to "Back", admin_user_path(@user), :id => "back_btn"
