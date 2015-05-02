@@ -10,10 +10,7 @@
     = form_tag user_form_question_path(@user,@form_type), {:method => :put, :class => "form-inline"} do
       = render "shared/form_questions"
 
-    %div.save_and_ret
       = submit_tag 'Save and Return', {:id => "save_and_ret_btn", disabled: @disable}
-
-    %div.submit_f
       = submit_tag 'Submit', {:id => "aprove_btn", disabled: @disable}
 
     %div.back_user_btn
