@@ -74,6 +74,11 @@ describe User do
       expect(User.get_users_by_order(:email)).to be == [users[1], users[2], users[0]]
     end
 
+  it "should return list of email separated by ", "" do
+    users = [FactoryGirl.create(:user, :email => "c@hostname.com"), FactoryGirl.create(:user, :email => "a@hostname.com"), FactoryGirl.create(:user, :email => "b@hostname.com")]
+    expect(User.get_all_email_in_text(users)).to be == "c@hostname.com, a@hostname.com, b@hostname.com"
+  end
+
   it "should format the telephone number in the correct format" do
     user = FactoryGirl.create( :user, :email => "malady@hostname.com")
     user.telephone = "5105121234"
