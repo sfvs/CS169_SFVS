@@ -51,11 +51,11 @@ ActiveRecord::Schema.define(:version => 20150501162408) do
   create_table "file_attachments", :force => true do |t|
     t.string   "filename"
     t.string   "content_type"
-    t.binary   "data"
+    t.binary   "data",           :limit => 5242880
     t.string   "file_type"
     t.integer  "application_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "form_questions", :force => true do |t|
