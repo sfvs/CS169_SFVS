@@ -3,39 +3,30 @@ require 'spec_helper'
 describe FileAttachmentController do
   login(:user, :email => "i_am_a_coconut@mail.com")
   make_a_vendor_application_for_user
-
-  before :each do
-    @file = fixture_file_upload('/files/health_permit_form.pdf', 'application/pdf')
-  end
+  file_fixture
 
   describe "uploading files" do
-    it "should not upload any files that do not have file_type health_form or advertisement" do
-      post :upload_file, :id => @user.id, :file_type => "random_type", :file_attachment => @file
-      expect(flash[:alert].empty?).to be_false
-    end
-
     it "should not upload empty files" do
       post :upload_file, :id => @user.id, :file_type => "health_form", :file_attachment => nil
       expect(@mock_app.file_attachments.size).to be 0
     end
 
-    it "should create a new file_attachment and upload the health_form" do
+    it "should not upload an invalid file" do
       type = "health_form"
       User.stub(:get_most_recent_application).and_return(@mock_app)
-      FileAttachment.any_instance.stub(:find_by_file_type).with(type).and_return(nil)
+      Application.any_instance.stub(:save_file).and_return(false)
 
       post :upload_file, :id => @user.id, :file_type => type, :file_attachment => @file
-      expect(@mock_app.file_attachments.size).to be 1
+      expect(flash[:alert].empty?).to be_false
     end
     
-    it "should update an old health_form with a new uploaded file" do
-      type = "advertisement"
-      file = make_a_file_attachment @file
+    it "should correctly upload a file" do
+      type = "health_form"
       User.stub(:get_most_recent_application).and_return(@mock_app)
-      FileAttachment.any_instance.stub(:find_by_file_type).and_return(file)
+      Application.any_instance.stub(:save_file).and_return(true)
 
       post :upload_file, :id => @user.id, :file_type => type, :file_attachment => @file
-      @mock_app.file_attachments[0].file_type.should == type
+      expect(flash[:notice].empty?).to be_false
     end
   end
 

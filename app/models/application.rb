@@ -119,4 +119,15 @@ class Application < ActiveRecord::Base
       "Unknown"
     end
   end
+
+  def save_file incoming_file, type
+    attachment = self.file_attachments.find_by_file_type(type)
+    if attachment.nil?
+      attachment = self.file_attachments.build
+      attachment.file_type = type
+    end
+
+    attachment.uploaded_file = incoming_file
+    attachment.save
+  end
 end

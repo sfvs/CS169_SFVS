@@ -25,7 +25,7 @@ class PaymentController < ActionController::Base
  
     if (response != "VERIFIED" or (params[:payment_status] != "Complete" and params[:payment_status] != "Pending") )
       application.pay_status = Application::PAYSTATUS_DECLINED
-      print("PayPal could not verify the information provided by the user. Please manually inspect this payment.")
+      # print("PayPal could not verify the information provided by the user. Please manually inspect this payment.")
     else
       application.pay_status = payment_status[params[:payment_status]]
       application.amount_paid = gross
@@ -49,9 +49,9 @@ class PaymentController < ActionController::Base
     application = Application.find_by_invoice_number!(params[:invoice])
 
     if (not params_are_valid?(application))
-      print("invalid post request. Canceling transaction.")
+      # print("invalid post request. Canceling transaction.")
     else
-      print("RAW PAYPAL REQUEST: " + request.raw_post)
+      # print("RAW PAYPAL REQUEST: " + request.raw_post)
       result = get_paypal_response(request.raw_post)
       update_application_with_response(application, result, params[:mc_gross].to_f)
     end
