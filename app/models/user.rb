@@ -43,4 +43,12 @@ class User < ActiveRecord::Base
   def self.valid_email?(email)
     !User.exists?(['email LIKE ?', "%#{email}%"])
   end
+
+  def self.get_all_email_in_text(users)
+    txt = ""
+    users.each do |entry|
+      txt = txt + entry.email + "\n"
+    end
+    txt = txt[0..-2]
+  end
 end
