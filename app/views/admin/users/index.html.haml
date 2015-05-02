@@ -17,13 +17,13 @@
           = form_tag search_admin_users_path do
             = label_tag 'user_email', 'Search by e-mail'
             = text_field_tag 'user_email', nil, placeholder: 'User Email'
-            = submit_tag 'Search', :class => "btn btn-default search_btn"
+            = submit_tag 'Search', :class => "search_btn", :id => "search_filter_btn"
       %li.search_fields
         %div.user_filter
           = form_tag filter_admin_users_path do
             = label_tag 'app_year', 'Filter Users by year'
             = text_field_tag 'app_year', nil, placeholder: 'Application Year'
-            = submit_tag 'Filter', :class => 'btn btn-default filter_btn'
+            = submit_tag 'Filter', :class => 'filter_btn', :id => "search_filter_btn"
 
 %div.users_content.effect1
   %div.container-fluid
