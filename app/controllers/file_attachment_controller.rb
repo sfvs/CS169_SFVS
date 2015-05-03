@@ -7,14 +7,22 @@ class FileAttachmentController < ApplicationController
 
   def upload_file
     incoming_file = params[:file_attachment]
+    type = params[:file_type]
     if incoming_file.blank?
       flash[:alert] = "There was nothing to upload."
       redirect_to user_path
       return
     end
-    
+
     application = User.find_by_id(params[:id]).get_most_recent_application
-    if application.save_file incoming_file, params[:file_type]
+
+    attachment = application.file_attachments.find_by_file_type(type)
+    if attachment.nil?
+      attachment = application.file_attachments.build
+      attachment.file_type = type
+    end
+    attachment.uploaded_file = incoming_file
+    if attachment.save
       flash[:notice] = "Thank you for your submission..."
     else
       flash[:alert] = "There was a problem submitting your attachment."

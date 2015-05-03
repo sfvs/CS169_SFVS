@@ -2,9 +2,9 @@ class FileAttachment < ActiveRecord::Base
   attr_accessible :filename, :content_type, :data, :file_type
   belongs_to :application
   
-  validates :file_type, format: {:with => /^health_form$|^advertisement$/}, :allow_blank => true
-  validates :content_type, format: {:with => /application\/pdf|image\/tiff/}, :allow_blank => true
-  validates :data, length: {:maximum => 4.megabytes}, :allow_blank => true
+  validate :check_valid_file_type
+  validate :check_file_extension
+  validate :check_file_size_limit
 
   def uploaded_file=(incoming_file)
     self.filename = incoming_file.original_filename
@@ -24,4 +24,23 @@ class FileAttachment < ActiveRecord::Base
     #replace all non-alphanumeric, underscore or periods with underscores
     just_filename.gsub(/[^\w\.\-]/, '_')
   end
+
+  def check_valid_file_type
+    if self.file_type.match(/^health_form$|^advertisement$/).nil?
+      errors.add(:file_type, 'File type is not a Health Form or an Advertisement')
+    end
+  end
+
+  def check_file_extension
+    if self.content_type.match(/application\/pdf|image\/tiff/).nil?
+      errors.add(:file_ext, 'Content Type is not pdf or tiff.')
+    end
+  end
+
+  def check_file_size_limit
+    if self.data.size > 4.megabytes
+      errors.add(:file_size, 'File size cannot be over four megabyte.')
+    end
+  end
+
 end
