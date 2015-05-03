@@ -14,13 +14,7 @@ class UsersController < ApplicationController
     @application = @user.get_most_recent_application
     if @application
       @completed_forms = @application.get_completed_forms
-      if @application.approved
-        @status = "Complete"
-      elsif @application.completed
-        @status = "Submitted - In Review"
-      else
-        @status = "Incomplete"
-      end
+      @status = @application.completition_status
       @year = @application.year
       @type = @application.application_type.app_type
       @forms_to_build = @application.application_type.forms
