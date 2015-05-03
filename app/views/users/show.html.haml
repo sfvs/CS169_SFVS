@@ -76,6 +76,7 @@
           -unless @health_form_file.nil?
             %br Health Form Submitted
           
+          %br=link_to "Click to Download Health Permit", health_form_file_path
           =form_tag upload_file_user_path, :multipart => true do
             =file_field_tag :file_attachment, accept: 'application/pdf'
             =hidden_field_tag :file_type, :health_form
