@@ -106,18 +106,13 @@ class Application < ActiveRecord::Base
   end
 
   def pay_status_string
-    case read_attribute(:pay_status)
-    when PAYSTATUS_UNPAID
-      "Not Paid"
-    when PAYSTATUS_PENDING
-      "Pending"
-    when PAYSTATUS_PAID
-      "Paid"
-    when PAYSTATUS_DECLINED
-      "Declined"
-    else
-      "Unknown"
-    end
+    payment_status = {
+      PAYSTATUS_UNPAID =>"Not Paid",
+      PAYSTATUS_PENDING => "Pending",
+      PAYSTATUS_PAID => "Paid",
+      PAYSTATUS_DECLINED => "Declined",
+    }
+    payment_status[read_attribute(:pay_status)]
   end
 
   def save_file incoming_file, type
