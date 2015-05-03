@@ -144,13 +144,6 @@ module ControllerMacros
     f
   end
 
-  def file_fixture
-    before :each do
-      extend ActionDispatch::TestProcess
-      @file = fixture_file_upload('/files/health_permit_form.pdf', 'application/pdf')
-    end
-  end
-
   # Create Questionnaire, and Answer Helpers
 
   def make_question_answer_tree
