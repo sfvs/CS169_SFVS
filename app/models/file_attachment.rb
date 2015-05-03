@@ -3,7 +3,6 @@ class FileAttachment < ActiveRecord::Base
   belongs_to :application
   
   validates :file_type, format: {:with => /^health_form$|^advertisement$/}, :allow_blank => true
-  validates :content_type, format: {:with => /application\/pdf|image\/tiff/}, :allow_blank => true
   validates :data, length: {:maximum => 4.megabytes}, :allow_blank => true
 
   def uploaded_file=(incoming_file)

@@ -15,9 +15,6 @@ describe FileAttachment do
       file = FileAttachment.new
       file.content_type = "application/pdf"
       file.save.should be_true
-
-      file.content_type = "application/doc"
-      file.save.should be_false
     end
   end
 end
