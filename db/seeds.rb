@@ -362,6 +362,9 @@ questions_for_form[sponsor_food_contract] = [
 
 		Included above are 6' x 2.5' table/s, chairs, health permits, and electricity.",
 		:question_type => :statement},
+	{:question => 'Will you need a Booth?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
 	{:question => 'Will you need electricity?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
@@ -391,6 +394,9 @@ questions_for_form[sponsor_non_food_contract] = [
 
 		Included above are 6' x 2.5' table/s, chairs, health permits, and electricity.",
 		:question_type => :statement},
+	{:question => 'Will you need a Booth?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
 	{:question => 'Will you need electricity?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
@@ -428,6 +434,9 @@ questions_for_form[associate_sponsor_food_contract] = [
 
 		Included above are 6' x 2.5' table/s, chairs, and electricity.",
 		:question_type => :statement},
+	{:question => 'Will you need a Booth?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
 	{:question => 'Will you need electricity?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
@@ -454,6 +463,9 @@ questions_for_form[associate_sponsor_non_food_contract] = [
 
 		Included above are 6' x 2.5' table/s, chairs, and electricity.",
 		:question_type => :statement},
+	{:question => 'Will you need a Booth?',
+		:answers => "[Yes, No]",
+		:question_type => :radio_button},
 	{:question => 'Will you need electricity?',
 		:answers => "[Yes, No]",
 		:question_type => :radio_button},
