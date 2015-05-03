@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   before_filter :validate_user_authorization
   
-  @messages = {
+  @@messages = {
     Application::PAYSTATUS_UNPAID => "Not Paid",
     Application::PAYSTATUS_PENDING => "Pending", 
     Application::PAYSTATUS_PAID => "Payment received! Thank you!",
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
         @application_cost = @application.amount_due
       end
 
-      @application_status_msg = @messages[@application.pay_status]
+      @application_status_msg = @@messages[@application.pay_status]
     end
   end
 
