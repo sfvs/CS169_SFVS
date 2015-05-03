@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
 
   before_filter :validate_user_authorization
+  
+  @@messages = {
+    Application::PAYSTATUS_UNPAID => "Not Paid",
+    Application::PAYSTATUS_PENDING => "Pending", 
+    Application::PAYSTATUS_PAID => "Payment received! Thank you!",
+    Application::PAYSTATUS_DECLINED => "An error occurred while processing your payment. While your application is submitted, you will need to contact support to submit payment."
+  }
 
   def show
     @user = User.find(params[:id])
@@ -27,13 +34,7 @@ class UsersController < ApplicationController
         @application_cost = @application.amount_due
       end
 
-      messages = {Application::PAYSTATUS_UNPAID => "Not Paid",
-        Application::PAYSTATUS_PENDING => "Pending", 
-        Application::PAYSTATUS_PAID => "Payment received! Thank you!",
-        Application::PAYSTATUS_DECLINED => "An error occurred while processing your payment. While your application is submitted, you will need to contact support to submit payment." }
-
-
-      @application_status_msg = messages[@application.pay_status]
+      @application_status_msg = @@messages[@application.pay_status]
     end
   end
 
@@ -62,13 +63,12 @@ class UsersController < ApplicationController
       application.invoice_number = "#{timestamp}" + "#{application.id}"
       application.save!
     end
-    if not application.completed
-      flash[:alert] = "You must first complete and submit the application."
-      redirect_to user_path(user)
-      return
-    end
-    if application.hasPaid?
-      flash[:alert] = "You have already paid for this application."
+    if not application.completed || application.hasPaid?
+      if not application.completed
+        flash[:alert] = "You must first complete and submit the application."
+      else
+        flash[:alert] = "You have already paid for this application."
+      end
       redirect_to user_path(user)
     else
       redirect_to get_paypal_url(user, application.invoice_number)

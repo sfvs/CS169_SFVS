@@ -82,7 +82,7 @@ describe PaymentController do
       app.reload
 
       expect(app.pay_status).to be(Application::PAYSTATUS_PENDING)
-      expect(app.amount_paid).should == 380.00
+      expect(app.amount_paid).to be == 380.00
       expect(app.has_paid).to be(true)
     end
   end 

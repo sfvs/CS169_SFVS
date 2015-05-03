@@ -106,17 +106,23 @@ class Application < ActiveRecord::Base
   end
 
   def pay_status_string
-    case read_attribute(:pay_status)
-    when PAYSTATUS_UNPAID
-      "Not Paid"
-    when PAYSTATUS_PENDING
-      "Pending"
-    when PAYSTATUS_PAID
-      "Paid"
-    when PAYSTATUS_DECLINED
-      "Declined"
-    else
-      "Unknown"
+    payment_status = {
+      PAYSTATUS_UNPAID =>"Not Paid",
+      PAYSTATUS_PENDING => "Pending",
+      PAYSTATUS_PAID => "Paid",
+      PAYSTATUS_DECLINED => "Declined",
+    }
+    payment_status[read_attribute(:pay_status)]
+  end
+
+  def save_file incoming_file, type
+    attachment = self.file_attachments.find_by_file_type(type)
+    if attachment.nil?
+      attachment = self.file_attachments.build
+      attachment.file_type = type
     end
+
+    attachment.uploaded_file = incoming_file
+    attachment.save
   end
 end
