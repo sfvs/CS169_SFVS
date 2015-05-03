@@ -17,6 +17,17 @@ class Application < ActiveRecord::Base
 
   self.current_application_year = Time.now.year
 
+  def completition_status
+    if self.approved
+      status = "Complete"
+    elsif self.completed
+      status = "Submitted - In Review"
+    else
+      status = "Incomplete"
+    end
+    status
+  end
+
   def content
     # has content been parsed yet? If not, let's do that..
     if not @hashed_val
