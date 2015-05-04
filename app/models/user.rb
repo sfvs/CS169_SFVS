@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
     app = self.applications.create()
     app.application_type = type
     app.year = Application.current_application_year
+    app.payment = Payment.create
     app.save
   end
 
