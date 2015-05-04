@@ -1,4 +1,7 @@
-FactoryGirl.define do  
+FactoryGirl.define do  factory :payment do
+    
+  end
+  
 
   factory :file_attachment do
     data 'some_content'

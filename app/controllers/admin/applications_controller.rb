@@ -15,7 +15,7 @@ class Admin::ApplicationsController < Admin::AdminController
 
   def approve
     @application = Application.find(params[:id])
-    if @application.completed? && @application.hasPaid?
+    if @application.completed? && @application.payment.has_paid
       @application.update_attribute(:approved, params[:approve])
     else
       flash[:alert] = @application.completed? == false ? "Application needs to be completed before being approved." : "Payment was not made for this application."
