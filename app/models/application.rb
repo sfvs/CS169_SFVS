@@ -1,16 +1,11 @@
 require 'json'
 
 class Application < ActiveRecord::Base  
-  attr_accessible :year, :content, :completed, :approved, :submitted_at,
-    :amount_paid, :amount_due, :has_paid, :pay_receipt, :pay_status, :invoice_number, :payment_id
+  attr_accessible :year, :content, :completed, :approved, :submitted_at
   belongs_to :user
   belongs_to :application_type
+  has_one :payment, dependent: :destroy
   has_many :file_attachments, dependent: :destroy
-
-  PAYSTATUS_UNPAID = 0
-  PAYSTATUS_PENDING = 1
-  PAYSTATUS_PAID = 2
-  PAYSTATUS_DECLINED = 3
 
   class << self
     attr_accessor :current_application_year
@@ -109,22 +104,8 @@ class Application < ActiveRecord::Base
   def calculate_current_application_cost all_costs
     cost_list = all_costs.map { |cost,item| cost }
     amount_to_be_paid = cost_list.map{ |price| price.match(/[[:digit:]]+/)[0].to_i }
-    self.amount_due = amount_to_be_paid.sum
-    self.save
-  end
-
-  def hasPaid?
-    return read_attribute(:has_paid)
-  end
-
-  def pay_status_string
-    payment_status = {
-      PAYSTATUS_UNPAID =>"Not Paid",
-      PAYSTATUS_PENDING => "Pending",
-      PAYSTATUS_PAID => "Paid",
-      PAYSTATUS_DECLINED => "Declined",
-    }
-    payment_status[read_attribute(:pay_status)]
+    self.payment.amount_due = amount_to_be_paid.sum
+    self.payment.save
   end
 
   def save_file incoming_file, type
