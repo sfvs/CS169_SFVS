@@ -47,6 +47,7 @@ SFVSRegistrationSystem::Application.routes.draw do
     post "submit_payment", on: :member
   end
 
+  get "health_form_file", to: "file_attachment#send_health_form"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
