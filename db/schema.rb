@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20150501162408) do
     t.text     "content",             :default => "",    :null => false
     t.boolean  "completed",           :default => false, :null => false
     t.boolean  "approved",            :default => false, :null => false
+    t.datetime "submitted_at"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.decimal  "amount_paid",         :default => 0.0

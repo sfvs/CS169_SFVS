@@ -17,7 +17,7 @@ class Admin::UsersController < Admin::AdminController
   def show
     @user = User.find(params[:id])
     # List the forms for the user
-    @applications = @user.applications
+    @applications = @user.applications.order(year: :desc)
   end
 
   def edit

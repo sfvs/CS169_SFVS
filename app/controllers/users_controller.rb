@@ -38,6 +38,7 @@ class UsersController < ApplicationController
     if application
       if not application.completed and application.all_forms_completed? 
         application.completed = true
+        application.submitted_at = Time.now
         application.save
         flash[:notice] = "Application successfully submitted."
       else

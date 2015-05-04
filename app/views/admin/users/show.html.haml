@@ -5,6 +5,9 @@
   %div.container-fluid
     %h1 User Content
     %h4= "Contents of user: #{@user.email}"
+    %p="Contact Person: #{@user.contact_person}"
+    %p="Company Name: #{@user.company_name}"
+    %p="Telephone: #{@user.telephone}"
 
 %div.user_content.effect1
   %div.container-fluid
@@ -16,7 +19,7 @@
           %th Status
           %th Payment Status
           %th Approved/Pending
-          %th Created At
+          %th Submitted At
           %th More Details
       %tbody
         - if !@applications.nil?
@@ -27,7 +30,7 @@
               %td= application.completed == true ? "Submitted" : "Incomplete"
               %td= application.pay_status_string
               %td= application.approved == true ? "Approved" : "Pending"
-              %td= application.created_at
+              %td= application.submitted_at
               %td= link_to "View Application", admin_user_application_path(:user_id => @user.id, :id => application.id), :id => "view_btn"
     %div.edit_user_btn
       = link_to "Edit User", edit_admin_user_path(@user), id: "aprove_btn"

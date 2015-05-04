@@ -1,7 +1,8 @@
 require 'json'
 
 class Application < ActiveRecord::Base  
-  attr_accessible :year, :content, :completed, :approved, :amount_paid, :amount_due, :has_paid, :pay_receipt, :pay_status, :invoice_number, :payment_id
+  attr_accessible :year, :content, :completed, :approved, :submitted_at,
+    :amount_paid, :amount_due, :has_paid, :pay_receipt, :pay_status, :invoice_number, :payment_id
   belongs_to :user
   belongs_to :application_type
   has_many :file_attachments, dependent: :destroy
