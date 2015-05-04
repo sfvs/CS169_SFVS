@@ -8,7 +8,7 @@ class FileAttachmentController < ApplicationController
   end
 
   def download_file
-    @attachment = FileAttachment.find_by_file_type(params[:file_type])
+    @attachment = FileAttachment.where("application_id = ?", params[:id]).find_by_file_type(params[:file_type])
     send_data @attachment.data, :filename => @attachment.filename, :type => @attachment.content_type
   end
 
