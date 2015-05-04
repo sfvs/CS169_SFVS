@@ -250,7 +250,6 @@ questions_for_form[company_information]  = [
 	{:question => "City", :question_type => :textbox},
 	{:question => "State", :question_type => :textbox},
 	{:question => "Zip", :question_type => :textbox},
-	{:question => "Fax", :question_type => :textbox},
 	{:question => "Website", :question_type => :textbox},
 	{:question => "Company name for WVF Program listing", :question_type => :textbox}
 ]
