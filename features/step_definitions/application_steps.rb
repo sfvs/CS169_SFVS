@@ -56,8 +56,8 @@ end
 Given(/^john doe has a 2020 complete vendor application$/) do
   steps %Q{
     Given the following applications exist: 
-    | user_id | application_type_id | completed | year |
-    | 1       | 1                   | true     | 2020 |
+    | user_id | application_type_id | completed | year | has_paid |
+    | 1       | 1                   | true      | 2020 | true     |
   }
 end
 

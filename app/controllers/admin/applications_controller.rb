@@ -15,10 +15,10 @@ class Admin::ApplicationsController < Admin::AdminController
 
   def approve
     @application = Application.find(params[:id])
-    if @application.completed?
+    if @application.completed? && @application.hasPaid?
       @application.update_attribute(:approved, params[:approve])
     else
-      flash[:alert] = "Application has to be completed before being approved."
+      flash[:alert] = @application.completed? == false ? "Application needs to be completed before being approved." : "Payment was not made for this application."
     end
     redirect_to admin_user_path(params[:user_id])
   end

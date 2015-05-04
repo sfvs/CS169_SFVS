@@ -37,8 +37,16 @@ describe Admin::ApplicationsController do
       assigns(:completed_forms).should == {@form_name => true}
     end
 
-    it "should aprove if the application is complete" do
+    it "should not aprove if the application is complete but not paid" do
       @application.update_attribute(:completed, true)
+      post 'approve', :user_id => @user.id, :id => @application.id, :approve => true
+      @application.reload
+      @application.approved.should == false
+    end
+
+    it "should aprove if the application is complete and paid" do
+      @application.update_attribute(:completed, true)
+      @application.update_attribute(:has_paid, true)
       post 'approve', :user_id => @user.id, :id => @application.id, :approve => true
       @application.reload
       @application.approved.should == true
