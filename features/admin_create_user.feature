@@ -42,3 +42,11 @@ Scenario: should not be able to use an already existing e-mail
   And I select "user_admin_true"
   And I press "Create User"
   Then I should see "E-mail already taken"
+
+Scenario: should not be able to use a password of length less than 8
+  Given I follow "Create User"
+  And I fill in "Email:" with "admin123@gmail.com"
+  And I fill in "Password:" with "admin"
+  And I select "user_admin_true"
+  And I press "Create User"
+  Then I should see "Password needs to be atleast 8 characters long."
