@@ -2,13 +2,6 @@ class UsersController < ApplicationController
 
   before_filter :validate_user_authorization
   
-  @@messages = {
-    Application::PAYSTATUS_UNPAID => "Not Paid",
-    Application::PAYSTATUS_PENDING => "Pending", 
-    Application::PAYSTATUS_PAID => "Payment received! Thank you!",
-    Application::PAYSTATUS_DECLINED => "An error occurred while processing your payment. While your application is submitted, you will need to contact support to submit payment."
-  }
-
   def show
     @user = User.find(params[:id])
     @application = @user.get_most_recent_application
@@ -29,7 +22,7 @@ class UsersController < ApplicationController
         @application_cost = @payment.amount_due
       end
 
-      @application_status_msg = @@messages[@payment.pay_status]
+      @application_status_msg = @payment.pay_status_long
     end
   end
 

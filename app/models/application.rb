@@ -7,11 +7,6 @@ class Application < ActiveRecord::Base
   has_one :payment, dependent: :destroy
   has_many :file_attachments, dependent: :destroy
 
-  PAYSTATUS_UNPAID = 0
-  PAYSTATUS_PENDING = 1
-  PAYSTATUS_PAID = 2
-  PAYSTATUS_DECLINED = 3
-
   class << self
     attr_accessor :current_application_year
   end

@@ -54,7 +54,7 @@ describe PaymentController do
       post :verify_payment, {:invoice => "abc123", :mc_gross => 500}
       payment.reload
 
-      expect(payment.pay_status).to be(Application::PAYSTATUS_DECLINED)
+      expect(payment.pay_status).to be(Payment::PAYSTATUS_DECLINED)
     end
 
     it "should succeed if paypal can verify params" do
@@ -69,7 +69,7 @@ describe PaymentController do
       post :verify_payment, {:invoice => "14304493741", :mc_gross => "380.00", :txn_id => "abc123", :payment_status => "Pending"}
       payment.reload
 
-      expect(payment.pay_status).to be(Application::PAYSTATUS_PENDING)
+      expect(payment.pay_status).to be(Payment::PAYSTATUS_PENDING)
       expect(payment.amount_paid).to be == 380.00
       expect(payment.has_paid).to be(true)
     end
