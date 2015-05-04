@@ -7,6 +7,28 @@ class PaymentController < ActionController::Base
   # by PayPal from the notification hook
   skip_before_filter :verify_authenticity_token, :only => [:verify_payment]
 
+  def verify_payment
+    # lookup the application by invoice number/item number
+    payment = Payment.find_by_invoice_number!(params[:invoice])
+
+    if (not params_are_valid?(payment))
+      puts("invalid post request. Canceling transaction.")
+    else
+      puts("RAW PAYPAL REQUEST: " + request.raw_post)
+      result = get_paypal_response(request.raw_post)
+      update_application_with_response(payment, result, params[:mc_gross].to_f)
+    end
+
+    redirect_to root_path
+  end
+
+  def thankyou
+    flash[:notice] = "Thank you for submitting your payment. Please see the status of your payment below."
+    redirect_to root_path
+  end
+
+  private
+  
   def get_paypal_response(query)
     paypal_url_cmd = "https://www.sandbox.paypal.com/cgi-bin/webscr"
     req_body = "cmd=_notify-validate&" + query
@@ -42,25 +64,5 @@ class PaymentController < ActionController::Base
     gross = params[:mc_gross].to_f
 
     (not item_number.empty?) and (payment.has_paid != true) and (payment.txn_id != txn_id) and (gross == payment.amount_due)
-  end
-
-  def verify_payment
-    # lookup the application by invoice number/item number
-    payment = Payment.find_by_invoice_number!(params[:invoice])
-
-    if (not params_are_valid?(payment))
-      puts("invalid post request. Canceling transaction.")
-    else
-      puts("RAW PAYPAL REQUEST: " + request.raw_post)
-      result = get_paypal_response(request.raw_post)
-      update_application_with_response(payment, result, params[:mc_gross].to_f)
-    end
-
-    redirect_to root_path
-  end
-
-  def thankyou
-    flash[:notice] = "Thank you for submitting your payment. Please see the status of your payment below."
-    redirect_to root_path
   end
 end

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery
+
   before_filter :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -15,7 +16,10 @@ class ApplicationController < ActionController::Base
     authorize user, :is_profile_owner?
     authorize user, :is_regular_user?
   end
-  
+
+  def require_admin
+    authorize current_user, :is_admin?
+  end
 
   private
 
