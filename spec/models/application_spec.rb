@@ -64,7 +64,7 @@ describe Application do
   describe "payment calculations" do
     it "should be able to calculate the total cost from a list of costs" do
       @mock_app.calculate_current_application_cost [["$22","hat"],["$12","shoe"]]
-      @mock_app.amount_due.should be == 34
+      @mock_app.payment.amount_due.should be == 34
     end
 
     it "should be able to calculate payment based off of content" do
@@ -83,7 +83,7 @@ describe Application do
       cost_description.should be == [["$77","electricity fee"],["$11","chairs"]]
 
       @mock_app.calculate_current_application_cost cost_description
-      @mock_app.amount_due.should be == 88
+      @mock_app.payment.amount_due.should be == 88
     end
 
     it "should remove double quotes and remove any dollar signs" do

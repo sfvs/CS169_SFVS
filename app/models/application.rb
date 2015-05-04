@@ -110,7 +110,7 @@ class Application < ActiveRecord::Base
     cost_list = all_costs.map { |cost,item| cost }
     amount_to_be_paid = cost_list.map{ |price| price.match(/[[:digit:]]+/)[0].to_i }
     self.payment.amount_due = amount_to_be_paid.sum
-    self.save
+    self.payment.save
   end
 
   def pay_status_string

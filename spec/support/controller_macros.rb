@@ -131,6 +131,10 @@ module ControllerMacros
     app = FactoryGirl.create(:application)
     app.application_type = type
     app.year = year
+    
+    payment = FactoryGirl.create(:payment)
+    app.payment = payment
+    
     app.save
     app
   end

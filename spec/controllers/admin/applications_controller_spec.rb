@@ -46,7 +46,7 @@ describe Admin::ApplicationsController do
 
     it "should aprove if the application is complete and paid" do
       @application.update_attribute(:completed, true)
-      @application.update_attribute(:has_paid, true)
+      @application.payment.update_attribute(:has_paid, true)
       post 'approve', :user_id => @user.id, :id => @application.id, :approve => true
       @application.reload
       @application.approved.should == true
