@@ -59,14 +59,13 @@ describe PaymentController do
 
     it "should succeed if paypal can verify params" do
       PaymentController.any_instance.stub(:get_paypal_response).and_return("VERIFIED")
-      payment = FactoryGirl.create(:application)
+      payment = FactoryGirl.create(:payment)
       payment.invoice_number = "14304493741"
       payment.amount_due = 380.00
       payment.amount_paid = 0
       payment.has_paid = false
       payment.save!
 
-      Application.any_instance.stub(:all_forms_completed?).and_return(true)
       post :verify_payment, {:invoice => "14304493741", :mc_gross => "380.00", :txn_id => "abc123", :payment_status => "Pending"}
       payment.reload
 
