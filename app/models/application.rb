@@ -108,16 +108,6 @@ class Application < ActiveRecord::Base
     self.payment.save
   end
 
-  def pay_status_string
-    payment_status = {
-      PAYSTATUS_UNPAID =>"Not Paid",
-      PAYSTATUS_PENDING => "Pending",
-      PAYSTATUS_PAID => "Paid",
-      PAYSTATUS_DECLINED => "Declined",
-    }
-    payment_status[self.payment.pay_status]
-  end
-
   def save_file incoming_file, type
     attachment = self.file_attachments.find_by_file_type(type)
     if attachment.nil?
