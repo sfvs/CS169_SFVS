@@ -60,7 +60,7 @@ class PaymentController < ActionController::Base
   end
 
   def thankyou
-    flash[:success] = "Thank you for submitting your payment. Please see the status of your payment below."
+    flash[:notice] = "Thank you for submitting your payment. Please see the status of your payment below."
     redirect_to root_path
   end
 end
