@@ -68,7 +68,7 @@
             %br Advertisement Submitted
           
           =form_tag upload_file_user_path, :multipart => true do
-            =file_field_tag :file_attachment, accept: 'application/pdf'
+            =file_field_tag :file_attachment
             =hidden_field_tag :file_type, :advertisement
             =submit_tag "Submit", :id => "submit_payment_button"
 
@@ -78,7 +78,7 @@
           
           %br=link_to "Click to Download Health Permit", health_form_file_path
           =form_tag upload_file_user_path, :multipart => true do
-            =file_field_tag :file_attachment, accept: 'application/pdf'
+            =file_field_tag :file_attachment
             =hidden_field_tag :file_type, :health_form
             =submit_tag "Submit", :id => "submit_payment_button"
           %p Note: File Sizes need to be less than 4MBs; Minimum Specs: Tiff, PDF, JPEG, or JPG;
