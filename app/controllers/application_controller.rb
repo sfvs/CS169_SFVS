@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery
-  force_ssl
-  
+
   before_filter :authenticate_user!
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
