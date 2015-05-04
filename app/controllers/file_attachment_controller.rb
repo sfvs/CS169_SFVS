@@ -1,5 +1,8 @@
 class FileAttachmentController < ApplicationController
 
+  before_filter :validate_user_authorization, :only => :upload_file
+  before_filter :require_admin, :only => :download_file
+
   def send_health_form
     send_file 'app/assets/files/health_permit_form.pdf'
   end

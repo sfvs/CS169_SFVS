@@ -15,7 +15,10 @@ class ApplicationController < ActionController::Base
     authorize user, :is_profile_owner?
     authorize user, :is_regular_user?
   end
-  
+
+  def require_admin
+    authorize current_user, :is_admin?
+  end
 
   private
 
