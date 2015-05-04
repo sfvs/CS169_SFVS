@@ -7,6 +7,7 @@ class CreateApplications < ActiveRecord::Migration
       t.text :content, null: false, default: ""
       t.boolean :completed, null: false, default: false
       t.boolean :approved, null: false, default: false
+      t.datetime :submitted_at
       t.timestamps
     end
   end
