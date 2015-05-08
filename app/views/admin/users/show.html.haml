@@ -28,7 +28,7 @@
               %td= application.application_type.app_type
               %td= application.year
               %td= application.completed == true ? "Submitted" : "Incomplete"
-              %td= application.payment.pay_status_short
+              %td= application.payment.has_paid == true ? application.payment.pay_status_short : link_to("Click here if you received a check payment from this user.", mark_paid_admin_user_application_path(:user_id => @user.id, :id => application.id), :id => "view_btn", :method => "post")
               %td= application.approved == true ? "Approved" : "Pending"
               %td= application.submitted_at
               %td= link_to "View Application", admin_user_application_path(:user_id => @user.id, :id => application.id), :id => "view_btn"
