@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Set up Rails app for development
+# Run this script immediately after cloning the codebase.
+
+# Set up Ruby dependencies
+bundle install --without production
+
+# Set up database
+rake db:migrate
+rake db:test:prepare
+rake db:seed
+
+echo "You are ready!"
