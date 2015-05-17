@@ -70,7 +70,7 @@ class UsersController < ApplicationController
   def get_paypal_url(payment)
     base_url = request.protocol + request.host
     values = {
-        business: "treasurer@sfvs.org",
+        business: "teamsfvs-business@gmail.com",
         cmd: "_xclick",
         upload: 1,
         return: base_url + "/payment_receipt",
