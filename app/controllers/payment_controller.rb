@@ -45,7 +45,7 @@ class PaymentController < ActionController::Base
   def update_application_with_response(payment, response, gross)
     payment_status = {"Completed" => Payment::PAYSTATUS_PAID, "Pending" => Payment::PAYSTATUS_PENDING}
  
-    if (response != "VERIFIED" or (params[:payment_status] != "Complete" and params[:payment_status] != "Pending") )
+    if (response != "VERIFIED" or (params[:payment_status] != "Completed" and params[:payment_status] != "Pending") )
       payment.pay_status = Payment::PAYSTATUS_DECLINED
       puts("PayPal could not verify the information provided by the user. Please manually inspect this payment.")
     else
