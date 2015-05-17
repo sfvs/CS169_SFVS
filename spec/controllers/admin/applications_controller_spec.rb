@@ -37,8 +37,16 @@ describe Admin::ApplicationsController do
       assigns(:completed_forms).should == {@form_name => true}
     end
 
-    it "should aprove if the application is complete" do
+    it "should not aprove if the application is complete but not paid" do
       @application.update_attribute(:completed, true)
+      post 'approve', :user_id => @user.id, :id => @application.id, :approve => true
+      @application.reload
+      @application.approved.should == false
+    end
+
+    it "should aprove if the application is complete and paid" do
+      @application.update_attribute(:completed, true)
+      @application.payment.update_attribute(:has_paid, true)
       post 'approve', :user_id => @user.id, :id => @application.id, :approve => true
       @application.reload
       @application.approved.should == true
@@ -49,6 +57,29 @@ describe Admin::ApplicationsController do
       post 'approve', :user_id => @user.id, :id => @application.id, :approve => true
       @application.reload
       @application.approved.should == false
+    end
+  end
+
+  describe "mark_paid action" do
+
+    before :each do
+      @user = make_a_member :user, :email => "rspecftw@hostname.com"
+    end
+
+    make_a_vendor_application_for_user
+
+    before :each do
+      @user.reload
+      @application = @user.applications[0]
+      @form_name = @application.application_type.forms[0].form_name
+    end
+
+    it "should properly update payment information to reflect check payment" do
+      @application.update_attribute(:completed, true)
+      @application.payment.update_attribute(:amount_due, 500)
+      post "mark_paid", :user_id => @user.id, :id => @application.id
+      @application.reload
+      @application.payment.has_paid.should == true
     end
   end
 end

@@ -32,12 +32,15 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def create
-    if User.valid_email?(params[:user][:email])
-      User.create(params[:user], :without_protection => true)
+    valid_email = User.valid_email?(params[:user][:email])
+    if valid_email && params[:user][:password].length >= 8
+      user = User.create(params[:user], :without_protection => true)
+      user.skip_confirmation!
+      user.save!
       flash[:notice] = "New user created"
       redirect_to admin_users_path
     else
-      flash[:alert] = "E-mail already taken"
+      flash[:alert] = valid_email == false ? "E-mail already taken" : "Password needs to be atleast 8 characters long."
       redirect_to new_admin_user_path
     end
   end
@@ -62,6 +65,9 @@ class Admin::UsersController < Admin::AdminController
 
   def filter
     @users = User.get_users_filtered_by(params[:app_year]).paginate(:page => params[:page], :per_page => 10)
+    gon.push({
+      :emails => User.get_all_email_in_text(@users)
+      })
     render :index
     return
   end

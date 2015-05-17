@@ -2,13 +2,6 @@ class UsersController < ApplicationController
 
   before_filter :validate_user_authorization
   
-  @@messages = {
-    Application::PAYSTATUS_UNPAID => "Not Paid",
-    Application::PAYSTATUS_PENDING => "Pending", 
-    Application::PAYSTATUS_PAID => "Payment received! Thank you!",
-    Application::PAYSTATUS_DECLINED => "An error occurred while processing your payment. While your application is submitted, you will need to contact support to submit payment."
-  }
-
   def show
     @user = User.find(params[:id])
     @application = @user.get_most_recent_application
@@ -21,14 +14,15 @@ class UsersController < ApplicationController
       
       @health_form_file = @application.file_attachments.find_by_file_type(:health_form)
       @advertisement_file = @application.file_attachments.find_by_file_type(:advertisement)
-      
-      unless @application.has_paid
+      @payment = @application.payment
+
+      unless @payment.has_paid
         @cost_description = @application.grab_application_cost_description
         @application.calculate_current_application_cost @cost_description
-        @application_cost = @application.amount_due
+        @application_cost = @payment.amount_due
       end
 
-      @application_status_msg = @@messages[@application.pay_status]
+      @application_status_msg = @payment.pay_status_long
     end
   end
 
@@ -38,6 +32,7 @@ class UsersController < ApplicationController
     if application
       if not application.completed and application.all_forms_completed? 
         application.completed = true
+        application.submitted_at = Time.now
         application.save
         flash[:notice] = "Application successfully submitted."
       else
@@ -52,12 +47,13 @@ class UsersController < ApplicationController
   def submit_payment
     user = User.find(params[:id])
     application = user.get_most_recent_application
-    if (application.invoice_number.empty?)
+    payment = application.payment
+    if (payment.invoice_number.empty?)
       timestamp = Time.now.to_i
-      application.invoice_number = "#{timestamp}" + "#{application.id}"
-      application.save!
+      payment.invoice_number = "#{timestamp}" + "#{application.id}"
+      payment.save!
     end
-    if not application.completed || application.hasPaid?
+    if not application.completed || payment.has_paid
       if not application.completed
         flash[:alert] = "You must first complete and submit the application."
       else
@@ -65,24 +61,23 @@ class UsersController < ApplicationController
       end
       redirect_to user_path(user)
     else
-      redirect_to get_paypal_url(user, application.invoice_number)
+      redirect_to get_paypal_url(payment)
     end
   end
 
   private
 
-  def get_paypal_url(user, invoice_number)
+  def get_paypal_url(payment)
     base_url = request.protocol + request.host
-    app = user.get_most_recent_application
     values = {
-        business: "sfvsteam-business@gmail.com",
+        business: "teamsfvs-business@gmail.com",
         cmd: "_xclick",
         upload: 1,
         return: base_url + "/payment_receipt",
-        invoice: invoice_number,
-        amount: app.amount_due,
+        invoice: payment.invoice_number,
+        amount: payment.amount_due,
         item_name: "SFVS Registration Fee",
-        item_number: invoice_number,
+        item_number: payment.invoice_number,
         quantity: '1',
         notify_url: base_url + "/verify_payment"
     }

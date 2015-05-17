@@ -13,6 +13,7 @@ SFVSRegistrationSystem::Application.routes.draw do
         get "edit_form", to: "application_form#edit", on: :member
         put "edit_form", to: "application_form#update", on: :member
         post "approve", to: "applications#approve", on: :member
+        post "mark_paid", to: "applications#mark_paid", on: :member
       end
     end
     resources :forms, :only => :index do
@@ -47,6 +48,7 @@ SFVSRegistrationSystem::Application.routes.draw do
     post "submit_payment", on: :member
   end
 
+  get "health_form_file", to: "file_attachment#send_health_form"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

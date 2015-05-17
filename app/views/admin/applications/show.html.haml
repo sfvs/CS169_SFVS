@@ -4,6 +4,8 @@
 %div.users_index_title.effect1
   %div.container-fluid
     %h1 Application Contents
+    %p= "User: #{@user.email}, Contact Person: #{@user.contact_person}, Company Name: #{@user.company_name}, Telephone: #{@user.telephone}"
+    %p= "Submitted at: #{@application.submitted_at}"
     
 %div.user_content.effect1
   %div.container-fluid

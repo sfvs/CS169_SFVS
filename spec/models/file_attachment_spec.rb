@@ -11,10 +11,18 @@ describe FileAttachment do
       file.save.should be_false
     end
 
-    it "should not save if content_type is not pdf or tiff, but save otherwise" do
+    it "should not save if filename does not have extension pdf or tiff, but save otherwise" do
       file = FileAttachment.new
-      file.content_type = "application/pdf"
+      file.filename = "aform.pdf"
       file.save.should be_true
+
+      file = FileAttachment.new
+      file.filename = "aform.tiff"
+      file.save.should be_true
+
+      file = FileAttachment.new
+      file.filename = "aform.doc"
+      file.save.should be_false
     end
   end
 end

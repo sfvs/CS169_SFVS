@@ -50,6 +50,10 @@ Given(/^john doe has a 2020 incomplete vendor application$/) do
     Given the following applications exist: 
     | user_id | application_type_id | completed | year |
     | 1       | 1                   | false     | 2020 |
+
+    Given the following payments exist: 
+    | application_id | invoice_number | has_paid  | amount_due | amount_paid | pay_status |
+    | 1              | 14304493741    | false     | 100.00     | 0           | 0          |
   }
 end
 
@@ -57,7 +61,11 @@ Given(/^john doe has a 2020 complete vendor application$/) do
   steps %Q{
     Given the following applications exist: 
     | user_id | application_type_id | completed | year |
-    | 1       | 1                   | true     | 2020 |
+    | 1       | 1                   | true      | 2020 |
+
+    Given the following payments exist: 
+    | application_id | invoice_number | has_paid | amount_due | amount_paid | pay_status |
+    | 1              | 14304493741    | true     | 100.00     | 100.00      | 2          |
   }
 end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150501162408) do
+ActiveRecord::Schema.define(:version => 20150504015008) do
 
   create_table "answers", :force => true do |t|
     t.string   "ans"
@@ -41,15 +41,9 @@ ActiveRecord::Schema.define(:version => 20150501162408) do
     t.text     "content",             :default => "",    :null => false
     t.boolean  "completed",           :default => false, :null => false
     t.boolean  "approved",            :default => false, :null => false
+    t.datetime "submitted_at"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.decimal  "amount_paid",         :default => 0.0
-    t.string   "payment_id",          :default => "",    :null => false
-    t.boolean  "has_paid",            :default => false, :null => false
-    t.decimal  "amount_due",          :default => 0.0,   :null => false
-    t.text     "pay_receipt",         :default => "",    :null => false
-    t.integer  "pay_status",          :default => 0,     :null => false
-    t.string   "invoice_number",      :default => "",    :null => false
   end
 
   create_table "file_attachments", :force => true do |t|
@@ -79,6 +73,19 @@ ActiveRecord::Schema.define(:version => 20150501162408) do
     t.string   "form_name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "payments", :force => true do |t|
+    t.string   "invoice_number", :default => "",    :null => false
+    t.integer  "pay_status",     :default => 0,     :null => false
+    t.text     "pay_receipt",    :default => "",    :null => false
+    t.decimal  "amount_due",     :default => 0.0,   :null => false
+    t.boolean  "has_paid",       :default => false, :null => false
+    t.string   "txn_id",         :default => "",    :null => false
+    t.decimal  "amount_paid",    :default => 0.0
+    t.integer  "application_id"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "questionnaires", :force => true do |t|
